@@ -9,8 +9,7 @@ body {
 }
 
 .navbar{
-    background-color: turquoise;
-    
+    background-color: turquoise;   
 }
 
 header {
@@ -28,4 +27,5 @@ header {
 .navbar-brand {
     color: black;
 }
-    
+
+ 
