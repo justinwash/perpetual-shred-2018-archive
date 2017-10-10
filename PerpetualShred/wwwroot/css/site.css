@@ -1,0 +1,31 @@
+body {
+    padding-top: 0px;
+    padding-bottom: 20px;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navbar{
+    background-color: turquoise;
+    
+}
+
+header {
+    padding-top: 0px;
+}
+
+.nav.navbar-nav li a {
+    color: black;
+}
+
+.navbar-default .navbar-brand {
+    color: black;
+}
+
+.navbar-brand {
+    color: black;
+}
+    
