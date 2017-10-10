@@ -1,0 +1,48 @@
+﻿@model PerpetualShred.Models.WebVid
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WebVid</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlayerUrl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OriginUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OriginUrl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Synopsis)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Synopsis)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

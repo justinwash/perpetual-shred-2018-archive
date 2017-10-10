@@ -1,0 +1,39 @@
+﻿@model PerpetualShred.Models.WebVid
+
+<div>
+    <h4>Random Video Returned</h4>
+    <p>Here's The data. Figure out how to embed the vid from the db.</p>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlayerUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlayerUrl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OriginUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OriginUrl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Synopsis)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Synopsis)
+        </dd>
+    </dl>
+</div>

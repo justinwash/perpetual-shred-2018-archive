@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using PerpetualShred.Models;
 
 namespace PerpetualShred
 {
@@ -22,6 +24,11 @@ namespace PerpetualShred
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDbContext<PerpetualShredContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("PerpetualShredContext")));
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
