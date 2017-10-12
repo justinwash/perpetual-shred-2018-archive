@@ -28,22 +28,18 @@ namespace ShredCrawl
             }
             */
 
-            Console.WriteLine(nodes[1].OuterHtml);
-            Match matches = rx.Match(nodes[1].OuterHtml);
-
-            if (matches.Success)
-            {
-                string input = matches.Value;
-                int index = input.IndexOf("\"");
-                if (index > 0)
-                    input = input.Substring(0, index);
-                Console.WriteLine(input);
+            nodes.RemoveAt(0);
+            foreach (HtmlNode node in nodes) {
+                Match matches = rx.Match(node.OuterHtml);
+                if (matches.Success)
+                {
+                    string input = matches.Value;
+                    int index = input.IndexOf("\"");
+                    if (index > 0)
+                        input = input.Substring(0, index);
+                    Console.WriteLine(input);
+                }
             }
-
-          
-
-
-
 
             Console.ReadLine();
         }
