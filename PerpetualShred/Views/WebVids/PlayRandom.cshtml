@@ -21,13 +21,13 @@
             @Html.DisplayNameFor(model => model.PlayerUrl)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.PlayerUrl)
+            <iframe width="560" height="315" src="@Html.DisplayFor(model => model.PlayerUrl)" frameborder="0" allowfullscreen></iframe>
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.OriginUrl)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.OriginUrl)
+            <a href="@Html.DisplayFor(model => model.OriginUrl)">See original post</a>
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Synopsis)
