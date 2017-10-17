@@ -13,12 +13,18 @@ namespace ShredCrawl
         static Regex pinkbikeMatch = new Regex("(data-videoid=\")([0-9]+)\"");
         static string pbPreceder = "www.pinkbike.com/v/embed/";
 
-        public static List<WebVid> YouTubeCrawl(string crawlTarget)
+        static HtmlWeb web;
+        static HtmlDocument htmlDoc;
+
+        public static void Crawl(string crawlTarget)
+        {
+            web = new HtmlWeb();
+            htmlDoc = web.Load(crawlTarget);
+        }
+
+        public static List<WebVid> YouTubeCollect()
         {
             var ytVidList = new List<WebVid>();
-
-            HtmlWeb web = new HtmlWeb();
-            var htmlDoc = web.Load(crawlTarget);
             var ytNodes = htmlDoc.DocumentNode.SelectNodes("//iframe");
 
             foreach (HtmlNode node in ytNodes)
@@ -42,12 +48,9 @@ namespace ShredCrawl
             return ytVidList;
         }
 
-        public static List<WebVid> VimeoCrawl(string crawlTarget)
+        public static List<WebVid> VimeoCollect()
         {
             var vmVidList = new List<WebVid>();
-
-            HtmlWeb web = new HtmlWeb();
-            var htmlDoc = web.Load(crawlTarget);
             var vmNodes = htmlDoc.DocumentNode.SelectNodes("//iframe");
 
             foreach (HtmlNode node in vmNodes)
@@ -71,12 +74,9 @@ namespace ShredCrawl
             return vmVidList;
         }
 
-        public static List<WebVid> PinkBikeCrawl(string crawlTarget)
+        public static List<WebVid> PinkBikeCollect()
         {
             var pbVidList = new List<WebVid>();
-
-            HtmlWeb web = new HtmlWeb();
-            var htmlDoc = web.Load(crawlTarget);
             var pbNodes = htmlDoc.DocumentNode.SelectNodes("//video");
 
             foreach (HtmlNode node in pbNodes)

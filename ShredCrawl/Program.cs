@@ -12,11 +12,14 @@ namespace ShredCrawl
         {
 
             var vidsToAdd = new List<WebVid>();
+
             var crawlTarget = "https://www.pinkbike.com/news/movies-for-your-monday-october9-2017.html";
 
-            vidsToAdd.AddRange(Crawler.YouTubeCrawl(crawlTarget));
-            vidsToAdd.AddRange(Crawler.VimeoCrawl(crawlTarget));
-            vidsToAdd.AddRange(Crawler.PinkBikeCrawl(crawlTarget));
+            Crawler.Crawl(crawlTarget);
+
+            vidsToAdd.AddRange(Crawler.YouTubeCollect());
+            vidsToAdd.AddRange(Crawler.VimeoCollect());
+            vidsToAdd.AddRange(Crawler.PinkBikeCollect());
 
             Console.WriteLine("Crawl Completed. Found " + vidsToAdd.Count + " new videos. Press anything to add them to the database.");
             Console.ReadLine();
