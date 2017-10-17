@@ -11,5 +11,6 @@ namespace ShredCrawl
         public DateTime ReleaseDate { get; set; }
         public string Synopsis { get; set; }
         public string Title { get; set; }
+        public string VideoService { get; set; }
     }
 }

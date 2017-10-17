@@ -13,5 +13,6 @@ namespace PerpetualShred.Models
         public string PlayerUrl { get; set; }
         public string OriginUrl { get; set; }
         public string Synopsis { get; set; }
+        public string VideoService { get; set; }
     }
 }

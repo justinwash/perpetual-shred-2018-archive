@@ -2,6 +2,7 @@
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
 using System.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace ShredCrawl
 {
@@ -10,51 +11,22 @@ namespace ShredCrawl
         static void Main(string[] args)
         {
 
-            Regex youtubeMatch = new Regex("youtu(?:.be|be.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]).+?(?=\")");
-            Regex vimeoMatch = new Regex("(player.)?(vimeo.com)/(video/)?([0-9]+)");
-            Regex pinkMatch = new Regex("(player.)?(vimeo.com)/(video/)?([0-9]+)");
+            var vidsToAdd = new List<WebVid>();
+            var crawlTarget = "https://www.pinkbike.com/news/movies-for-your-monday-october9-2017.html";
 
-            var html = "https://www.pinkbike.com/news/movies-for-your-monday-october9-2017.html";
+            vidsToAdd.AddRange(Crawler.YouTubeCrawl(crawlTarget));
+            vidsToAdd.AddRange(Crawler.VimeoCrawl(crawlTarget));
+            vidsToAdd.AddRange(Crawler.PinkBikeCrawl(crawlTarget));
 
-            HtmlWeb web = new HtmlWeb();
+            Console.WriteLine("Crawl Completed. Found " + vidsToAdd.Count + " new videos. Press anything to add them to the database.");
+            Console.ReadLine();
 
-            var htmlDoc = web.Load(html);
-
-            var ytNodes = htmlDoc.DocumentNode.SelectNodes("//iframe");
-            var pbNodes = htmlDoc.DocumentNode.SelectNodes("//video");
-
-            foreach (HtmlNode node in ytNodes)
+            foreach (WebVid webVid in vidsToAdd)
             {
-                Match youtubeMatches = youtubeMatch.Match(node.OuterHtml);
-                Match vimeoMatches = vimeoMatch.Match(node.OuterHtml);
-
-                if (youtubeMatches.Success)
-                {
-                    string input = youtubeMatches.Value;
-                    Console.WriteLine("Youtube match: " + input);
-                    
-                }
-
-                if (vimeoMatches.Success)
-                {
-                    string input = vimeoMatches.Value;
-                    Console.WriteLine("Vimeo match: " + input);
-
-                }
+                DbInterface.AddToDb(webVid);
             }
 
-            foreach (HtmlNode node in ytNodes)
-            {
-                Match pinkMatches = pinkMatch.Match(node.OuterHtml);
-
-                if (pinkMatches.Success)
-                {
-                    string input = pinkMatches.Value;
-                    Console.WriteLine("PinkBike match: " + input);
-
-                }
-            }
-
+            Console.WriteLine(vidsToAdd.Count + " new videos added to the database!");
             Console.ReadLine();
         }
     }
