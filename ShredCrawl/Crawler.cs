@@ -82,7 +82,7 @@ namespace ShredCrawl
             foreach (HtmlNode node in pbNodes)
             {
                 Match pbMatches = pinkbikeMatch.Match(node.OuterHtml);
-                //var infoNode = node.ParentNode.ParentNode.SelectSingleNode("//div/");
+                //var infoNode = node.SelectNodes("//div/");
                 //Regex findTitle = new Regex("(data-videoid=\")([0-9]+)\"");
                 if (pbMatches.Success)
                 {
