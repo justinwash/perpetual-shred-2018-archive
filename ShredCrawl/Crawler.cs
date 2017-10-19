@@ -39,7 +39,7 @@ namespace ShredCrawl
                     Console.WriteLine("Youtube match: " + input);
 
                     ytVidToAdd.PlayerUrl = input;
-
+ytVidToAdd.VideoService = "YouTube";
                     ytVidList.Add(ytVidToAdd);
 
                 }
@@ -64,8 +64,8 @@ namespace ShredCrawl
                     string input = vimeoMatches.Value;
                     Console.WriteLine("Vimeo match: " + input);
 
-                    vmVidToAdd.PlayerUrl = input;
-
+                    vmVidToAdd.PlayerUrl = input;        
+vmVidToAdd.VideoService = "Vimeo";
                     vmVidList.Add(vmVidToAdd);
 
                 }
@@ -93,6 +93,7 @@ namespace ShredCrawl
                     Console.WriteLine("PinkBike match: " + pbLink);
 
                     pbVidToAdd.PlayerUrl = pbLink;
+pbVidToAdd.VideoService = "PinkBike";
                     pbVidList.Add(pbVidToAdd);
                 }
             }

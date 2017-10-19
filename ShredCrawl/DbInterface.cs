@@ -13,7 +13,11 @@ namespace ShredCrawl
         {
             using (DbContext db = new PerpetualShredContext_0b395b83_09f4_4116_97c6_eb6c19f89ae2Context())
             {
+                if (webVid.VideoService == "YouTube")
+                {
+                
                 webVid.PlayerUrl = "http://www." + webVid.PlayerUrl + "?rel=0&autoplay=1&amp;showinfo=0";
+                }
 
                 db.Add(webVid);
                 db.SaveChanges();
