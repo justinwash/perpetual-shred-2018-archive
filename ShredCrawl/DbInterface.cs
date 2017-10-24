@@ -21,8 +21,13 @@ namespace ShredCrawl
 
                 db.Add(webVid);
                 db.SaveChanges();
-                Console.WriteLine("WebVid object with PlayerUrl "
-                    + webVid.PlayerUrl + " passed to DbInterface.");
+                Console.WriteLine("WebVid object sent to DB");
+                Console.WriteLine("Origin Url: " + webVid.OriginUrl);
+                Console.WriteLine("Origin Title: " + webVid.OriginTitle);
+                Console.WriteLine("Player Url: " + webVid.PlayerUrl);
+                Console.WriteLine("Title: \"" + webVid.Title + "\"");
+                Console.WriteLine("Synopsis: " + webVid.Synopsis);
+                Console.WriteLine("Release Date: " + webVid.ReleaseDate);
                 Console.WriteLine();
 
 

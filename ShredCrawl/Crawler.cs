@@ -28,18 +28,27 @@ namespace ShredCrawl
             var ytNodes = htmlDoc.DocumentNode.SelectNodes("//iframe");
 
             foreach (HtmlNode node in ytNodes)
-            {
+            { 
                 Match youtubeMatches = youtubeMatch.Match(node.OuterHtml);
 
                 if (youtubeMatches.Success)
                 {
                     WebVid ytVidToAdd = new WebVid();
-
+                    
                     string input = youtubeMatches.Value;
+                    string ytID = input.Substring(18, 11);
+
+                    YouTubeVid tempVid = YouTubeInfo.RetrieveData(ytID);
+
                     Console.WriteLine("Youtube match: " + input);
 
+                    ytVidToAdd.Title = tempVid.Title;
+                    ytVidToAdd.ReleaseDate = tempVid.ReleaseDate;
+                    ytVidToAdd.Synopsis = tempVid.Synopsis;
                     ytVidToAdd.PlayerUrl = input;
-ytVidToAdd.VideoService = "YouTube";
+                    ytVidToAdd.OriginUrl = "http://www.youtube.com/channel/" + tempVid.ChannelID;
+                    ytVidToAdd.OriginTitle = tempVid.ChannelTitle + " on YouTube";
+                    ytVidToAdd.VideoService = "YouTube";
                     ytVidList.Add(ytVidToAdd);
 
                 }
@@ -65,7 +74,7 @@ ytVidToAdd.VideoService = "YouTube";
                     Console.WriteLine("Vimeo match: " + input);
 
                     vmVidToAdd.PlayerUrl = input;        
-vmVidToAdd.VideoService = "Vimeo";
+                    vmVidToAdd.VideoService = "Vimeo";
                     vmVidList.Add(vmVidToAdd);
 
                 }
@@ -93,7 +102,7 @@ vmVidToAdd.VideoService = "Vimeo";
                     Console.WriteLine("PinkBike match: " + pbLink);
 
                     pbVidToAdd.PlayerUrl = pbLink;
-pbVidToAdd.VideoService = "PinkBike";
+                    pbVidToAdd.VideoService = "PinkBike";
                     pbVidList.Add(pbVidToAdd);
                 }
             }

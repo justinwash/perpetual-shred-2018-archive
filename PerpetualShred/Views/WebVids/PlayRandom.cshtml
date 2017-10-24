@@ -27,7 +27,7 @@
             @Html.DisplayNameFor(model => model.OriginUrl)
         </dt>
         <dd>
-            <a href="@Html.DisplayFor(model => model.OriginUrl)">See original post</a>
+            <a href="@Html.DisplayFor(model => model.OriginUrl)">@Html.DisplayFor(model => model.OriginTitle)</a>
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Synopsis)

@@ -4,13 +4,16 @@ using System.Text.RegularExpressions;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 
+using Google.Apis.YouTube.v3;
+using Google.Apis.YouTube.v3.Data;
+using Google.Apis.Services;
+
 namespace ShredCrawl
 {
     class Program
     {
         static void Main(string[] args)
         {
-
             var vidsToAdd = new List<WebVid>();
 
             var crawlTarget = "https://www.pinkbike.com/news/movies-for-your-monday-october9-2017.html";
@@ -31,6 +34,17 @@ namespace ShredCrawl
 
             Console.WriteLine(vidsToAdd.Count + " new videos added to the database!");
             Console.ReadLine();
+        }
+
+        public static YouTubeService YoutTubeAuthorize()
+        {
+            var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+            {
+                ApiKey = "AIzaSyBV0CufWBbF7O1J6Y27kw5Tmmbcwj5t1Ho",
+                ApplicationName = "PerpetualShred"
+            });
+
+            return youtubeService;
         }
     }
 }
