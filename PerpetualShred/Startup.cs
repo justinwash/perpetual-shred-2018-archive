@@ -16,6 +16,7 @@ namespace PerpetualShred
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            //UsedVidList.UsedVids = null;
         }
 
         public IConfiguration Configuration { get; }

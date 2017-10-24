@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PerpetualShred.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace PerpetualShred.Controllers
 {
@@ -17,6 +18,8 @@ namespace PerpetualShred.Controllers
         {
             _context = context;
         }
+
+        
 
         // GET: WebVids
         public async Task<IActionResult> Index()
@@ -45,15 +48,10 @@ namespace PerpetualShred.Controllers
         // Play random video?
         public async Task<IActionResult> PlayRandom(int? id)
         {
-            WebVid vidToPlay;
+            List<WebVid> vidList = new List<WebVid>();
+            vidList.AddRange(_context.WebVid);
 
-            if (id == null)
-            {
-                var vidList = new List<WebVid>();
-                vidList.AddRange(_context.WebVid);
-                vidToPlay = vidList[(new Random().Next(0, vidList.Count))];
-                id = vidToPlay.ID;
-            }
+            id = Randomizer.RandomVidPicker(vidList);
 
             var webVid = await _context.WebVid
                 .SingleOrDefaultAsync(m => m.ID == id);
@@ -172,7 +170,5 @@ namespace PerpetualShred.Controllers
         {
             return _context.WebVid.Any(e => e.ID == id);
         }
-
-        
     }
 }
