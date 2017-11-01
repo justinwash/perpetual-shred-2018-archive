@@ -1,27 +1,33 @@
 ﻿using System;
+using HigLabo.Net.Vimeo;
+using System.Net;
+using Newtonsoft.Json;
 
 namespace ShredCrawl
 {
     static class VimeoInfo
     {
-        
-        public static VimeoVid RetrieveData(string vidID)
-        {
-            int vidNumber = Int32.Parse(vidID);
-            VimeoVid vmVid = new VimeoVid();
-            string title = null;
-            DateTime? releaseDate = null;
-            string synopsis = null;
-            string channelTitle = null;
-            string channelID = null;
+        static VimeoClient vmServ = Program.VimeoAuthorize();
 
+        public static VimeoVid RetrieveData(string vidUrl)
+        {
+            int vidID = Int32.Parse(vidUrl);
+            VimeoVid vmVid = new VimeoVid();
+            string channelTitle = "MISSING";
             
 
+            WebClient myDownloader = new WebClient();
+            myDownloader.Encoding = System.Text.Encoding.UTF8;
+
+            string jsonResponse = myDownloader.DownloadString("http://vimeo.com/api/v2/video/" + vidID + ".json");
+            
+            var item = JsonConvert.DeserializeObject(jsonResponse);
+
             vmVid.ChannelTitle = channelTitle;
-            vmVid.ChannelID = channelID;
-            vmVid.Title = title;
-            vmVid.ReleaseDate = releaseDate;
-            vmVid.Synopsis = synopsis;
+            //vmVid.ChannelID = item.url;
+            //vmVid.Title = item.title;
+            //vmVid.ReleaseDate = Convert.ToDateTime(item.upload_date);
+            //vmVid.Synopsis = item.description;
             return vmVid;
         }
 
@@ -29,6 +35,9 @@ namespace ShredCrawl
         {
             return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
         }
+
+        
+        
     }
 
     class VimeoSettings

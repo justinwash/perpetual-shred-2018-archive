@@ -48,4 +48,10 @@ namespace ShredCrawl
             return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
         }
     }
+
+    class YouTubeSettings
+    {
+        public static string apiKey = "AIzaSyBV0CufWBbF7O1J6Y27kw5Tmmbcwj5t1Ho";
+        public static string appName = "PerpetualShred";
+    }
 }

@@ -2,6 +2,7 @@
 using Google.Apis.YouTube.v3;
 using System;
 using System.Collections.Generic;
+using HigLabo.Net.Vimeo;
 
 namespace ShredCrawl
 {
@@ -35,14 +36,18 @@ namespace ShredCrawl
         {
             var youtubeService = new YouTubeService(new BaseClientService.Initializer()
             {
-                ApiKey = "AIzaSyBV0CufWBbF7O1J6Y27kw5Tmmbcwj5t1Ho",
-                ApplicationName = "PerpetualShred"
+                ApiKey = YouTubeSettings.apiKey,
+                ApplicationName = YouTubeSettings.appName
             });
 
             return youtubeService;
         }
 
-        
+        public static VimeoClient VimeoAuthorize()
+        {
+            var vimeoClient = new VimeoClient(VimeoSettings.ConsumerKey, VimeoSettings.ConsumerSecret);
+            return vimeoClient;
+        }
 
         
     }

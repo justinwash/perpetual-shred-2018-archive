@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "cf7ab33911abaa665d02f03d232fa8d14c335717"
+    "signature": "0d07af4e60c07321e70199c7d1ccb76102656cf2"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,9 +9,11 @@
       "ShredCrawl/1.0.0": {
         "dependencies": {
           "Google.Apis.YouTube.v3": "1.29.2.1006",
+          "HigLabo.Net.Vimeo": "0.1.0",
           "HtmlAgilityPack": "1.6.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.0",
-          "Microsoft.EntityFrameworkCore.Tools": "2.0.0"
+          "Microsoft.EntityFrameworkCore.Tools": "2.0.0",
+          "Newtonsoft.Json": "10.0.3"
         },
         "runtime": {
           "ShredCrawl.dll": {}
@@ -20,7 +22,7 @@
       "Google.Apis/1.29.2": {
         "dependencies": {
           "Google.Apis.Core": "1.29.2",
-          "Newtonsoft.Json": "10.0.2",
+          "Newtonsoft.Json": "10.0.3",
           "System.Net.Http": "4.3.2",
           "System.Reflection.TypeExtensions": "4.3.0"
         },
@@ -42,7 +44,7 @@
       },
       "Google.Apis.Core/1.29.2": {
         "dependencies": {
-          "Newtonsoft.Json": "10.0.2",
+          "Newtonsoft.Json": "10.0.3",
           "System.Net.Http": "4.3.2",
           "System.Reflection.TypeExtensions": "4.3.0"
         },
@@ -57,6 +59,16 @@
         },
         "runtime": {
           "lib/netstandard1.3/Google.Apis.YouTube.v3.dll": {}
+        }
+      },
+      "HigLabo.Net.Vimeo/0.1.0": {
+        "runtime": {
+          "lib/net45/HigLabo.Converter.dll": {},
+          "lib/net45/HigLabo.Core.dll": {},
+          "lib/net45/HigLabo.Mapper.dll": {},
+          "lib/net45/HigLabo.Net.Vimeo.dll": {},
+          "lib/net45/HigLabo.Net.dll": {},
+          "lib/net45/HigLabo.Rss.dll": {}
         }
       },
       "HtmlAgilityPack/1.6.0": {
@@ -212,7 +224,7 @@
           }
         }
       },
-      "Newtonsoft.Json/10.0.2": {
+      "Newtonsoft.Json/10.0.3": {
         "dependencies": {
           "Microsoft.CSharp": "4.4.0",
           "System.ComponentModel.TypeConverter": "4.3.0",
@@ -1204,6 +1216,13 @@
       "path": "google.apis.youtube.v3/1.29.2.1006",
       "hashPath": "google.apis.youtube.v3.1.29.2.1006.nupkg.sha512"
     },
+    "HigLabo.Net.Vimeo/0.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pSqZtlEGiTJBgCD2VFde+9Mq+R/dziX53TBPqaRbu20fYpxAEU42u4ceyXJ0AigPlDofdiPfvAyLFJMU42zc8Q==",
+      "path": "higlabo.net.vimeo/0.1.0",
+      "hashPath": "higlabo.net.vimeo.0.1.0.nupkg.sha512"
+    },
     "HtmlAgilityPack/1.6.0": {
       "type": "package",
       "serviceable": true,
@@ -1337,12 +1356,12 @@
       "path": "microsoft.win32.registry/4.4.0",
       "hashPath": "microsoft.win32.registry.4.4.0.nupkg.sha512"
     },
-    "Newtonsoft.Json/10.0.2": {
+    "Newtonsoft.Json/10.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-iwElSU2IXmwGvytJsezyDML2ZWDkG2JzTYzlU/BNlmzMdlmRvbnwITsGGY74gwVEpDli1UdOLkMT7/3jxWvXzA==",
-      "path": "newtonsoft.json/10.0.2",
-      "hashPath": "newtonsoft.json.10.0.2.nupkg.sha512"
+      "sha512": "sha512-hSXaFmh7hNCuEoC4XNY5DrRkLDzYHqPx/Ik23R4J86Z7PE/Y6YidhG602dFVdLBRSdG6xp9NabH3dXpcoxWvww==",
+      "path": "newtonsoft.json/10.0.3",
+      "hashPath": "newtonsoft.json.10.0.3.nupkg.sha512"
     },
     "Remotion.Linq/2.1.1": {
       "type": "package",

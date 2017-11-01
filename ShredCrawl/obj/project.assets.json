@@ -65,6 +65,27 @@
           "lib/netstandard1.3/Google.Apis.YouTube.v3.dll": {}
         }
       },
+      "HigLabo.Net.Vimeo/0.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/HigLabo.Converter.dll": {},
+          "lib/net45/HigLabo.Core.dll": {},
+          "lib/net45/HigLabo.Mapper.dll": {},
+          "lib/net45/HigLabo.Net.Vimeo.dll": {},
+          "lib/net45/HigLabo.Net.dll": {},
+          "lib/net45/HigLabo.Rss.dll": {},
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/HigLabo.Converter.dll": {},
+          "lib/net45/HigLabo.Core.dll": {},
+          "lib/net45/HigLabo.Mapper.dll": {},
+          "lib/net45/HigLabo.Net.Vimeo.dll": {},
+          "lib/net45/HigLabo.Net.dll": {},
+          "lib/net45/HigLabo.Rss.dll": {},
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
       "HtmlAgilityPack/1.6.0": {
         "type": "package",
         "dependencies": {
@@ -505,7 +526,7 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "Newtonsoft.Json/10.0.2": {
+      "Newtonsoft.Json/10.0.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.3.0",
@@ -1988,6 +2009,22 @@
         "lib/netstandard1.3/Google.Apis.YouTube.v3.xml"
       ]
     },
+    "HigLabo.Net.Vimeo/0.1.0": {
+      "sha512": "pSqZtlEGiTJBgCD2VFde+9Mq+R/dziX53TBPqaRbu20fYpxAEU42u4ceyXJ0AigPlDofdiPfvAyLFJMU42zc8Q==",
+      "type": "package",
+      "path": "higlabo.net.vimeo/0.1.0",
+      "files": [
+        "higlabo.net.vimeo.0.1.0.nupkg.sha512",
+        "higlabo.net.vimeo.nuspec",
+        "lib/net45/HigLabo.Converter.dll",
+        "lib/net45/HigLabo.Core.dll",
+        "lib/net45/HigLabo.Mapper.dll",
+        "lib/net45/HigLabo.Net.Vimeo.dll",
+        "lib/net45/HigLabo.Net.dll",
+        "lib/net45/HigLabo.Rss.dll",
+        "lib/net45/Newtonsoft.Json.dll"
+      ]
+    },
     "HtmlAgilityPack/1.6.0": {
       "sha512": "+jNhj2wQI59RiHNcbwI5F7zNv/kpPdI6PAunOru36HUxJWcNSgeUTznmxbt/fyg04jQC9ZlkzrACIGXwag3aFg==",
       "type": "package",
@@ -2805,10 +2842,10 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/10.0.2": {
-      "sha512": "iwElSU2IXmwGvytJsezyDML2ZWDkG2JzTYzlU/BNlmzMdlmRvbnwITsGGY74gwVEpDli1UdOLkMT7/3jxWvXzA==",
+    "Newtonsoft.Json/10.0.3": {
+      "sha512": "hSXaFmh7hNCuEoC4XNY5DrRkLDzYHqPx/Ik23R4J86Z7PE/Y6YidhG602dFVdLBRSdG6xp9NabH3dXpcoxWvww==",
       "type": "package",
-      "path": "newtonsoft.json/10.0.2",
+      "path": "newtonsoft.json/10.0.3",
       "files": [
         "LICENSE.md",
         "lib/net20/Newtonsoft.Json.dll",
@@ -2823,11 +2860,11 @@
         "lib/netstandard1.0/Newtonsoft.Json.xml",
         "lib/netstandard1.3/Newtonsoft.Json.dll",
         "lib/netstandard1.3/Newtonsoft.Json.xml",
-        "lib/portable-net40+sl5+win8+wpa81+wp8/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+win8+wpa81+wp8/Newtonsoft.Json.xml",
-        "lib/portable-net45+win8+wpa81+wp8/Newtonsoft.Json.dll",
-        "lib/portable-net45+win8+wpa81+wp8/Newtonsoft.Json.xml",
-        "newtonsoft.json.10.0.2.nupkg.sha512",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "newtonsoft.json.10.0.3.nupkg.sha512",
         "newtonsoft.json.nuspec",
         "tools/install.ps1"
       ]
@@ -6434,10 +6471,12 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "Google.Apis.YouTube.v3 >= 1.29.2.1006",
+      "HigLabo.Net.Vimeo >= 0.1.0",
       "HtmlAgilityPack >= 1.6.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 2.0.0",
-      "Microsoft.NETCore.App >= 2.0.0"
+      "Microsoft.NETCore.App >= 2.0.0",
+      "Newtonsoft.Json >= 10.0.3"
     ]
   },
   "packageFolders": {
@@ -6501,9 +6540,17 @@
             "target": "Package",
             "version": "2.0.0"
           },
+          "HigLabo.Net.Vimeo": {
+            "target": "Package",
+            "version": "0.1.0"
+          },
           "HtmlAgilityPack": {
             "target": "Package",
             "version": "1.6.0"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "10.0.3"
           }
         },
         "imports": [
@@ -6513,5 +6560,17 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'HigLabo.Net.Vimeo 0.1.0' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "HigLabo.Net.Vimeo",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    }
+  ]
 }
