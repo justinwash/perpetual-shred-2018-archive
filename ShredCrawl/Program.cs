@@ -2,9 +2,6 @@
 using Google.Apis.YouTube.v3;
 using System;
 using System.Collections.Generic;
-using BlackBayou.Vimeo;
-using BlackBayou.Vimeo.Api;
-using BlackBayou.Vimeo.OAuth;
 
 namespace ShredCrawl
 {
@@ -45,17 +42,7 @@ namespace ShredCrawl
             return youtubeService;
         }
 
-        public static VimeoService VimeoAuth()
-        {
-            var vimeoService = new VimeoService();
-            // Build the token manager 
-            vimeoService.tokenManager = new InMemoryTokenManager(VimeoSettings.ConsumerKey, VimeoSettings.ConsumerSecret, 
-                new Dictionary<string, string> { { VimeoSettings.AccessToken, VimeoSettings.AccessTokenSecret } });
-            // Build the api client 
-            vimeoService.apiClient = new VimeoPlusApi(vimeoService.tokenManager, VimeoSettings.AccessToken);
-
-            return vimeoService;
-        }
+        
 
         
     }

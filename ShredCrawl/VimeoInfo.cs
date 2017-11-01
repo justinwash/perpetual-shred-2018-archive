@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using BlackBayou.Vimeo.Api;
-using BlackBayou.Vimeo.Api.Videos;
-using BlackBayou.Vimeo.OAuth;
 
 namespace ShredCrawl
 {
     static class VimeoInfo
     {
-        static VimeoService vmServ = Program.VimeoAuth();
-
+        
         public static VimeoVid RetrieveData(string vidID)
         {
             int vidNumber = Int32.Parse(vidID);
@@ -22,7 +15,7 @@ namespace ShredCrawl
             string channelTitle = null;
             string channelID = null;
 
-            vmServ.apiClient.Videos.GetVideoInfo(vidNumber);
+            
 
             vmVid.ChannelTitle = channelTitle;
             vmVid.ChannelID = channelID;
@@ -46,11 +39,7 @@ namespace ShredCrawl
         public static string AccessTokenSecret = "";
     }
 
-    class VimeoService
-    {
-        public InMemoryTokenManager tokenManager { get; set; }
-        public VimeoPlusApi apiClient { get; set; }
-    }
+    
 
 }
 

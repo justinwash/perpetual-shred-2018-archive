@@ -1,14 +1,13 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "3fe96daa981ad55db91b63e5fd03cea55d64c42b"
+    "signature": "cf7ab33911abaa665d02f03d232fa8d14c335717"
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.0": {
       "ShredCrawl/1.0.0": {
         "dependencies": {
-          "BlackBayou.Vimeo": "1.0.4",
           "Google.Apis.YouTube.v3": "1.29.2.1006",
           "HtmlAgilityPack": "1.6.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.0",
@@ -16,36 +15,6 @@
         },
         "runtime": {
           "ShredCrawl.dll": {}
-        }
-      },
-      "BlackBayou.Vimeo/1.0.4": {
-        "dependencies": {
-          "DotNetOpenAuth.OAuth.Consumer": "4.2.2.13055",
-          "Newtonsoft.Json": "10.0.2"
-        },
-        "runtime": {
-          "lib/net40/BlackBayou.Vimeo.dll": {}
-        }
-      },
-      "DotNetOpenAuth.Core/4.2.2.13055": {
-        "runtime": {
-          "lib/net45-full/DotNetOpenAuth.Core.dll": {}
-        }
-      },
-      "DotNetOpenAuth.OAuth.Consumer/4.2.2.13055": {
-        "dependencies": {
-          "DotNetOpenAuth.OAuth.Core": "4.2.2.13055"
-        },
-        "runtime": {
-          "lib/net45-full/DotNetOpenAuth.OAuth.Consumer.dll": {}
-        }
-      },
-      "DotNetOpenAuth.OAuth.Core/4.2.2.13055": {
-        "dependencies": {
-          "DotNetOpenAuth.Core": "4.2.2.13055"
-        },
-        "runtime": {
-          "lib/net45-full/DotNetOpenAuth.OAuth.dll": {}
         }
       },
       "Google.Apis/1.29.2": {
@@ -1206,34 +1175,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "BlackBayou.Vimeo/1.0.4": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-kZqe1hvic97fzGMpt6Tt/HWGr++fPS8viZAGXSBeEJg5eyrqR00GOpF1opYIGgHpH0gJFlt41GmyHPYtk0VrKQ==",
-      "path": "blackbayou.vimeo/1.0.4",
-      "hashPath": "blackbayou.vimeo.1.0.4.nupkg.sha512"
-    },
-    "DotNetOpenAuth.Core/4.2.2.13055": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-6A0TKDuMaPCXPMlDuzqFfMrQ5QfRQ2IG8PV3CDPR1EEGj84pavXSw0ANOlFTdf6Ax7DcjPFf0patG4JAIES6nA==",
-      "path": "dotnetopenauth.core/4.2.2.13055",
-      "hashPath": "dotnetopenauth.core.4.2.2.13055.nupkg.sha512"
-    },
-    "DotNetOpenAuth.OAuth.Consumer/4.2.2.13055": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Yx0YmFwLAcJe6XqULyR1pBozxsMf2NIMrqc0JQDaAAU3XmkAJRHFz1DT1dOc3/KIhjkpTsZal9d9kHSDf0uCxQ==",
-      "path": "dotnetopenauth.oauth.consumer/4.2.2.13055",
-      "hashPath": "dotnetopenauth.oauth.consumer.4.2.2.13055.nupkg.sha512"
-    },
-    "DotNetOpenAuth.OAuth.Core/4.2.2.13055": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-SIZKCr6RNIr/VfdkBwHJQMtxaaiOgrg/HBSZD2Xf7yDa3M01uOzgS/yt8MUCUJwkbGTej/NhQCzT9YqRBbV+vA==",
-      "path": "dotnetopenauth.oauth.core/4.2.2.13055",
-      "hashPath": "dotnetopenauth.oauth.core.4.2.2.13055.nupkg.sha512"
     },
     "Google.Apis/1.29.2": {
       "type": "package",
