@@ -71,9 +71,17 @@ namespace ShredCrawl
                     WebVid vmVidToAdd = new WebVid();
 
                     string input = vimeoMatches.Value;
+                    string vmID = input.Substring(23, 9);
                     Console.WriteLine("Vimeo match: " + input);
 
-                    vmVidToAdd.PlayerUrl = input;        
+                    VimeoVid tempVid = VimeoInfo.RetrieveData(vmID);
+
+                    vmVidToAdd.Title = tempVid.Title;
+                    vmVidToAdd.ReleaseDate = tempVid.ReleaseDate;
+                    vmVidToAdd.Synopsis = tempVid.Synopsis;
+                    vmVidToAdd.PlayerUrl = input;
+                    vmVidToAdd.OriginUrl = "http://www.vimeo.com/" + tempVid.ChannelID;
+                    vmVidToAdd.OriginTitle = tempVid.ChannelTitle + " on YouTube";
                     vmVidToAdd.VideoService = "Vimeo";
                     vmVidList.Add(vmVidToAdd);
 
@@ -109,5 +117,7 @@ namespace ShredCrawl
 
             return pbVidList;
         }
+
+        
     }
 }

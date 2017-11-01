@@ -1,12 +1,10 @@
-﻿using System;
-using HtmlAgilityPack;
-using System.Text.RegularExpressions;
-using System.Data.SqlClient;
-using System.Collections.Generic;
-
+﻿using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
-using Google.Apis.YouTube.v3.Data;
-using Google.Apis.Services;
+using System;
+using System.Collections.Generic;
+using BlackBayou.Vimeo;
+using BlackBayou.Vimeo.Api;
+using BlackBayou.Vimeo.OAuth;
 
 namespace ShredCrawl
 {
@@ -21,7 +19,7 @@ namespace ShredCrawl
             Crawler.Crawl(crawlTarget);
 
             vidsToAdd.AddRange(Crawler.YouTubeCollect());
-            //vidsToAdd.AddRange(Crawler.VimeoCollect());
+            vidsToAdd.AddRange(Crawler.VimeoCollect());
             //vidsToAdd.AddRange(Crawler.PinkBikeCollect());
 
             Console.WriteLine("Crawl Completed. Found " + vidsToAdd.Count + " new videos. Press anything to add them to the database.");
@@ -46,5 +44,19 @@ namespace ShredCrawl
 
             return youtubeService;
         }
+
+        public static VimeoService VimeoAuth()
+        {
+            var vimeoService = new VimeoService();
+            // Build the token manager 
+            vimeoService.tokenManager = new InMemoryTokenManager(VimeoSettings.ConsumerKey, VimeoSettings.ConsumerSecret, 
+                new Dictionary<string, string> { { VimeoSettings.AccessToken, VimeoSettings.AccessTokenSecret } });
+            // Build the api client 
+            vimeoService.apiClient = new VimeoPlusApi(vimeoService.tokenManager, VimeoSettings.AccessToken);
+
+            return vimeoService;
+        }
+
+        
     }
 }
