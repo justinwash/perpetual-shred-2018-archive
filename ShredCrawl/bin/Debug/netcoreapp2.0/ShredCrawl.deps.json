@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "0d07af4e60c07321e70199c7d1ccb76102656cf2"
+    "signature": "6451fc8f411888e7ce869c41eb9462d304c51c84"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,7 +9,6 @@
       "ShredCrawl/1.0.0": {
         "dependencies": {
           "Google.Apis.YouTube.v3": "1.29.2.1006",
-          "HigLabo.Net.Vimeo": "0.1.0",
           "HtmlAgilityPack": "1.6.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "2.0.0",
@@ -59,16 +58,6 @@
         },
         "runtime": {
           "lib/netstandard1.3/Google.Apis.YouTube.v3.dll": {}
-        }
-      },
-      "HigLabo.Net.Vimeo/0.1.0": {
-        "runtime": {
-          "lib/net45/HigLabo.Converter.dll": {},
-          "lib/net45/HigLabo.Core.dll": {},
-          "lib/net45/HigLabo.Mapper.dll": {},
-          "lib/net45/HigLabo.Net.Vimeo.dll": {},
-          "lib/net45/HigLabo.Net.dll": {},
-          "lib/net45/HigLabo.Rss.dll": {}
         }
       },
       "HtmlAgilityPack/1.6.0": {
@@ -1215,13 +1204,6 @@
       "sha512": "sha512-bHqkkkKfEOdDNdDpLwgyxPEpAnNJj9Kmsp+QFBcaaGhM6dutpmvYt5/83MPTLvwrcEtoYPK5Ix3X+BGqDtzDHA==",
       "path": "google.apis.youtube.v3/1.29.2.1006",
       "hashPath": "google.apis.youtube.v3.1.29.2.1006.nupkg.sha512"
-    },
-    "HigLabo.Net.Vimeo/0.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-pSqZtlEGiTJBgCD2VFde+9Mq+R/dziX53TBPqaRbu20fYpxAEU42u4ceyXJ0AigPlDofdiPfvAyLFJMU42zc8Q==",
-      "path": "higlabo.net.vimeo/0.1.0",
-      "hashPath": "higlabo.net.vimeo.0.1.0.nupkg.sha512"
     },
     "HtmlAgilityPack/1.6.0": {
       "type": "package",

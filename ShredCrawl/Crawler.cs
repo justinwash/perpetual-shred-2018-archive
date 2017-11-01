@@ -76,12 +76,12 @@ namespace ShredCrawl
 
                     VimeoVid tempVid = VimeoInfo.RetrieveData(vmID);
 
-                    vmVidToAdd.Title = tempVid.Title;
-                    vmVidToAdd.ReleaseDate = tempVid.ReleaseDate;
-                    vmVidToAdd.Synopsis = tempVid.Synopsis;
+                    vmVidToAdd.Title = tempVid.title;
+                    vmVidToAdd.ReleaseDate = Convert.ToDateTime(tempVid.upload_date);
+                    vmVidToAdd.Synopsis = tempVid.description;
                     vmVidToAdd.PlayerUrl = input;
-                    vmVidToAdd.OriginUrl = "http://www.vimeo.com/" + tempVid.ChannelID;
-                    vmVidToAdd.OriginTitle = tempVid.ChannelTitle + " on YouTube";
+                    vmVidToAdd.OriginUrl = "http://www.vimeo.com/" + tempVid.user_id;
+                    vmVidToAdd.OriginTitle = tempVid.user_name + " on Vimeo";
                     vmVidToAdd.VideoService = "Vimeo";
                     vmVidList.Add(vmVidToAdd);
 

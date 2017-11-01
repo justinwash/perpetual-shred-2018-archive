@@ -1,7 +1,9 @@
 ﻿using System;
-
 using System.Net;
 using Newtonsoft.Json;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ShredCrawl
 {
@@ -12,21 +14,19 @@ namespace ShredCrawl
         {
             int vidID = Int32.Parse(vidUrl);
             VimeoVid vmVid = new VimeoVid();
-            string channelTitle = "MISSING";
-            
-
+           
             WebClient myDownloader = new WebClient();
             myDownloader.Encoding = System.Text.Encoding.UTF8;
 
             string jsonResponse = myDownloader.DownloadString("http://vimeo.com/api/v2/video/" + vidID + ".json");
-            
-            var item = JsonConvert.DeserializeObject(jsonResponse);
+            List<VimeoVid> tempVidList = JsonConvert.DeserializeObject<List<VimeoVid>>(jsonResponse);
+            var tempVid = tempVidList[0];
 
-            vmVid.ChannelTitle = channelTitle;
-            //vmVid.ChannelID = item.url;
-            //vmVid.Title = item.title;
-            //vmVid.ReleaseDate = Convert.ToDateTime(item.upload_date);
-            //vmVid.Synopsis = item.description;
+            vmVid.title = tempVid.title;
+            vmVid.user_id = tempVid.user_id;
+            vmVid.user_name = tempVid.user_name;
+            vmVid.upload_date = tempVid.upload_date;
+            vmVid.description = vmTruncate(tempVid.description, 200);
             return vmVid;
         }
 
