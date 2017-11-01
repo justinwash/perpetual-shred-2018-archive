@@ -65,27 +65,6 @@
           "lib/netstandard1.3/Google.Apis.YouTube.v3.dll": {}
         }
       },
-      "HigLabo.Net.Vimeo/0.1.0": {
-        "type": "package",
-        "compile": {
-          "lib/net45/HigLabo.Converter.dll": {},
-          "lib/net45/HigLabo.Core.dll": {},
-          "lib/net45/HigLabo.Mapper.dll": {},
-          "lib/net45/HigLabo.Net.Vimeo.dll": {},
-          "lib/net45/HigLabo.Net.dll": {},
-          "lib/net45/HigLabo.Rss.dll": {},
-          "lib/net45/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/net45/HigLabo.Converter.dll": {},
-          "lib/net45/HigLabo.Core.dll": {},
-          "lib/net45/HigLabo.Mapper.dll": {},
-          "lib/net45/HigLabo.Net.Vimeo.dll": {},
-          "lib/net45/HigLabo.Net.dll": {},
-          "lib/net45/HigLabo.Rss.dll": {},
-          "lib/net45/Newtonsoft.Json.dll": {}
-        }
-      },
       "HtmlAgilityPack/1.6.0": {
         "type": "package",
         "dependencies": {
@@ -2007,22 +1986,6 @@
         "lib/netstandard1.0/Google.Apis.YouTube.v3.xml",
         "lib/netstandard1.3/Google.Apis.YouTube.v3.dll",
         "lib/netstandard1.3/Google.Apis.YouTube.v3.xml"
-      ]
-    },
-    "HigLabo.Net.Vimeo/0.1.0": {
-      "sha512": "pSqZtlEGiTJBgCD2VFde+9Mq+R/dziX53TBPqaRbu20fYpxAEU42u4ceyXJ0AigPlDofdiPfvAyLFJMU42zc8Q==",
-      "type": "package",
-      "path": "higlabo.net.vimeo/0.1.0",
-      "files": [
-        "higlabo.net.vimeo.0.1.0.nupkg.sha512",
-        "higlabo.net.vimeo.nuspec",
-        "lib/net45/HigLabo.Converter.dll",
-        "lib/net45/HigLabo.Core.dll",
-        "lib/net45/HigLabo.Mapper.dll",
-        "lib/net45/HigLabo.Net.Vimeo.dll",
-        "lib/net45/HigLabo.Net.dll",
-        "lib/net45/HigLabo.Rss.dll",
-        "lib/net45/Newtonsoft.Json.dll"
       ]
     },
     "HtmlAgilityPack/1.6.0": {
@@ -6471,7 +6434,6 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "Google.Apis.YouTube.v3 >= 1.29.2.1006",
-      "HigLabo.Net.Vimeo >= 0.1.0",
       "HtmlAgilityPack >= 1.6.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 2.0.0",
@@ -6540,10 +6502,6 @@
             "target": "Package",
             "version": "2.0.0"
           },
-          "HigLabo.Net.Vimeo": {
-            "target": "Package",
-            "version": "0.1.0"
-          },
           "HtmlAgilityPack": {
             "target": "Package",
             "version": "1.6.0"
@@ -6560,17 +6518,5 @@
         "warn": true
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'HigLabo.Net.Vimeo 0.1.0' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
-      "libraryId": "HigLabo.Net.Vimeo",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.0"
-      ]
-    }
-  ]
+  }
 }

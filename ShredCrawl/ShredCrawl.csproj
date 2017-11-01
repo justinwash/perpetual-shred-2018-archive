@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <PackageReference Include="Google.Apis.YouTube.v3" Version="1.29.2.1006" />
-    <PackageReference Include="HigLabo.Net.Vimeo" Version="0.1.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.6.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" />

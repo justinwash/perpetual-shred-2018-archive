@@ -1,5 +1,5 @@
 ﻿using System;
-using HigLabo.Net.Vimeo;
+
 using System.Net;
 using Newtonsoft.Json;
 
@@ -7,7 +7,6 @@ namespace ShredCrawl
 {
     static class VimeoInfo
     {
-        static VimeoClient vmServ = Program.VimeoAuthorize();
 
         public static VimeoVid RetrieveData(string vidUrl)
         {

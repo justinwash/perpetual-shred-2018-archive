@@ -2,7 +2,7 @@
 using Google.Apis.YouTube.v3;
 using System;
 using System.Collections.Generic;
-using HigLabo.Net.Vimeo;
+
 
 namespace ShredCrawl
 {
@@ -42,13 +42,5 @@ namespace ShredCrawl
 
             return youtubeService;
         }
-
-        public static VimeoClient VimeoAuthorize()
-        {
-            var vimeoClient = new VimeoClient(VimeoSettings.ConsumerKey, VimeoSettings.ConsumerSecret);
-            return vimeoClient;
-        }
-
-        
     }
 }
