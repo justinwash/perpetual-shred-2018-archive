@@ -18,7 +18,7 @@ namespace ShredCrawl
 
             vidsToAdd.AddRange(Crawler.YouTubeCollect());
             vidsToAdd.AddRange(Crawler.VimeoCollect());
-            //vidsToAdd.AddRange(Crawler.PinkBikeCollect());
+            vidsToAdd.AddRange(Crawler.PinkBikeCollect());
 
             Console.WriteLine("Crawl Completed. Found " + vidsToAdd.Count + " new videos. Press anything to add them to the database.");
             Console.ReadLine();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
+using System.Collections;
 
 namespace ShredCrawl
 {
@@ -94,13 +95,42 @@ namespace ShredCrawl
         public static List<WebVid> PinkBikeCollect()
         {
             var pbVidList = new List<WebVid>();
-            var pbNodes = htmlDoc.DocumentNode.SelectNodes("//video");
-
-            foreach (HtmlNode node in pbNodes)
+            var videoNodes = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'blog-section')]");
+            foreach (HtmlNode node in videoNodes)
             {
                 Match pbMatches = pinkbikeMatch.Match(node.OuterHtml);
-                //var infoNode = node.SelectNodes("//div/");
+
+                var textList = new ArrayList();
+                var mediaList = new ArrayList();
+                var infoNodes = node.SelectNodes("//div[contains(@class, 'blog-text-container')]");
+                var mediaNodes = node.SelectNodes("//div[contains(@class, 'blog-media-container')]");
+                var pbVideoNodes = node.SelectNodes("//div[contains(@class, 'pbvideo')]");
+                
+
+                foreach (HtmlNode infoNode in infoNodes)
+                {
+                    textList.Add(infoNode.OuterHtml);
+                    Console.WriteLine(textList.Count);
+                }
+
+                foreach (HtmlNode mediaNode in mediaNodes)
+                {
+                    var pbVideoNode = mediaNode.FirstChild;
+                    
+
+                    if (mediaNode.ChildNodes.Contains(pbVideoNode))
+                    {
+                        mediaList.Add(pbVideoNode.OuterHtml);
+                        Console.WriteLine(mediaList.Count);
+                    }
+                    
+                }
+                
+
+
                 //Regex findTitle = new Regex("(data-videoid=\")([0-9]+)\"");
+
+
                 if (pbMatches.Success)
                 {
                     WebVid pbVidToAdd = new WebVid();
