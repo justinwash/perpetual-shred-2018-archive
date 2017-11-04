@@ -104,7 +104,7 @@ namespace ShredCrawl
                 var mediaList = new ArrayList();
                 var infoNodes = node.SelectNodes("//div[contains(@class, 'blog-text-container')]");
                 var mediaNodes = node.SelectNodes("//div[contains(@class, 'blog-media-container')]");
-                var pbVideoNodes = node.SelectNodes("//div[contains(@class, 'pbvideo')]");
+                
                 
 
                 foreach (HtmlNode infoNode in infoNodes)
@@ -115,10 +115,10 @@ namespace ShredCrawl
 
                 foreach (HtmlNode mediaNode in mediaNodes)
                 {
-                    var pbVideoNode = mediaNode.FirstChild;
-                    
+                    var childNode = mediaNode.FirstChild;
+                    var pbVideoNode = mediaNode.SelectSingleNode("//div[contains(@class, 'pbvideo')]");
 
-                    if (mediaNode.ChildNodes.Contains(pbVideoNode))
+                    if (childNode.FirstChild == pbVideoNode)
                     {
                         mediaList.Add(pbVideoNode.OuterHtml);
                         Console.WriteLine(mediaList.Count);
