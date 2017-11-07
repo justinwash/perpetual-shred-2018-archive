@@ -96,43 +96,30 @@ namespace ShredCrawl
         {
             var pbVidList = new List<WebVid>();
             var videoNodes = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'blog-section')]");
-            foreach (HtmlNode node in videoNodes)
+
+
+            //foreach (HtmlNode node in videoNodes)
+            //{
+            var textList = new ArrayList();
+            var mediaList = new ArrayList();
+            var infoNodes = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'blog-text-container')]");
+            var mediaNodes = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'blog-media-container')]");
+
+            foreach (HtmlNode infoNode in infoNodes)
             {
-                Match pbMatches = pinkbikeMatch.Match(node.OuterHtml);
+                textList.Add(infoNode.OuterHtml);
+                Console.WriteLine(textList.Count);
+            }
 
-                var textList = new ArrayList();
-                var mediaList = new ArrayList();
-                var infoNodes = node.SelectNodes("//div[contains(@class, 'blog-text-container')]");
-                var mediaNodes = node.SelectNodes("//div[contains(@class, 'blog-media-container')]");
-                
-                
+            foreach (HtmlNode mediaNode in mediaNodes)
+            {
+                Match pbMatches = pinkbikeMatch.Match(mediaNode.OuterHtml);
 
-                foreach (HtmlNode infoNode in infoNodes)
+                if (mediaNode.InnerHtml.Contains("pbvideo") && pbMatches.Success)
                 {
-                    textList.Add(infoNode.OuterHtml);
-                    Console.WriteLine(textList.Count);
-                }
+                    mediaList.Add(mediaNode.InnerHtml);
+                    Console.WriteLine(mediaList.Count);
 
-                foreach (HtmlNode mediaNode in mediaNodes)
-                {
-                    var childNode = mediaNode.FirstChild;
-                    var pbVideoNode = mediaNode.SelectSingleNode("//div[contains(@class, 'pbvideo')]");
-
-                    if (childNode.FirstChild == pbVideoNode)
-                    {
-                        mediaList.Add(pbVideoNode.OuterHtml);
-                        Console.WriteLine(mediaList.Count);
-                    }
-                    
-                }
-                
-
-
-                //Regex findTitle = new Regex("(data-videoid=\")([0-9]+)\"");
-
-
-                if (pbMatches.Success)
-                {
                     WebVid pbVidToAdd = new WebVid();
 
                     string input = pbMatches.Value;
@@ -142,6 +129,13 @@ namespace ShredCrawl
                     pbVidToAdd.PlayerUrl = pbLink;
                     pbVidToAdd.VideoService = "PinkBike";
                     pbVidList.Add(pbVidToAdd);
+                }
+
+                else
+                {
+                    mediaList.Add("NOTPB");
+                    Console.WriteLine(mediaList.Count);
+                    Console.WriteLine("NOTPB");
                 }
             }
 
