@@ -83,7 +83,7 @@ namespace ShredCrawl
                     vmVidToAdd.Title = tempVid.title;
                     vmVidToAdd.ReleaseDate = Convert.ToDateTime(tempVid.upload_date);
                     vmVidToAdd.Synopsis = tempVid.description;
-                    vmVidToAdd.PlayerUrl = input;
+                    vmVidToAdd.PlayerUrl = "https://" + input;
                     vmVidToAdd.OriginUrl = "http://www.vimeo.com/" + tempVid.user_id;
                     vmVidToAdd.OriginTitle = tempVid.user_name + " on Vimeo";
                     vmVidToAdd.VideoService = "Vimeo";
@@ -126,7 +126,7 @@ namespace ShredCrawl
                 if (mediaNode.InnerHtml.Contains("pbvideo") && pbMatches.Success)
                 {
                     mediaList.Add(mediaNode.InnerHtml);
-                    vidNumber = mediaList.Count;
+                    vidNumber = mediaList.Count - 1;
 
                     WebVid pbVidToAdd = new WebVid();
 
@@ -137,12 +137,13 @@ namespace ShredCrawl
                     int titleLength = titleList[vidNumber].ToString().Length - 21;
                     int synopsisLength = synList[vidNumber].ToString().Length - 9;
 
-                    pbVidToAdd.PlayerUrl = pbLink;
+                    pbVidToAdd.PlayerUrl = "https://" + pbLink + "/?colors=c80000&a=1";
                     pbVidToAdd.VideoService = "PinkBike";
                     pbVidToAdd.Title = titleList[vidNumber].ToString().Substring(19, titleLength);
                     pbVidToAdd.Synopsis = synList[vidNumber].ToString().Substring(8, synopsisLength);
                     pbVidToAdd.OriginUrl = crawledPageUrl;
                     pbVidToAdd.OriginTitle = "Movies For Your Monday on PinkBike";
+                    pbVidToAdd.ReleaseDate = DateTime.Today;
                     pbVidList.Add(pbVidToAdd);
                 }
 

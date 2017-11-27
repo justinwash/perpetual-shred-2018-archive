@@ -11,9 +11,18 @@ namespace ShredCrawl
         static void Main(string[] args)
         {
             var vidsToAdd = new List<WebVid>();
+            var crawlTestUrl = "https://www.pinkbike.com/news/movies-for-your-monday-october9-2017.html";
+            var crawlTarget = crawlTestUrl;
 
-            var crawlTarget = "https://www.pinkbike.com/news/movies-for-your-monday-october9-2017.html";
+            Console.WriteLine("Enter URL of page to crawl for sick vids bruh.");
+            crawlTarget = Console.ReadLine();
 
+            if (crawlTarget == null)
+            {
+                crawlTarget = crawlTestUrl;
+            }
+
+            Console.WriteLine("Crawling " + crawlTarget + "...");
             Crawler.Crawl(crawlTarget);
 
             vidsToAdd.AddRange(Crawler.YouTubeCollect());

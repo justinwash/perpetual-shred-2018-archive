@@ -19,8 +19,8 @@ namespace ShredCrawl
                 webVid.PlayerUrl = "http://www." + webVid.PlayerUrl + "?rel=0&autoplay=1&amp;showinfo=0";
                 }
 
-                //db.Add(webVid);
-                //db.SaveChanges();
+                db.Add(webVid);
+                db.SaveChanges();
                 Console.WriteLine("WebVid object sent to DB");
                 Console.WriteLine("Origin Url: " + webVid.OriginUrl);
                 Console.WriteLine("Origin Title: " + webVid.OriginTitle);
