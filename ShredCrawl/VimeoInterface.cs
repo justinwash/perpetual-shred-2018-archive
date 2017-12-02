@@ -4,10 +4,12 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using HtmlAgilityPack;
+using System.Text.RegularExpressions;
 
 namespace ShredCrawl
 {
-    static class VimeoInfo
+    static class VimeoInterface
     {
 
         public static VimeoVid RetrieveData(string vidUrl)
@@ -35,8 +37,42 @@ namespace ShredCrawl
             return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
         }
 
-        
-        
+        public static List<WebVid> VimeoCollect(HtmlDocument htmlDoc)
+        {
+            Regex vimeoMatch = new Regex("(player.)?(vimeo.com)/(video/)?([0-9]+)");
+
+            var vmVidList = new List<WebVid>();
+            var vmNodes = htmlDoc.DocumentNode.SelectNodes("//iframe");
+
+            foreach (HtmlNode node in vmNodes)
+            {
+                Match vimeoMatches = vimeoMatch.Match(node.OuterHtml);
+
+                if (vimeoMatches.Success)
+                {
+                    WebVid vmVidToAdd = new WebVid();
+
+                    string input = vimeoMatches.Value;
+                    string vmID = input.Substring(23, 9);
+                    Console.WriteLine("Vimeo match: " + input);
+
+                    VimeoVid tempVid = VimeoInterface.RetrieveData(vmID);
+
+                    vmVidToAdd.Title = tempVid.title;
+                    vmVidToAdd.ReleaseDate = Convert.ToDateTime(tempVid.upload_date);
+                    vmVidToAdd.Synopsis = tempVid.description;
+                    vmVidToAdd.PlayerUrl = "https://" + input;
+                    vmVidToAdd.OriginUrl = "http://www.vimeo.com/" + tempVid.user_id;
+                    vmVidToAdd.OriginTitle = tempVid.user_name + " on Vimeo";
+                    vmVidToAdd.VideoService = "Vimeo";
+                    vmVidList.Add(vmVidToAdd);
+
+                }
+            }
+
+            return vmVidList;
+        }
+
     }
 
     class VimeoSettings

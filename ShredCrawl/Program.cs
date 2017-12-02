@@ -11,30 +11,17 @@ namespace ShredCrawl
         static void Main(string[] args)
         {
             var vidsToAdd = new List<WebVid>();
-            var crawlTestUrl = "https://www.pinkbike.com/news/movies-for-your-monday-october9-2017.html";
-            var crawlTarget = crawlTestUrl;
+            PinkBikeCrawler pbCrawler = new PinkBikeCrawler();
+            DbInterface db = new DbInterface();
 
-            Console.WriteLine("Enter URL of page to crawl for sick vids bruh.");
-            crawlTarget = Console.ReadLine();
+            vidsToAdd.AddRange(pbCrawler.CrawlPinkBike());
 
-            if (crawlTarget == null)
-            {
-                crawlTarget = crawlTestUrl;
-            }
-
-            Console.WriteLine("Crawling " + crawlTarget + "...");
-            Crawler.Crawl(crawlTarget);
-
-            vidsToAdd.AddRange(Crawler.YouTubeCollect());
-            vidsToAdd.AddRange(Crawler.VimeoCollect());
-            vidsToAdd.AddRange(Crawler.PinkBikeCollect());
-
-            Console.WriteLine("Crawl Completed. Found " + vidsToAdd.Count + " new videos. Press anything to add them to the database.");
+            Console.WriteLine("Crawled PinkBike dude! Found " + vidsToAdd.Count + " new videos. Press Enter to add them to the database.");
             Console.ReadLine();
 
             foreach (WebVid webVid in vidsToAdd)
             {
-                DbInterface.AddToDb(webVid);
+                db.AddToDb(webVid);
             }
 
             Console.WriteLine(vidsToAdd.Count + " new videos added to the database!");
