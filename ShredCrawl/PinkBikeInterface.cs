@@ -62,8 +62,8 @@ namespace ShredCrawl
 
                     pbVidToAdd.PlayerUrl = "https://" + pbLink + "/?colors=c80000&a=1";
                     pbVidToAdd.VideoService = "PinkBike";
-                    pbVidToAdd.Title = titleList[vidNumber].ToString().Substring(19, titleLength);
-                    pbVidToAdd.Synopsis = synList[vidNumber].ToString().Substring(8, synopsisLength);
+                  //  pbVidToAdd.Title = titleList[vidNumber].ToString().Substring(19, titleLength);
+                  //  pbVidToAdd.Synopsis = synList[vidNumber].ToString().Substring(8, synopsisLength);
                     pbVidToAdd.OriginUrl = crawledPageUrl;
                     pbVidToAdd.OriginTitle = "Movies For Your Monday on PinkBike";
                     pbVidToAdd.ReleaseDate = DateTime.Today;

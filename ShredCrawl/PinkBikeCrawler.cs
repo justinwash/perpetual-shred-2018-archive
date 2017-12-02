@@ -28,23 +28,22 @@ namespace ShredCrawl
 
         public List<HtmlDocument> GetPostUrls()
         {
-            var posts = homePage.DocumentNode.SelectNodes("/html/body/div[4]/div/div[1]/div/div/div[1]/div[2]/div[2]/div[2]");
-            Regex vidPageLink = new Regex("<a class=\"fblack\" href=\"(.*?)>");
+            var posts = homePage.DocumentNode.SelectNodes("/html/body/div[4]/div/div[1]/div/div/div[1]/div[2]/div[2]/div");
+            Regex vidPageLink = new Regex("<a class=\"f22 fgrey4 bold\" href=\"(.*?)>");
 
             var postList = new List<HtmlDocument>();
 
             foreach (HtmlNode postNode in posts)
             {
-                
-                Console.WriteLine(postNode.OuterHtml);
+                //Console.WriteLine(postNode.OuterHtml);
                 Match vidPageMatches = vidPageLink.Match(postNode.OuterHtml);
 
                 if (vidPageMatches.Success)
                 {
                     string rawLink = vidPageMatches.Value;
-                    int linkLength = rawLink.ToString().Length - 26;
-                    string truncLink = rawLink.Substring(24, linkLength);
-                    Console.WriteLine(truncLink);
+                    int linkLength = rawLink.ToString().Length - 35;
+                    string truncLink = rawLink.Substring(33, linkLength);
+                    Console.WriteLine("Found post! " + truncLink);
                     postList.Add(new HtmlWeb().Load(truncLink));
                 }
             }
