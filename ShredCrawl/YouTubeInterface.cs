@@ -49,6 +49,11 @@ namespace ShredCrawl
                 var ytVidList = new List<WebVid>();
                 var ytNodes = htmlDoc.DocumentNode.SelectNodes("//iframe");
 
+                if (ytNodes == null)
+                {
+                     return new List<WebVid>();
+                }
+
                 foreach (HtmlNode node in ytNodes)
                 {
                     Match youtubeMatches = youtubeMatch.Match(node.OuterHtml);

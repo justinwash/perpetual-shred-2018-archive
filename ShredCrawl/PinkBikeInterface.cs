@@ -26,6 +26,11 @@ namespace ShredCrawl
 
             string pbPreceder = "www.pinkbike.com/v/embed/";
 
+            if (infoNodes == null)
+            {
+                return new List<WebVid>();
+            }
+
             foreach (HtmlNode infoNode in infoNodes)
             {
                 Match pbTitleMatches = pinkbikeTitle.Match(infoNode.OuterHtml);

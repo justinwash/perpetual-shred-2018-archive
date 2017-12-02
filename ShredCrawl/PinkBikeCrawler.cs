@@ -9,11 +9,11 @@ namespace ShredCrawl
 {
     class PinkBikeCrawler
     {
-        HtmlDocument homePage = new HtmlWeb().Load("http://www.pinkbike.com");
+        HtmlDocument homePage = new HtmlWeb().Load("https://www.pinkbike.com/news/videos");
 
         public List<WebVid> CrawlPinkBike()
         {
-            var linksToCrawl = new List<HtmlDocument>();
+            var linksToCrawl = GetPostUrls();
             var vidList = new List<WebVid>();
             
             foreach (HtmlDocument vidPage in linksToCrawl)
@@ -25,5 +25,32 @@ namespace ShredCrawl
 
             return vidList;
         }
+
+        public List<HtmlDocument> GetPostUrls()
+        {
+            var posts = homePage.DocumentNode.SelectNodes("/html/body/div[4]/div/div[1]/div/div/div[1]/div[2]/div[2]/div[2]");
+            Regex vidPageLink = new Regex("<a class=\"fblack\" href=\"(.*?)>");
+
+            var postList = new List<HtmlDocument>();
+
+            foreach (HtmlNode postNode in posts)
+            {
+                
+                Console.WriteLine(postNode.OuterHtml);
+                Match vidPageMatches = vidPageLink.Match(postNode.OuterHtml);
+
+                if (vidPageMatches.Success)
+                {
+                    string rawLink = vidPageMatches.Value;
+                    int linkLength = rawLink.ToString().Length - 26;
+                    string truncLink = rawLink.Substring(24, linkLength);
+                    Console.WriteLine(truncLink);
+                    postList.Add(new HtmlWeb().Load(truncLink));
+                }
+            }
+
+            return postList;
+        }
+            
     }
 }

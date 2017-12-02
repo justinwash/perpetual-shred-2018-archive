@@ -44,6 +44,11 @@ namespace ShredCrawl
             var vmVidList = new List<WebVid>();
             var vmNodes = htmlDoc.DocumentNode.SelectNodes("//iframe");
 
+            if (vmNodes == null)
+            {
+                return new List<WebVid>();
+            }
+
             foreach (HtmlNode node in vmNodes)
             {
                 Match vimeoMatches = vimeoMatch.Match(node.OuterHtml);
