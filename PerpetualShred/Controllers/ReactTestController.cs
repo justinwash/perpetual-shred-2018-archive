@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PerpetualShred.Models;
 
 namespace PerpetualShred.Controllers
@@ -8,34 +10,11 @@ namespace PerpetualShred.Controllers
     {
         private static readonly IList<CommentModel> _comments;
 
-        static ReactTestController()
-        {
-            _comments = new List<CommentModel>
-            {
-                new CommentModel
-                {
-                    Id = 1,
-                    Author = "Daniel Lo Nigro",
-                    Text = "Hello ReactJS.NET World!"
-                },
-                new CommentModel
-                {
-                    Id = 2,
-                    Author = "Pete Hunt",
-                    Text = "This is one comment"
-                },
-                new CommentModel
-                {
-                    Id = 3,
-                    Author = "Jordan Walke",
-                    Text = "This is *another* comment"
-                },
-            };
-        }
+        private readonly PerpetualShredContext _context;
 
-        public IActionResult ReactTest()
+        public ReactTestController(PerpetualShredContext context)
         {
-            return View();
+            _context = context;
         }
 
         [Route("comments")]
@@ -45,5 +24,22 @@ namespace PerpetualShred.Controllers
             return Json(_comments);
         }
 
+        public async Task<IActionResult> ReactTest(int? id)
+        {
+            List<WebVid> vidList = new List<WebVid>();
+            vidList.AddRange(_context.WebVid);
+
+            id = Randomizer.RandomVidPicker(vidList);
+
+            var webVid = await _context.WebVid
+                .SingleOrDefaultAsync(m => m.ID == id);
+
+            if (webVid == null)
+            {
+                return NotFound();
+            }
+
+            return View(webVid);
+        }
     }
 }

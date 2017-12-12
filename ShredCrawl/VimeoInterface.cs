@@ -20,6 +20,7 @@ namespace ShredCrawl
             WebClient myDownloader = new WebClient();
             myDownloader.Encoding = System.Text.Encoding.UTF8;
 
+
             string jsonResponse = myDownloader.DownloadString("http://vimeo.com/api/v2/video/" + vidID + ".json");
             List<VimeoVid> tempVidList = JsonConvert.DeserializeObject<List<VimeoVid>>(jsonResponse);
             var tempVid = tempVidList[0];
@@ -56,17 +57,27 @@ namespace ShredCrawl
                 if (vimeoMatches.Success)
                 {
                     WebVid vmVidToAdd = new WebVid();
+                    string vmID = "";
 
                     string input = vimeoMatches.Value;
-                    string vmID = input.Substring(23, 9);
-                    Console.WriteLine("Vimeo match: " + input);
+
+                    if (input.Length == 32)
+                    {
+                        vmID = input.Substring(23, 9);
+                    }
+                    else
+                    {
+                        vmID = input.Substring(23, 8);
+                    }
+
+                    Console.WriteLine("Vimeo match: " + input + "?autoplay=1");
 
                     VimeoVid tempVid = VimeoInterface.RetrieveData(vmID);
 
                     vmVidToAdd.Title = tempVid.title;
                     vmVidToAdd.ReleaseDate = Convert.ToDateTime(tempVid.upload_date);
                     vmVidToAdd.Synopsis = tempVid.description;
-                    vmVidToAdd.PlayerUrl = "https://" + input;
+                    vmVidToAdd.PlayerUrl = "https://" + input + "autoplay=1";
                     vmVidToAdd.OriginUrl = "http://www.vimeo.com/" + tempVid.user_id;
                     vmVidToAdd.OriginTitle = tempVid.user_name + " on Vimeo";
                     vmVidToAdd.VideoService = "Vimeo";

@@ -13632,30 +13632,30 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.All": {
+            "target": "Package",
+            "version": "[2.0.0, )"
+          },
           "Microsoft.EntityFrameworkCore.Tools": {
             "target": "Package",
-            "version": "2.0.0"
-          },
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
-            "target": "Package",
-            "version": "2.0.0"
+            "version": "[2.0.0, )"
           },
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "2.0.0",
+            "version": "[2.0.0, )",
             "autoReferenced": true
           },
-          "Microsoft.AspNetCore.All": {
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
-            "version": "2.0.0"
-          },
-          "React.AspNet": {
-            "target": "Package",
-            "version": "3.2.0"
+            "version": "[2.0.0, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",
-            "version": "10.0.3"
+            "version": "[10.0.3, )"
+          },
+          "React.AspNet": {
+            "target": "Package",
+            "version": "[3.2.0, )"
           }
         },
         "imports": [
