@@ -38,8 +38,17 @@ namespace PerpetualShred
                     unwatchedIds = unwatchedCookie.Split(';').ToList();
                 }
 
-                int selectedVidIndex = Int32.Parse(unwatchedIds[(new Random().Next(0, unwatchedIds.Count))]);
-                vidToPlay = vidList[selectedVidIndex-1];
+                if (unwatchedIds == null)
+                {
+                    vidToPlay = vidList[(new Random().Next(0, vidList.Count))];
+                }
+                else
+                {
+                    int selectedVidDbId = Int32.Parse(unwatchedIds[(new Random().Next(0, unwatchedIds.Count))]);
+                    int selectedVidAdaptedId = selectedVidDbId - Int32.Parse(unwatchedIds[0]) - 1;
+                    vidToPlay = vidList[selectedVidAdaptedId];
+                }
+                
                 id = vidToPlay.ID;
                 previousVid = JsonConvert.SerializeObject(vidToPlay);
 

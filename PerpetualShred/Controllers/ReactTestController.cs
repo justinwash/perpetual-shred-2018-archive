@@ -13,7 +13,7 @@ namespace PerpetualShred.Controllers
         private readonly PerpetualShredContext _context;
         private readonly ICookieService _cookieService;
 
-        public ReactTestController(PerpetualShredContext context, CookieService cookieService)
+        public ReactTestController(PerpetualShredContext context, ICookieService cookieService)
         {
             _context = context;
             _cookieService = cookieService;
