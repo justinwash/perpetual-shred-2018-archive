@@ -11,18 +11,31 @@
 </head>
 <body>
     <div class="video-background">
-        <div class="video-foreground">
-            <iframe src="@Html.DisplayFor(model => model.PlayerUrl)"></iframe>
-        </div>
+        <iframe id="video" src="@Html.DisplayFor(model => model.PlayerUrl)" frameborder="0"></iframe>
     </div>
-
-    <div id="polina">
+    <div id="sidebar">
         <h1>@Html.DisplayFor(model => model.Title)</h1>
-        <p><a href="@Html.DisplayFor(model => model.OriginUrl)">View origin page</a>
-        <p>@Html.DisplayFor(model => model.Synopsis)
+        <p>
+            @Html.DisplayFor(model => model.Synopsis)
+            @if (Model.VideoService == "PinkBike"){ 
+                <a href="@Html.DisplayFor(model => model.OriginUrl)" class="btn">more info at Pinkbike.com</a> 
+            }
+            
+            @if (Model.VideoService == "YouTube"){ 
+                <a href="@Html.DisplayFor(model => model.OriginUrl)" class="btn">more info at YouTube.com</a> 
+            }
+
+            @if (Model.VideoService == "Vimeo"){ 
+                <a href="@Html.DisplayFor(model => model.OriginUrl)" class="btn">more info at Vimeo.com</a> 
+            }
+
+            @if (Model.VideoService == "PinkBike"){
+                <button id="playpause" onclick="">Play/Pause</button>
+            }
     </div>
+    
 </body>
 </html>
 <footer>
-    <script src="~/js/VidControls.js"></script>
+    
 </footer>

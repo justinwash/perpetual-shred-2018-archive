@@ -72,7 +72,7 @@ namespace ShredCrawl
                         ytVidToAdd.Title = tempVid.Title;
                         ytVidToAdd.ReleaseDate = tempVid.ReleaseDate;
                         ytVidToAdd.Synopsis = tempVid.Synopsis;
-                        ytVidToAdd.PlayerUrl = "http://www." + input + "?rel=0&autoplay=1&amp;showinfo=0";
+                        ytVidToAdd.PlayerUrl = "http://www." + input + "?&theme=dark&autoplay=1&autohide=1&modestbranding=1&fs=0&showinfo=0&rel=0";
                         ytVidToAdd.OriginUrl = "http://www.youtube.com/channel/" + tempVid.ChannelID;
                         ytVidToAdd.OriginTitle = tempVid.ChannelTitle + " on YouTube";
                         ytVidToAdd.VideoService = "YouTube";

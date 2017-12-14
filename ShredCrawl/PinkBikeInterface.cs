@@ -60,7 +60,7 @@ namespace ShredCrawl
                     int titleLength = titleList[vidNumber].ToString().Length - 21;
                     int synopsisLength = synList[vidNumber].ToString().Length - 9;
 
-                    pbVidToAdd.PlayerUrl = "https://" + pbLink + "/?colors=c80000&a=1";
+                    pbVidToAdd.PlayerUrl = "https://" + pbLink + "?colors=c80000&a=1&showheadshot=0&showtitle=0&showbyline=0";
                     pbVidToAdd.VideoService = "PinkBike";
                   //  pbVidToAdd.Title = titleList[vidNumber].ToString().Substring(19, titleLength);
                   //  pbVidToAdd.Synopsis = synList[vidNumber].ToString().Substring(8, synopsisLength);

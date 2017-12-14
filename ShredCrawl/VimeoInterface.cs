@@ -70,14 +70,14 @@ namespace ShredCrawl
                         vmID = input.Substring(23, 8);
                     }
 
-                    Console.WriteLine("Vimeo match: " + input + "?autoplay=1");
+                    Console.WriteLine("Vimeo match: " + input);
 
                     VimeoVid tempVid = VimeoInterface.RetrieveData(vmID);
 
                     vmVidToAdd.Title = tempVid.title;
                     vmVidToAdd.ReleaseDate = Convert.ToDateTime(tempVid.upload_date);
                     vmVidToAdd.Synopsis = tempVid.description;
-                    vmVidToAdd.PlayerUrl = "https://" + input + "autoplay=1";
+                    vmVidToAdd.PlayerUrl = "https://" + input + "?autoplay=1";
                     vmVidToAdd.OriginUrl = "http://www.vimeo.com/" + tempVid.user_id;
                     vmVidToAdd.OriginTitle = tempVid.user_name + " on Vimeo";
                     vmVidToAdd.VideoService = "Vimeo";
