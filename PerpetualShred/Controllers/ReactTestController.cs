@@ -45,5 +45,25 @@ namespace PerpetualShred.Controllers
 
             return View(webVid);
         }
+
+        public async Task<IActionResult> ReactPlayerTest(int? id)
+        {
+            Randomizer randomizer = new Randomizer(_cookieService);
+
+            List<WebVid> vidList = new List<WebVid>();
+            vidList.AddRange(_context.WebVid);
+
+            id = randomizer.RandomVidPicker(vidList);
+
+            var webVid = await _context.WebVid
+                .SingleOrDefaultAsync(m => m.ID == id);
+
+            if (webVid == null)
+            {
+                return NotFound();
+            }
+
+            return View(webVid);
+        }
     }
 }
