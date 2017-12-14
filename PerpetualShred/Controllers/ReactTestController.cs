@@ -11,10 +11,12 @@ namespace PerpetualShred.Controllers
         private static readonly IList<CommentModel> _comments;
 
         private readonly PerpetualShredContext _context;
+        private readonly ICookieService _cookieService;
 
-        public ReactTestController(PerpetualShredContext context)
+        public ReactTestController(PerpetualShredContext context, CookieService cookieService)
         {
             _context = context;
+            _cookieService = cookieService;
         }
 
         [Route("comments")]
@@ -26,10 +28,12 @@ namespace PerpetualShred.Controllers
 
         public async Task<IActionResult> ReactTest(int? id)
         {
+            Randomizer randomizer = new Randomizer(_cookieService);
+
             List<WebVid> vidList = new List<WebVid>();
             vidList.AddRange(_context.WebVid);
 
-            id = Randomizer.RandomVidPicker(vidList);
+            id = randomizer.RandomVidPicker(vidList);
 
             var webVid = await _context.WebVid
                 .SingleOrDefaultAsync(m => m.ID == id);

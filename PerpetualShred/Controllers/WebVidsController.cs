@@ -13,10 +13,12 @@ namespace PerpetualShred.Controllers
     public class WebVidsController : Controller
     {
         private readonly PerpetualShredContext _context;
+        ICookieService _cookieService;
 
-        public WebVidsController(PerpetualShredContext context)
-        {
+        public WebVidsController(PerpetualShredContext context, ICookieService cookieService)
+        { 
             _context = context;
+            _cookieService = cookieService;
         }
 
         
@@ -48,10 +50,11 @@ namespace PerpetualShred.Controllers
         // Play random video?
         public async Task<IActionResult> PlayRandom(int? id)
         {
+            Randomizer randomizer = new Randomizer(_cookieService);
             List<WebVid> vidList = new List<WebVid>();
             vidList.AddRange(_context.WebVid);
 
-            id = Randomizer.RandomVidPicker(vidList);
+            id = randomizer.RandomVidPicker(vidList);
 
             var webVid = await _context.WebVid
                 .SingleOrDefaultAsync(m => m.ID == id);
@@ -60,6 +63,8 @@ namespace PerpetualShred.Controllers
             {
                 return NotFound();
             }
+
+            _cookieService.RemoveVideoFromUnwatched(id);
 
             return View(webVid);
         }
