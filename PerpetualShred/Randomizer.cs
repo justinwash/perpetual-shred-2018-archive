@@ -45,7 +45,7 @@ namespace PerpetualShred
                 else
                 {
                     int selectedVidDbId = Int32.Parse(unwatchedIds[(new Random().Next(0, unwatchedIds.Count))]);
-                    int selectedVidAdaptedId = selectedVidDbId - Int32.Parse(unwatchedIds[0]) - 1;
+                    int selectedVidAdaptedId = selectedVidDbId - Int32.Parse(unwatchedIds[0]);
                     vidToPlay = vidList[selectedVidAdaptedId];
                 }
                 
