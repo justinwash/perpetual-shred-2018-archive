@@ -10,47 +10,49 @@
 <head>
     <meta charset="UTF-8" />
     <title>ReactPlayerTest</title>
-    <link rel="stylesheet" href="~/css/ReactTest.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/ReactPlayerTest.css" type="text/css" />
     <script type="text/javascript">
         var jsModel = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
     </script>
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-    <script src="https://unpkg.com/react-player/dist/ReactPlayer.js"></script>
     <script src="https://unpkg.com/screenfull"></script>
 </head>
 <body>
     <div class="video-background">
         <div id="shredplayer" style="width: 480px">
-            <script type="text/babel" src="~/js/shredplayer.jsx">
-            </script>
         </div>
     </div>
-    <div id="sidebar">
-        <h1>@Html.DisplayFor(model => model.Title)</h1>
-        <p>
-            @Html.DisplayFor(model => model.Synopsis)
-            @if (Model.VideoService == "PinkBike")
-            {
-                <a href="@Html.DisplayFor(model => model.OriginUrl)" class="btn">more info at Pinkbike.com</a>
-            }
-
-            @if (Model.VideoService == "YouTube")
-            {
-                <a href="@Html.DisplayFor(model => model.OriginUrl)" class="btn">more info at YouTube.com</a>
-            }
-
-            @if (Model.VideoService == "Vimeo")
-            {
-                <a href="@Html.DisplayFor(model => model.OriginUrl)" class="btn">more info at Vimeo.com</a>
-            }
-
-            @if (Model.VideoService == "PinkBike")
-            {
-                <button id="playpause" onclick="">Play/Pause</button>
-            }
-             
+    <div id="shredsidebar">     
     </div>
+    @*    <div id="sidebar">
+            <h1>@Html.DisplayFor(model => model.Title)</h1>
+            <p>
+                @Html.DisplayFor(model => model.Synopsis)
+                @if (Model.VideoService == "PinkBike")
+                {
+                    <a href="@Html.DisplayFor(model => model.OriginUrl)" class="btn">more info at Pinkbike.com</a>
+                }
+
+                @if (Model.VideoService == "YouTube")
+                {
+                    <a href="@Html.DisplayFor(model => model.OriginUrl)" class="btn">more info at YouTube.com</a>
+                }
+
+                @if (Model.VideoService == "Vimeo")
+                {
+                    <a href="@Html.DisplayFor(model => model.OriginUrl)" class="btn">more info at Vimeo.com</a>
+                }
+
+                @if (Model.VideoService == "PinkBike")
+                {
+                    <button id="playpause" onclick="">Play/Pause</button>
+                }
+
+        </div> *@
 </body>
 </html>
+<footer>
+    <script src="~/js/shredsidebar.jsx"></script>
+    <script src="~/js/shredplayer.jsx"></script>
+</footer>

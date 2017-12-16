@@ -15,12 +15,12 @@ namespace ShredCrawl
         {
             var linksToCrawl = GetPostUrls();
             var vidList = new List<WebVid>();
-            
+
             foreach (HtmlDocument vidPage in linksToCrawl)
             {
                 vidList.AddRange(YouTubeInterface.YouTubeCollect(vidPage));
                 vidList.AddRange(VimeoInterface.VimeoCollect(vidPage));
-                vidList.AddRange(PinkBikeInterface.PinkBikeCollect(vidPage));
+                //vidList.AddRange(PinkBikeInterface.PinkBikeCollect(vidPage));
             }
 
             return vidList;

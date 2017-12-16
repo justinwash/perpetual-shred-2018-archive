@@ -2,6 +2,12 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
+      "BuildBundlerMinifier/2.6.362": {
+        "type": "package",
+        "build": {
+          "build/BuildBundlerMinifier.targets": {}
+        }
+      },
       "JavaScriptEngineSwitcher.ChakraCore/2.4.8": {
         "type": "package",
         "dependencies": {
@@ -3741,6 +3747,49 @@
           }
         }
       },
+      "System.Diagnostics.Process/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "Microsoft.Win32.Primitives": "4.3.0",
+          "Microsoft.Win32.Registry": "4.3.0",
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Debug": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.IO.FileSystem": "4.3.0",
+          "System.IO.FileSystem.Primitives": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Runtime.Handles": "4.3.0",
+          "System.Runtime.InteropServices": "4.3.0",
+          "System.Text.Encoding": "4.3.0",
+          "System.Text.Encoding.Extensions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.Tasks": "4.3.0",
+          "System.Threading.Thread": "4.3.0",
+          "System.Threading.ThreadPool": "4.3.0",
+          "runtime.native.System": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.4/System.Diagnostics.Process.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux/lib/netstandard1.4/System.Diagnostics.Process.dll": {
+            "assetType": "runtime",
+            "rid": "linux"
+          },
+          "runtimes/osx/lib/netstandard1.4/System.Diagnostics.Process.dll": {
+            "assetType": "runtime",
+            "rid": "osx"
+          },
+          "runtimes/win/lib/netstandard1.4/System.Diagnostics.Process.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "System.Diagnostics.StackTrace/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -5234,6 +5283,21 @@
           "lib/netstandard1.6/VroomJs.dll": {}
         }
       },
+      "Webpack/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.1",
+          "NETStandard.Library": "1.6.1",
+          "Newtonsoft.Json": "9.0.1",
+          "System.Diagnostics.Process": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Webpack.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Webpack.dll": {}
+        }
+      },
       "WindowsAzure.Storage/8.1.4": {
         "type": "package",
         "dependencies": {
@@ -5252,6 +5316,25 @@
     }
   },
   "libraries": {
+    "BuildBundlerMinifier/2.6.362": {
+      "sha512": "J8vHrhvkvBAkzf5eA0zDu9Z4RbVlA8lYWGq0UyvWh98kKpqQZpzUe3yC89Rq9nQyiO0pdULrPPs9sSmx+xq8jA==",
+      "type": "package",
+      "path": "buildbundlerminifier/2.6.362",
+      "files": [
+        "build/BuildBundlerMinifier.targets",
+        "buildbundlerminifier.2.6.362.nupkg.sha512",
+        "buildbundlerminifier.nuspec",
+        "tools/net46/BundlerMinifier.dll",
+        "tools/net46/NUglify.dll",
+        "tools/net46/Newtonsoft.Json.dll",
+        "tools/netcoreapp2.0/BundlerMinifier.dll",
+        "tools/netcoreapp2.0/NUglify.dll",
+        "tools/netcoreapp2.0/Newtonsoft.Json.dll",
+        "tools/netstandard1.3/BundlerMinifier.dll",
+        "tools/netstandard1.3/NUglify.dll",
+        "tools/netstandard1.3/Newtonsoft.Json.dll"
+      ]
+    },
     "JavaScriptEngineSwitcher.ChakraCore/2.4.8": {
       "sha512": "HoRqyAehgK51i4/qABBPByOFDNxVva0K9OI8gBY6y9hcsZyvck6bYlTwcpCaYEa4gQPW/WRuG341mpkIbayxAA==",
       "type": "package",
@@ -5402,7 +5485,7 @@
       ]
     },
     "Microsoft.AspNetCore.All/2.0.0": {
-      "sha512": "AQ4SM2ZY+yhkQ+kJADXP6OpBpR4xWScYsy7WtV77LxXSroSc8PBe3LORa1eycC1zF3ob/vq6WAn5SEtElaOZcQ==",
+      "sha512": "uQyWk9w8Fl76aaOTxPDbJNIWZ7Dwt/STsp+6NWECE6mlQhTjUmjiaSKQ3SnnlDyNS+l6RGcL3/M174bljHkXlA==",
       "type": "package",
       "path": "microsoft.aspnetcore.all/2.0.0",
       "files": [
@@ -6970,7 +7053,7 @@
       ]
     },
     "Microsoft.Extensions.FileProviders.Abstractions/2.0.0": {
-      "sha512": "Z0AK+hmLO33WAXQ5P1uPzhH7z5yjDHX/XnUefXxE//SyvCb9x4cVjND24dT5566t/yzGp8/WLD7EG9KQKZZklQ==",
+      "sha512": "zhMllgKlsokgDu63lmujKSJUdVr+GA42WpPrP+1gRfYSorngIIlKKWo92UsirSEv3/3lxObJQnyqcNyRAoEVug==",
       "type": "package",
       "path": "microsoft.extensions.fileproviders.abstractions/2.0.0",
       "files": [
@@ -7003,7 +7086,7 @@
       ]
     },
     "Microsoft.Extensions.FileProviders.Physical/2.0.0": {
-      "sha512": "DKO2j2socZbHNCCVEWsLVpB3AQIIzKYFNyITVeWdA1jQ829GJIQf4MUD04+1c+Q2kbK03pIKQZmEy4CGIfgDZw==",
+      "sha512": "K3x6WbNy5Ucyzkj+0F/CY1WWHa/g6GsA3c/NqkbrpVZaIEnOPqOyLup+Wd3Y4BytHtkxq9AK3jsHvKB6xP/k3w==",
       "type": "package",
       "path": "microsoft.extensions.fileproviders.physical/2.0.0",
       "files": [
@@ -7014,7 +7097,7 @@
       ]
     },
     "Microsoft.Extensions.FileSystemGlobbing/2.0.0": {
-      "sha512": "UC87vRDUB7/vSaNY/FVhbdAyRkfFBTkYmcUoglxk6TyTojhSqYaG5pZsoP4e1ZuXktFXJXJBTvK8U/QwCo0z3g==",
+      "sha512": "+cuBjfizLroDgrPW1GzNVDGHfaoEaJ7E5d2WtdpIdNDmWpf2/8gnQ1oGWBZZPQcXVwOTaLpBEs43OLxl7odmhg==",
       "type": "package",
       "path": "microsoft.extensions.filesystemglobbing/2.0.0",
       "files": [
@@ -7214,7 +7297,7 @@
       ]
     },
     "Microsoft.Extensions.Primitives/2.0.0": {
-      "sha512": "ukg53qNlqTrK38WA30b5qhw0GD7y3jdI9PHHASjdKyTcBHTevFM2o23tyk3pWCgAV27Bbkm+CPQ2zUe1ZOuYSA==",
+      "sha512": "lahdU7IuMMlv8dnxKL3AeViv3ijGr+/XH4nJ+hKy0zIOZuC52U28aM6khsmTcEDhdKI0MV8o78MRMKVhkrOkLA==",
       "type": "package",
       "path": "microsoft.extensions.primitives/2.0.0",
       "files": [
@@ -7533,7 +7616,7 @@
       ]
     },
     "Microsoft.NETCore.App/2.0.0": {
-      "sha512": "/mzXF+UtZef+VpzzN88EpvFq5U6z4rj54ZMq/J968H6pcvyLOmcupmTRpJ3CJm8ILoCGh9WI7qpDdiKtuzswrQ==",
+      "sha512": "EpMaVQgoY5ut4WedM5bnGPkXhQU99geJOzW+6MMt1xEmAtI/DGc0mnRA69J9GSrRhCRLK6AyM4HA9BDiOGrYPA==",
       "type": "package",
       "path": "microsoft.netcore.app/2.0.0",
       "files": [
@@ -7811,7 +7894,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetAppHost/2.0.0": {
-      "sha512": "L4GGkcI/Mxl8PKLRpFdGmLb5oI8sGIR05bDTGkzCoamAjdUl1Zhkov2swjEsZvKYT8kkdiz39LtwyGYuCJxm1A==",
+      "sha512": "uEdp8rNLKkmPJ198neCrRbpYO7n4qZnvlopNbLoEXH8BdD8EVEOeU29LhtWoIE4pm8cZ8Xq2tnf7YPKsyw2svg==",
       "type": "package",
       "path": "microsoft.netcore.dotnetapphost/2.0.0",
       "files": [
@@ -7823,7 +7906,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetHostPolicy/2.0.0": {
-      "sha512": "rm7mMn0A93fwyAwVhbyOCcPuu2hZNL0A0dAur9sNG9pEkONPfCEQeF7m2mC8KpqZO0Ol6tpV5J0AF3HTXT3GXA==",
+      "sha512": "6avIg2R5kkoCXIWx7tkoSHkKZLxfgddJ36cNa7lmFWK04VMTtYKNFnl1CjxzkPCZjca+FxJRZSA30elRyn7+FA==",
       "type": "package",
       "path": "microsoft.netcore.dotnethostpolicy/2.0.0",
       "files": [
@@ -7835,7 +7918,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetHostResolver/2.0.0": {
-      "sha512": "uBbjpeSrwsaTCADZCzRk+3aBzNnMqkC4zftJWBsL+Zk+8u+W+/lMb2thM5Y4hiVrv1YQg9t6dKldXzOKkY+pQw==",
+      "sha512": "Z40DT0K25apw8RC4exbxJ+JSdWupey716dqq0CvxqOGEmqVj8eF99XLTIowxCpfsNVoI66BQkTQcB8cKqq46iA==",
       "type": "package",
       "path": "microsoft.netcore.dotnethostresolver/2.0.0",
       "files": [
@@ -7847,7 +7930,7 @@
       ]
     },
     "Microsoft.NETCore.Platforms/2.0.0": {
-      "sha512": "VdLJOCXhZaEMY7Hm2GKiULmn7IEPFE4XC5LPSfBVCUIA8YLZVh846gtfBJalsPQF2PlzdD7ecX7DZEulJ402ZQ==",
+      "sha512": "itCtD/4OLwHtB5Qvfom1Cu1CycUyqOF3DzX6KyHaMVhpKAjf6keURtwI1onvDhXb8aZjXMqFD8uwuy8xhdBklw==",
       "type": "package",
       "path": "microsoft.netcore.platforms/2.0.0",
       "files": [
@@ -7927,7 +8010,7 @@
       ]
     },
     "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/2.0.0": {
-      "sha512": "UIlELB0laoUrkGRcMLwUpek6sUXtlxToDsAg0xU4gQvDGYIfe7bBJjka54XBHq/TZEsZ0NipOaFiNQOfRTd2xA==",
+      "sha512": "HD3fA98k2Z6ckl6FWnKj0sLatuvboZC3M2ioe1xf3+hH1nAwCI87AYlzB6tmFVyBv2/u0AlEDQyQ6qurxF9cKg==",
       "type": "package",
       "path": "microsoft.visualstudio.web.codegeneration.contracts/2.0.0",
       "files": [
@@ -8140,7 +8223,7 @@
       ]
     },
     "NETStandard.Library/2.0.0": {
-      "sha512": "7jnbRU+L08FXKMxqUflxEXtVymWvNOrS8yHgu9s6EM8Anr6T/wIX4nZ08j/u3Asz+tCufp3YVwFSEvFTPYmBPA==",
+      "sha512": "46qA34DmjrbU9J64w/sdhcod9113ytV5IXXIUKk72flu/vqXqfpgcNTNhRBgRdPtGLFed1nb5bL1EqkpB/+rhg==",
       "type": "package",
       "path": "netstandard.library/2.0.0",
       "files": [
@@ -8308,7 +8391,7 @@
       ]
     },
     "NuGet.Frameworks/4.0.0": {
-      "sha512": "WCkN68c8q+USG+Ot1MmBDH+9DUo5dk7UB0QDMiwCYhrH7ZoFLKFGGNzJ8C3LTR1DvB1LW9BOxKeznnZznKiCTA==",
+      "sha512": "SZB1Qopv3NXX7BgB7pdkYWnJ/VlD+3fI4QAU4mMRzP/wAS+2rxckZSybRd7VwHIYxYzyvH6b1YJ/SS8ZNivOgg==",
       "type": "package",
       "path": "nuget.frameworks/4.0.0",
       "files": [
@@ -9671,6 +9754,59 @@
         "runtimes/win/lib/netstandard1.3/System.Diagnostics.FileVersionInfo.dll",
         "system.diagnostics.fileversioninfo.4.3.0.nupkg.sha512",
         "system.diagnostics.fileversioninfo.nuspec"
+      ]
+    },
+    "System.Diagnostics.Process/4.3.0": {
+      "sha512": "J0wOX07+QASQblsfxmIMFc9Iq7KTXYL3zs2G/Xc704Ylv3NpuVdo6gij6V3PGiptTxqsK0K7CdXenRvKUnkA2g==",
+      "type": "package",
+      "path": "system.diagnostics.process/4.3.0",
+      "files": [
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Diagnostics.Process.dll",
+        "lib/net461/System.Diagnostics.Process.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/System.Diagnostics.Process.dll",
+        "ref/net461/System.Diagnostics.Process.dll",
+        "ref/netstandard1.3/System.Diagnostics.Process.dll",
+        "ref/netstandard1.3/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/de/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/es/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/fr/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/it/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/ja/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/ko/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/ru/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/zh-hans/System.Diagnostics.Process.xml",
+        "ref/netstandard1.3/zh-hant/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/System.Diagnostics.Process.dll",
+        "ref/netstandard1.4/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/de/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/es/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/fr/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/it/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/ja/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/ko/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/ru/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/zh-hans/System.Diagnostics.Process.xml",
+        "ref/netstandard1.4/zh-hant/System.Diagnostics.Process.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/linux/lib/netstandard1.4/System.Diagnostics.Process.dll",
+        "runtimes/osx/lib/netstandard1.4/System.Diagnostics.Process.dll",
+        "runtimes/win/lib/net46/System.Diagnostics.Process.dll",
+        "runtimes/win/lib/net461/System.Diagnostics.Process.dll",
+        "runtimes/win/lib/netstandard1.4/System.Diagnostics.Process.dll",
+        "runtimes/win7/lib/netcore50/_._",
+        "system.diagnostics.process.4.3.0.nupkg.sha512",
+        "system.diagnostics.process.nuspec"
       ]
     },
     "System.Diagnostics.StackTrace/4.3.0": {
@@ -11585,7 +11721,7 @@
       ]
     },
     "System.Runtime.CompilerServices.Unsafe/4.4.0": {
-      "sha512": "9dLLuBxr5GNmOfl2jSMcsHuteEg32BEfUotmmUkmZjpR3RpVHE8YQwt0ow3p6prwA1ME8WqDVZqrr8z6H8G+Kw==",
+      "sha512": "KVJTBK0pnFeChUvLHx0eqhQmkwv4xlh/0eFcTiK9KaOjbqfrnrVREjSmcgfiU5yxCyRxDXNyhX8OT+TmlpzVnw==",
       "type": "package",
       "path": "system.runtime.compilerservices.unsafe/4.4.0",
       "files": [
@@ -11900,7 +12036,7 @@
       ]
     },
     "System.Runtime.Serialization.Formatters/4.3.0": {
-      "sha512": "KT591AkTNFOTbhZlaeMVvfax3RqhH1EJlcwF50Wm7sfnBLuHiOeZRRKrr1ns3NESkM20KPZ5Ol/ueMq5vg4QoQ==",
+      "sha512": "Zl+04iliG2OO5lM3zRVikQdR5CbRDk0fWo4DT5/Cp0qoPrzD5RMwNg0tOvCdkK8yU+oeTm0z0fDCDTNGmRfGgQ==",
       "type": "package",
       "path": "system.runtime.serialization.formatters/4.3.0",
       "files": [
@@ -13555,6 +13691,16 @@
         "vroomjs.nuspec"
       ]
     },
+    "Webpack/4.0.0": {
+      "sha512": "HPvYUK4I7WZEfIL18oSnFNJkTfpOTFwD6hVrBFgxVqYr/ZczSiU+TuqvkmgTR/J/2emcD/u15oKAsRD9ohGtdA==",
+      "type": "package",
+      "path": "webpack/4.0.0",
+      "files": [
+        "lib/netstandard1.3/Webpack.dll",
+        "webpack.4.0.0.nupkg.sha512",
+        "webpack.nuspec"
+      ]
+    },
     "WindowsAzure.Storage/8.1.4": {
       "sha512": "W6ZZ0/o7+3Qb77mRAQyLjPudHG3OMeeQ4p9yY13PUdJArmRCx2cLMm5F4tpIjJXxzHC0ew0oK7DMDGILMdfCnw==",
       "type": "package",
@@ -13580,16 +13726,19 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "BuildBundlerMinifier >= 2.6.362",
       "Microsoft.AspNetCore.All >= 2.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.0",
       "Newtonsoft.Json >= 10.0.3",
-      "React.AspNet >= 3.2.0"
+      "React.AspNet >= 3.2.0",
+      "React.AspNet.Middleware >= 3.2.0",
+      "Webpack >= 4.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Owner\\.nuget\\packages\\": {},
+    "C:\\Users\\justin\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13598,17 +13747,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\PerpetualShred.csproj",
+      "projectUniqueName": "E:\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\PerpetualShred.csproj",
       "projectName": "PerpetualShred",
-      "projectPath": "C:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\PerpetualShred.csproj",
-      "packagesPath": "C:\\Users\\Owner\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\obj\\",
+      "projectPath": "E:\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\PerpetualShred.csproj",
+      "packagesPath": "C:\\Users\\justin\\.nuget\\packages\\",
+      "outputPath": "E:\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Owner\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\justin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13632,6 +13781,10 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
+          "BuildBundlerMinifier": {
+            "target": "Package",
+            "version": "[2.6.362, )"
+          },
           "Microsoft.AspNetCore.All": {
             "target": "Package",
             "version": "[2.0.0, )"
@@ -13656,6 +13809,14 @@
           "React.AspNet": {
             "target": "Package",
             "version": "[3.2.0, )"
+          },
+          "React.AspNet.Middleware": {
+            "target": "Package",
+            "version": "[3.2.0, )"
+          },
+          "Webpack": {
+            "target": "Package",
+            "version": "[4.0.0, )"
           }
         },
         "imports": [

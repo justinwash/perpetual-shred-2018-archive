@@ -1,4 +1,7 @@
-﻿class App extends React.Component {
+﻿import React, { Component } from 'react'
+import ReactPlayer from 'react-player'
+
+class Shredplayer extends React.Component {
 
     constructor(props) {
         super(props)
