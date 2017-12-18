@@ -8,8 +8,6 @@ namespace PerpetualShred.Controllers
 {
     public class ReactTestController : Controller
     {
-        private static readonly IList<CommentModel> _comments;
-
         private readonly PerpetualShredContext _context;
         private readonly ICookieService _cookieService;
 
@@ -17,13 +15,6 @@ namespace PerpetualShred.Controllers
         {
             _context = context;
             _cookieService = cookieService;
-        }
-
-        [Route("comments")]
-        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public ActionResult Comments()
-        {
-            return Json(_comments);
         }
 
         public async Task<IActionResult> ReactTest(int? id)

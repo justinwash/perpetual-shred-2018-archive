@@ -14,13 +14,11 @@
     <script type="text/javascript">
         var jsModel = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
     </script>
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/screenfull"></script>
 </head>
 <body>
     <div class="video-background">
-        <div id="shredplayer" style="width: 480px">
+        <div id="shredplayer">
         </div>
     </div>
     <div id="shredsidebar">     
@@ -53,6 +51,5 @@
 </body>
 </html>
 <footer>
-    <script src="~/js/shredsidebar.jsx"></script>
-    <script src="~/js/shredplayer.jsx"></script>
+    <script src="~/js/main.build.js"></script>
 </footer>

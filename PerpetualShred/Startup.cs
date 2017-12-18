@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using PerpetualShred.Models;
 
 using Microsoft.AspNetCore.Http;
-using React.AspNet;
+//using React.AspNet;
 using System;
 
 namespace PerpetualShred
@@ -26,7 +26,7 @@ namespace PerpetualShred
         {
             services.AddTransient<ICookieService, CookieService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddReact();
+            //services.AddReact();
             services.AddMvc();
 
             services.AddDbContext<PerpetualShredContext>(options =>
@@ -49,7 +49,7 @@ namespace PerpetualShred
             }
 
             // Initialise ReactJS.NET. Must be before static files.
-            app.UseReact(config =>
+/*            app.UseReact(config =>
             {
                 // If you want to use server-side rendering of React components,
                 // add all the necessary JavaScript files here. This includes
@@ -67,7 +67,7 @@ namespace PerpetualShred
                 //  .SetLoadBabel(false)
                 //  .AddScriptWithoutTransform("~/Scripts/bundle.server.js");
                 config.AddScript("~/js/tutorial.jsx");
-            });
+            }); */
 
             app.UseStaticFiles();
 

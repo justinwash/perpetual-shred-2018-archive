@@ -1,1 +1,0 @@
-﻿import Shredplayer from './shredplayer'; 
