@@ -12,7 +12,7 @@ namespace ShredCrawl
         public void AddToDb(WebVid webVid)
         {
             using (DbContext db = new PerpetualShredContext_0b395b83_09f4_4116_97c6_eb6c19f89ae2Context())
-            { 
+            {
                 db.Add(webVid);
                 db.SaveChanges();
                 Console.WriteLine("WebVid object sent to DB");

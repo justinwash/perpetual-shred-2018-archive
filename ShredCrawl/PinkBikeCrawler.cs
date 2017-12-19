@@ -20,7 +20,7 @@ namespace ShredCrawl
             {
                 vidList.AddRange(YouTubeInterface.YouTubeCollect(vidPage));
                 vidList.AddRange(VimeoInterface.VimeoCollect(vidPage));
-                //vidList.AddRange(PinkBikeInterface.PinkBikeCollect(vidPage));
+                vidList.AddRange(PinkBikeInterface.PinkBikeCollect(vidPage));
             }
 
             return vidList;
