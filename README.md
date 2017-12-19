@@ -11,22 +11,10 @@ Getting set up:
 1. Install Node.js
 2. Install dependencies (React, React-Video, Webpack, Babel):
  
-  npm install --save react
+  npm install --save react react-dom react-video
   
-  npm install --save react-dom
+  npm install --save-dev webpack babel-loader babel-core babel-preset-es2015 babel-preset-react
   
-  npm install --save react-video
-  
-  npm install --save-dev webpack
-  
-  npm install webpack-dev-server –g
-  
-  npm install --save-dev babel-loader
-  
-  npm install --save-dev babel-core
-  
-  npm install --save-dev babel-preset-es2015
-  
-  npm install --save-dev babel-preset-react
+  npm install webpack webpack-dev-server –g
 
 3. Check that 'webpack' is present in your pre-build commands (if you want to bundle automatically on build).
