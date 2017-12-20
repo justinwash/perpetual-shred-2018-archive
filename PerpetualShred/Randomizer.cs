@@ -31,7 +31,7 @@ namespace PerpetualShred
                 {
                     string randomVideoUnwatchedValue = string.Join(';', (from v in vidList
                                                                          select v.ID));
-                    _cookieService.CreateCookie("randomVideoUnwatched", randomVideoUnwatchedValue);
+                    //_cookieService.CreateCookie("randomVideoUnwatched", randomVideoUnwatchedValue);
                 }
                 else
                 {

@@ -15,20 +15,48 @@ class Shredplayer extends React.Component {
         screenfull.request(ReactDOM.findDOMNode(this.refs.player))
     }
     render() {
-        return (
-            <div>
-                <ReactPlayer ref='player'
-                    url={
-                        jsModel.PlayerUrl
-                    }
-                    playing={this.state.playing}
-                    width='100%'
-                    height='100%' />
-                <button onClick={() => this.setState({ playing: true })}>Play</button>
-                <button onClick={() => this.setState({ playing: false })}>Pause</button>
-                <button onClick={this.onClickFullscreen}>Fullscreen</button>
-            </div>
-        );
+        if (jsModel.VideoService == "PinkBike") {
+            if (JSON.parse(jsModel.SourceList)[3] != null) {
+                return (
+                    <div>
+                        <ReactPlayer ref='player'
+                            url={
+                                JSON.parse(jsModel.SourceList)[3]
+                            }
+                            playing={this.state.playing}
+                            width='100%'
+                            height='100%' />
+                    </div>
+                );
+            }
+            else {
+                return (
+                    <div>
+                        <ReactPlayer ref='player'
+                            url={
+                                JSON.parse(jsModel.SourceList)[2]
+                            }
+                            playing={this.state.playing}
+                            width='100%'
+                            height='100%' />
+                    </div>
+                );
+            }
+        }
+
+        else {
+            return (
+                <div>
+                    <ReactPlayer ref='player'
+                        url={
+                            jsModel.PlayerUrl
+                        }
+                        playing={this.state.playing}
+                        width='100%'
+                        height='100%' />
+                </div>
+            );
+        }
     }
 }
 

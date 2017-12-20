@@ -28348,36 +28348,39 @@ var Shredplayer = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
-
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(_reactPlayer2.default, { ref: 'player',
-                    url: jsModel.PlayerUrl,
-                    playing: this.state.playing,
-                    width: '100%',
-                    height: '100%' }),
-                _react2.default.createElement(
-                    'button',
-                    { onClick: function onClick() {
-                            return _this2.setState({ playing: true });
-                        } },
-                    'Play'
-                ),
-                _react2.default.createElement(
-                    'button',
-                    { onClick: function onClick() {
-                            return _this2.setState({ playing: false });
-                        } },
-                    'Pause'
-                ),
-                _react2.default.createElement(
-                    'button',
-                    { onClick: this.onClickFullscreen },
-                    'Fullscreen'
-                )
-            );
+            if (jsModel.VideoService == "PinkBike") {
+                if (JSON.parse(jsModel.SourceList)[3] != null) {
+                    return _react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(_reactPlayer2.default, { ref: 'player',
+                            url: JSON.parse(jsModel.SourceList)[3],
+                            playing: this.state.playing,
+                            width: '100%',
+                            height: '100%' })
+                    );
+                } else {
+                    return _react2.default.createElement(
+                        'div',
+                        null,
+                        _react2.default.createElement(_reactPlayer2.default, { ref: 'player',
+                            url: JSON.parse(jsModel.SourceList)[2],
+                            playing: this.state.playing,
+                            width: '100%',
+                            height: '100%' })
+                    );
+                }
+            } else {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(_reactPlayer2.default, { ref: 'player',
+                        url: jsModel.PlayerUrl,
+                        playing: this.state.playing,
+                        width: '100%',
+                        height: '100%' })
+                );
+            }
         }
     }]);
 
