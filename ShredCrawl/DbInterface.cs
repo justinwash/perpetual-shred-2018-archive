@@ -13,6 +13,11 @@ namespace ShredCrawl
         {
             using (DbContext db = new PerpetualShredContext_0b395b83_09f4_4116_97c6_eb6c19f89ae2Context())
             {
+                if ((webVid.Title == null) || (webVid.Synopsis == null) || (webVid.Title == "") || (webVid.Synopsis == ""))
+                {
+                    return;
+                }
+
                 db.Add(webVid);
                 db.SaveChanges();
                 Console.WriteLine("WebVid object sent to DB");

@@ -12,7 +12,7 @@ namespace ShredCrawl
         {
             var vidsToAdd = new List<WebVid>();
             PinkBikeCrawler pbCrawler = new PinkBikeCrawler();
-            DbInterface db = new DbInterface();
+            DbInterface dB = new DbInterface();
 
             vidsToAdd.AddRange(pbCrawler.CrawlPinkBike());
 
@@ -21,10 +21,10 @@ namespace ShredCrawl
 
             foreach (WebVid webVid in vidsToAdd)
             {
-                db.AddToDb(webVid);
+                dB.AddToDb(webVid);
             }
 
-            Console.WriteLine(vidsToAdd.Count + " new videos added to the database!");
+            Console.WriteLine("SENT 'em to the database! (get it???)");
             Console.ReadLine();
         }
 

@@ -20,22 +20,6 @@ namespace ShredCrawl.Migrations
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ShredCrawl.PinkBikeVideoSource", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Source");
-
-                    b.Property<int?>("WebVidId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WebVidId");
-
-                    b.ToTable("PinkBikeVideoSource");
-                });
-
             modelBuilder.Entity("ShredCrawl.WebVid", b =>
                 {
                     b.Property<int>("Id")
@@ -50,6 +34,8 @@ namespace ShredCrawl.Migrations
 
                     b.Property<DateTime?>("ReleaseDate");
 
+                    b.Property<string>("SourceList");
+
                     b.Property<string>("Synopsis");
 
                     b.Property<string>("Title");
@@ -59,13 +45,6 @@ namespace ShredCrawl.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WebVid");
-                });
-
-            modelBuilder.Entity("ShredCrawl.PinkBikeVideoSource", b =>
-                {
-                    b.HasOne("ShredCrawl.WebVid")
-                        .WithMany("SourceList")
-                        .HasForeignKey("WebVidId");
                 });
 #pragma warning restore 612, 618
         }

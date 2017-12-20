@@ -10,28 +10,30 @@ namespace ShredCrawl
     class PinkBikeCrawler
     {
         HtmlDocument homePage = new HtmlWeb().Load("https://www.pinkbike.com/news/videos");
-
+        
         public List<WebVid> CrawlPinkBike()
         {
-            var linksToCrawl = GetPostUrls();
+            var pagesToCrawl = GetPostUrls();
+            
             var vidList = new List<WebVid>();
+            
 
-            foreach (HtmlDocument vidPage in linksToCrawl)
+            foreach (PinkBikePage vidPage in pagesToCrawl)
             {
-                vidList.AddRange(YouTubeInterface.YouTubeCollect(vidPage));
-                vidList.AddRange(VimeoInterface.VimeoCollect(vidPage));
-                vidList.AddRange(PinkBikeInterface.PinkBikeCollect(vidPage));
+                vidList.AddRange(YouTubeInterface.YouTubeCollect(vidPage.Doc));
+                vidList.AddRange(VimeoInterface.VimeoCollect(vidPage.Doc));
+                vidList.AddRange(PinkBikeInterface.PinkBikeCollect(vidPage.Doc, vidPage.Url));
             }
 
             return vidList;
         }
 
-        public List<HtmlDocument> GetPostUrls()
+        public List<PinkBikePage> GetPostUrls()
         {
             var posts = homePage.DocumentNode.SelectNodes("/html/body/div[4]/div/div[1]/div/div/div[1]/div[2]/div[2]/div");
             Regex vidPageLink = new Regex("<a class=\"f22 fgrey4 bold\" href=\"(.*?)>");
 
-            var postList = new List<HtmlDocument>();
+            var postList = new List<PinkBikePage>();
 
             foreach (HtmlNode postNode in posts)
             {
@@ -40,11 +42,14 @@ namespace ShredCrawl
 
                 if (vidPageMatches.Success)
                 {
+                    var pageToAdd = new PinkBikePage();
                     string rawLink = vidPageMatches.Value;
                     int linkLength = rawLink.ToString().Length - 35;
                     string truncLink = rawLink.Substring(33, linkLength);
                     Console.WriteLine("Found post! " + truncLink);
-                    postList.Add(new HtmlWeb().Load(truncLink));
+                    pageToAdd.Url = truncLink;
+                    pageToAdd.Doc = new HtmlWeb().Load(truncLink);
+                    postList.Add(pageToAdd);
                 }
             }
 

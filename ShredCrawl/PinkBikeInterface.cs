@@ -9,16 +9,16 @@ namespace ShredCrawl
 {
     class PinkBikeInterface
     {
-        public static List<WebVid> PinkBikeCollect(HtmlDocument htmlDoc)
+        public static List<WebVid> PinkBikeCollect(HtmlDocument htmlDoc, string originUrl)
         {
             Regex pinkbikeMatch = new Regex("(data-videoid=\")([0-9]+)\"");
-            string crawledPageUrl = "http://www.pinkbike.com"; //CHANGE THIS WHEN THE CRAWLER ACTUALLY CRAWLS
             var pbVidList = new List<WebVid>();
             var titleList = new ArrayList();
             var synList = new ArrayList();
             var mediaList = new ArrayList();
             var infoNodes = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'blog-text-container')]");
             var mediaNodes = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'blog-media-container')]");
+            var pageTitle = htmlDoc.DocumentNode.SelectSingleNode("//title");
 
             Regex pinkbikeTitle = new Regex("<span(.*?)<");
             Regex pinkbikeSynopsis = new Regex("</span(.*?)<");
@@ -37,7 +37,7 @@ namespace ShredCrawl
                 Match pbTitleMatches = pinkbikeTitle.Match(infoNode.OuterHtml);
                 titleList.Add(pbTitleMatches.Value);
 
-                Match pbSynopsisMatches = pinkbikeSynopsis.Match(infoNode.OuterHtml);
+                Match pbSynopsisMatches = pinkbikeSynopsis.Match(infoNode.InnerHtml);
                 synList.Add(pbSynopsisMatches.Value);
 
             }
@@ -61,14 +61,21 @@ namespace ShredCrawl
                     Console.WriteLine("PinkBike match: " + pbLink);
 
                     int titleLength = titleList[vidNumber].ToString().Length - 21;
-                    int synopsisLength = synList[vidNumber].ToString().Length - 9;
+                    int synopsisLength = synList[vidNumber].ToString().Length - 8;
 
                     pbVidToAdd.PlayerUrl = "https://" + pbLink + "?colors=c80000&a=1&showheadshot=0&showtitle=0&showbyline=0";
                     pbVidToAdd.VideoService = "PinkBike";
-                    //pbVidToAdd.Title = titleList[vidNumber].ToString().Substring(19, titleLength);
-                    //pbVidToAdd.Synopsis = synList[vidNumber].ToString().Substring(8, synopsisLength);
-                    pbVidToAdd.OriginUrl = crawledPageUrl;
-                    pbVidToAdd.OriginTitle = "Movies For Your Monday on PinkBike";
+
+                    if ((titleList[vidNumber].ToString() != null) && (titleList[vidNumber].ToString() != ""))
+                    {
+                        pbVidToAdd.Title = titleList[vidNumber].ToString().Substring(19, titleLength);
+                    }
+                    if ((synList[vidNumber].ToString() != null) && (synList[vidNumber].ToString() != ""))
+                    {
+                        pbVidToAdd.Synopsis = synList[vidNumber].ToString().Substring(7, synopsisLength);
+                    }
+                    pbVidToAdd.OriginUrl = originUrl;
+                    pbVidToAdd.OriginTitle = pageTitle.InnerText;
                     pbVidToAdd.ReleaseDate = DateTime.Today;
 
                     foreach (Match foundSource in sourceMatches)
