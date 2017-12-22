@@ -8,7 +8,7 @@ class ShredsidebarContainer extends Component {
         super(props, context);
 
         this.state = {
-            visible: false
+            visible: true
         };
 
         this.handleMouseDown = this.handleMouseDown.bind(this);
@@ -31,7 +31,8 @@ class ShredsidebarContainer extends Component {
     render() {
         return (
             <div>
-                <ShredsidebarButton handleMouseDown={this.handleMouseDown} />
+                <ShredsidebarButton handleMouseDown={this.handleMouseDown} 
+                    menuVisibility={this.state.visible}/>
                 <Shredsidebar handleMouseDown={this.handleMouseDown}
                     menuVisibility={this.state.visible} />
             </div>

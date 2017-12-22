@@ -28122,7 +28122,7 @@ var ShredsidebarContainer = function (_Component) {
         var _this = _possibleConstructorReturn(this, (ShredsidebarContainer.__proto__ || Object.getPrototypeOf(ShredsidebarContainer)).call(this, props, context));
 
         _this.state = {
-            visible: false
+            visible: true
         };
 
         _this.handleMouseDown = _this.handleMouseDown.bind(_this);
@@ -28151,7 +28151,8 @@ var ShredsidebarContainer = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_shredsidebarbutton2.default, { handleMouseDown: this.handleMouseDown }),
+                _react2.default.createElement(_shredsidebarbutton2.default, { handleMouseDown: this.handleMouseDown,
+                    menuVisibility: this.state.visible }),
                 _react2.default.createElement(_shredsidebar2.default, { handleMouseDown: this.handleMouseDown,
                     menuVisibility: this.state.visible })
             );
@@ -28200,8 +28201,21 @@ var ShredsidebarButton = function (_Component) {
     _createClass(ShredsidebarButton, [{
         key: "render",
         value: function render() {
-            return _react2.default.createElement("button", { id: "infoButton",
-                onMouseDown: this.props.handleMouseDown });
+            var anim = "hamburger hamburger--arrowalt-r";
+
+            if (this.props.menuVisibility) {
+                anim = "hamburger hamburger--arrowalt-r is-active";
+            }
+
+            return _react2.default.createElement(
+                "button",
+                { className: anim, type: "button", onMouseDown: this.props.handleMouseDown },
+                _react2.default.createElement(
+                    "span",
+                    { className: "hamburger-box" },
+                    _react2.default.createElement("span", { className: "hamburger-inner" })
+                )
+            );
         }
     }]);
 

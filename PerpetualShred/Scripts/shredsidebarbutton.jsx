@@ -2,9 +2,18 @@
 
 class ShredsidebarButton extends Component {
     render() {
+        var anim = "hamburger hamburger--arrowalt-r";
+
+        if (this.props.menuVisibility) {
+            anim = "hamburger hamburger--arrowalt-r is-active";
+        }
+        
         return (
-            <button id="infoButton"
-                onMouseDown={this.props.handleMouseDown}></button>
+            <button className={anim} type="button" onMouseDown={this.props.handleMouseDown}>
+                <span className="hamburger-box">
+                    <span className="hamburger-inner"></span>
+                </span>
+            </button>
         );
     }
 }
