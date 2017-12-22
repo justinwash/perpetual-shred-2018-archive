@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+require("!style-loader!css-loader!../css/shredburger.css");
 
 class ShredsidebarButton extends Component {
     render() {

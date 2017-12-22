@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import ReactPlayer from 'react-player'
+require("!style-loader!css-loader!../css/shredplayer.css");
 
 class Shredplayer extends React.Component {
 
@@ -18,27 +19,30 @@ class Shredplayer extends React.Component {
         if (jsModel.VideoService == "PinkBike") {
             if (JSON.parse(jsModel.SourceList)[3] != null) {
                 return (
-                    <div>
+                    <div id="pbcontainer">
                         <ReactPlayer ref='player'
                             url={
                                 JSON.parse(jsModel.SourceList)[3]
                             }
+                            
                             playing={this.state.playing}
-                            width='100%'
-                            height='100%' />
+                            width=""
+                            height=""
+                            />
                     </div>
                 );
             }
             else {
                 return (
-                    <div>
+                    <div id="pbcontainer">
                         <ReactPlayer ref='player'
                             url={
                                 JSON.parse(jsModel.SourceList)[2]
                             }
                             playing={this.state.playing}
-                            width='100%'
-                            height='100%' />
+                            width=""
+                            height=""
+                            />
                     </div>
                 );
             }
@@ -52,6 +56,7 @@ class Shredplayer extends React.Component {
                             jsModel.PlayerUrl
                         }
                         playing={this.state.playing}
+                        controls='false'
                         width='100%'
                         height='100%' />
                 </div>

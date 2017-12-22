@@ -10,8 +10,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>ReactPlayerTest</title>
-    <link rel="stylesheet" href="~/css/ReactPlayerTest.css" type="text/css" />
-    <link href="~/css/hamburgers.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/css/site.css" type="text/css" />
     <script type="text/javascript">
         var jsModel = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
     </script>
@@ -24,31 +23,6 @@
     </div>
     <div id="shredsidebar">     
     </div>
-    @*    <div id="sidebar">
-            <h1>@Html.DisplayFor(model => model.Title)</h1>
-            <p>
-                @Html.DisplayFor(model => model.Synopsis)
-                @if (Model.VideoService == "PinkBike")
-                {
-                    <a href="@Html.DisplayFor(model => model.OriginUrl)" class="btn">more info at Pinkbike.com</a>
-                }
-
-                @if (Model.VideoService == "YouTube")
-                {
-                    <a href="@Html.DisplayFor(model => model.OriginUrl)" class="btn">more info at YouTube.com</a>
-                }
-
-                @if (Model.VideoService == "Vimeo")
-                {
-                    <a href="@Html.DisplayFor(model => model.OriginUrl)" class="btn">more info at Vimeo.com</a>
-                }
-
-                @if (Model.VideoService == "PinkBike")
-                {
-                    <button id="playpause" onclick="">Play/Pause</button>
-                }
-
-        </div> *@
 </body>
 </html>
 <footer>
