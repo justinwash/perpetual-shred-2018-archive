@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import ShredsidebarButton from './shredsidebarbutton.jsx'
 import Shredsidebar from './shredsidebar.jsx'
 
-class ShredsidebarContainer extends Component {
+class ShredSideBarContainer extends Component {
     constructor(props, context) {
         super(props, context);
 
@@ -41,6 +41,6 @@ class ShredsidebarContainer extends Component {
 }
 
 ReactDOM.render(
-    <ShredsidebarContainer />,
-    document.getElementById("shredsidebar")
+    <ShredSideBarContainer />,
+    document.getElementById("shredsidebarcontainer")
 );

@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 require("!style-loader!css-loader!../css/shrednavbutton.css");
 
-class ShrednavButton extends Component {
+
+class ShredNavButton extends Component {
     render() {
-        var anim = "shrednavbutton dock";
+        var anim = "dock";
 
         if (this.props.menuVisibility) {
-            anim = "shrednavbutton float";
+            anim = "float";
         }
         
         return (
-            <button className={anim} type="button" onMouseDown={this.props.handleMouseDown}>
+            <button id="shrednavbutton" className={anim} type="button" onMouseDown={this.props.handleMouseDown}>
+                <span className="shrednavbutton-box"></span>
             </button>
         );
     }
 }
 
-export default ShrednavButton;
+export default ShredNavButton;
