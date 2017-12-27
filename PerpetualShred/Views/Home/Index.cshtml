@@ -1,5 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Index";
+﻿@model PerpetualShred.Models.WebVid
+@using Newtonsoft;
+@{
+    Layout = "~/Views/Shared/_ShredLayout.cshtml";
+    var viewModelVids = new PerpetualShred.Models.ViewModelVids();
+    var vidList = viewModelVids.WebVids;
 }
 
-Click something there aint nothing on this home page.
+@section Header {
+    <head>
+        <meta charset="UTF-8" />
+        <title>Perpetual Shred</title>
+        <link rel="stylesheet" href="~/css/site.css" type="text/css" />
+        <script type="text/javascript">
+            var jsModel = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+            var jsVidList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(vidList));
+        </script>
+    </head>
+}
+
+@section Body {
+    <body>
+        <div class="video-background">
+            <div id="shredplayer"></div>
+        </div>
+        <div id="shredsidebarcontainer"></div>
+        <div id="shrednavoverlaycontainer"></div>
+        <div id="shredvidlistcontainer"></div>
+    </body>
+}
+
+@section Scripts {
+    <script src="~/js/main.build.js"></script>
+    <script src="https://unpkg.com/screenfull"></script>
+}

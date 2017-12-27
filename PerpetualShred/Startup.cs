@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using PerpetualShred.Models;
+using PerpetualShred.Controllers;
 
 using Microsoft.AspNetCore.Http;
 //using React.AspNet;
@@ -16,7 +17,6 @@ namespace PerpetualShred
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            //UsedVidList.UsedVids = null;
         }
 
         public IConfiguration Configuration { get; }

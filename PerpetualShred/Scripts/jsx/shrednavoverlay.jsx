@@ -11,17 +11,12 @@ class ShredNavOverlay extends Component {
 
         return (
             <div>
-                <div id="shrednavoverlay-background"
-                    onMouseDown={this.props.handleMouseDown}
-                    className={visibility}>
-                </div>
+                <div id="shrednavoverlay-background" className={visibility} />
                 <div id="shrednavoverlay-titlebar"
                     onMouseDown={this.props.handleMouseDown}
                     className={visibility}>
                 </div>
-                <div id="shrednavoverlay"
-                    onMouseDown={this.props.handleMouseDown}
-                    className={visibility}>
+                <div id="shrednavoverlay" className={visibility}>
                     <div id="navlink-list">
                     <div id="navlink">
                         ∞ Discover Radness

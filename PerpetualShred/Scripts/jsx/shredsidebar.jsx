@@ -11,13 +11,8 @@ class Shredsidebar extends Component {
 
         return (
             <div>
-                <div id="flyoutMenuBackground"
-                    onMouseDown={this.props.handleMouseDown}
-                    className={visibility}>
-                </div>
-                <div id="flyoutMenu"
-                    onMouseDown={this.props.handleMouseDown}
-                    className={visibility}>
+                <div id="flyoutMenuBackground" className={visibility} />
+                <div id="flyoutMenu" className={visibility}>
                     <div id="vidtitle">
                         {jsModel.Title}
                     </div>

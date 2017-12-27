@@ -1,6 +1,6 @@
 #shrednavoverlay {
     width: 100vw;
-    height: 100vw;
+    height: 120vw;
     background-color: transparent;
     position: fixed;
     top: 0;
@@ -11,7 +11,7 @@
 
 #shrednavoverlay-background {
     width: 100vw;
-    height: 100vw;
+    height: 120vw;
     background-color: rgba(16, 16, 16, 0.8);
     position: fixed;
     top: 0;
@@ -32,7 +32,7 @@
 }
 
 #shrednavoverlay-background.hide {
-    transform: translate3d(0, -100vw, 0);
+    transform: translate3d(0, -120vw, 0);
 }
 
 #shrednavoverlay-background.show {
@@ -41,7 +41,7 @@
 }
 
 #shrednavoverlay.hide {
-    transform: translate3d(0, -100vw, 0);
+    transform: translate3d(0, -120vw, 0);
 }
 
 #shrednavoverlay.show {

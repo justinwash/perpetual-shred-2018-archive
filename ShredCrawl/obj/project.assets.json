@@ -6514,11 +6514,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\PerpetualShred\\ShredCrawl\\ShredCrawl.csproj",
+      "projectUniqueName": "c:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\ShredCrawl.csproj",
       "projectName": "ShredCrawl",
-      "projectPath": "d:\\PerpetualShred\\ShredCrawl\\ShredCrawl.csproj",
+      "projectPath": "c:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\ShredCrawl.csproj",
       "packagesPath": "C:\\Users\\Owner\\.nuget\\packages\\",
-      "outputPath": "d:\\PerpetualShred\\ShredCrawl\\obj\\",
+      "outputPath": "c:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

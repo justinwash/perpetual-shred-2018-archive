@@ -7,3 +7,5 @@ import ShredSideBarContainer from './jsx/shredsidebarcontainer.jsx';
 import Shredplayer from './jsx/shredplayer.jsx';
 // Import ShredNavOverlay and it's dependencies
 import ShreNavOverlayContainer from './jsx/shrednavoverlaycontainer.jsx';
+//Import ShredVidList and it's dependencies
+import ShredVidlistContainer from './jsx/shredvidlistcontainer.jsx';

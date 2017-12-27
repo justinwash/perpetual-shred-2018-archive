@@ -17,4 +17,9 @@ namespace PerpetualShred.Models
         public string OriginTitle { get; set; }
         public string SourceList { get; set; }
     }
+
+    public class ViewModelVids
+    {
+        public virtual IEnumerable<WebVid> WebVids { get; set; }
+    }
 }

@@ -56,7 +56,7 @@ class Shredplayer extends React.Component {
                             jsModel.PlayerUrl
                         }
                         playing={this.state.playing}
-                        controls='false'
+                        controls={false}
                         width='100%'
                         height='100%' />
                 </div>
