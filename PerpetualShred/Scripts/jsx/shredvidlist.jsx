@@ -9,11 +9,17 @@ class ShredVidList extends Component {
             visibility = "show";
         }
 
+        function htmlDecode(input) {
+            var e = document.createElement('div');
+            e.innerHTML = input;
+            return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+        }
+        
         return (
             <div>
                 <div id="shredvidlist-background" className={visibility} />
                 <div id="shredvidlist" className={visibility}>
-                    { jsVidList }
+                    <div dangerouslySetInnerHTML={{__html: htmlDecode(jsVidList) }} />
                 </div>
             </div>
         );

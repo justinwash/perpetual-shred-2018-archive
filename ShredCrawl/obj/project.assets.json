@@ -2253,7 +2253,7 @@
       ]
     },
     "Microsoft.Extensions.Primitives/2.0.0": {
-      "sha512": "lahdU7IuMMlv8dnxKL3AeViv3ijGr+/XH4nJ+hKy0zIOZuC52U28aM6khsmTcEDhdKI0MV8o78MRMKVhkrOkLA==",
+      "sha512": "ukg53qNlqTrK38WA30b5qhw0GD7y3jdI9PHHASjdKyTcBHTevFM2o23tyk3pWCgAV27Bbkm+CPQ2zUe1ZOuYSA==",
       "type": "package",
       "path": "microsoft.extensions.primitives/2.0.0",
       "files": [
@@ -2264,7 +2264,7 @@
       ]
     },
     "Microsoft.NETCore.App/2.0.0": {
-      "sha512": "EpMaVQgoY5ut4WedM5bnGPkXhQU99geJOzW+6MMt1xEmAtI/DGc0mnRA69J9GSrRhCRLK6AyM4HA9BDiOGrYPA==",
+      "sha512": "/mzXF+UtZef+VpzzN88EpvFq5U6z4rj54ZMq/J968H6pcvyLOmcupmTRpJ3CJm8ILoCGh9WI7qpDdiKtuzswrQ==",
       "type": "package",
       "path": "microsoft.netcore.app/2.0.0",
       "files": [
@@ -2542,7 +2542,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetAppHost/2.0.0": {
-      "sha512": "uEdp8rNLKkmPJ198neCrRbpYO7n4qZnvlopNbLoEXH8BdD8EVEOeU29LhtWoIE4pm8cZ8Xq2tnf7YPKsyw2svg==",
+      "sha512": "L4GGkcI/Mxl8PKLRpFdGmLb5oI8sGIR05bDTGkzCoamAjdUl1Zhkov2swjEsZvKYT8kkdiz39LtwyGYuCJxm1A==",
       "type": "package",
       "path": "microsoft.netcore.dotnetapphost/2.0.0",
       "files": [
@@ -2554,7 +2554,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetHostPolicy/2.0.0": {
-      "sha512": "6avIg2R5kkoCXIWx7tkoSHkKZLxfgddJ36cNa7lmFWK04VMTtYKNFnl1CjxzkPCZjca+FxJRZSA30elRyn7+FA==",
+      "sha512": "rm7mMn0A93fwyAwVhbyOCcPuu2hZNL0A0dAur9sNG9pEkONPfCEQeF7m2mC8KpqZO0Ol6tpV5J0AF3HTXT3GXA==",
       "type": "package",
       "path": "microsoft.netcore.dotnethostpolicy/2.0.0",
       "files": [
@@ -2566,7 +2566,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetHostResolver/2.0.0": {
-      "sha512": "Z40DT0K25apw8RC4exbxJ+JSdWupey716dqq0CvxqOGEmqVj8eF99XLTIowxCpfsNVoI66BQkTQcB8cKqq46iA==",
+      "sha512": "uBbjpeSrwsaTCADZCzRk+3aBzNnMqkC4zftJWBsL+Zk+8u+W+/lMb2thM5Y4hiVrv1YQg9t6dKldXzOKkY+pQw==",
       "type": "package",
       "path": "microsoft.netcore.dotnethostresolver/2.0.0",
       "files": [
@@ -2578,7 +2578,7 @@
       ]
     },
     "Microsoft.NETCore.Platforms/2.0.0": {
-      "sha512": "itCtD/4OLwHtB5Qvfom1Cu1CycUyqOF3DzX6KyHaMVhpKAjf6keURtwI1onvDhXb8aZjXMqFD8uwuy8xhdBklw==",
+      "sha512": "VdLJOCXhZaEMY7Hm2GKiULmn7IEPFE4XC5LPSfBVCUIA8YLZVh846gtfBJalsPQF2PlzdD7ecX7DZEulJ402ZQ==",
       "type": "package",
       "path": "microsoft.netcore.platforms/2.0.0",
       "files": [
@@ -2680,7 +2680,7 @@
       ]
     },
     "NETStandard.Library/2.0.0": {
-      "sha512": "46qA34DmjrbU9J64w/sdhcod9113ytV5IXXIUKk72flu/vqXqfpgcNTNhRBgRdPtGLFed1nb5bL1EqkpB/+rhg==",
+      "sha512": "7jnbRU+L08FXKMxqUflxEXtVymWvNOrS8yHgu9s6EM8Anr6T/wIX4nZ08j/u3Asz+tCufp3YVwFSEvFTPYmBPA==",
       "type": "package",
       "path": "netstandard.library/2.0.0",
       "files": [
@@ -5146,7 +5146,7 @@
       ]
     },
     "System.Runtime.CompilerServices.Unsafe/4.4.0": {
-      "sha512": "KVJTBK0pnFeChUvLHx0eqhQmkwv4xlh/0eFcTiK9KaOjbqfrnrVREjSmcgfiU5yxCyRxDXNyhX8OT+TmlpzVnw==",
+      "sha512": "9dLLuBxr5GNmOfl2jSMcsHuteEg32BEfUotmmUkmZjpR3RpVHE8YQwt0ow3p6prwA1ME8WqDVZqrr8z6H8G+Kw==",
       "type": "package",
       "path": "system.runtime.compilerservices.unsafe/4.4.0",
       "files": [
@@ -5428,7 +5428,7 @@
       ]
     },
     "System.Runtime.Serialization.Formatters/4.3.0": {
-      "sha512": "Zl+04iliG2OO5lM3zRVikQdR5CbRDk0fWo4DT5/Cp0qoPrzD5RMwNg0tOvCdkK8yU+oeTm0z0fDCDTNGmRfGgQ==",
+      "sha512": "KT591AkTNFOTbhZlaeMVvfax3RqhH1EJlcwF50Wm7sfnBLuHiOeZRRKrr1ns3NESkM20KPZ5Ol/ueMq5vg4QoQ==",
       "type": "package",
       "path": "system.runtime.serialization.formatters/4.3.0",
       "files": [
@@ -6508,26 +6508,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\justin\\.nuget\\packages\\": {},
+    "C:\\Users\\Owner\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "E:\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\ShredCrawl.csproj",
+      "projectUniqueName": "c:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\ShredCrawl.csproj",
       "projectName": "ShredCrawl",
-      "projectPath": "E:\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\ShredCrawl.csproj",
-      "packagesPath": "C:\\Users\\justin\\.nuget\\packages\\",
-      "outputPath": "E:\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\obj\\",
+      "projectPath": "c:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\ShredCrawl.csproj",
+      "packagesPath": "C:\\Users\\Owner\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\justin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Owner\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -19,13 +19,13 @@ namespace ViewComponentSample.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(int start, int count)
         {
-            var items = GetVidsAsync(start, count);
+            var items = await GetVidsAsync(start, count);
             return View(items);
         }
 
-        private List<WebVid> GetVidsAsync(int start, int count)
+        private Task<List<WebVid>> GetVidsAsync(int start, int count)
         {
-            return db.WebVid.Skip(start).Take(count).ToList();
+            return db.WebVid.Skip(start).Take(count).ToListAsync();
         }
     }
 }

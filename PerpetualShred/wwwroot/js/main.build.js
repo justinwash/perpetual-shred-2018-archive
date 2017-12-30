@@ -28728,7 +28728,7 @@ exports = module.exports = __webpack_require__(47)(undefined);
 
 
 // module
-exports.push([module.i, ".hamburger {\r\n  padding: 15px 15px;\r\n  display: inline-block;\r\n  cursor: pointer;\r\n  transition-property: opacity, filter;\r\n  transition-duration: 0.15s;\r\n  transition-timing-function: linear;\r\n  font: inherit;\r\n  color: inherit;\r\n  text-transform: none;\r\n  background-color: transparent;\r\n  border: 0;\r\n  margin: 0;\r\n  overflow: visible; \r\n  position: absolute;\r\n  top: 24px;\r\n  right: 15px;\r\n  z-index: 11;\r\n  }\r\n  \r\n.hamburger:hover {\r\n    opacity: 0.7; \r\n  }\r\n\r\n.hamburger-box {\r\n  width: 40px;\r\n  height: 24px;\r\n  display: inline-block;\r\n  position: relative; \r\n  }\r\n\r\n.hamburger-inner {\r\n  display: block;\r\n  top: 50%;\r\n  margin-top: -2px; \r\n  }\r\n\r\n.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {\r\n    width: 40px;\r\n    height: 4px;\r\n    background-color: rgb(255, 255, 255);\r\n    border-radius: 4px;\r\n    position: absolute;\r\n    transition-property: transform;\r\n    transition-duration: 0.15s;\r\n    transition-timing-function: ease; \r\n  }\r\n  \r\n.hamburger-inner::before, .hamburger-inner::after {\r\n    content: \"\";\r\n    display: block; \r\n  }\r\n\r\n.hamburger-inner::before {\r\n    top: -10px;\r\n  }\r\n\r\n.hamburger-inner::after {\r\n    bottom: -10px;\r\n  }\r\n    \r\n.hamburger--arrowalt-r .hamburger-inner::before {\r\n  transition: top 0.1s 0.1s ease, transform 0.1s cubic-bezier(0.165, 0.84, 0.44, 1); \r\n  }\r\n\r\n.hamburger--arrowalt-r .hamburger-inner::after {\r\n  transition: bottom 0.1s 0.1s ease, transform 0.1s cubic-bezier(0.165, 0.84, 0.44, 1); \r\n  }\r\n\r\n.hamburger--arrowalt-r.is-active .hamburger-inner::before {\r\n  top: 0;\r\n  transform: translate3d(8px, -10px, 0) rotate(45deg) scale(0.7, 1);\r\n  transition: top 0.1s ease, transform 0.1s 0.1s cubic-bezier(0.895, 0.03, 0.685, 0.22); \r\n  }\r\n\r\n.hamburger--arrowalt-r.is-active .hamburger-inner::after {\r\n  bottom: 0;\r\n  transform: translate3d(8px, 10px, 0) rotate(-45deg) scale(0.7, 1);\r\n  transition: bottom 0.1s ease, transform 0.1s 0.1s cubic-bezier(0.895, 0.03, 0.685, 0.22); \r\n  }\r\n\r\n", ""]);
+exports.push([module.i, ".hamburger {\n  padding: 15px 15px;\n  display: inline-block;\n  cursor: pointer;\n  transition-property: opacity, filter;\n  transition-duration: 0.15s;\n  transition-timing-function: linear;\n  font: inherit;\n  color: inherit;\n  text-transform: none;\n  background-color: transparent;\n  border: 0;\n  margin: 0;\n  overflow: visible; \n  position: absolute;\n  top: 24px;\n  right: 15px;\n  z-index: 11;\n  }\n  \n.hamburger:hover {\n    opacity: 0.7; \n  }\n\n.hamburger-box {\n  width: 40px;\n  height: 24px;\n  display: inline-block;\n  position: relative; \n  }\n\n.hamburger-inner {\n  display: block;\n  top: 50%;\n  margin-top: -2px; \n  }\n\n.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {\n    width: 40px;\n    height: 4px;\n    background-color: rgb(255, 255, 255);\n    border-radius: 4px;\n    position: absolute;\n    transition-property: transform;\n    transition-duration: 0.15s;\n    transition-timing-function: ease; \n  }\n  \n.hamburger-inner::before, .hamburger-inner::after {\n    content: \"\";\n    display: block; \n  }\n\n.hamburger-inner::before {\n    top: -10px;\n  }\n\n.hamburger-inner::after {\n    bottom: -10px;\n  }\n    \n.hamburger--arrowalt-r .hamburger-inner::before {\n  transition: top 0.1s 0.1s ease, transform 0.1s cubic-bezier(0.165, 0.84, 0.44, 1); \n  }\n\n.hamburger--arrowalt-r .hamburger-inner::after {\n  transition: bottom 0.1s 0.1s ease, transform 0.1s cubic-bezier(0.165, 0.84, 0.44, 1); \n  }\n\n.hamburger--arrowalt-r.is-active .hamburger-inner::before {\n  top: 0;\n  transform: translate3d(8px, -10px, 0) rotate(45deg) scale(0.7, 1);\n  transition: top 0.1s ease, transform 0.1s 0.1s cubic-bezier(0.895, 0.03, 0.685, 0.22); \n  }\n\n.hamburger--arrowalt-r.is-active .hamburger-inner::after {\n  bottom: 0;\n  transform: translate3d(8px, 10px, 0) rotate(-45deg) scale(0.7, 1);\n  transition: bottom 0.1s ease, transform 0.1s 0.1s cubic-bezier(0.895, 0.03, 0.685, 0.22); \n  }\n\n", ""]);
 
 // exports
 
@@ -30647,8 +30647,8 @@ var Vimeo = function (_Base) {
         }));
         _this2.player.ready().then(function () {
           var iframe = _this2.container.querySelector('iframe');
-          iframe.style.width = '100%';
-          iframe.style.height = '100%';
+      //    iframe.style.width = '100%';
+      //    iframe.style.height = '100%';
         })['catch'](_this2.props.onError);
         _this2.player.on('loaded', function () {
           _this2.onReady();
@@ -32313,6 +32313,12 @@ var ShredVidList = function (_Component) {
                 visibility = "show";
             }
 
+            function htmlDecode(input) {
+                var e = document.createElement('div');
+                e.innerHTML = input;
+                return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+            }
+
             return _react2.default.createElement(
                 "div",
                 null,
@@ -32320,7 +32326,7 @@ var ShredVidList = function (_Component) {
                 _react2.default.createElement(
                     "div",
                     { id: "shredvidlist", className: visibility },
-                    jsVidList
+                    _react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: htmlDecode(jsVidList) } })
                 )
             );
         }
@@ -32371,7 +32377,7 @@ exports = module.exports = __webpack_require__(47)(undefined);
 
 
 // module
-exports.push([module.i, "#shredvidlist {\r\n    width: 100vw;\r\n    height: 100vw;\r\n    background-color: transparent;\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n    z-index: 15;\r\n}\r\n\r\n#shredvidlist.hide {\r\n    transform: translate3d(0, 200vw, 0);\r\n}\r\n\r\n#shredvidlist.show {\r\n    transform: translate3d(0, 0, 0);\r\n    overflow-x: auto;\r\n    overflow-y: auto;\r\n}\r\n\r\n#shredvidlist-background {\r\n    width: 100vw;\r\n    height: 120vw;\r\n    background-color: rgba(16, 16, 16, 0.8);\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n    z-index: 14;\r\n}\r\n\r\n#shredvidlist-background.hide {\r\n    transform: translate3d(0, 200vw, 0);\r\n}\r\n\r\n#shredvidlist-background.show {\r\n    transform: translate3d(0, 0, 0);\r\n    overflow-x: auto;\r\n    overflow-y: auto;\r\n}", ""]);
+exports.push([module.i, "#shredvidlist {\r\n    width: 100vw;\r\n    height: 100vw;\r\n    background-color: transparent;\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n    z-index: 15;\r\n}\r\n\r\n#shredvidlist.hide {\r\n    transform: translate3d(0, 200vw, 0);\r\n}\r\n\r\n#shredvidlist.show {\r\n    transform: translate3d(0, 0, 0);\r\n    overflow-x: auto;\r\n    overflow-y: auto;\r\n}\r\n\r\n#shredvidlist-background {\r\n    width: 100vw;\r\n    height: 120vw;\r\n    background-color: rgba(16, 16, 16, 0.8);\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n    z-index: 14;\r\n}\r\n\r\n#shredvidlist-background.hide {\r\n    transform: translate3d(0, 200vw, 0);\r\n}\r\n\r\n#shredvidlist-background.show {\r\n    transform: translate3d(0, 0, 0);\r\n    overflow-x: auto;\r\n    overflow-y: auto;\r\n}\r\n\r\n.divTable{\r\n\tdisplay: table;\r\n\twidth: 100%;\r\n}\r\n.divTableRow {\r\n\tdisplay: table-row;\r\n}\r\n.divTableHeading {\r\n\tbackground-color: #EEE;\r\n\tdisplay: table-header-group;\r\n}\r\n.divTableCell, .divTableHead {\r\n\tborder: 1px solid #999999;\r\n\tdisplay: table-cell;\r\n\tpadding: 3px 10px;\r\n}\r\n.divTableHeading {\r\n\tbackground-color: #EEE;\r\n\tdisplay: table-header-group;\r\n\tfont-weight: bold;\r\n}\r\n.divTableFoot {\r\n\tbackground-color: #EEE;\r\n\tdisplay: table-footer-group;\r\n\tfont-weight: bold;\r\n}\r\n.divTableBody {\r\n\tdisplay: table-row-group;\r\n}", ""]);
 
 // exports
 
