@@ -10,7 +10,7 @@
 
 @{
     var writer = new System.IO.StringWriter();
-    Component.InvokeAsync("AllVidList", new { start = 0, count = 10 }).Result.WriteTo(writer, HtmlEncoder);
+    Component.InvokeAsync("AllVidList", new { start = 0, count = 1000 }).Result.WriteTo(writer, HtmlEncoder);
 }
 
 @section Header {
@@ -22,9 +22,7 @@
             var jsModel = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
         </script>
         <script>
-            /**/
             var jsVidList = "@writer.ToString()";
-/**/
         </script>
     </head>
 }

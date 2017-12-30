@@ -6513,12 +6513,15 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
-      "projectUniqueName": "c:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\ShredCrawl.csproj",
+      "projectUniqueName": "C:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\ShredCrawl.csproj",
       "projectName": "ShredCrawl",
-      "projectPath": "c:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\ShredCrawl.csproj",
+      "projectPath": "C:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\ShredCrawl.csproj",
       "packagesPath": "C:\\Users\\Owner\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\obj\\",
+      "outputPath": "C:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\ShredCrawl\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
