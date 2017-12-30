@@ -1,11 +1,13 @@
 ﻿@model IEnumerable<PerpetualShred.Models.WebVid>
 
+<h3 align="center">The Gnarcyclopedia BRAAAPtannica</h3>
+
 @foreach (var shredVid in Model) {
-<div class="vidTextContainer">
-    <div class="vidTitleContainer">
+<div class="vidInfoContainer">
+    <div class="vidTextContainer">
         <div class="vidTitle">@shredVid.Title</div>
-        <div class="vidSynopsis">@shredVid.Synopsis</div>
         <div class="vidReleaseDate">@shredVid.ReleaseDate</div>
+        <div class="vidSynopsis">@shredVid.Synopsis</div>
         <div class="vidOrigin"><a href="@shredVid.OriginUrl">@shredVid.VideoService</a></div>
     </div>
 </div> }

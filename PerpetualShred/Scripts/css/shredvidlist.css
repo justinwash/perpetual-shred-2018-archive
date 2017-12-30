@@ -40,3 +40,58 @@
     overflow-y: auto;
 }
 
+.vidInfoContainer {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    overflow: auto;
+    
+}
+
+.vidTextContainer {
+    background-color: rgba(88, 88, 88, 0.5);
+    padding-left: 200px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+
+.vidTitle {
+    font-family: serif;
+    font-weight: 500;
+    font-size: 32px;
+    letter-spacing: -0.3px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    padding-bottom: 5px;
+}
+
+.vidReleaseDate {
+    font-family: PTMono;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+}
+
+.vidSynopsis {
+    padding-top: 5px;
+    font-family: PTMono;
+    line-height: 1.33;
+    letter-spacing: -0.4px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+}
+
+.vidOrigin {
+    padding: 0px;
+    text-align: right;
+    text-decoration: none;
+    color: white;
+    font-family: PTMono;
+    line-height: 1.33;
+    letter-spacing: -0.4px;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+}
