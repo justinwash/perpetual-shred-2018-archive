@@ -1,0 +1,9 @@
+﻿@model IEnumerable<PerpetualShred.Models.WebVid>
+
+<h3>WebVids In The DB</h3>
+<ul>
+    @foreach (var shredVid in Model)
+    {
+        <li>@shredVid.Title</li>
+    }
+</ul>
