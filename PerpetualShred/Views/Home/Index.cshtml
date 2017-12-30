@@ -1,9 +1,16 @@
 ﻿@model PerpetualShred.Models.WebVid
 @using Newtonsoft;
+@using HtmlAgilityPack;
+@using System.Text.Encodings;
 @{
     Layout = "~/Views/Shared/_ShredLayout.cshtml";
     var viewModelVids = new PerpetualShred.Models.ViewModelVids();
     var vidList = viewModelVids.WebVids;
+}
+
+@{
+    var writer = new System.IO.StringWriter();
+    Component.InvokeAsync("AllVidList", new { start = 0, count = 10 }).Result.WriteTo(writer, HtmlEncoder);
 }
 
 @section Header {
@@ -13,7 +20,11 @@
         <link rel="stylesheet" href="~/css/site.css" type="text/css" />
         <script type="text/javascript">
             var jsModel = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
-            var jsVidList = @Component.InvokeAsync("AllVidList", new { start = 2, count = 10 })
+        </script>
+        <script>
+            /**/
+            var jsVidList = "@writer.ToString()";
+/**/
         </script>
     </head>
 }

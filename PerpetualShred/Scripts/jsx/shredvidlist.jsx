@@ -13,7 +13,7 @@ class ShredVidList extends Component {
             <div>
                 <div id="shredvidlist-background" className={visibility} />
                 <div id="shredvidlist" className={visibility}>
-                    {  }
+                    { jsVidList }
                 </div>
             </div>
         );

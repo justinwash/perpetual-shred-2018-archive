@@ -32317,7 +32317,11 @@ var ShredVidList = function (_Component) {
                 "div",
                 null,
                 _react2.default.createElement("div", { id: "shredvidlist-background", className: visibility }),
-                _react2.default.createElement("div", { id: "shredvidlist", className: visibility })
+                _react2.default.createElement(
+                    "div",
+                    { id: "shredvidlist", className: visibility },
+                    jsVidList
+                )
             );
         }
     }]);

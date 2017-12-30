@@ -23,9 +23,9 @@ namespace ViewComponentSample.ViewComponents
             return View(items);
         }
 
-        private string GetVidsAsync(int start, int count)
+        private List<WebVid> GetVidsAsync(int start, int count)
         {
-            return JsonConvert.SerializeObject(db.WebVid.Skip(start).Take(count).ToList());
+            return db.WebVid.Skip(start).Take(count).ToList();
         }
     }
 }
