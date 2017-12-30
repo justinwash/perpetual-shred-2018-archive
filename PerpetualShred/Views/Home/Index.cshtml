@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="~/css/site.css" type="text/css" />
         <script type="text/javascript">
             var jsModel = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+            var jsVidList = @Component.InvokeAsync("AllVidList", new { start = 2, count = 10 })
         </script>
     </head>
 }
@@ -24,7 +25,7 @@
         </div>
         <div id="shredsidebarcontainer"></div>
         <div id="shrednavoverlaycontainer"></div>
-        <div id="shredvidlistcontainer">lkhsdgflkhsdlfkhsdlfkhsdf</div>
+        <div id="shredvidlistcontainer"></div>
     </body>
 }
 
