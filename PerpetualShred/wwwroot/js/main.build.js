@@ -29431,6 +29431,8 @@ var _reactPlayer2 = _interopRequireDefault(_reactPlayer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -29438,6 +29440,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 __webpack_require__(394);
+
+var _loaded = false;
 
 var Shredplayer = function (_React$Component) {
     _inherits(Shredplayer, _React$Component);
@@ -29460,8 +29464,24 @@ var Shredplayer = function (_React$Component) {
             screenfull.request(_reactDom2.default.findDOMNode(this.refs.player));
         }
     }, {
+        key: 'loaded',
+        value: function loaded() {
+            _loaded = true;
+            console.log('loaded it!');
+        }
+    }, {
+        key: 'reload',
+        value: function reload() {
+            console.log('trying to refresh!');
+            if (_loaded = true) {
+                window.location.reload();
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             if (jsModel.VideoService == "PinkBike") {
                 if (JSON.parse(jsModel.SourceList)[3] != null) {
                     return _react2.default.createElement(
@@ -29469,7 +29489,33 @@ var Shredplayer = function (_React$Component) {
                         { id: 'pbcontainer' },
                         _react2.default.createElement(_reactPlayer2.default, { ref: 'player',
                             url: JSON.parse(jsModel.SourceList)[3],
-
+                            onReady: function onReady() {
+                                return console.log('onReady');
+                            },
+                            onStart: function onStart() {
+                                return _this2.loaded();
+                            },
+                            onPlay: function onPlay() {
+                                return console.log('onPlay');
+                            },
+                            onPause: function onPause() {
+                                return console.log('onPause');
+                            },
+                            onBuffer: function onBuffer() {
+                                return console.log('onBuffer');
+                            },
+                            onEnded: function onEnded() {
+                                return _this2.reload();
+                            },
+                            onError: function onError() {
+                                return console.log('onError');
+                            },
+                            onProgress: function onProgress() {
+                                return console.log('onProgress');
+                            },
+                            onDuration: function onDuration() {
+                                return console.log('onDuration');
+                            },
                             playing: this.state.playing,
                             width: '',
                             height: ''
@@ -29481,6 +29527,33 @@ var Shredplayer = function (_React$Component) {
                         { id: 'pbcontainer' },
                         _react2.default.createElement(_reactPlayer2.default, { ref: 'player',
                             url: JSON.parse(jsModel.SourceList)[2],
+                            onReady: function onReady() {
+                                return console.log('onReady');
+                            },
+                            onStart: function onStart() {
+                                return _this2.loaded();
+                            },
+                            onPlay: function onPlay() {
+                                return console.log('onPlay');
+                            },
+                            onPause: function onPause() {
+                                return console.log('onPause');
+                            },
+                            onBuffer: function onBuffer() {
+                                return console.log('onBuffer');
+                            },
+                            onEnded: function onEnded() {
+                                return _this2.reload();
+                            },
+                            onError: function onError() {
+                                return console.log('onError');
+                            },
+                            onProgress: function onProgress() {
+                                return console.log('onProgress');
+                            },
+                            onDuration: function onDuration() {
+                                return console.log('onDuration');
+                            },
                             playing: this.state.playing,
                             width: '',
                             height: ''
@@ -29491,12 +29564,39 @@ var Shredplayer = function (_React$Component) {
                 return _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement(_reactPlayer2.default, { ref: 'player',
+                    _react2.default.createElement(_reactPlayer2.default, _defineProperty({ ref: 'player',
                         url: jsModel.PlayerUrl,
                         playing: this.state.playing,
-                        controls: false,
                         width: '100%',
-                        height: '100%' })
+                        height: '100%',
+                        onReady: function onReady() {
+                            return console.log('onReady');
+                        },
+                        onStart: function onStart() {
+                            return _this2.loaded();
+                        },
+                        onPlay: function onPlay() {
+                            return console.log('onPlay');
+                        },
+                        onPause: function onPause() {
+                            return console.log('onPause');
+                        },
+                        onBuffer: function onBuffer() {
+                            return console.log('onBuffer');
+                        },
+                        onEnded: function onEnded() {
+                            return _this2.reload();
+                        },
+                        onError: function onError() {
+                            return console.log('onError');
+                        },
+                        onProgress: function onProgress() {
+                            return console.log('onProgress');
+                        },
+                        onDuration: function onDuration() {
+                            return console.log('onDuration');
+                        }
+                    }, 'playing', this.state.playing))
                 );
             }
         }
