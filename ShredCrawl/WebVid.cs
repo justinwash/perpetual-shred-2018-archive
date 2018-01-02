@@ -14,5 +14,6 @@ namespace ShredCrawl
         public string VideoService { get; set; }
         public string OriginTitle { get; set; }
         public string SourceList { get; set; }
+        public string Thumbnail { get; set; }
     }
 }

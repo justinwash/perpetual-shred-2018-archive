@@ -40,7 +40,7 @@
     overflow-y: auto;
 }
 
-.vidInfoContainer {
+.vidPageContainer {
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 0px;
@@ -49,9 +49,20 @@
     
 }
 
-.vidTextContainer {
+.vidThumbContainer img{
+    width: 200px;
+    align-self: center;
+}
+
+.vidInfoContainer {
     background-color: rgba(88, 88, 88, 0.5);
-    padding-left: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.vidTextContainer {
+    padding-left: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-right: 10px;
@@ -86,12 +97,30 @@
 }
 
 .vidOrigin {
-    padding: 0px;
+    font-family: serif;
+    font-weight: 500;
+    letter-spacing: -0.3px;
     text-align: right;
-    text-decoration: none;
-    color: white;
-    font-family: PTMono;
-    line-height: 1.33;
-    letter-spacing: -0.4px;
     text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    color: white;
+}
+
+.vidOrigin:hover {
+    transform: translateX(-5px);
+    transition-duration: 0.3s;
+}
+
+#allvidsheading {
+    font-family: serif;
+    font-weight: 500;
+    font-size: 32px;
+    letter-spacing: -0.3px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    padding-bottom: 5px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
 }

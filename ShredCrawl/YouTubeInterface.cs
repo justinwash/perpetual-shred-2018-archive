@@ -41,6 +41,7 @@ namespace ShredCrawl
             ytVid.Title = title;
             ytVid.ReleaseDate = releaseDate;
             ytVid.Synopsis = synopsis;
+            ytVid.Thumbnail = "https://img.youtube.com/vi/" + vidID + "/maxresdefault.jpg";
             return ytVid;
         }
             public static List<WebVid> YouTubeCollect(HtmlDocument htmlDoc)
@@ -76,6 +77,7 @@ namespace ShredCrawl
                         ytVidToAdd.OriginUrl = "http://www.youtube.com/channel/" + tempVid.ChannelID;
                         ytVidToAdd.OriginTitle = tempVid.ChannelTitle + " on YouTube";
                         ytVidToAdd.VideoService = "YouTube";
+                        ytVidToAdd.Thumbnail = tempVid.Thumbnail;
                         ytVidList.Add(ytVidToAdd);
 
                     }

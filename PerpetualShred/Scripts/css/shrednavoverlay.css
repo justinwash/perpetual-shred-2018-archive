@@ -66,10 +66,25 @@
     letter-spacing: -0.3px;
     text-align: center;
     text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    color: white;
 }
+
+#navlink:hover {
+        transform: translateX(5px);
+        transition-duration: 0.3s;
+    }
 
 #navlink-list {
     align-self: center;
     top: 50%;
     padding-top: 40vh;
+}
+
+button {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
 }

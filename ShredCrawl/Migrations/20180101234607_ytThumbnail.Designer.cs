@@ -11,9 +11,10 @@ using System;
 namespace ShredCrawl.Migrations
 {
     [DbContext(typeof(PerpetualShredContext_0b395b83_09f4_4116_97c6_eb6c19f89ae2Context))]
-    partial class PerpetualShredContext_0b395b83_09f4_4116_97c6_eb6c19f89ae2ContextModelSnapshot : ModelSnapshot
+    [Migration("20180101234607_ytThumbnail")]
+    partial class ytThumbnail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

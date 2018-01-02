@@ -10,5 +10,6 @@ namespace ShredCrawl
         public string Title { get; set; }
         public string ChannelTitle { get; set; }
         public string ChannelID { get; set; }
+        public string Thumbnail { get; set; }
     }
 }

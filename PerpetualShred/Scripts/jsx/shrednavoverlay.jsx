@@ -22,7 +22,9 @@ class ShredNavOverlay extends Component {
                         ∞ Discover Radness
                     </div>
                     <div id="navlink">
-                        > All Videos
+                            <button id="navlink" type="button" onMouseDown={this.props.allVidsMouseDown}>
+                                <span className="shredvidlistbutton-box">> All Videos</span>
+                            </button>
                     </div>
                     <div id="navlink">
                         > Who We Are

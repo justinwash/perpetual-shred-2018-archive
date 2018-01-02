@@ -57,5 +57,10 @@ namespace PerpetualShred.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult ALlVidList(int start, int count)
+        {
+            return ViewComponent("AllVidList", new { start, count });
+        }
     }
 }
