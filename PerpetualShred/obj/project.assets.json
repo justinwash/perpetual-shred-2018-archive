@@ -13186,15 +13186,12 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\PerpetualShred.csproj",
+      "projectUniqueName": "c:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\PerpetualShred.csproj",
       "projectName": "PerpetualShred",
-      "projectPath": "C:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\PerpetualShred.csproj",
+      "projectPath": "c:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\PerpetualShred.csproj",
       "packagesPath": "C:\\Users\\Owner\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\obj\\",
+      "outputPath": "c:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
