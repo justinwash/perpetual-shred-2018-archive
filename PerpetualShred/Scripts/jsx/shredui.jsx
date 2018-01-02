@@ -17,7 +17,8 @@ class ShredUI extends Component {
             sidebarVisible: true,
             navOverlayVisible: false,
             allVidsVisible: false,
-            sidebarWasVisible: false
+            sidebarWasVisible: false,
+            discoverRadness: false
 
         };
         // Sidebar prop binds
@@ -31,6 +32,9 @@ class ShredUI extends Component {
         // AllVids prop binds
         this.allVidsMouseDown = this.allVidsMouseDown.bind(this);
         this.toggleAllVids = this.toggleAllVids.bind(this);
+
+        // Discover Radness prop bind
+        this.discoverRadness = this.discoverRadness.bind(this);
     }
 
     // Sidebar functions
@@ -108,6 +112,10 @@ class ShredUI extends Component {
         });
     }
 
+    discoverRadness() {
+        window.location.reload()
+    }
+
 
     render() {
         return (
@@ -121,7 +129,7 @@ class ShredUI extends Component {
                     menuVisibility={this.state.navOverlayVisible} />
                 <ShredNavOverlay handleMouseDown={this.navOverlayMouseDown}
                     menuVisibility={this.state.navOverlayVisible}
-                    allVidsMouseDown={this.allVidsMouseDown} />
+                    allVidsMouseDown={this.allVidsMouseDown} discoverRadness={this.discoverRadness} />
 
                 <ShredVidList handleMouseDown={this.allVidsMouseDown}
                     menuVisibility={this.state.allVidsVisible} />

@@ -28597,7 +28597,8 @@ var ShredUI = function (_Component) {
             sidebarVisible: true,
             navOverlayVisible: false,
             allVidsVisible: false,
-            sidebarWasVisible: false
+            sidebarWasVisible: false,
+            discoverRadness: false
 
         };
         // Sidebar prop binds
@@ -28611,6 +28612,9 @@ var ShredUI = function (_Component) {
         // AllVids prop binds
         _this.allVidsMouseDown = _this.allVidsMouseDown.bind(_this);
         _this.toggleAllVids = _this.toggleAllVids.bind(_this);
+
+        // Discover Radness prop bind
+        _this.discoverRadness = _this.discoverRadness.bind(_this);
         return _this;
     }
 
@@ -28698,6 +28702,11 @@ var ShredUI = function (_Component) {
             });
         }
     }, {
+        key: 'discoverRadness',
+        value: function discoverRadness() {
+            window.location.reload();
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -28711,7 +28720,7 @@ var ShredUI = function (_Component) {
                     menuVisibility: this.state.navOverlayVisible }),
                 _react2.default.createElement(_shrednavoverlay2.default, { handleMouseDown: this.navOverlayMouseDown,
                     menuVisibility: this.state.navOverlayVisible,
-                    allVidsMouseDown: this.allVidsMouseDown }),
+                    allVidsMouseDown: this.allVidsMouseDown, discoverRadness: this.discoverRadness }),
                 _react2.default.createElement(_shredvidlist2.default, { handleMouseDown: this.allVidsMouseDown,
                     menuVisibility: this.state.allVidsVisible })
             );
@@ -29218,7 +29227,15 @@ var ShredNavOverlay = function (_Component) {
                         _react2.default.createElement(
                             "div",
                             { id: "navlink" },
-                            "\u221E Discover Radness"
+                            _react2.default.createElement(
+                                "button",
+                                { id: "navlink", type: "button", onMouseDown: this.props.discoverRadness },
+                                _react2.default.createElement(
+                                    "span",
+                                    { className: "shredvidlistbutton-box" },
+                                    "\u221E Discover Radness"
+                                )
+                            )
                         ),
                         _react2.default.createElement(
                             "div",
