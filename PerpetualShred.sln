@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerpetualShred", "PerpetualShred\PerpetualShred.csproj", "{4705C710-D10F-44A2-A849-D7F07D5378AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShredCrawl", "ShredCrawl\ShredCrawl.csproj", "{92E5E899-6DC2-492D-9B05-30D1BA4018D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShredCrawl", "ShredCrawl\ShredCrawl.csproj", "{92E5E899-6DC2-492D-9B05-30D1BA4018D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

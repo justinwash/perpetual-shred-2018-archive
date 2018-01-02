@@ -9,7 +9,7 @@ namespace ShredCrawl
 {
     class PinkBikeCrawler
     {
-        HtmlDocument homePage = new HtmlWeb().Load("https://www.pinkbike.com/news/videos");
+        HtmlDocument homePage = new HtmlWeb().Load("https://www.pinkbike.com/news/videos/");
         
         public List<WebVid> CrawlPinkBike()
         {
