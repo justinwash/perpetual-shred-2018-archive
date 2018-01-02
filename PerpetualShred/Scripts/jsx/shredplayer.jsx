@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import ReactPlayer from 'react-player'
 require("!style-loader!css-loader!../css/shredplayer.css");
 
+var loaded = false;
+
 class Shredplayer extends React.Component {
 
     constructor(props) {
@@ -15,6 +17,17 @@ class Shredplayer extends React.Component {
     onClickFullscreen() {
         screenfull.request(ReactDOM.findDOMNode(this.refs.player))
     }
+
+    loaded() {
+        loaded = true
+        console.log('loaded it!')
+    }
+    reload() {
+        console.log('trying to refresh!')
+        if (loaded = true) {
+            window.location.reload()
+        } 
+    }
     render() {
         if (jsModel.VideoService == "PinkBike") {
             if (JSON.parse(jsModel.SourceList)[3] != null) {
@@ -24,7 +37,15 @@ class Shredplayer extends React.Component {
                             url={
                                 JSON.parse(jsModel.SourceList)[3]
                             }
-                            
+                            onReady={() => console.log('onReady')}
+                            onStart={() => this.loaded()}
+                            onPlay={() => console.log('onPlay')}
+                            onPause={() => console.log('onPause')}
+                            onBuffer={() => console.log('onBuffer')}
+                            onEnded={() => this.reload()}
+                            onError={() => console.log('onError')}
+                            onProgress={() => console.log('onProgress')}
+                            onDuration={() => console.log('onDuration')}
                             playing={this.state.playing}
                             width=""
                             height=""
@@ -39,10 +60,19 @@ class Shredplayer extends React.Component {
                             url={
                                 JSON.parse(jsModel.SourceList)[2]
                             }
+                            onReady={() => console.log('onReady')}
+                            onStart={() => this.loaded()}
+                            onPlay={() => console.log('onPlay')}
+                            onPause={() => console.log('onPause')}
+                            onBuffer={() => console.log('onBuffer')}
+                            onEnded={() => this.reload()}
+                            onError={() => console.log('onError')}
+                            onProgress={() => console.log('onProgress')}
+                            onDuration={() => console.log('onDuration')}
                             playing={this.state.playing}
                             width=""
                             height=""
-                            />
+                        />
                     </div>
                 );
             }
@@ -56,9 +86,20 @@ class Shredplayer extends React.Component {
                             jsModel.PlayerUrl
                         }
                         playing={this.state.playing}
-                        controls={false}
                         width='100%'
-                        height='100%' />
+                        height='100%'
+                        onReady={() => console.log('onReady')}
+                        onStart={() => this.loaded()}
+                        onPlay={() => console.log('onPlay')}
+                        onPause={() => console.log('onPause')}
+                        onBuffer={() => console.log('onBuffer')}
+                        onEnded={() => this.reload()}
+                        onError={() => console.log('onError')}
+                        onProgress={() => console.log('onProgress')}
+                        onDuration={() => console.log('onDuration')}
+                        playing={this.state.playing}
+                        
+                    />
                 </div>
             );
         }
