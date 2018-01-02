@@ -30,6 +30,7 @@ namespace ShredCrawl
             vmVid.user_name = tempVid.user_name;
             vmVid.upload_date = tempVid.upload_date;
             vmVid.description = vmTruncate(tempVid.description, 200);
+            vmVid.thumbnail_large = tempVid.thumbnail_large;
             return vmVid;
         }
 
@@ -81,6 +82,7 @@ namespace ShredCrawl
                     vmVidToAdd.OriginUrl = "http://www.vimeo.com/" + tempVid.user_id;
                     vmVidToAdd.OriginTitle = tempVid.user_name + " on Vimeo";
                     vmVidToAdd.VideoService = "Vimeo";
+                    vmVidToAdd.Thumbnail = tempVid.thumbnail_large;
                     vmVidList.Add(vmVidToAdd);
 
                 }

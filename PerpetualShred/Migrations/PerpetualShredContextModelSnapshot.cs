@@ -33,7 +33,11 @@ namespace PerpetualShred.Migrations
 
                     b.Property<DateTime>("ReleaseDate");
 
+                    b.Property<string>("SourceList");
+
                     b.Property<string>("Synopsis");
+
+                    b.Property<string>("Thumbnail");
 
                     b.Property<string>("Title");
 

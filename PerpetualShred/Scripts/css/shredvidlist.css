@@ -22,7 +22,7 @@
 #shredvidlist-background {
     width: 100vw;
     height: 120vw;
-    background-color: rgba(16, 16, 16, 0.8);
+    background-color: rgba(16, 16, 16, 0.5);
     position: fixed;
     top: 0;
     left: 0;
@@ -49,13 +49,15 @@
     
 }
 
-.vidThumbContainer img{
+.vidThumbContainer img {
     width: 200px;
     align-self: center;
+    padding-top: 10px;
+    padding-left: 10px;
 }
 
 .vidInfoContainer {
-    background-color: rgba(88, 88, 88, 0.5);
+    background-color: rgba(105, 33, 33, 0.7);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -100,13 +102,15 @@
     font-family: serif;
     font-weight: 500;
     letter-spacing: -0.3px;
-    text-align: right;
+    text-align: center;
+    vertical-align: sub;
     text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
     color: white;
+    padding-bottom: 5px;
 }
 
 .vidOrigin:hover {
-    transform: translateX(-5px);
+    transform: translateX(3px);
     transition-duration: 0.3s;
 }
 
