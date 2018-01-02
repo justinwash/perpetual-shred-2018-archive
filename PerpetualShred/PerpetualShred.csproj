@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\PerpetualShred - Web Deploy.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\shredplayer.jsx" />
     <Content Include="Scripts\shredsidebarcontainer.jsx" />
@@ -25,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
