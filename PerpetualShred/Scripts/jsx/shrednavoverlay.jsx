@@ -18,18 +18,20 @@ class ShredNavOverlay extends Component {
                 </div>
                 <div id="shrednavoverlay" className={visibility}>
                     <div id="navlink-list">
-                    <div id="navlink">
-                        ∞ Discover Radness
-                    </div>
-                    <div id="navlink">
+                        <div id="navlink">
+                            <button id="navlink" type="button" onMouseDown={this.props.discoverRadness}>
+                                <span className="shredvidlistbutton-box">∞ Discover Radness</span>
+                            </button>
+                        </div>
+                        <div id="navlink">
                             <button id="navlink" type="button" onMouseDown={this.props.allVidsMouseDown}>
                                 <span className="shredvidlistbutton-box">> All Videos</span>
                             </button>
+                       </div>
+                        <div id="navlink">
+                            > Who We Are
+                        </div>
                     </div>
-                    <div id="navlink">
-                        > Who We Are
-                    </div>
-                </div>
                 </div>
             </div>
         );
