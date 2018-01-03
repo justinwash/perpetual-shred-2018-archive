@@ -11,7 +11,9 @@
             <div class="vidOrigin"><a href="@shredVid.OriginUrl">> @shredVid.VideoService</a></div>
         </div>
         <div class="vidTextContainer">
-            <div class="vidTitle">@shredVid.Title</div>
+            <div class="vidTitle"><a asp-action="Index" 
+                                     asp-controller="Home"
+                                     asp-route-id="@shredVid.ID"> @shredVid.Title </a></div>
             <div class="vidReleaseDate">@shredVid.ReleaseDate</div>
             <div class="vidSynopsis">@shredVid.Synopsis</div>
         </div>

@@ -28704,7 +28704,7 @@ var ShredUI = function (_Component) {
     }, {
         key: 'discoverRadness',
         value: function discoverRadness() {
-            window.location.reload();
+            window.location.replace("http://perpetualshred20180102115742.azurewebsites.net/");
         }
     }, {
         key: 'render',
