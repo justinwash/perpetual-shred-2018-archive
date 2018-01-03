@@ -11,23 +11,31 @@ namespace ShredCrawl
         
         public void AddToDb(WebVid webVid)
         {
-            using (DbContext db = new PerpetualShredContext_0b395b83_09f4_4116_97c6_eb6c19f89ae2Context())
+            using (PerpetualShredContext_0b395b83_09f4_4116_97c6_eb6c19f89ae2Context db = new PerpetualShredContext_0b395b83_09f4_4116_97c6_eb6c19f89ae2Context())
             {
                 if ((webVid.Title == null) || (webVid.Synopsis == null) || (webVid.Title == "") || (webVid.Synopsis == ""))
                 {
                     return;
                 }
 
-                db.Add(webVid);
-                db.SaveChanges();
-                Console.WriteLine("WebVid object sent to DB");
-                Console.WriteLine("Origin Url: " + webVid.OriginUrl);
-                Console.WriteLine("Origin Title: " + webVid.OriginTitle);
-                Console.WriteLine("Player Url: " + webVid.PlayerUrl);
-                Console.WriteLine("Title: \"" + webVid.Title + "\"");
-                Console.WriteLine("Synopsis: " + webVid.Synopsis);
-                Console.WriteLine("Release Date: " + webVid.ReleaseDate);
-                Console.WriteLine();
+                if (db.WebVid.Any(o => o.PlayerUrl == webVid.PlayerUrl))
+                {
+                    return;
+                }
+
+                else
+                {
+                    db.Add(webVid);
+                    db.SaveChanges();
+                    Console.WriteLine("WebVid object sent to DB");
+                    Console.WriteLine("Origin Url: " + webVid.OriginUrl);
+                    Console.WriteLine("Origin Title: " + webVid.OriginTitle);
+                    Console.WriteLine("Player Url: " + webVid.PlayerUrl);
+                    Console.WriteLine("Title: \"" + webVid.Title + "\"");
+                    Console.WriteLine("Synopsis: " + webVid.Synopsis);
+                    Console.WriteLine("Release Date: " + webVid.ReleaseDate);
+                    Console.WriteLine();
+                }
             }
         }
     }

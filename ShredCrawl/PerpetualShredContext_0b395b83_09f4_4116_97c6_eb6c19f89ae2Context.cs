@@ -12,7 +12,7 @@ namespace ShredCrawl
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=tcp:perpetualshred20180102115742dbserver.database.windows.net,1433;Initial Catalog=PerpetualShred20180102115742_db;Persist Security Info=False;User ID=Trifectuh;Password=Trif3ctuh;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=PerpetualShredContext-0b395b83-09f4-4116-97c6-eb6c19f89ae2;Trusted_Connection=True;");
             }
         }
 
