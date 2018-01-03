@@ -21,22 +21,42 @@ namespace PerpetualShred.Controllers
         }
         public async Task<IActionResult> Index(int? id)
         {
-            Randomizer randomizer = new Randomizer(_cookieService);
-
-            List<WebVid> vidList = new List<WebVid>();
-            vidList.AddRange(_context.WebVid);
-
-            id = randomizer.RandomVidPicker(vidList);
-
-            var webVid = await _context.WebVid
-                .SingleOrDefaultAsync(m => m.ID == id);
-
-            if (webVid == null)
+            
+            if (id == null)
             {
-                return NotFound();
+                Randomizer randomizer = new Randomizer(_cookieService);
+
+                List<WebVid> vidList = new List<WebVid>();
+                vidList.AddRange(_context.WebVid);
+
+                id = randomizer.RandomVidPicker(vidList);
+
+                var webVid = await _context.WebVid
+                    .SingleOrDefaultAsync(m => m.ID == id);
+
+                if (webVid == null)
+                {
+                    return NotFound();
+                }
+
+                return View(webVid);
+            }
+            else
+            {
+
+                int vidID = id.Value;
+                var webVid = await _context.WebVid
+                    .SingleOrDefaultAsync(m => m.ID == vidID);
+
+                if (webVid == null)
+                {
+                    return NotFound();
+                }
+
+                return View(webVid);
             }
 
-            return View(webVid);
+            
         }
 
         public IActionResult About()
