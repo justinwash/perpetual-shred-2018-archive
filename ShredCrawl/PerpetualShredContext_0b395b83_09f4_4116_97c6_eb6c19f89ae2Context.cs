@@ -12,7 +12,10 @@ namespace ShredCrawl
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=PerpetualShredContext-0b395b83-09f4-4116-97c6-eb6c19f89ae2;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;
+				Database=PerpetualShredContext-0b395b83-09f4-4116-97c6-eb6c19f89ae2;
+                Trusted_Connection=True;");
+                Console.WriteLine("using Local DB");
             }
         }
 
