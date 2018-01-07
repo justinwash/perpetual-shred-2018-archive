@@ -13186,9 +13186,6 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "C:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\PerpetualShred.csproj",
       "projectName": "PerpetualShred",
