@@ -376,24 +376,5 @@ __pycache__/
 # should be stored in the .pubxml.user file.
 
 # End of https://www.gitignore.io/api/node,windows,visualstudio
-ShredCrawl/obj/Debug/netcoreapp2.0/ShredCrawl.csproj.CoreCompileInputs.cache
-ShredCrawl/obj/Debug/netcoreapp2.0/ShredCrawl.csproj.CoreCompileInputs.cache
-.vscode/launch.json
-.vscode/tasks.json
-.vscode/launch.json
-.vscode/tasks.json
-PerpetualShred/obj/PerpetualShred.csproj.nuget.cache
-PerpetualShred/obj/PerpetualShred.csproj.nuget.g.props
-PerpetualShred/obj/project.assets.json
-PerpetualShred/bin/Debug/netcoreapp2.0/PerpetualShred.dll
-PerpetualShred/bin/Debug/netcoreapp2.0/PerpetualShred.pdb
-PerpetualShred/obj/PerpetualShred.csproj.nuget.cache
-PerpetualShred/obj/PerpetualShred.csproj.nuget.g.props
-PerpetualShred/obj/project.assets.json
-PerpetualShred/obj/Debug/netcoreapp2.0/PerpetualShred.dll
-PerpetualShred/obj/Debug/netcoreapp2.0/PerpetualShred.pdb
-PerpetualShred/wwwroot/js/main.build.js
 Connection Strings.txt
-.vs/PerpetualShred/v15/.suo
-.vs/PerpetualShred/v15/Server/sqlite3/storage.ide
-.vs/PerpetualShred/v15/sqlite3/storage.ide
+
