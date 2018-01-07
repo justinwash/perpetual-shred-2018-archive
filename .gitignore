@@ -98,16 +98,26 @@ $RECYCLE.BIN/
 *.userprefs
 
 # Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-bld/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
+/PerpetualShred/[Dd]ebug/
+/PerpetualShred/[Dd]ebugPublic/
+/PerpetualShred/[Rr]elease/
+/PerpetualShred/[Rr]eleases/
+/PerpetualShred/x64/
+/PerpetualShred/x86/
+/PerpetualShred/bld/
+/PerpetualShred/[Bb]in/
+/PerpetualShred/[Oo]bj/
+/PerpetualShred/[Ll]og/
+/ShredCrawl/[Dd]ebug/
+/ShredCrawl/[Dd]ebugPublic/
+/ShredCrawl/[Rr]elease/
+/ShredCrawl/[Rr]eleases/
+/ShredCrawl/x64/
+/ShredCrawl/x86/
+/ShredCrawl/bld/
+/ShredCrawl/[Bb]in/
+/ShredCrawl/[Oo]bj/
+/ShredCrawl/[Ll]og/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -378,3 +388,7 @@ __pycache__/
 # End of https://www.gitignore.io/api/node,windows,visualstudio
 Connection Strings.txt
 
+*.dll
+*.pdb
+*.cache
+PerpetualShred/obj/Debug/netcoreapp2.0/PerpetualShred.AssemblyInfo.cs
