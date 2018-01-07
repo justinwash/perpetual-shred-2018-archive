@@ -1,52 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using HtmlAgilityPack;
-using Google.Apis.Services;
-using Google.Apis.YouTube.v3;
-using Google.Apis.YouTube.v3.Data;
 using System.Text.RegularExpressions;
+using Google.Apis.YouTube.v3;
+using HtmlAgilityPack;
 
 namespace ShredCrawl
 {
-    static class YouTubeInterface
+    internal static class YouTubeInterface
     {
-        static YouTubeService ytServ = Program.YoutTubeAuthorize();
+        private static readonly YouTubeService YtServ = Program.YoutTubeAuthorize();
 
-        public static YouTubeVid RetrieveData(string vidID)
+        private static YouTubeVid RetrieveData(string vidId)
         {
-            YouTubeVid ytVid = new YouTubeVid();
+            var ytVid = new YouTubeVid();
             string title = null;
             DateTime? releaseDate = null;
             string synopsis = null;
             string channelTitle = null;
-            string channelID = null;
+            string channelId = null;
 
-            var request = ytServ.Videos.List("snippet");
+            var request = YtServ.Videos.List("snippet");
 
-            request.Id = vidID;
+            request.Id = vidId;
             var response = request.Execute();
             if (response.Items.Count == 1)
             {
-                Video video = response.Items[0];
+                var video = response.Items[0];
                 title = video.Snippet.Title;
                 releaseDate = video.Snippet.PublishedAt;
-                synopsis = video.Snippet.Description.ytTruncate(200);
+                synopsis = video.Snippet.Description.YtTruncate(200);
                 channelTitle = video.Snippet.ChannelTitle;
-                channelID = video.Snippet.ChannelId;
+                channelId = video.Snippet.ChannelId;
             }
 
             ytVid.ChannelTitle = channelTitle;
-            ytVid.ChannelID = channelID;
+            ytVid.ChannelId = channelId;
             ytVid.Title = title;
             ytVid.ReleaseDate = releaseDate;
             ytVid.Synopsis = synopsis;
-            ytVid.Thumbnail = "https://img.youtube.com/vi/" + vidID + "/maxresdefault.jpg";
+            ytVid.Thumbnail = "https://img.youtube.com/vi/" + vidId + "/maxresdefault.jpg";
             return ytVid;
         }
-            public static List<WebVid> YouTubeCollect(HtmlDocument htmlDoc)
+            public static IEnumerable<WebVid> YouTubeCollect(HtmlDocument htmlDoc)
             {
-                Regex youtubeMatch = new Regex("youtu(?:.be|be.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]).+?(?=\")");
+                var youtubeMatch = new Regex("youtu(?:.be|be.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]).+?(?=\")");
                 var ytVidList = new List<WebVid>();
                 var ytNodes = htmlDoc.DocumentNode.SelectNodes("//iframe");
 
@@ -55,46 +52,43 @@ namespace ShredCrawl
                      return new List<WebVid>();
                 }
 
-                foreach (HtmlNode node in ytNodes)
+                foreach (var node in ytNodes)
                 {
-                    Match youtubeMatches = youtubeMatch.Match(node.OuterHtml);
+                    var youtubeMatches = youtubeMatch.Match(node.OuterHtml);
 
-                    if (youtubeMatches.Success)
-                    {
-                        WebVid ytVidToAdd = new WebVid();
+                    if (!youtubeMatches.Success) continue;
+                    var ytVidToAdd = new WebVid();
 
-                        string input = youtubeMatches.Value;
-                        string ytID = input.Substring(18, 11);
+                    var input = youtubeMatches.Value;
+                    var ytId = input.Substring(18, 11);
 
-                        YouTubeVid tempVid = YouTubeInterface.RetrieveData(ytID);
+                    var tempVid = RetrieveData(ytId);
 
-                        Console.WriteLine("Youtube match: " + input);
+                    Console.WriteLine(@"Youtube match: " + input);
 
-                        ytVidToAdd.Title = tempVid.Title;
-                        ytVidToAdd.ReleaseDate = tempVid.ReleaseDate;
-                        ytVidToAdd.Synopsis = tempVid.Synopsis;
-                        ytVidToAdd.PlayerUrl = "http://www." + input + "?&theme=dark&autoplay=1&autohide=1&modestbranding=1&fs=0&showinfo=0&rel=0";
-                        ytVidToAdd.OriginUrl = "http://www.youtube.com/channel/" + tempVid.ChannelID;
-                        ytVidToAdd.OriginTitle = tempVid.ChannelTitle + " on YouTube";
-                        ytVidToAdd.VideoService = "YouTube";
-                        ytVidToAdd.Thumbnail = tempVid.Thumbnail;
-                        ytVidList.Add(ytVidToAdd);
-
-                    }
+                    ytVidToAdd.Title = tempVid.Title;
+                    ytVidToAdd.ReleaseDate = tempVid.ReleaseDate;
+                    ytVidToAdd.Synopsis = tempVid.Synopsis;
+                    ytVidToAdd.PlayerUrl = "http://www." + input + "?&theme=dark&autoplay=1&autohide=1&modestbranding=1&fs=0&showinfo=0&rel=0";
+                    ytVidToAdd.OriginUrl = "http://www.youtube.com/channel/" + tempVid.ChannelId;
+                    ytVidToAdd.OriginTitle = tempVid.ChannelTitle + " on YouTube";
+                    ytVidToAdd.VideoService = "YouTube";
+                    ytVidToAdd.Thumbnail = tempVid.Thumbnail;
+                    ytVidList.Add(ytVidToAdd);
                 }
 
                 return ytVidList;
             }
 
-        public static string ytTruncate(this string value, int maxChars)
+        private static string YtTruncate(this string value, int maxChars)
         {
             return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
         }
     }
 
-    class YouTubeSettings
+    internal static class YouTubeSettings
     {
-        public static string apiKey = "AIzaSyBV0CufWBbF7O1J6Y27kw5Tmmbcwj5t1Ho";
-        public static string appName = "PerpetualShred";
+        public const string ApiKey = "AIzaSyBV0CufWBbF7O1J6Y27kw5Tmmbcwj5t1Ho";
+        public const string AppName = "PerpetualShred";
     }
 }

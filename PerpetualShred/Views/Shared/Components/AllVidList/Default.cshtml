@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PerpetualShred.Models.WebVid>
+﻿@model IEnumerable<WebVid>
 
 <div id="allvidsheading">
     <h3 align="center">The Gnarcyclopedia BRAAAPtannica</h3>
@@ -13,7 +13,7 @@
         <div class="vidTextContainer">
             <div class="vidTitle"><a asp-action="Index" 
                                      asp-controller="Home"
-                                     asp-route-id="@shredVid.ID"> @shredVid.Title </a></div>
+                                     asp-route-id="@shredVid.Id"> @shredVid.Title </a></div>
             <div class="vidReleaseDate">@shredVid.ReleaseDate</div>
             <div class="vidSynopsis">@shredVid.Synopsis</div>
         </div>

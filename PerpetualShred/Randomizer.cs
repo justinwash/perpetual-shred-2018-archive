@@ -1,17 +1,16 @@
-﻿using PerpetualShred.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using PerpetualShred.Models;
 
 namespace PerpetualShred
 {
     public class Randomizer : Controller
     {
-        static string previousVid;
-        ICookieService _cookieService;
+        private static string _previousVid;
+        private ICookieService _cookieService;
 
         public Randomizer(ICookieService cookieService)
         {
@@ -26,11 +25,11 @@ namespace PerpetualShred
                 WebVid vidToPlay;
                 List<string> unwatchedIds = null;
 
-                string unwatchedCookie = _cookieService.GetCookie("randomVideoUnwatched");
+                var unwatchedCookie = _cookieService.GetCookie("randomVideoUnwatched");
                 if (string.IsNullOrWhiteSpace(unwatchedCookie))
                 {
-                    string randomVideoUnwatchedValue = string.Join(';', (from v in vidList
-                                                                         select v.ID));
+                    var randomVideoUnwatchedValue = string.Join(';', (from v in vidList
+                                                                         select v.Id));
                     //_cookieService.CreateCookie("randomVideoUnwatched", randomVideoUnwatchedValue);
                 }
                 else
@@ -44,13 +43,13 @@ namespace PerpetualShred
                 }
                 else
                 {
-                    int selectedVidDbId = Int32.Parse(unwatchedIds[(new Random().Next(0, unwatchedIds.Count))]);
-                    int selectedVidAdaptedId = selectedVidDbId - Int32.Parse(unwatchedIds[0]);
+                    var selectedVidDbId = Int32.Parse(unwatchedIds[(new Random().Next(0, unwatchedIds.Count))]);
+                    var selectedVidAdaptedId = selectedVidDbId - Int32.Parse(unwatchedIds[0]);
                     vidToPlay = vidList[selectedVidAdaptedId];
                 }
                 
-                id = vidToPlay.ID;
-                previousVid = JsonConvert.SerializeObject(vidToPlay);
+                id = vidToPlay.Id;
+                _previousVid = JsonConvert.SerializeObject(vidToPlay);
 
                 return id;
             }

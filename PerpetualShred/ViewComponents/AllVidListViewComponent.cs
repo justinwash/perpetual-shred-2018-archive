@@ -1,20 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PerpetualShred.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
+using PerpetualShred.Models;
 
-namespace ViewComponentSample.ViewComponents
+namespace PerpetualShred.ViewComponents
 {
     public class AllVidListViewComponent : ViewComponent
     {
-        private readonly PerpetualShredContext db;
+        private readonly PerpetualShredContext _db;
 
         public AllVidListViewComponent(PerpetualShredContext context)
         {
-            db = context;
+            _db = context;
         }
 
         public async Task<IViewComponentResult> InvokeAsync(int start, int count)
@@ -25,7 +24,7 @@ namespace ViewComponentSample.ViewComponents
 
         private Task<List<WebVid>> GetVidsAsync(int start, int count)
         {
-            return db.WebVid.Skip(start).Take(count).ToListAsync();
+            return _db.WebVid.Skip(start).Take(count).ToListAsync();
         }
     }
 }

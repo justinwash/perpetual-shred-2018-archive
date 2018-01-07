@@ -1,47 +1,44 @@
 ﻿using System;
-using System.Net;
-using Newtonsoft.Json;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using HtmlAgilityPack;
+using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
+using HtmlAgilityPack;
+using Newtonsoft.Json;
 
 namespace ShredCrawl
 {
-    static class VimeoInterface
+    internal static class VimeoInterface
     {
-
-        public static VimeoVid RetrieveData(string vidUrl)
+        private static VimeoVid RetrieveData(string vidUrl)
         {
-            int vidID = Int32.Parse(vidUrl);
-            VimeoVid vmVid = new VimeoVid();
-           
-            WebClient myDownloader = new WebClient();
-            myDownloader.Encoding = System.Text.Encoding.UTF8;
+            var vidId = int.Parse(vidUrl);
+            var vmVid = new VimeoVid();
+
+            var myDownloader = new WebClient {Encoding = Encoding.UTF8};
 
 
-            string jsonResponse = myDownloader.DownloadString("http://vimeo.com/api/v2/video/" + vidID + ".json");
-            List<VimeoVid> tempVidList = JsonConvert.DeserializeObject<List<VimeoVid>>(jsonResponse);
+            var jsonResponse = myDownloader.DownloadString("http://vimeo.com/api/v2/video/" + vidId + ".json");
+            var tempVidList = JsonConvert.DeserializeObject<List<VimeoVid>>(jsonResponse);
             var tempVid = tempVidList[0];
 
-            vmVid.title = tempVid.title;
-            vmVid.user_id = tempVid.user_id;
-            vmVid.user_name = tempVid.user_name;
-            vmVid.upload_date = tempVid.upload_date;
-            vmVid.description = vmTruncate(tempVid.description, 200);
-            vmVid.thumbnail_large = tempVid.thumbnail_large;
+            vmVid.Title = tempVid.Title;
+            vmVid.UserId = tempVid.UserId;
+            vmVid.UserName = tempVid.UserName;
+            vmVid.UploadDate = tempVid.UploadDate;
+            vmVid.Description = VmTruncate(tempVid.Description, 200);
+            vmVid.ThumbnailLarge = tempVid.ThumbnailLarge;
             return vmVid;
         }
 
-        public static string vmTruncate(this string value, int maxChars)
+        private static string VmTruncate(this string value, int maxChars)
         {
             return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
         }
 
-        public static List<WebVid> VimeoCollect(HtmlDocument htmlDoc)
+        public static IEnumerable<WebVid> VimeoCollect(HtmlDocument htmlDoc)
         {
-            Regex vimeoMatch = new Regex("(player.)?(vimeo.com)/(video/)?([0-9]+)");
+            var vimeoMatch = new Regex("(player.)?(vimeo.com)/(video/)?([0-9]+)");
 
             var vmVidList = new List<WebVid>();
             var vmNodes = htmlDoc.DocumentNode.SelectNodes("//iframe");
@@ -51,41 +48,30 @@ namespace ShredCrawl
                 return new List<WebVid>();
             }
 
-            foreach (HtmlNode node in vmNodes)
+            foreach (var node in vmNodes)
             {
-                Match vimeoMatches = vimeoMatch.Match(node.OuterHtml);
+                var vimeoMatches = vimeoMatch.Match(node.OuterHtml);
 
-                if (vimeoMatches.Success)
-                {
-                    WebVid vmVidToAdd = new WebVid();
-                    string vmID = "";
+                if (!vimeoMatches.Success) continue;
+                var vmVidToAdd = new WebVid();
 
-                    string input = vimeoMatches.Value;
+                var input = vimeoMatches.Value;
 
-                    if (input.Length == 32)
-                    {
-                        vmID = input.Substring(23, 9);
-                    }
-                    else
-                    {
-                        vmID = input.Substring(23, 8);
-                    }
+                var vmId = input.Substring(23, input.Length == 32 ? 9 : 8);
 
-                    Console.WriteLine("Vimeo match: " + input);
+                Console.WriteLine(@"Vimeo match: " + input);
 
-                    VimeoVid tempVid = VimeoInterface.RetrieveData(vmID);
+                var tempVid = RetrieveData(vmId);
 
-                    vmVidToAdd.Title = tempVid.title;
-                    vmVidToAdd.ReleaseDate = Convert.ToDateTime(tempVid.upload_date);
-                    vmVidToAdd.Synopsis = tempVid.description;
-                    vmVidToAdd.PlayerUrl = "https://" + input + "?autoplay=1";
-                    vmVidToAdd.OriginUrl = "http://www.vimeo.com/" + tempVid.user_id;
-                    vmVidToAdd.OriginTitle = tempVid.user_name + " on Vimeo";
-                    vmVidToAdd.VideoService = "Vimeo";
-                    vmVidToAdd.Thumbnail = tempVid.thumbnail_large;
-                    vmVidList.Add(vmVidToAdd);
-
-                }
+                vmVidToAdd.Title = tempVid.Title;
+                vmVidToAdd.ReleaseDate = Convert.ToDateTime(tempVid.UploadDate);
+                vmVidToAdd.Synopsis = tempVid.Description;
+                vmVidToAdd.PlayerUrl = "https://" + input + "?autoplay=1";
+                vmVidToAdd.OriginUrl = "http://www.vimeo.com/" + tempVid.UserId;
+                vmVidToAdd.OriginTitle = tempVid.UserName + " on Vimeo";
+                vmVidToAdd.VideoService = "Vimeo";
+                vmVidToAdd.Thumbnail = tempVid.ThumbnailLarge;
+                vmVidList.Add(vmVidToAdd);
             }
 
             return vmVidList;
@@ -93,7 +79,7 @@ namespace ShredCrawl
 
     }
 
-    class VimeoSettings
+    internal class VimeoSettings
     {
         public static string ConsumerKey = "2d70dbab78ddc882a591aae3d9fb2c73b34ecb87";
         public static string ConsumerSecret = "65HlFHS2vGqK/7cwvi+UXreW3y2soqAnQldlETLqObXISJi8dWnspIHVPy3icgW86YRbmicGFBFaNrLVYEe+GojmE4xoCQgPnP0B7+Ege0N8K9Mhj/eHaGV8PpOgIAdd";

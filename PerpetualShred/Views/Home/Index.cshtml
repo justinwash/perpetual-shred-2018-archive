@@ -1,14 +1,9 @@
-﻿@model PerpetualShred.Models.WebVid
-@using Newtonsoft;
-@using HtmlAgilityPack;
-@using System.Text.Encodings;
-@{
-    var viewModelVids = new PerpetualShred.Models.ViewModelVids();
-    var vidList = viewModelVids.WebVids;
-}
+﻿@using System.IO
+@using Newtonsoft.Json
+@model WebVid
 
 @{
-    var writer = new System.IO.StringWriter();
+    var writer = new StringWriter();
     Component.InvokeAsync("AllVidList", new { start = 0, count = 1000 }).Result.WriteTo(writer, HtmlEncoder);
 }
 
@@ -18,7 +13,7 @@
         <title>Perpetual Shred</title>
         <link rel="stylesheet" href="~/css/site.css" type="text/css" />
         <script type="text/javascript">
-            var jsModel = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+            var jsModel = @Html.Raw(JsonConvert.SerializeObject(Model));
         </script>
         <script>
             var jsVidList = "@writer.ToString()";

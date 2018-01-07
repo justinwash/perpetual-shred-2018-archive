@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+using Microsoft.AspNetCore.Http;
 
 namespace PerpetualShred
 {
@@ -16,23 +13,23 @@ namespace PerpetualShred
 
     public class CookieService : ICookieService
     {
-        IHttpContextAccessor httpContextAccessor;
+        private IHttpContextAccessor _httpContextAccessor;
         public CookieService(IHttpContextAccessor httpContextAccessor)
         {
-            this.httpContextAccessor = httpContextAccessor;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public void RemoveVideoFromUnwatched(int? id)
         {
-            string cookieDelimiter = ";";
+            var cookieDelimiter = ";";
 
-            string unwatchedCookieName = "randomVideoUnwatched";
-            string unwatchedCookieValue = id.ToString() + cookieDelimiter;
+            var unwatchedCookieName = "randomVideoUnwatched";
+            var unwatchedCookieValue = id + cookieDelimiter;
 
-            CookieOptions cookieOptions = new CookieOptions();
+            var cookieOptions = new CookieOptions();
             cookieOptions.Expires = DateTime.Now.AddDays(7);
 
-            var httpContext = httpContextAccessor.HttpContext;
+            var httpContext = _httpContextAccessor.HttpContext;
             if (httpContext.Request.Cookies[unwatchedCookieName] is null)
             {
                 // This should never actually happen.
@@ -40,8 +37,8 @@ namespace PerpetualShred
             else
             {
                 // If the cookie already exists, we need to update it to remove the video we're watching.
-                string oldUnwtachedCookie = httpContext.Request.Cookies[unwatchedCookieName];
-                List<string> unwatchedList = oldUnwtachedCookie.Split(cookieDelimiter).ToList();
+                var oldUnwtachedCookie = httpContext.Request.Cookies[unwatchedCookieName];
+                var unwatchedList = oldUnwtachedCookie.Split(cookieDelimiter).ToList();
                 unwatchedList.Remove(id.ToString());
                 unwatchedCookieValue = String.Join(';', unwatchedList);
 
@@ -51,7 +48,7 @@ namespace PerpetualShred
 
         public string GetCookie(string name)
         {
-            return httpContextAccessor.HttpContext.Request.Cookies[name];
+            return _httpContextAccessor.HttpContext.Request.Cookies[name];
         }
 
         public void CreateCookie(string name, string value, CookieOptions options = null)
@@ -61,7 +58,7 @@ namespace PerpetualShred
                 options = new CookieOptions();
                 options.Expires = DateTime.Now.AddDays(7);
             }
-            httpContextAccessor.HttpContext.Response.Cookies.Append(name, value, options);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append(name, value, options);
         }
     }
 }

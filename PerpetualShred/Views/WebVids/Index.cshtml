@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PerpetualShred.Models.WebVid>
+﻿@model IEnumerable<WebVid>
 
 @{
     ViewData["Title"] = "Index";
@@ -50,9 +50,9 @@ All the dope stuff currently in the database.
                 @Html.DisplayFor(modelItem => item.Synopsis)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
