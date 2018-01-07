@@ -1,39 +1,37 @@
-﻿using Google.Apis.Services;
-using Google.Apis.YouTube.v3;
-using System;
+﻿using System;
 using System.Collections.Generic;
-
+using Google.Apis.Services;
+using Google.Apis.YouTube.v3;
 
 namespace ShredCrawl
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             var vidsToAdd = new List<WebVid>();
-            PinkBikeCrawler pbCrawler = new PinkBikeCrawler();
-            DbInterface dB = new DbInterface();
+            var pbCrawler = new PinkBikeCrawler();
 
             vidsToAdd.AddRange(pbCrawler.CrawlPinkBike());
 
-            Console.WriteLine("Crawled PinkBike dude! Found " + vidsToAdd.Count + " new videos. Press Enter to add them to the database.");
+            Console.WriteLine(@"Crawled PinkBike dude! Found " + vidsToAdd.Count + @" videos. Press anything to add the new ones to the Db.");
             Console.ReadLine();
 
-            foreach (WebVid webVid in vidsToAdd)
+            foreach (var webVid in vidsToAdd)
             {
-                dB.AddToDb(webVid);
+                DbInterface.AddToDb(webVid);
             }
 
-            Console.WriteLine("SENT 'em to the database! (get it???)");
+            Console.WriteLine(@"using Local DB");
             Console.ReadLine();
         }
 
         public static YouTubeService YoutTubeAuthorize()
         {
-            var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+            var youtubeService = new YouTubeService(new BaseClientService.Initializer
             {
-                ApiKey = YouTubeSettings.apiKey,
-                ApplicationName = YouTubeSettings.appName
+                ApiKey = YouTubeSettings.ApiKey,
+                ApplicationName = YouTubeSettings.AppName
             });
 
             return youtubeService;

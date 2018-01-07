@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace PerpetualShred.Models
 {
@@ -13,6 +9,6 @@ namespace PerpetualShred.Models
         {
         }
 
-        public DbSet<PerpetualShred.Models.WebVid> WebVid { get; set; }
+        public DbSet<WebVid> WebVid { get; set; }
     }
 }

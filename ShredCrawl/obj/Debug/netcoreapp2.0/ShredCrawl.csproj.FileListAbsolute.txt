@@ -14,7 +14,6 @@ C:\Users\Owner\Dropbox\GitHub\PerpetualShred\ShredCrawl\bin\Debug\netcoreapp2.0\
 C:\Users\Owner\Dropbox\GitHub\PerpetualShred\ShredCrawl\bin\Debug\netcoreapp2.0\ShredCrawl.runtimeconfig.dev.json
 C:\Users\Owner\Dropbox\GitHub\PerpetualShred\ShredCrawl\bin\Debug\netcoreapp2.0\ShredCrawl.dll
 C:\Users\Owner\Dropbox\GitHub\PerpetualShred\ShredCrawl\bin\Debug\netcoreapp2.0\ShredCrawl.pdb
-C:\Users\Owner\Dropbox\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.csprojResolveAssemblyReference.cache
 C:\Users\Owner\Dropbox\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.csproj.CoreCompileInputs.cache
 C:\Users\Owner\Dropbox\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.AssemblyInfoInputs.cache
 C:\Users\Owner\Dropbox\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.AssemblyInfo.cs

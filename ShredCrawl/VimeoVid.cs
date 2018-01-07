@@ -1,33 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ShredCrawl
+﻿namespace ShredCrawl
 {
     public class VimeoVid 
     {
-        public int id { get; set; }
-        public string title { get; set; }
-        public string description { get; set; }
-        public string url { get; set; }
-        public string upload_date { get; set; }
-        public string thumbnail_small { get; set; }
-        public string thumbnail_medium { get; set; }
-        public string thumbnail_large { get; set; }
-        public int user_id { get; set; }
-        public string user_name { get; set; }
-        public string user_url { get; set; }
-        public string user_portrait_small { get; set; }
-        public string user_portrait_medium { get; set; }
-        public string user_portrait_large { get; set; }
-        public string user_portrait_huge { get; set; }
-        public int stats_number_of_likes { get; set; }
-        public int stats_number_of_plays { get; set; }
-        public int stats_number_of_comments { get; set; }
-        public int duration { get; set; }
-        public int width { get; set; }
-        public int height { get; set; }
-        public string tags { get; set; }
-        public string embed_privacy { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Url { get; set; }
+        public string UploadDate { get; set; }
+        public string ThumbnailSmall { get; set; }
+        public string ThumbnailMedium { get; set; }
+        public string ThumbnailLarge { get; set; }
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string UserUrl { get; set; }
+        public string UserPortraitSmall { get; set; }
+        public string UserPortraitMedium { get; set; }
+        public string UserPortraitLarge { get; set; }
+        public string UserPortraitHuge { get; set; }
+        public int StatsNumberOfLikes { get; set; }
+        public int StatsNumberOfPlays { get; set; }
+        public int StatsNumberOfComments { get; set; }
+        public int Duration { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public string Tags { get; set; }
+        public string EmbedPrivacy { get; set; }
     }
 
     

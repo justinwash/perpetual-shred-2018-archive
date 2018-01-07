@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace ShredCrawl
 {
-    public partial class WebVid
+    public class WebVid
     {
         public int Id { get; set; }
         public string OriginUrl { get; set; } 

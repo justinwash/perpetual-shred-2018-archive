@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
 namespace ShredCrawl.Migrations
 {
-    public partial class pbSources : Migration
+    public partial class PbSources : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +12,7 @@ namespace ShredCrawl.Migrations
                 name: "WebVid",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "int")
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     OriginTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OriginUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -32,7 +31,7 @@ namespace ShredCrawl.Migrations
                 name: "PinkBikeVideoSource",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)"),
                     Source = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WebVidId = table.Column<int>(type: "int", nullable: true)
                 },

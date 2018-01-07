@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
 namespace ShredCrawl.Migrations
 {
-    public partial class pbSources2 : Migration
+    public partial class PbSources2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +26,7 @@ namespace ShredCrawl.Migrations
                 name: "PinkBikeVideoSource",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<string>(),
                     Source = table.Column<string>(nullable: true),
                     WebVidId = table.Column<int>(nullable: true)
                 },

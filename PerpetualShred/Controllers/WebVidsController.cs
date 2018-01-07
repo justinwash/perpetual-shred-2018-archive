@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PerpetualShred.Models;
-using Microsoft.AspNetCore.Http;
 
 namespace PerpetualShred.Controllers
 {
     public class WebVidsController : Controller
     {
         private readonly PerpetualShredContext _context;
-        ICookieService _cookieService;
+        private ICookieService _cookieService;
 
         public WebVidsController(PerpetualShredContext context, ICookieService cookieService)
         { 
@@ -38,7 +35,7 @@ namespace PerpetualShred.Controllers
             }
 
             var webVid = await _context.WebVid
-                .SingleOrDefaultAsync(m => m.ID == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (webVid == null)
             {
                 return NotFound();
@@ -50,14 +47,14 @@ namespace PerpetualShred.Controllers
         // Play random video?
         public async Task<IActionResult> PlayRandom(int? id)
         {
-            Randomizer randomizer = new Randomizer(_cookieService);
-            List<WebVid> vidList = new List<WebVid>();
+            var randomizer = new Randomizer(_cookieService);
+            var vidList = new List<WebVid>();
             vidList.AddRange(_context.WebVid);
 
             id = randomizer.RandomVidPicker(vidList);
 
             var webVid = await _context.WebVid
-                .SingleOrDefaultAsync(m => m.ID == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
 
             if (webVid == null)
             {
@@ -99,7 +96,7 @@ namespace PerpetualShred.Controllers
                 return NotFound();
             }
 
-            var webVid = await _context.WebVid.SingleOrDefaultAsync(m => m.ID == id);
+            var webVid = await _context.WebVid.SingleOrDefaultAsync(m => m.Id == id);
             if (webVid == null)
             {
                 return NotFound();
@@ -114,7 +111,7 @@ namespace PerpetualShred.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Title,ReleaseDate,PlayerUrl,OriginUrl,Synopsis")] WebVid webVid)
         {
-            if (id != webVid.ID)
+            if (id != webVid.Id)
             {
                 return NotFound();
             }
@@ -128,14 +125,12 @@ namespace PerpetualShred.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!WebVidExists(webVid.ID))
+                    if (!WebVidExists(webVid.Id))
                     {
                         return NotFound();
                     }
-                    else
-                    {
-                        throw;
-                    }
+
+                    throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -151,7 +146,7 @@ namespace PerpetualShred.Controllers
             }
 
             var webVid = await _context.WebVid
-                .SingleOrDefaultAsync(m => m.ID == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (webVid == null)
             {
                 return NotFound();
@@ -165,7 +160,7 @@ namespace PerpetualShred.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var webVid = await _context.WebVid.SingleOrDefaultAsync(m => m.ID == id);
+            var webVid = await _context.WebVid.SingleOrDefaultAsync(m => m.Id == id);
             _context.WebVid.Remove(webVid);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -173,7 +168,7 @@ namespace PerpetualShred.Controllers
 
         private bool WebVidExists(int id)
         {
-            return _context.WebVid.Any(e => e.ID == id);
+            return _context.WebVid.Any(e => e.Id == id);
         }
     }
 }

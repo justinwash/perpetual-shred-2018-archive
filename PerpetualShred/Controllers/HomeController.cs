@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,15 +22,15 @@ namespace PerpetualShred.Controllers
             
             if (id == null)
             {
-                Randomizer randomizer = new Randomizer(_cookieService);
+                var randomizer = new Randomizer(_cookieService);
 
-                List<WebVid> vidList = new List<WebVid>();
+                var vidList = new List<WebVid>();
                 vidList.AddRange(_context.WebVid);
 
                 id = randomizer.RandomVidPicker(vidList);
 
                 var webVid = await _context.WebVid
-                    .SingleOrDefaultAsync(m => m.ID == id);
+                    .SingleOrDefaultAsync(m => m.Id == id);
 
                 if (webVid == null)
                 {
@@ -44,9 +42,9 @@ namespace PerpetualShred.Controllers
             else
             {
 
-                int vidID = id.Value;
+                var vidId = id.Value;
                 var webVid = await _context.WebVid
-                    .SingleOrDefaultAsync(m => m.ID == vidID);
+                    .SingleOrDefaultAsync(m => m.Id == vidId);
 
                 if (webVid == null)
                 {
@@ -57,20 +55,6 @@ namespace PerpetualShred.Controllers
             }
 
             
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "A place to watch and share videos that get you pumped to be stoked.";
-
-            return View();
-        }
-
-        public IActionResult Submit()
-        {
-            ViewData["Message"] = "The crawler can only do so much...";
-
-            return View();
         }
 
         public IActionResult Error()

@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
 namespace PerpetualShred.Migrations
 {
-    public partial class thumbies : Migration
+    public partial class Thumbies : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

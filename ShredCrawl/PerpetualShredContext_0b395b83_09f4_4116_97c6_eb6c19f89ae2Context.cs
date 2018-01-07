@@ -1,22 +1,20 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ShredCrawl
 {
-    public partial class PerpetualShredContext_0b395b83_09f4_4116_97c6_eb6c19f89ae2Context : DbContext
+    public sealed class PerpetualShredContext_0B395B8309F4411697C6Eb6C19F89Ae2Context : DbContext
     {
-        public virtual DbSet<WebVid> WebVid { get; set; }
+        public DbSet<WebVid> WebVid { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;
-				Database=PerpetualShredContext-0b395b83-09f4-4116-97c6-eb6c19f89ae2;
-                Trusted_Connection=True;");
-                Console.WriteLine("using Local DB");
-            }
+            if (optionsBuilder.IsConfigured) return;
+            optionsBuilder.UseSqlServer(@"Server=tcp:perpetualshred20180102115742dbserver.database.windows.net,1433;
+                Initial Catalog=PerpetualShred20180102115742_db;Persist Security Info=False;
+                User ID=Trifectuh;Password=***REMOVED***;MultipleActiveResultSets=False;
+                Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            Console.WriteLine(@"using Remote DB");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

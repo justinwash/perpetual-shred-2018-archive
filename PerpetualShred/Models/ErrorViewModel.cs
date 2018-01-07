@@ -1,5 +1,3 @@
-using System;
-
 namespace PerpetualShred.Models
 {
     public class ErrorViewModel
