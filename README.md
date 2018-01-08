@@ -17,6 +17,6 @@ Getting set up:
   
   npm install --save-dev webpack babel-loader babel-core babel-preset-es2015 babel-preset-react
   
-  npm install webpack webpack-dev-server –g
+  npm install  –g webpack webpack-dev-server
 
 3. Check that 'webpack' is present in your pre-build commands (if you want to bundle automatically on build).
