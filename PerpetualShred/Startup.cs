@@ -28,6 +28,7 @@ namespace PerpetualShred
             services.AddMvc();
 
             services.AddDbContext<PerpetualShredContext>(options =>
+
                     options.UseSqlServer(Configuration.GetConnectionString("PerpetualShredContext")));
 
             return services.BuildServiceProvider();

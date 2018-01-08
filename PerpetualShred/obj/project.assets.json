@@ -8073,7 +8073,7 @@
       ]
     },
     "Remotion.Linq/2.1.1": {
-      "sha512": "IJn0BqkvwEDpP+2qjvci7n4/a9f7DhKESLWb2/uG4xQh3rTkGTBUz69bI4IivCoKkTFAqjXxYDZw2K/npohjsw==",
+      "sha512": "83XtNdIO0jbXvPgN+fuq0sd5DNq5Nx6s5W/mEeHLVvzqHl26BohU0au+sJWzLT8YkTiF/Kebar6qIpfkbTQuEw==",
       "type": "package",
       "path": "remotion.linq/2.1.1",
       "files": [
@@ -10240,7 +10240,7 @@
       ]
     },
     "System.Linq.Queryable/4.0.1": {
-      "sha512": "Yn/WfYe9RoRfmSLvUt2JerP0BTGGykCZkQPgojaxgzF2N0oPo+/AhB8TXOpdCcNlrG3VRtsamtK2uzsp3cqRVw==",
+      "sha512": "10E4RizszVH6YZYYNivjatqnB+gHjeKfqRvVb8XPpjN3EA77gU3zeN6gbwjmxdCKFwKVpGMpUCjeKlYy9qiqmA==",
       "type": "package",
       "path": "system.linq.queryable/4.0.1",
       "files": [
@@ -13181,24 +13181,30 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Owner\\.nuget\\packages\\": {},
+    "C:\\Users\\_afterparty\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\PerpetualShred.csproj",
+      "projectUniqueName": "C:\\Users\\_afterparty\\Documents\\Visual Studio 2017\\Projects\\PerpetualShred\\PerpetualShred\\PerpetualShred.csproj",
       "projectName": "PerpetualShred",
-      "projectPath": "C:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\PerpetualShred.csproj",
-      "packagesPath": "C:\\Users\\Owner\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Owner\\Dropbox\\GitHub\\PerpetualShred\\PerpetualShred\\obj\\",
+      "projectPath": "C:\\Users\\_afterparty\\Documents\\Visual Studio 2017\\Projects\\PerpetualShred\\PerpetualShred\\PerpetualShred.csproj",
+      "packagesPath": "C:\\Users\\_afterparty\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\_afterparty\\Documents\\Visual Studio 2017\\Projects\\PerpetualShred\\PerpetualShred\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Owner\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\_afterparty\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
@@ -13234,7 +13240,6 @@
             "version": "[2.0.0, )"
           },
           "Microsoft.NETCore.App": {
-            "suppressParent": "All",
             "target": "Package",
             "version": "[2.0.0, )",
             "autoReferenced": true

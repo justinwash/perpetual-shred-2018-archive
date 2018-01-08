@@ -42,3 +42,14 @@ d:\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.Assembly
 d:\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.AssemblyInfo.cs
 c:\Users\Owner\Dropbox\GitHub\PerpetualShred\PerpetualShred\bin\Debug\netcoreapp2.0\PerpetualShred.runtimeconfig.json
 c:\Users\Owner\Dropbox\GitHub\PerpetualShred\PerpetualShred\bin\Debug\netcoreapp2.0\PerpetualShred.runtimeconfig.dev.json
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.dll
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.pdb
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\PerpetualShred\bin\Debug\netcoreapp2.0\PerpetualShred.deps.json
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\PerpetualShred\bin\Debug\netcoreapp2.0\PerpetualShred.runtimeconfig.json
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\PerpetualShred\bin\Debug\netcoreapp2.0\PerpetualShred.runtimeconfig.dev.json
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\PerpetualShred\bin\Debug\netcoreapp2.0\PerpetualShred.dll
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\PerpetualShred\bin\Debug\netcoreapp2.0\PerpetualShred.pdb
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.csprojResolveAssemblyReference.cache
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.csproj.CoreCompileInputs.cache
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.AssemblyInfoInputs.cache
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.AssemblyInfo.cs

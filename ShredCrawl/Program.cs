@@ -21,8 +21,6 @@ namespace ShredCrawl
             {
                 DbInterface.AddToDb(webVid);
             }
-
-            Console.WriteLine(@"using Local DB");
             Console.ReadLine();
         }
 
