@@ -17,13 +17,13 @@ namespace ShredCrawl
 
                 if (db.WebVid.Any(o => o.PlayerUrl == webVid.PlayerUrl))
                 {
+                    Console.WriteLine("Duplicate found : " + webVid.Title);
                 }
 
                 else
                 {
                     db.Add(webVid);
                     db.SaveChanges();
-                    Console.WriteLine(@"using Local DB");
                     Console.WriteLine(@"Origin Url: " + webVid.OriginUrl);
                     Console.WriteLine(@"Origin Title: " + webVid.OriginTitle);
                     Console.WriteLine(@"Player Url: " + webVid.PlayerUrl);

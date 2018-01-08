@@ -31215,8 +31215,8 @@ var Vimeo = function (_Base) {
         }));
         _this2.player.ready().then(function () {
           var iframe = _this2.container.querySelector('iframe');
-      //    iframe.style.width = '100%';
-      //    iframe.style.height = '100%';
+          iframe.style.width = '100%';
+          iframe.style.height = '100%';
         })['catch'](_this2.props.onError);
         _this2.player.on('loaded', function () {
           _this2.onReady();

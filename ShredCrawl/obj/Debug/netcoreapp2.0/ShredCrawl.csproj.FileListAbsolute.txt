@@ -32,3 +32,16 @@ E:\Dropbox\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.d
 E:\Dropbox\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.pdb
 C:\Users\Owner\Dropbox\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.Properties.Resources.resources
 C:\Users\Owner\Dropbox\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.csproj.GenerateResource.Cache
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\bin\Debug\netcoreapp2.0\ShredCrawl.deps.json
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\bin\Debug\netcoreapp2.0\ShredCrawl.runtimeconfig.json
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\bin\Debug\netcoreapp2.0\ShredCrawl.runtimeconfig.dev.json
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\bin\Debug\netcoreapp2.0\ShredCrawl.dll
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\bin\Debug\netcoreapp2.0\ShredCrawl.pdb
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.csprojResolveAssemblyReference.cache
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.Properties.Resources.resources
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.csproj.GenerateResource.Cache
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.csproj.CoreCompileInputs.cache
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.AssemblyInfoInputs.cache
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.AssemblyInfo.cs
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.dll
+C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.pdb
