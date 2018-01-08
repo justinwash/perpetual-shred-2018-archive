@@ -1,18 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk.web">
-
+﻿<Project Sdk="Microsoft.NET.Sdk.web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <StartupObject>PerpetualShred.Program</StartupObject>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Properties\PublishProfiles\PerpetualShred - Web Deploy.pubxml" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="Scripts\main.js" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.6.10" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
@@ -22,23 +18,18 @@
     <PackageReference Include="System.Text.Encoding" Version="4.3.0" />
     <PackageReference Include="WindowsAzure.Storage" Version="8.3.0" />
   </ItemGroup>
-
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Connected Services\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
-
   <ItemGroup>
     <WCFMetadata Include="Connected Services" />
   </ItemGroup>
-
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="webpack" />
   </Target>
-
 </Project>

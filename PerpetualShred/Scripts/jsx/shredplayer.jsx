@@ -29,7 +29,7 @@ class Shredplayer extends React.Component {
         } 
     }
     render() {
-        if (jsModel.VideoService == "PinkBike") {
+        if (jsModel.VideoService === "PinkBike") {
             if (JSON.parse(jsModel.SourceList)[3] != null) {
                 return (
                     <div id="pbcontainer">
@@ -37,15 +37,8 @@ class Shredplayer extends React.Component {
                             url={
                                 JSON.parse(jsModel.SourceList)[3]
                             }
-                            onReady={() => console.log('onReady')}
                             onStart={() => this.loaded()}
-                            onPlay={() => console.log('onPlay')}
-                            onPause={() => console.log('onPause')}
-                            onBuffer={() => console.log('onBuffer')}
                             onEnded={() => this.reload()}
-                            onError={() => console.log('onError')}
-                            onProgress={() => console.log('onProgress')}
-                            onDuration={() => console.log('onDuration')}
                             playing={this.state.playing}
                             width=""
                             height=""
@@ -60,15 +53,8 @@ class Shredplayer extends React.Component {
                             url={
                                 JSON.parse(jsModel.SourceList)[2]
                             }
-                            onReady={() => console.log('onReady')}
                             onStart={() => this.loaded()}
-                            onPlay={() => console.log('onPlay')}
-                            onPause={() => console.log('onPause')}
-                            onBuffer={() => console.log('onBuffer')}
                             onEnded={() => this.reload()}
-                            onError={() => console.log('onError')}
-                            onProgress={() => console.log('onProgress')}
-                            onDuration={() => console.log('onDuration')}
                             playing={this.state.playing}
                             width=""
                             height=""
@@ -88,15 +74,8 @@ class Shredplayer extends React.Component {
                         playing={this.state.playing}
                         width='100%'
                         height='100%'
-                        onReady={() => console.log('onReady')}
                         onStart={() => this.loaded()}
-                        onPlay={() => console.log('onPlay')}
-                        onPause={() => console.log('onPause')}
-                        onBuffer={() => console.log('onBuffer')}
                         onEnded={() => this.reload()}
-                        onError={() => console.log('onError')}
-                        onProgress={() => console.log('onProgress')}
-                        onDuration={() => console.log('onDuration')}
                         playing={this.state.playing}
                         
                     />

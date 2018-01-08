@@ -8,8 +8,8 @@ import ShredNavButton from './shrednavbutton.jsx';
 import ShredNavOverlay from './shrednavoverlay.jsx';
 // Import 'all vids' page
 import ShredVidList from './shredvidlist.jsx';
-// Import Gamepad stuffs
-import ShredGamepad from './shredgamepad.jsx';
+// Import Gamepad support component
+import Gamepad from 'react-gamepad';
 
 class ShredUI extends Component {
     constructor(props, context) {
@@ -38,6 +38,15 @@ class ShredUI extends Component {
         // Discover Radness prop bind
         this.discoverRadness = this.discoverRadness.bind(this);
         
+    }
+    
+    //Gamepad functionality
+    connectHandler(gamepadIndex) {
+        console.log(`Gamepad ${gamepadIndex} connected !`)
+    }
+
+    disconnectHandler(gamepadIndex) {
+        console.log(`Gamepad ${gamepadIndex} disconnected !`)
     }
 
     // Sidebar functions
@@ -121,30 +130,30 @@ class ShredUI extends Component {
 
 
     render() {
-        return (
+        return <Gamepad
+            onConnect={this.connectHandler}
+            onDisconnect={this.disconnectHandler}
+            onRB={this.toggleSidebar}
+            onLB={this.toggleNavOverlay}
+            onLT={this.toggleAllVids}
+            onBack={this.discoverRadness}
+            >
             <div>
                 <ShredsidebarButton handleMouseDown={this.sidebarMouseDown}
-                    menuVisibility={this.state.sidebarVisible} />
+                                    menuVisibility={this.state.sidebarVisible}/>
                 <Shredsidebar handleMouseDown={this.sidebarMouseDown}
-                    menuVisibility={this.state.sidebarVisible} />
+                              menuVisibility={this.state.sidebarVisible}/>
 
                 <ShredNavButton handleMouseDown={this.navOverlayMouseDown}
-                    menuVisibility={this.state.navOverlayVisible} />
+                                menuVisibility={this.state.navOverlayVisible}/>
                 <ShredNavOverlay handleMouseDown={this.navOverlayMouseDown}
-                    menuVisibility={this.state.navOverlayVisible}
-                    allVidsMouseDown={this.allVidsMouseDown} discoverRadness={this.discoverRadness} />
+                                 menuVisibility={this.state.navOverlayVisible}
+                                 allVidsMouseDown={this.allVidsMouseDown} discoverRadness={this.discoverRadness}/>
 
                 <ShredVidList handleMouseDown={this.allVidsMouseDown}
-                    menuVisibility={this.state.allVidsVisible} />
-                <ShredGamepad
-                    onConnect={this.connectHandler}
-                    onDisconnect={this.disconnectHandler}
-
-                    onButtonChange={this.buttonChangeHandler}
-                    onAxisChange={this.axisChangeHandler}
-                />
+                              menuVisibility={this.state.allVidsVisible}/>
             </div>
-        );
+        </Gamepad>;
     }
 }
 

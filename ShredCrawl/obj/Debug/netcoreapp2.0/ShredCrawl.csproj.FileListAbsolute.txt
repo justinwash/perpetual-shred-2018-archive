@@ -45,3 +45,5 @@ C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredC
 C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.AssemblyInfo.cs
 C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.dll
 C:\Users\_afterparty\Documents\Visual Studio 2017\Projects\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.pdb
+E:\Dropbox\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.Properties.Resources.resources
+E:\Dropbox\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.csproj.GenerateResource.Cache
