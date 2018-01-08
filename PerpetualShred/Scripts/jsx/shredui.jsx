@@ -1,13 +1,15 @@
 ﻿import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 // Import sidebar components
-import ShredsidebarButton from './shredsidebarbutton.jsx'
-import Shredsidebar from './shredsidebar.jsx'
+import ShredsidebarButton from './shredsidebarbutton.jsx';
+import Shredsidebar from './shredsidebar.jsx';
 // Import nav overlay components
-import ShredNavButton from './shrednavbutton.jsx'
-import ShredNavOverlay from './shrednavoverlay.jsx'
+import ShredNavButton from './shrednavbutton.jsx';
+import ShredNavOverlay from './shrednavoverlay.jsx';
 // Import 'all vids' page
-import ShredVidList from './shredvidlist.jsx'
+import ShredVidList from './shredvidlist.jsx';
+// Import Gamepad stuffs
+import ShredGamepad from './shredgamepad.jsx';
 
 class ShredUI extends Component {
     constructor(props, context) {
@@ -35,6 +37,7 @@ class ShredUI extends Component {
 
         // Discover Radness prop bind
         this.discoverRadness = this.discoverRadness.bind(this);
+        
     }
 
     // Sidebar functions
@@ -113,7 +116,7 @@ class ShredUI extends Component {
     }
 
     discoverRadness() {
-        window.location.replace("http://perpetualshred20180102115742.azurewebsites.net/")
+        window.location.replace("http://perpetualshred20180102115742.azurewebsites.net/");
     }
 
 
@@ -133,6 +136,13 @@ class ShredUI extends Component {
 
                 <ShredVidList handleMouseDown={this.allVidsMouseDown}
                     menuVisibility={this.state.allVidsVisible} />
+                <ShredGamepad
+                    onConnect={this.connectHandler}
+                    onDisconnect={this.disconnectHandler}
+
+                    onButtonChange={this.buttonChangeHandler}
+                    onAxisChange={this.axisChangeHandler}
+                />
             </div>
         );
     }

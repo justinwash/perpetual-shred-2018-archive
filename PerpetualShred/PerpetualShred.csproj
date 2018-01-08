@@ -11,8 +11,6 @@
 
   <ItemGroup>
     <Content Include="Scripts\main.js" />
-    <Content Include="Scripts\shredplayer.jsx" />
-    <Content Include="Scripts\shredsidebarcontainer.jsx" />
   </ItemGroup>
 
   <ItemGroup>
