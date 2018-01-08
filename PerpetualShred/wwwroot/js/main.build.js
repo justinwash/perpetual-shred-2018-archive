@@ -770,11 +770,11 @@ exports.getSDK = getSDK;
 exports.getConfig = getConfig;
 exports.omit = omit;
 
-var _loadScript = __webpack_require__(388);
+var _loadScript = __webpack_require__(387);
 
 var _loadScript2 = _interopRequireDefault(_loadScript);
 
-var _deepmerge = __webpack_require__(389);
+var _deepmerge = __webpack_require__(388);
 
 var _deepmerge2 = _interopRequireDefault(_deepmerge);
 
@@ -4221,7 +4221,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DEPRECATED_CONFIG_PROPS = exports.defaultProps = exports.propTypes = undefined;
 
-var _propTypes = __webpack_require__(385);
+var _propTypes = __webpack_require__(384);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -5655,7 +5655,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.XBOX = undefined;
 
-var _XBOX = __webpack_require__(382);
+var _XBOX = __webpack_require__(381);
 
 var _XBOX2 = _interopRequireDefault(_XBOX);
 
@@ -11308,7 +11308,7 @@ var _shredui = __webpack_require__(362);
 
 var _shredui2 = _interopRequireDefault(_shredui);
 
-var _shredplayer = __webpack_require__(383);
+var _shredplayer = __webpack_require__(382);
 
 var _shredplayer2 = _interopRequireDefault(_shredplayer);
 
@@ -28594,9 +28594,9 @@ var _shredvidlist = __webpack_require__(376);
 
 var _shredvidlist2 = _interopRequireDefault(_shredvidlist);
 
-var _shredgamepad = __webpack_require__(379);
+var _reactGamepad = __webpack_require__(379);
 
-var _shredgamepad2 = _interopRequireDefault(_shredgamepad);
+var _reactGamepad2 = _interopRequireDefault(_reactGamepad);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28611,7 +28611,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 // Import 'all vids' page
 
-// Import Gamepad stuffs
+// Import Gamepad support component
 
 
 var ShredUI = function (_Component) {
@@ -28648,10 +28648,23 @@ var ShredUI = function (_Component) {
         return _this;
     }
 
-    // Sidebar functions
+    //Gamepad functionality
 
 
     _createClass(ShredUI, [{
+        key: 'connectHandler',
+        value: function connectHandler(gamepadIndex) {
+            console.log('Gamepad ' + gamepadIndex + ' connected !');
+        }
+    }, {
+        key: 'disconnectHandler',
+        value: function disconnectHandler(gamepadIndex) {
+            console.log('Gamepad ' + gamepadIndex + ' disconnected !');
+        }
+
+        // Sidebar functions
+
+    }, {
         key: 'sidebarMouseDown',
         value: function sidebarMouseDown(e) {
             this.toggleSidebar();
@@ -28740,26 +28753,30 @@ var ShredUI = function (_Component) {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(_shredsidebarbutton2.default, { handleMouseDown: this.sidebarMouseDown,
-                    menuVisibility: this.state.sidebarVisible }),
-                _react2.default.createElement(_shredsidebar2.default, { handleMouseDown: this.sidebarMouseDown,
-                    menuVisibility: this.state.sidebarVisible }),
-                _react2.default.createElement(_shrednavbutton2.default, { handleMouseDown: this.navOverlayMouseDown,
-                    menuVisibility: this.state.navOverlayVisible }),
-                _react2.default.createElement(_shrednavoverlay2.default, { handleMouseDown: this.navOverlayMouseDown,
-                    menuVisibility: this.state.navOverlayVisible,
-                    allVidsMouseDown: this.allVidsMouseDown, discoverRadness: this.discoverRadness }),
-                _react2.default.createElement(_shredvidlist2.default, { handleMouseDown: this.allVidsMouseDown,
-                    menuVisibility: this.state.allVidsVisible }),
-                _react2.default.createElement(_shredgamepad2.default, {
+                _reactGamepad2.default,
+                {
                     onConnect: this.connectHandler,
                     onDisconnect: this.disconnectHandler,
-
-                    onButtonChange: this.buttonChangeHandler,
-                    onAxisChange: this.axisChangeHandler
-                })
+                    onRB: this.toggleSidebar,
+                    onLB: this.toggleNavOverlay,
+                    onLT: this.toggleAllVids,
+                    onBack: this.discoverRadness
+                },
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(_shredsidebarbutton2.default, { handleMouseDown: this.sidebarMouseDown,
+                        menuVisibility: this.state.sidebarVisible }),
+                    _react2.default.createElement(_shredsidebar2.default, { handleMouseDown: this.sidebarMouseDown,
+                        menuVisibility: this.state.sidebarVisible }),
+                    _react2.default.createElement(_shrednavbutton2.default, { handleMouseDown: this.navOverlayMouseDown,
+                        menuVisibility: this.state.navOverlayVisible }),
+                    _react2.default.createElement(_shrednavoverlay2.default, { handleMouseDown: this.navOverlayMouseDown,
+                        menuVisibility: this.state.navOverlayVisible,
+                        allVidsMouseDown: this.allVidsMouseDown, discoverRadness: this.discoverRadness }),
+                    _react2.default.createElement(_shredvidlist2.default, { handleMouseDown: this.allVidsMouseDown,
+                        menuVisibility: this.state.allVidsVisible })
+                )
             );
         }
     }]);
@@ -29470,97 +29487,11 @@ exports.push([module.i, "#shredvidlist {\r\n    width: 100vw;\r\n    height: 100
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(6);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactGamepad = __webpack_require__(380);
-
-var _reactGamepad2 = _interopRequireDefault(_reactGamepad);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ShredGamepad = function (_Component) {
-    _inherits(ShredGamepad, _Component);
-
-    function ShredGamepad() {
-        _classCallCheck(this, ShredGamepad);
-
-        return _possibleConstructorReturn(this, (ShredGamepad.__proto__ || Object.getPrototypeOf(ShredGamepad)).apply(this, arguments));
-    }
-
-    _createClass(ShredGamepad, [{
-        key: 'connectHandler',
-        value: function connectHandler(gamepadIndex) {
-            console.log('Gamepad ' + gamepadIndex + ' connected !');
-        }
-    }, {
-        key: 'disconnectHandler',
-        value: function disconnectHandler(gamepadIndex) {
-            console.log('Gamepad ' + gamepadIndex + ' disconnected !');
-        }
-    }, {
-        key: 'buttonChangeHandler',
-        value: function buttonChangeHandler(buttonName, down) {
-            console.log(buttonName, down);
-        }
-    }, {
-        key: 'axisChangeHandler',
-        value: function axisChangeHandler(axisName, value, previousValue) {
-            console.log(axisName, value);
-        }
-    }, {
-        key: 'buttonDownHandler',
-        value: function buttonDownHandler(buttonName) {
-            console.log(buttonName, 'down');
-        }
-    }, {
-        key: 'buttonUpHandler',
-        value: function buttonUpHandler(buttonName) {
-            console.log(buttonName, 'up');
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(_reactGamepad2.default, {
-                onConnect: this.connectHandler,
-                onDisconnect: this.disconnectHandler,
-
-                onButtonChange: this.buttonChangeHandler,
-                onAxisChange: this.axisChangeHandler
-            });
-        }
-    }]);
-
-    return ShredGamepad;
-}(_react.Component);
-
-exports.default = ShredGamepad;
-
-/***/ }),
-/* 380 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.layouts = exports.Gamepad = undefined;
 
-var _Gamepad = __webpack_require__(381);
+var _Gamepad = __webpack_require__(380);
 
 var _Gamepad2 = _interopRequireDefault(_Gamepad);
 
@@ -29577,7 +29508,7 @@ exports.layouts = _layouts2.default;
 exports.default = _Gamepad2.default;
 
 /***/ }),
-/* 381 */
+/* 380 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29706,7 +29637,7 @@ var Gamepad = function (_React$Component) {
     key: 'updateButton',
     value: function updateButton(buttonName, pressed) {
       if (this.padState.buttons[buttonName] === undefined) {
-        console.error('Unknown button ' + buttonName);
+        // console.error('Unknown button ' + buttonName);
       } else if (this.padState.buttons[buttonName] !== pressed) {
         this.padState.buttons[buttonName] = pressed;
 
@@ -29853,7 +29784,7 @@ Gamepad.defaultProps = {
 exports.default = Gamepad;
 
 /***/ }),
-/* 382 */
+/* 381 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29869,7 +29800,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 383 */
+/* 382 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29885,7 +29816,7 @@ var _reactDom = __webpack_require__(101);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactPlayer = __webpack_require__(384);
+var _reactPlayer = __webpack_require__(383);
 
 var _reactPlayer2 = _interopRequireDefault(_reactPlayer);
 
@@ -29899,7 +29830,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__(399);
+__webpack_require__(398);
 
 var _loaded = false;
 
@@ -29942,39 +29873,18 @@ var Shredplayer = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            if (jsModel.VideoService == "PinkBike") {
+            if (jsModel.VideoService === "PinkBike") {
                 if (JSON.parse(jsModel.SourceList)[3] != null) {
                     return _react2.default.createElement(
                         'div',
                         { id: 'pbcontainer' },
                         _react2.default.createElement(_reactPlayer2.default, { ref: 'player',
                             url: JSON.parse(jsModel.SourceList)[3],
-                            onReady: function onReady() {
-                                return console.log('onReady');
-                            },
                             onStart: function onStart() {
                                 return _this2.loaded();
                             },
-                            onPlay: function onPlay() {
-                                return console.log('onPlay');
-                            },
-                            onPause: function onPause() {
-                                return console.log('onPause');
-                            },
-                            onBuffer: function onBuffer() {
-                                return console.log('onBuffer');
-                            },
                             onEnded: function onEnded() {
                                 return _this2.reload();
-                            },
-                            onError: function onError() {
-                                return console.log('onError');
-                            },
-                            onProgress: function onProgress() {
-                                return console.log('onProgress');
-                            },
-                            onDuration: function onDuration() {
-                                return console.log('onDuration');
                             },
                             playing: this.state.playing,
                             width: '',
@@ -29987,32 +29897,11 @@ var Shredplayer = function (_React$Component) {
                         { id: 'pbcontainer' },
                         _react2.default.createElement(_reactPlayer2.default, { ref: 'player',
                             url: JSON.parse(jsModel.SourceList)[2],
-                            onReady: function onReady() {
-                                return console.log('onReady');
-                            },
                             onStart: function onStart() {
                                 return _this2.loaded();
                             },
-                            onPlay: function onPlay() {
-                                return console.log('onPlay');
-                            },
-                            onPause: function onPause() {
-                                return console.log('onPause');
-                            },
-                            onBuffer: function onBuffer() {
-                                return console.log('onBuffer');
-                            },
                             onEnded: function onEnded() {
                                 return _this2.reload();
-                            },
-                            onError: function onError() {
-                                return console.log('onError');
-                            },
-                            onProgress: function onProgress() {
-                                return console.log('onProgress');
-                            },
-                            onDuration: function onDuration() {
-                                return console.log('onDuration');
                             },
                             playing: this.state.playing,
                             width: '',
@@ -30029,32 +29918,11 @@ var Shredplayer = function (_React$Component) {
                         playing: this.state.playing,
                         width: '100%',
                         height: '100%',
-                        onReady: function onReady() {
-                            return console.log('onReady');
-                        },
                         onStart: function onStart() {
                             return _this2.loaded();
                         },
-                        onPlay: function onPlay() {
-                            return console.log('onPlay');
-                        },
-                        onPause: function onPause() {
-                            return console.log('onPause');
-                        },
-                        onBuffer: function onBuffer() {
-                            return console.log('onBuffer');
-                        },
                         onEnded: function onEnded() {
                             return _this2.reload();
-                        },
-                        onError: function onError() {
-                            return console.log('onError');
-                        },
-                        onProgress: function onProgress() {
-                            return console.log('onProgress');
-                        },
-                        onDuration: function onDuration() {
-                            return console.log('onDuration');
                         }
                     }, 'playing', this.state.playing))
                 );
@@ -30068,7 +29936,7 @@ var Shredplayer = function (_React$Component) {
 _reactDom2.default.render(_react2.default.createElement(Shredplayer, null), document.getElementById('shredplayer'));
 
 /***/ }),
-/* 384 */
+/* 383 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30090,19 +29958,19 @@ var _props2 = __webpack_require__(104);
 
 var _utils = __webpack_require__(29);
 
-var _YouTube = __webpack_require__(390);
+var _YouTube = __webpack_require__(389);
 
 var _YouTube2 = _interopRequireDefault(_YouTube);
 
-var _SoundCloud = __webpack_require__(391);
+var _SoundCloud = __webpack_require__(390);
 
 var _SoundCloud2 = _interopRequireDefault(_SoundCloud);
 
-var _Vimeo = __webpack_require__(392);
+var _Vimeo = __webpack_require__(391);
 
 var _Vimeo2 = _interopRequireDefault(_Vimeo);
 
-var _Facebook = __webpack_require__(393);
+var _Facebook = __webpack_require__(392);
 
 var _Facebook2 = _interopRequireDefault(_Facebook);
 
@@ -30110,23 +29978,23 @@ var _FilePlayer = __webpack_require__(147);
 
 var _FilePlayer2 = _interopRequireDefault(_FilePlayer);
 
-var _Streamable = __webpack_require__(394);
+var _Streamable = __webpack_require__(393);
 
 var _Streamable2 = _interopRequireDefault(_Streamable);
 
-var _Vidme = __webpack_require__(395);
+var _Vidme = __webpack_require__(394);
 
 var _Vidme2 = _interopRequireDefault(_Vidme);
 
-var _Wistia = __webpack_require__(396);
+var _Wistia = __webpack_require__(395);
 
 var _Wistia2 = _interopRequireDefault(_Wistia);
 
-var _DailyMotion = __webpack_require__(397);
+var _DailyMotion = __webpack_require__(396);
 
 var _DailyMotion2 = _interopRequireDefault(_DailyMotion);
 
-var _Twitch = __webpack_require__(398);
+var _Twitch = __webpack_require__(397);
 
 var _Twitch2 = _interopRequireDefault(_Twitch);
 
@@ -30339,7 +30207,7 @@ ReactPlayer.canPlay = function (url) {
 exports['default'] = ReactPlayer;
 
 /***/ }),
-/* 385 */
+/* 384 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/**
@@ -30364,17 +30232,17 @@ if (process.env.NODE_ENV !== 'production') {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(386)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(385)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(387)();
+  module.exports = __webpack_require__(386)();
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22)))
 
 /***/ }),
-/* 386 */
+/* 385 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30924,7 +30792,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22)))
 
 /***/ }),
-/* 387 */
+/* 386 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30989,7 +30857,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 388 */
+/* 387 */
 /***/ (function(module, exports) {
 
 
@@ -31060,7 +30928,7 @@ function ieOnEnd (script, cb) {
 
 
 /***/ }),
-/* 389 */
+/* 388 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31157,7 +31025,7 @@ var deepmerge_1 = deepmerge;
 
 
 /***/ }),
-/* 390 */
+/* 389 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31378,7 +31246,7 @@ YouTube.displayName = 'YouTube';
 exports['default'] = YouTube;
 
 /***/ }),
-/* 391 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31564,7 +31432,7 @@ SoundCloud.displayName = 'SoundCloud';
 exports['default'] = SoundCloud;
 
 /***/ }),
-/* 392 */
+/* 391 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31754,7 +31622,7 @@ Vimeo.displayName = 'Vimeo';
 exports['default'] = Vimeo;
 
 /***/ }),
-/* 393 */
+/* 392 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31923,7 +31791,7 @@ Facebook.displayName = 'Facebook';
 exports['default'] = Facebook;
 
 /***/ }),
-/* 394 */
+/* 393 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32084,7 +31952,7 @@ Streamable.displayName = 'Streamable';
 exports['default'] = Streamable;
 
 /***/ }),
-/* 395 */
+/* 394 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32185,7 +32053,7 @@ Vidme.displayName = 'Vidme';
 exports['default'] = Vidme;
 
 /***/ }),
-/* 396 */
+/* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32342,7 +32210,7 @@ Wistia.displayName = 'Wistia';
 exports['default'] = Wistia;
 
 /***/ }),
-/* 397 */
+/* 396 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32563,7 +32431,7 @@ DailyMotion.displayName = 'DailyMotion';
 exports['default'] = DailyMotion;
 
 /***/ }),
-/* 398 */
+/* 397 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32735,13 +32603,13 @@ Twitch.displayName = 'Twitch';
 exports['default'] = Twitch;
 
 /***/ }),
-/* 399 */
+/* 398 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(400);
+var content = __webpack_require__(399);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -32766,7 +32634,7 @@ if(false) {
 }
 
 /***/ }),
-/* 400 */
+/* 399 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(51)(undefined);
