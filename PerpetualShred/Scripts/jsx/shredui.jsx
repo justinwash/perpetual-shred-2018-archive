@@ -125,7 +125,7 @@ class ShredUI extends Component {
     }
 
     discoverRadness() {
-        window.location.replace("http://perpetualshred20180102115742.azurewebsites.net/");
+        window.location.replace("http://www.perpetualshred.com/");
     }
 
 
