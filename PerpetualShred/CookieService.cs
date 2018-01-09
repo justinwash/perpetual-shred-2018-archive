@@ -21,13 +21,12 @@ namespace PerpetualShred
 
         public void RemoveVideoFromUnwatched(int? id)
         {
-            var cookieDelimiter = ";";
+            const string cookieDelimiter = ";";
 
-            var unwatchedCookieName = "randomVideoUnwatched";
+            const string unwatchedCookieName = "randomVideoUnwatched";
             var unwatchedCookieValue = id + cookieDelimiter;
 
-            var cookieOptions = new CookieOptions();
-            cookieOptions.Expires = DateTime.Now.AddDays(7);
+            var cookieOptions = new CookieOptions {Expires = DateTime.Now.AddDays(7)};
 
             var httpContext = _httpContextAccessor.HttpContext;
             if (httpContext.Request.Cookies[unwatchedCookieName] is null)
@@ -40,7 +39,7 @@ namespace PerpetualShred
                 var oldUnwtachedCookie = httpContext.Request.Cookies[unwatchedCookieName];
                 var unwatchedList = oldUnwtachedCookie.Split(cookieDelimiter).ToList();
                 unwatchedList.Remove(id.ToString());
-                unwatchedCookieValue = String.Join(';', unwatchedList);
+                unwatchedCookieValue = string.Join(';', unwatchedList);
 
                 httpContext.Response.Cookies.Append(unwatchedCookieName, unwatchedCookieValue, cookieOptions);
             }
