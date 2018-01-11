@@ -2,6 +2,7 @@
 import ReactDOM from 'react-dom'
 import ReactPlayer from 'react-player'
 require("!style-loader!css-loader!../css/shredplayer.css");
+require("!style-loader!css-loader!../css/mobile/shredplayer_mobile.css");
 
 var loaded = false;
 

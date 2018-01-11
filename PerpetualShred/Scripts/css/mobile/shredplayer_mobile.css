@@ -1,0 +1,28 @@
+@media only screen and (max-device-width: 480px) {
+    .video-background iframe{
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 34vh;
+        background-color: black;
+    }
+
+    .video-background [id="pbcontainer"] video {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 34vh;
+        background-color: black;
+    }
+
+    .video-background [data-vimeo-initialized="true"] iframe {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 34vh;
+        background-color: black;
+    }
+}

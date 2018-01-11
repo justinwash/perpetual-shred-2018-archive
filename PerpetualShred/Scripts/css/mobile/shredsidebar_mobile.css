@@ -1,0 +1,81 @@
+@media only screen and (max-device-width: 480px){
+    #flyoutMenu {
+        width: 100vw;
+        height: 66vh;
+    }
+
+    #flyoutMenu.show {
+        transform: translate3d(0, 60vw, 0);
+        overflow: scroll;
+    }
+
+    #flyoutMenu.hide {
+        transform: translate3d(0, 60vw, 0);
+        overflow: scroll;
+    }
+
+    #flyoutMenuBackground {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #flyoutMenuBackground.show {
+        transform: translate3d(0, 60vw, 0);
+        overflow: hidden;
+    }
+
+    #flyoutMenuBackground.hide {
+        transform: translate3d(0, 60vw, 0);
+        overflow: hidden;
+    }
+
+    #vidtitle {
+        font-family: serif;
+        font-weight: 500;
+        font-size: 36px;
+        padding-top: 5%;
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-bottom: 5%;
+        letter-spacing: -0.3px;
+        text-align: left;
+        text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    }
+
+    #descriptionheader {
+        padding-left: 10%;
+        padding-right: 10%;
+        font-family: PTMono;
+        font-size: 10px;
+        font-weight: bold;
+        letter-spacing: 4px;
+        text-align: left;
+        text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    }
+
+    #vidsynopsis {
+        padding-top: 5%;
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-bottom: 5%;
+        font-family: PTMono;
+        font-size: 16px;
+        line-height: 1.33;
+        letter-spacing: -0.4px;
+        text-align: left;
+        text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    }
+    #vidoriginlink {
+        padding-top: 5%;
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-bottom: 5%;
+        font-family: PTMono;
+        font-size: 16px;
+        line-height: 1.33;
+        letter-spacing: -0.4px;
+        text-align: left;
+        text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+
+    }
+}

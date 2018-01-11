@@ -57,11 +57,7 @@ namespace ShredCrawl
 
                 var input = vimeoMatches.Value;
 
-<<<<<<< HEAD
-                var vmId = input.Substring(23, input.Length == 32 ? 9 : 8);
-=======
                 var vmId = input.Substring(23, input.Length - 23);
->>>>>>> origin/master
 
                 Console.WriteLine(@"Vimeo match: " + input);
 
