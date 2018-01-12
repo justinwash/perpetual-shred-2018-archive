@@ -98,26 +98,27 @@ $RECYCLE.BIN/
 *.userprefs
 
 # Build results
-/PerpetualShred/[Dd]ebug/
-/PerpetualShred/[Dd]ebugPublic/
-/PerpetualShred/[Rr]elease/
-/PerpetualShred/[Rr]eleases/
+/PerpetualShred/Debug/
+/PerpetualShred/DebugPublic/
+/PerpetualShred/Release/
+/PerpetualShred/Releases/
 /PerpetualShred/x64/
 /PerpetualShred/x86/
 /PerpetualShred/bld/
-/PerpetualShred/[Bb]in/
-/PerpetualShred/[Oo]bj/
-/PerpetualShred/[Ll]og/
-/ShredCrawl/[Dd]ebug/
-/ShredCrawl/[Dd]ebugPublic/
-/ShredCrawl/[Rr]elease/
-/ShredCrawl/[Rr]eleases/
+/PerpetualShred/bin/
+/PerpetualShred/obj/
+/PerpetualShred/log/
+/ShredCrawl/Debug/
+/ShredCrawl/DebugPublic/
+/ShredCrawl/Release/
+/ShredCrawl/Releases/
 /ShredCrawl/x64/
 /ShredCrawl/x86/
 /ShredCrawl/bld/
-/ShredCrawl/[Bb]in/
-/ShredCrawl/[Oo]bj/
-/ShredCrawl/[Ll]og/
+/ShredCrawl/bin/
+/ShredCrawl/obj/
+/ShredCrawl/log/
+/ShredCrawlEXE/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -392,3 +393,4 @@ Connection Strings.txt
 *.pdb
 *.cache
 PerpetualShred/obj/Debug/netcoreapp2.0/PerpetualShred.AssemblyInfo.cs
+ShredCrawlEXE/ShredCrawl.deps.json
