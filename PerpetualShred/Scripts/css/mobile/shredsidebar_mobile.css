@@ -1,7 +1,7 @@
 @media only screen and (max-device-width: 480px){
     #flyoutMenu {
         width: 100vw;
-        height: 66vh;
+        height: 100vh;
     }
 
     #flyoutMenu.show {
@@ -32,7 +32,7 @@
     #vidtitle {
         font-family: serif;
         font-weight: 500;
-        font-size: 36px;
+        font-size: 72px;
         padding-top: 5%;
         padding-left: 10%;
         padding-right: 10%;
@@ -59,7 +59,7 @@
         padding-right: 10%;
         padding-bottom: 5%;
         font-family: PTMono;
-        font-size: 16px;
+        font-size: 32px;
         line-height: 1.33;
         letter-spacing: -0.4px;
         text-align: left;
@@ -71,7 +71,7 @@
         padding-right: 10%;
         padding-bottom: 5%;
         font-family: PTMono;
-        font-size: 16px;
+        font-size: 10px;
         line-height: 1.33;
         letter-spacing: -0.4px;
         text-align: left;

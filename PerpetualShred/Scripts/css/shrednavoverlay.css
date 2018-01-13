@@ -1,6 +1,6 @@
 #shrednavoverlay {
     width: 100vw;
-    height: 120vw;
+    height: 100vh;
     background-color: transparent;
     position: fixed;
     top: 0;
@@ -11,7 +11,7 @@
 
 #shrednavoverlay-background {
     width: 100vw;
-    height: 120vw;
+    height: 100vh;
     background-color: rgba(16, 16, 16, 0.8);
     position: fixed;
     top: 0;
@@ -32,7 +32,7 @@
 }
 
 #shrednavoverlay-background.hide {
-    transform: translate3d(0, -120vw, 0);
+    transform: translate3d(0, -100vh, 0);
 }
 
 #shrednavoverlay-background.show {
@@ -41,7 +41,7 @@
 }
 
 #shrednavoverlay.hide {
-    transform: translate3d(0, -120vw, 0);
+    transform: translate3d(0, -100vh, 0);
 }
 
 #shrednavoverlay.show {
@@ -50,7 +50,7 @@
 }
 
 #shrednavoverlay-titlebar.hide {
-    transform: translate3d(0, -100vw, 0);
+    transform: translate3d(0, -100vh, 0);
 }
 
 #shrednavoverlay-titlebar.show {
@@ -61,7 +61,7 @@
 #navlink {
     font-family: serif;
     font-weight: 500;
-    font-size: 32px;
+    font-size: 64px;
     align-self: center;
     letter-spacing: -0.3px;
     text-align: center;

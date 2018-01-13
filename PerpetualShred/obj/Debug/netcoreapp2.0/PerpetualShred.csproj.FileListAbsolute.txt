@@ -9,3 +9,14 @@ E:\Dropbox\GitHub\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\Perpetua
 E:\Dropbox\GitHub\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.dll
 E:\Dropbox\GitHub\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.pdb
 E:\Dropbox\GitHub\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.csprojResolveAssemblyReference.cache
+C:\Projects\GitHub\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.dll
+C:\Projects\GitHub\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.pdb
+C:\Projects\GitHub\PerpetualShred\PerpetualShred\bin\Debug\netcoreapp2.0\PerpetualShred.deps.json
+C:\Projects\GitHub\PerpetualShred\PerpetualShred\bin\Debug\netcoreapp2.0\PerpetualShred.runtimeconfig.json
+C:\Projects\GitHub\PerpetualShred\PerpetualShred\bin\Debug\netcoreapp2.0\PerpetualShred.runtimeconfig.dev.json
+C:\Projects\GitHub\PerpetualShred\PerpetualShred\bin\Debug\netcoreapp2.0\PerpetualShred.dll
+C:\Projects\GitHub\PerpetualShred\PerpetualShred\bin\Debug\netcoreapp2.0\PerpetualShred.pdb
+C:\Projects\GitHub\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.csprojResolveAssemblyReference.cache
+C:\Projects\GitHub\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.csproj.CoreCompileInputs.cache
+C:\Projects\GitHub\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.AssemblyInfoInputs.cache
+C:\Projects\GitHub\PerpetualShred\PerpetualShred\obj\Debug\netcoreapp2.0\PerpetualShred.AssemblyInfo.cs

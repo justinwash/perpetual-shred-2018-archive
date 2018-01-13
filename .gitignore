@@ -394,3 +394,4 @@ Connection Strings.txt
 *.cache
 PerpetualShred/obj/Debug/netcoreapp2.0/PerpetualShred.AssemblyInfo.cs
 ShredCrawlEXE/ShredCrawl.deps.json
+PerpetualShred/bin/Debug/netcoreapp2.0/PerpetualShred.deps.json
