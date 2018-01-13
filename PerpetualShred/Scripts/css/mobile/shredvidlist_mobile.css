@@ -1,0 +1,42 @@
+@media only screen and (max-device-width: 480px) {
+    .vidlistcontainer {
+        display: flex;
+        flex-direction: column;
+        overflow: scroll;
+    }
+    
+    #shredvidlist-background.show {
+        transform: none;
+        position: relative;
+    }
+    
+    #shredvidlist-background {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(16, 16, 16, 0.5);
+        position: relative;
+        top: 0;
+        left: 0;
+        transition: transform .3s cubic-bezier(0, .52, 0, 1);
+        z-index: 14;
+    }
+    
+    #shredvidlist {
+        transform: none;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        top: auto;
+        height: 100%;
+    }
+    
+    #shredvidlist.show {
+        position: absolute;
+        transform: none;
+    }
+    
+    .vidPageContainer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

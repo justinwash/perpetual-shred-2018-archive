@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 require("!style-loader!css-loader!../css/shredvidlist.css");
+require("!style-loader!css-loader!../css/mobile/shredvidlist_mobile.css");
 
 class ShredVidList extends Component {
     render() {
@@ -16,7 +17,7 @@ class ShredVidList extends Component {
         }
         
         return (
-            <div>
+            <div className="vidlistcontainer">
                 <div id="shredvidlist-background" className={visibility} />
                 <div id="shredvidlist" className={visibility}>
                     <div dangerouslySetInnerHTML={{__html: htmlDecode(jsVidList) }} />

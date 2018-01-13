@@ -1,39 +1,49 @@
 @media only screen and (max-device-width: 480px){
-    #flyoutMenu {
-        width: 100vw;
-        height: 100vh;
+    .menucontainer {
+        display: flex;
     }
-
-    #flyoutMenu.show {
-        transform: translate3d(0, 60vw, 0);
-        overflow: scroll;
+    #flyoutMenu {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        top: auto;
+    }
+    
+    #flyoutMenu.show { 
+        transform: none;
+        overflow: hidden;
     }
 
     #flyoutMenu.hide {
-        transform: translate3d(0, 60vw, 0);
-        overflow: scroll;
+        display: none;
+        transform: none;
+        overflow: hidden;
+    }
+
+    #flyoutMenuBackground.show {
+        transform: none;
+        overflow: hidden;
+    }
+
+    #flyoutMenuBackground.hide {
+        display: none;
+        transform: none;
+        overflow: hidden;
     }
 
     #flyoutMenuBackground {
         width: 100vw;
         height: 100vh;
+        position: relative;
     }
 
-    #flyoutMenuBackground.show {
-        transform: translate3d(0, 60vw, 0);
-        overflow: hidden;
-    }
-
-    #flyoutMenuBackground.hide {
-        transform: translate3d(0, 60vw, 0);
-        overflow: hidden;
-    }
 
     #vidtitle {
         font-family: serif;
         font-weight: 500;
         font-size: 72px;
-        padding-top: 5%;
+        padding-top: 10%;
         padding-left: 10%;
         padding-right: 10%;
         padding-bottom: 5%;
@@ -46,7 +56,7 @@
         padding-left: 10%;
         padding-right: 10%;
         font-family: PTMono;
-        font-size: 10px;
+        font-size: 30px;
         font-weight: bold;
         letter-spacing: 4px;
         text-align: left;
@@ -59,7 +69,7 @@
         padding-right: 10%;
         padding-bottom: 5%;
         font-family: PTMono;
-        font-size: 32px;
+        font-size: 48px;
         line-height: 1.33;
         letter-spacing: -0.4px;
         text-align: left;
@@ -71,7 +81,7 @@
         padding-right: 10%;
         padding-bottom: 5%;
         font-family: PTMono;
-        font-size: 10px;
+        font-size: 36px;
         line-height: 1.33;
         letter-spacing: -0.4px;
         text-align: left;

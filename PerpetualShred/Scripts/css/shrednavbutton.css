@@ -39,4 +39,8 @@
         width: 120px;
         height: 120px;
     }
+
+    #shrednavbutton.dock {
+        transform: translate3d(-36px, -36px, 0);
+    }
 }

@@ -21,36 +21,5 @@
     top: 0%;
     left: 0%;
     width: 100%;
-    height: -100%;
     background-color: black;
 }
-
-@media (min-aspect-ratio: 16/9) {
-    .video-background iframe{
-      height: 300%;
-      top: -100%;
-    }
-    .video-background [data-vimeo-initialized="true"] iframe{
-        height: 300%;
-        top: -100%;
-      }
-    }
-    .video-background [id="pbcontainer"] video{
-        height: 120%;
-        top: -10%;
-      }
-  
-@media (max-aspect-ratio: 16/9) {
-    .video-background iframe {
-      width: 300%;
-      left: -100%;
-    }
-    .video-background [data-vimeo-initialized="true"] iframe {
-        width: 300%;
-        left: -100%;
-      }
-    }
-    .video-background [id="pbcontainer"] video {
-        width: 120%;
-        left: -10%;
-      }

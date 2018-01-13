@@ -83,23 +83,3 @@
     padding-right: 10%;
     padding-bottom: 5%;
 }
-
-@media (max-width: 1200px){
-    #flyoutMenu {
-        width: 50vw;
-    }
-
-    #flyoutMenu.show {
-        transform: translate3d(50vw, 0, 0);
-        overflow: scroll;
-    }
-
-    #flyoutMenuBackground {
-        width: 50vw;
-    }
-
-    #flyoutMenuBackground.show {
-        transform: translate3d(50vw, 0, 0);
-        overflow: hidden;
-    }
-}

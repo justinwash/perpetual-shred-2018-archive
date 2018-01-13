@@ -753,6 +753,460 @@ module.exports = function (TYPE, $create) {
 
 /***/ }),
 /* 29 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+
+var stylesInDom = {};
+
+var	memoize = function (fn) {
+	var memo;
+
+	return function () {
+		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+		return memo;
+	};
+};
+
+var isOldIE = memoize(function () {
+	// Test for IE <= 9 as proposed by Browserhacks
+	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+	// Tests for existence of standard globals is to allow style-loader
+	// to operate correctly into non-standard environments
+	// @see https://github.com/webpack-contrib/style-loader/issues/177
+	return window && document && document.all && !window.atob;
+});
+
+var getElement = (function (fn) {
+	var memo = {};
+
+	return function(selector) {
+		if (typeof memo[selector] === "undefined") {
+			var styleTarget = fn.call(this, selector);
+			// Special case to return head of iframe instead of iframe itself
+			if (styleTarget instanceof window.HTMLIFrameElement) {
+				try {
+					// This will throw an exception if access to iframe is blocked
+					// due to cross-origin restrictions
+					styleTarget = styleTarget.contentDocument.head;
+				} catch(e) {
+					styleTarget = null;
+				}
+			}
+			memo[selector] = styleTarget;
+		}
+		return memo[selector]
+	};
+})(function (target) {
+	return document.querySelector(target)
+});
+
+var singleton = null;
+var	singletonCounter = 0;
+var	stylesInsertedAtTop = [];
+
+var	fixUrls = __webpack_require__(366);
+
+module.exports = function(list, options) {
+	if (typeof DEBUG !== "undefined" && DEBUG) {
+		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+
+	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
+
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the <head> element
+	if (!options.insertInto) options.insertInto = "head";
+
+	// By default, add <style> tags to the bottom of the target
+	if (!options.insertAt) options.insertAt = "bottom";
+
+	var styles = listToStyles(list, options);
+
+	addStylesToDom(styles, options);
+
+	return function update (newList) {
+		var mayRemove = [];
+
+		for (var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+
+		if(newList) {
+			var newStyles = listToStyles(newList, options);
+			addStylesToDom(newStyles, options);
+		}
+
+		for (var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+
+			if(domStyle.refs === 0) {
+				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
+
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+};
+
+function addStylesToDom (styles, options) {
+	for (var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+
+		if(domStyle) {
+			domStyle.refs++;
+
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles (list, options) {
+	var styles = [];
+	var newStyles = {};
+
+	for (var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = options.base ? item[0] + options.base : item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+
+		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
+		else newStyles[id].parts.push(part);
+	}
+
+	return styles;
+}
+
+function insertStyleElement (options, style) {
+	var target = getElement(options.insertInto)
+
+	if (!target) {
+		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
+	}
+
+	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
+
+	if (options.insertAt === "top") {
+		if (!lastStyleElementInsertedAtTop) {
+			target.insertBefore(style, target.firstChild);
+		} else if (lastStyleElementInsertedAtTop.nextSibling) {
+			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			target.appendChild(style);
+		}
+		stylesInsertedAtTop.push(style);
+	} else if (options.insertAt === "bottom") {
+		target.appendChild(style);
+	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
+		var nextSibling = getElement(options.insertInto + " " + options.insertAt.before);
+		target.insertBefore(style, nextSibling);
+	} else {
+		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
+	}
+}
+
+function removeStyleElement (style) {
+	if (style.parentNode === null) return false;
+	style.parentNode.removeChild(style);
+
+	var idx = stylesInsertedAtTop.indexOf(style);
+	if(idx >= 0) {
+		stylesInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement (options) {
+	var style = document.createElement("style");
+
+	options.attrs.type = "text/css";
+
+	addAttrs(style, options.attrs);
+	insertStyleElement(options, style);
+
+	return style;
+}
+
+function createLinkElement (options) {
+	var link = document.createElement("link");
+
+	options.attrs.type = "text/css";
+	options.attrs.rel = "stylesheet";
+
+	addAttrs(link, options.attrs);
+	insertStyleElement(options, link);
+
+	return link;
+}
+
+function addAttrs (el, attrs) {
+	Object.keys(attrs).forEach(function (key) {
+		el.setAttribute(key, attrs[key]);
+	});
+}
+
+function addStyle (obj, options) {
+	var style, update, remove, result;
+
+	// If a transform function was defined, run it on the css
+	if (options.transform && obj.css) {
+	    result = options.transform(obj.css);
+
+	    if (result) {
+	    	// If transform returns a value, use that instead of the original css.
+	    	// This allows running runtime transformations on the css.
+	    	obj.css = result;
+	    } else {
+	    	// If the transform function returns a falsy value, don't add this css.
+	    	// This allows conditional loading of css
+	    	return function() {
+	    		// noop
+	    	};
+	    }
+	}
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+
+		style = singleton || (singleton = createStyleElement(options));
+
+		update = applyToSingletonTag.bind(null, style, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+
+	} else if (
+		obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function"
+	) {
+		style = createLinkElement(options);
+		update = updateLink.bind(null, style, options);
+		remove = function () {
+			removeStyleElement(style);
+
+			if(style.href) URL.revokeObjectURL(style.href);
+		};
+	} else {
+		style = createStyleElement(options);
+		update = applyToTag.bind(null, style);
+		remove = function () {
+			removeStyleElement(style);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle (newObj) {
+		if (newObj) {
+			if (
+				newObj.css === obj.css &&
+				newObj.media === obj.media &&
+				newObj.sourceMap === obj.sourceMap
+			) {
+				return;
+			}
+
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag (style, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (style.styleSheet) {
+		style.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = style.childNodes;
+
+		if (childNodes[index]) style.removeChild(childNodes[index]);
+
+		if (childNodes.length) {
+			style.insertBefore(cssNode, childNodes[index]);
+		} else {
+			style.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag (style, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		style.setAttribute("media", media)
+	}
+
+	if(style.styleSheet) {
+		style.styleSheet.cssText = css;
+	} else {
+		while(style.firstChild) {
+			style.removeChild(style.firstChild);
+		}
+
+		style.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink (link, options, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	/*
+		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
+		and there is no publicPath defined then lets turn convertToAbsoluteUrls
+		on by default.  Otherwise default to the convertToAbsoluteUrls option
+		directly
+	*/
+	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
+
+	if (options.convertToAbsoluteUrls || autoFixUrls) {
+		css = fixUrls(css);
+	}
+
+	if (sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = link.href;
+
+	link.href = URL.createObjectURL(blob);
+
+	if(oldSrc) URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ }),
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -770,11 +1224,11 @@ exports.getSDK = getSDK;
 exports.getConfig = getConfig;
 exports.omit = omit;
 
-var _loadScript = __webpack_require__(391);
+var _loadScript = __webpack_require__(393);
 
 var _loadScript2 = _interopRequireDefault(_loadScript);
 
-var _deepmerge = __webpack_require__(392);
+var _deepmerge = __webpack_require__(394);
 
 var _deepmerge2 = _interopRequireDefault(_deepmerge);
 
@@ -933,7 +1387,7 @@ function omit(object) {
 }
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1420,7 +1874,7 @@ if (__webpack_require__(7)) {
 
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Map = __webpack_require__(127);
@@ -1474,460 +1928,6 @@ module.exports = {
   key: toMetaKey,
   exp: exp
 };
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-
-var stylesInDom = {};
-
-var	memoize = function (fn) {
-	var memo;
-
-	return function () {
-		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-		return memo;
-	};
-};
-
-var isOldIE = memoize(function () {
-	// Test for IE <= 9 as proposed by Browserhacks
-	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-	// Tests for existence of standard globals is to allow style-loader
-	// to operate correctly into non-standard environments
-	// @see https://github.com/webpack-contrib/style-loader/issues/177
-	return window && document && document.all && !window.atob;
-});
-
-var getElement = (function (fn) {
-	var memo = {};
-
-	return function(selector) {
-		if (typeof memo[selector] === "undefined") {
-			var styleTarget = fn.call(this, selector);
-			// Special case to return head of iframe instead of iframe itself
-			if (styleTarget instanceof window.HTMLIFrameElement) {
-				try {
-					// This will throw an exception if access to iframe is blocked
-					// due to cross-origin restrictions
-					styleTarget = styleTarget.contentDocument.head;
-				} catch(e) {
-					styleTarget = null;
-				}
-			}
-			memo[selector] = styleTarget;
-		}
-		return memo[selector]
-	};
-})(function (target) {
-	return document.querySelector(target)
-});
-
-var singleton = null;
-var	singletonCounter = 0;
-var	stylesInsertedAtTop = [];
-
-var	fixUrls = __webpack_require__(366);
-
-module.exports = function(list, options) {
-	if (typeof DEBUG !== "undefined" && DEBUG) {
-		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-
-	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
-
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
-
-	// By default, add <style> tags to the <head> element
-	if (!options.insertInto) options.insertInto = "head";
-
-	// By default, add <style> tags to the bottom of the target
-	if (!options.insertAt) options.insertAt = "bottom";
-
-	var styles = listToStyles(list, options);
-
-	addStylesToDom(styles, options);
-
-	return function update (newList) {
-		var mayRemove = [];
-
-		for (var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-
-		if(newList) {
-			var newStyles = listToStyles(newList, options);
-			addStylesToDom(newStyles, options);
-		}
-
-		for (var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-
-			if(domStyle.refs === 0) {
-				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
-
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-};
-
-function addStylesToDom (styles, options) {
-	for (var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-
-		if(domStyle) {
-			domStyle.refs++;
-
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles (list, options) {
-	var styles = [];
-	var newStyles = {};
-
-	for (var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = options.base ? item[0] + options.base : item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-
-		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
-		else newStyles[id].parts.push(part);
-	}
-
-	return styles;
-}
-
-function insertStyleElement (options, style) {
-	var target = getElement(options.insertInto)
-
-	if (!target) {
-		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
-	}
-
-	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
-
-	if (options.insertAt === "top") {
-		if (!lastStyleElementInsertedAtTop) {
-			target.insertBefore(style, target.firstChild);
-		} else if (lastStyleElementInsertedAtTop.nextSibling) {
-			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			target.appendChild(style);
-		}
-		stylesInsertedAtTop.push(style);
-	} else if (options.insertAt === "bottom") {
-		target.appendChild(style);
-	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
-		var nextSibling = getElement(options.insertInto + " " + options.insertAt.before);
-		target.insertBefore(style, nextSibling);
-	} else {
-		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
-	}
-}
-
-function removeStyleElement (style) {
-	if (style.parentNode === null) return false;
-	style.parentNode.removeChild(style);
-
-	var idx = stylesInsertedAtTop.indexOf(style);
-	if(idx >= 0) {
-		stylesInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement (options) {
-	var style = document.createElement("style");
-
-	options.attrs.type = "text/css";
-
-	addAttrs(style, options.attrs);
-	insertStyleElement(options, style);
-
-	return style;
-}
-
-function createLinkElement (options) {
-	var link = document.createElement("link");
-
-	options.attrs.type = "text/css";
-	options.attrs.rel = "stylesheet";
-
-	addAttrs(link, options.attrs);
-	insertStyleElement(options, link);
-
-	return link;
-}
-
-function addAttrs (el, attrs) {
-	Object.keys(attrs).forEach(function (key) {
-		el.setAttribute(key, attrs[key]);
-	});
-}
-
-function addStyle (obj, options) {
-	var style, update, remove, result;
-
-	// If a transform function was defined, run it on the css
-	if (options.transform && obj.css) {
-	    result = options.transform(obj.css);
-
-	    if (result) {
-	    	// If transform returns a value, use that instead of the original css.
-	    	// This allows running runtime transformations on the css.
-	    	obj.css = result;
-	    } else {
-	    	// If the transform function returns a falsy value, don't add this css.
-	    	// This allows conditional loading of css
-	    	return function() {
-	    		// noop
-	    	};
-	    }
-	}
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-
-		style = singleton || (singleton = createStyleElement(options));
-
-		update = applyToSingletonTag.bind(null, style, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
-
-	} else if (
-		obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function"
-	) {
-		style = createLinkElement(options);
-		update = updateLink.bind(null, style, options);
-		remove = function () {
-			removeStyleElement(style);
-
-			if(style.href) URL.revokeObjectURL(style.href);
-		};
-	} else {
-		style = createStyleElement(options);
-		update = applyToTag.bind(null, style);
-		remove = function () {
-			removeStyleElement(style);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle (newObj) {
-		if (newObj) {
-			if (
-				newObj.css === obj.css &&
-				newObj.media === obj.media &&
-				newObj.sourceMap === obj.sourceMap
-			) {
-				return;
-			}
-
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag (style, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (style.styleSheet) {
-		style.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = style.childNodes;
-
-		if (childNodes[index]) style.removeChild(childNodes[index]);
-
-		if (childNodes.length) {
-			style.insertBefore(cssNode, childNodes[index]);
-		} else {
-			style.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag (style, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		style.setAttribute("media", media)
-	}
-
-	if(style.styleSheet) {
-		style.styleSheet.cssText = css;
-	} else {
-		while(style.firstChild) {
-			style.removeChild(style.firstChild);
-		}
-
-		style.appendChild(document.createTextNode(css));
-	}
-}
-
-function updateLink (link, options, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
-
-	/*
-		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
-		and there is no publicPath defined then lets turn convertToAbsoluteUrls
-		on by default.  Otherwise default to the convertToAbsoluteUrls option
-		directly
-	*/
-	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
-
-	if (options.convertToAbsoluteUrls || autoFixUrls) {
-		css = fixUrls(css);
-	}
-
-	if (sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = link.href;
-
-	link.href = URL.createObjectURL(blob);
-
-	if(oldSrc) URL.revokeObjectURL(oldSrc);
-}
 
 
 /***/ }),
@@ -4221,7 +4221,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DEPRECATED_CONFIG_PROPS = exports.defaultProps = exports.propTypes = undefined;
 
-var _propTypes = __webpack_require__(388);
+var _propTypes = __webpack_require__(390);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -5655,7 +5655,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.XBOX = undefined;
 
-var _XBOX = __webpack_require__(385);
+var _XBOX = __webpack_require__(387);
 
 var _XBOX2 = _interopRequireDefault(_XBOX);
 
@@ -5691,7 +5691,7 @@ var _Base2 = __webpack_require__(34);
 
 var _Base3 = _interopRequireDefault(_Base2);
 
-var _utils = __webpack_require__(29);
+var _utils = __webpack_require__(31);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -8886,7 +8886,7 @@ $export($export.G + $export.W + $export.F * !__webpack_require__(68).ABV, {
 /* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(30)('Int8', 1, function (init) {
+__webpack_require__(32)('Int8', 1, function (init) {
   return function Int8Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8897,7 +8897,7 @@ __webpack_require__(30)('Int8', 1, function (init) {
 /* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(30)('Uint8', 1, function (init) {
+__webpack_require__(32)('Uint8', 1, function (init) {
   return function Uint8Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8908,7 +8908,7 @@ __webpack_require__(30)('Uint8', 1, function (init) {
 /* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(30)('Uint8', 1, function (init) {
+__webpack_require__(32)('Uint8', 1, function (init) {
   return function Uint8ClampedArray(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8919,7 +8919,7 @@ __webpack_require__(30)('Uint8', 1, function (init) {
 /* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(30)('Int16', 2, function (init) {
+__webpack_require__(32)('Int16', 2, function (init) {
   return function Int16Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8930,7 +8930,7 @@ __webpack_require__(30)('Int16', 2, function (init) {
 /* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(30)('Uint16', 2, function (init) {
+__webpack_require__(32)('Uint16', 2, function (init) {
   return function Uint16Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8941,7 +8941,7 @@ __webpack_require__(30)('Uint16', 2, function (init) {
 /* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(30)('Int32', 4, function (init) {
+__webpack_require__(32)('Int32', 4, function (init) {
   return function Int32Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8952,7 +8952,7 @@ __webpack_require__(30)('Int32', 4, function (init) {
 /* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(30)('Uint32', 4, function (init) {
+__webpack_require__(32)('Uint32', 4, function (init) {
   return function Uint32Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8963,7 +8963,7 @@ __webpack_require__(30)('Uint32', 4, function (init) {
 /* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(30)('Float32', 4, function (init) {
+__webpack_require__(32)('Float32', 4, function (init) {
   return function Float32Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -8974,7 +8974,7 @@ __webpack_require__(30)('Float32', 4, function (init) {
 /* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(30)('Float64', 8, function (init) {
+__webpack_require__(32)('Float64', 8, function (init) {
   return function Float64Array(data, byteOffset, length) {
     return init(this, data, byteOffset, length);
   };
@@ -10021,7 +10021,7 @@ $export($export.S, 'Promise', { 'try': function (callbackfn) {
 /* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata = __webpack_require__(31);
+var metadata = __webpack_require__(33);
 var anObject = __webpack_require__(1);
 var toMetaKey = metadata.key;
 var ordinaryDefineOwnMetadata = metadata.set;
@@ -10035,7 +10035,7 @@ metadata.exp({ defineMetadata: function defineMetadata(metadataKey, metadataValu
 /* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata = __webpack_require__(31);
+var metadata = __webpack_require__(33);
 var anObject = __webpack_require__(1);
 var toMetaKey = metadata.key;
 var getOrCreateMetadataMap = metadata.map;
@@ -10056,7 +10056,7 @@ metadata.exp({ deleteMetadata: function deleteMetadata(metadataKey, target /* , 
 /* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata = __webpack_require__(31);
+var metadata = __webpack_require__(33);
 var anObject = __webpack_require__(1);
 var getPrototypeOf = __webpack_require__(18);
 var ordinaryHasOwnMetadata = metadata.has;
@@ -10081,7 +10081,7 @@ metadata.exp({ getMetadata: function getMetadata(metadataKey, target /* , target
 
 var Set = __webpack_require__(129);
 var from = __webpack_require__(138);
-var metadata = __webpack_require__(31);
+var metadata = __webpack_require__(33);
 var anObject = __webpack_require__(1);
 var getPrototypeOf = __webpack_require__(18);
 var ordinaryOwnMetadataKeys = metadata.keys;
@@ -10104,7 +10104,7 @@ metadata.exp({ getMetadataKeys: function getMetadataKeys(target /* , targetKey *
 /* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata = __webpack_require__(31);
+var metadata = __webpack_require__(33);
 var anObject = __webpack_require__(1);
 var ordinaryGetOwnMetadata = metadata.get;
 var toMetaKey = metadata.key;
@@ -10119,7 +10119,7 @@ metadata.exp({ getOwnMetadata: function getOwnMetadata(metadataKey, target /* , 
 /* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata = __webpack_require__(31);
+var metadata = __webpack_require__(33);
 var anObject = __webpack_require__(1);
 var ordinaryOwnMetadataKeys = metadata.keys;
 var toMetaKey = metadata.key;
@@ -10133,7 +10133,7 @@ metadata.exp({ getOwnMetadataKeys: function getOwnMetadataKeys(target /* , targe
 /* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata = __webpack_require__(31);
+var metadata = __webpack_require__(33);
 var anObject = __webpack_require__(1);
 var getPrototypeOf = __webpack_require__(18);
 var ordinaryHasOwnMetadata = metadata.has;
@@ -10155,7 +10155,7 @@ metadata.exp({ hasMetadata: function hasMetadata(metadataKey, target /* , target
 /* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var metadata = __webpack_require__(31);
+var metadata = __webpack_require__(33);
 var anObject = __webpack_require__(1);
 var ordinaryHasOwnMetadata = metadata.has;
 var toMetaKey = metadata.key;
@@ -10170,7 +10170,7 @@ metadata.exp({ hasOwnMetadata: function hasOwnMetadata(metadataKey, target /* , 
 /* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $metadata = __webpack_require__(31);
+var $metadata = __webpack_require__(33);
 var anObject = __webpack_require__(1);
 var aFunction = __webpack_require__(11);
 var toMetaKey = $metadata.key;
@@ -11308,7 +11308,7 @@ var _shredui = __webpack_require__(362);
 
 var _shredui2 = _interopRequireDefault(_shredui);
 
-var _shredplayer = __webpack_require__(386);
+var _shredplayer = __webpack_require__(388);
 
 var _shredplayer2 = _interopRequireDefault(_shredplayer);
 
@@ -28594,7 +28594,7 @@ var _shredvidlist = __webpack_require__(380);
 
 var _shredvidlist2 = _interopRequireDefault(_shredvidlist);
 
-var _reactGamepad = __webpack_require__(383);
+var _reactGamepad = __webpack_require__(385);
 
 var _reactGamepad2 = _interopRequireDefault(_reactGamepad);
 
@@ -28864,7 +28864,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(33)(content, options);
+var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -28884,7 +28884,7 @@ if(false) {
 /* 365 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(32)(undefined);
+exports = module.exports = __webpack_require__(29)(undefined);
 // imports
 
 
@@ -29004,7 +29004,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(33)(content, options);
+var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -29024,7 +29024,7 @@ if(false) {
 /* 368 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(32)(undefined);
+exports = module.exports = __webpack_require__(29)(undefined);
 // imports
 
 
@@ -29082,7 +29082,7 @@ var Shredsidebar = function (_Component) {
 
             return _react2.default.createElement(
                 "div",
-                null,
+                { className: "menucontainer" },
                 _react2.default.createElement("div", { id: "flyoutMenuBackground", className: visibility }),
                 _react2.default.createElement(
                     "div",
@@ -29134,7 +29134,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(33)(content, options);
+var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -29154,12 +29154,12 @@ if(false) {
 /* 371 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(32)(undefined);
+exports = module.exports = __webpack_require__(29)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, "#container li {\r\n    margin-bottom: 10px;\r\n}\r\n    \r\n#flyoutMenuBackground {\r\n    width: 30vw;\r\n    height: 100vh;\r\n    background-color: rgba(105, 33, 33, 0.7);\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n    z-index: 9;\r\n}\r\n\r\n#flyoutMenuBackground.hide {\r\n    transform: translate3d(200vw, 0, 0);\r\n}\r\n\r\n#flyoutMenuBackground.show {\r\n    transform: translate3d(70vw, 0, 0);\r\n    overflow: hidden;\r\n}\r\n\r\n#flyoutMenu {\r\n    width: 30vw;\r\n    height: 100vh;\r\n    background-color: transparent;\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n    z-index: 10;\r\n}\r\n\r\n#flyoutMenu.hide {\r\n    transform: translate3d(200vw, 0, 0);\r\n}\r\n\r\n#flyoutMenu.show {\r\n    transform: translate3d(70vw, 0, 0);\r\n    overflow: hidden;\r\n}\r\n\r\n#vidtitle {\r\n    font-family: serif;\r\n    font-weight: 500;\r\n    font-size: 48px;\r\n    padding-top: 20%;\r\n    padding-left: 10%;\r\n    padding-right: 10%;\r\n    padding-bottom: 5%;\r\n    letter-spacing: -0.3px;\r\n    text-align: left;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n}\r\n\r\n#descriptionheader {\r\n    padding-left: 10%;\r\n    padding-right: 10%;\r\n    font-family: PTMono;\r\n    font-size: 12px;\r\n    font-weight: bold;\r\n    letter-spacing: 4px;\r\n    text-align: left;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n}\r\n\r\n#vidsynopsis {\r\n    padding-top: 5%;\r\n    padding-left: 10%;\r\n    padding-right: 10%;\r\n    padding-bottom: 5%;\r\n    font-family: PTMono;\r\n    line-height: 1.33;\r\n    letter-spacing: -0.4px;\r\n    text-align: left;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n}\r\n\r\n#vidoriginlink {\r\n    padding-left: 10%;\r\n    padding-right: 10%;\r\n    padding-bottom: 5%;\r\n}\r\n\r\n@media (max-width: 1200px){\r\n    #flyoutMenu {\r\n        width: 50vw;\r\n    }\r\n\r\n    #flyoutMenu.show {\r\n        transform: translate3d(50vw, 0, 0);\r\n        overflow: scroll;\r\n    }\r\n\r\n    #flyoutMenuBackground {\r\n        width: 50vw;\r\n    }\r\n\r\n    #flyoutMenuBackground.show {\r\n        transform: translate3d(50vw, 0, 0);\r\n        overflow: hidden;\r\n    }\r\n}", ""]);
+exports.push([module.i, "#container li {\r\n    margin-bottom: 10px;\r\n}\r\n    \r\n#flyoutMenuBackground {\r\n    width: 30vw;\r\n    height: 100vh;\r\n    background-color: rgba(105, 33, 33, 0.7);\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n    z-index: 9;\r\n}\r\n\r\n#flyoutMenuBackground.hide {\r\n    transform: translate3d(200vw, 0, 0);\r\n}\r\n\r\n#flyoutMenuBackground.show {\r\n    transform: translate3d(70vw, 0, 0);\r\n    overflow: hidden;\r\n}\r\n\r\n#flyoutMenu {\r\n    width: 30vw;\r\n    height: 100vh;\r\n    background-color: transparent;\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n    z-index: 10;\r\n}\r\n\r\n#flyoutMenu.hide {\r\n    transform: translate3d(200vw, 0, 0);\r\n}\r\n\r\n#flyoutMenu.show {\r\n    transform: translate3d(70vw, 0, 0);\r\n    overflow: hidden;\r\n}\r\n\r\n#vidtitle {\r\n    font-family: serif;\r\n    font-weight: 500;\r\n    font-size: 48px;\r\n    padding-top: 20%;\r\n    padding-left: 10%;\r\n    padding-right: 10%;\r\n    padding-bottom: 5%;\r\n    letter-spacing: -0.3px;\r\n    text-align: left;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n}\r\n\r\n#descriptionheader {\r\n    padding-left: 10%;\r\n    padding-right: 10%;\r\n    font-family: PTMono;\r\n    font-size: 12px;\r\n    font-weight: bold;\r\n    letter-spacing: 4px;\r\n    text-align: left;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n}\r\n\r\n#vidsynopsis {\r\n    padding-top: 5%;\r\n    padding-left: 10%;\r\n    padding-right: 10%;\r\n    padding-bottom: 5%;\r\n    font-family: PTMono;\r\n    line-height: 1.33;\r\n    letter-spacing: -0.4px;\r\n    text-align: left;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n}\r\n\r\n#vidoriginlink {\r\n    padding-left: 10%;\r\n    padding-right: 10%;\r\n    padding-bottom: 5%;\r\n}", ""]);
 
 // exports
 
@@ -29179,7 +29179,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(33)(content, options);
+var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -29199,12 +29199,12 @@ if(false) {
 /* 373 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(32)(undefined);
+exports = module.exports = __webpack_require__(29)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, "@media only screen and (max-device-width: 480px){\r\n    #flyoutMenu {\r\n        width: 100vw;\r\n        height: 100vh;\r\n    }\r\n\r\n    #flyoutMenu.show {\r\n        transform: translate3d(0, 60vw, 0);\r\n        overflow: scroll;\r\n    }\r\n\r\n    #flyoutMenu.hide {\r\n        transform: translate3d(0, 60vw, 0);\r\n        overflow: scroll;\r\n    }\r\n\r\n    #flyoutMenuBackground {\r\n        width: 100vw;\r\n        height: 100vh;\r\n    }\r\n\r\n    #flyoutMenuBackground.show {\r\n        transform: translate3d(0, 60vw, 0);\r\n        overflow: hidden;\r\n    }\r\n\r\n    #flyoutMenuBackground.hide {\r\n        transform: translate3d(0, 60vw, 0);\r\n        overflow: hidden;\r\n    }\r\n\r\n    #vidtitle {\r\n        font-family: serif;\r\n        font-weight: 500;\r\n        font-size: 72px;\r\n        padding-top: 5%;\r\n        padding-left: 10%;\r\n        padding-right: 10%;\r\n        padding-bottom: 5%;\r\n        letter-spacing: -0.3px;\r\n        text-align: left;\r\n        text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n    }\r\n\r\n    #descriptionheader {\r\n        padding-left: 10%;\r\n        padding-right: 10%;\r\n        font-family: PTMono;\r\n        font-size: 10px;\r\n        font-weight: bold;\r\n        letter-spacing: 4px;\r\n        text-align: left;\r\n        text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n    }\r\n\r\n    #vidsynopsis {\r\n        padding-top: 5%;\r\n        padding-left: 10%;\r\n        padding-right: 10%;\r\n        padding-bottom: 5%;\r\n        font-family: PTMono;\r\n        font-size: 32px;\r\n        line-height: 1.33;\r\n        letter-spacing: -0.4px;\r\n        text-align: left;\r\n        text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n    }\r\n    #vidoriginlink {\r\n        padding-top: 5%;\r\n        padding-left: 10%;\r\n        padding-right: 10%;\r\n        padding-bottom: 5%;\r\n        font-family: PTMono;\r\n        font-size: 10px;\r\n        line-height: 1.33;\r\n        letter-spacing: -0.4px;\r\n        text-align: left;\r\n        text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n\r\n    }\r\n}", ""]);
+exports.push([module.i, "@media only screen and (max-device-width: 480px){\r\n    .menucontainer {\r\n        display: flex;\r\n    }\r\n    #flyoutMenu {\r\n        height: 100vh;\r\n        width: 100vw;\r\n        display: flex;\r\n        flex-direction: column;\r\n        top: auto;\r\n    }\r\n    \r\n    #flyoutMenu.show { \r\n        transform: none;\r\n        overflow: hidden;\r\n    }\r\n\r\n    #flyoutMenu.hide {\r\n        display: none;\r\n        transform: none;\r\n        overflow: hidden;\r\n    }\r\n\r\n    #flyoutMenuBackground.show {\r\n        transform: none;\r\n        overflow: hidden;\r\n    }\r\n\r\n    #flyoutMenuBackground.hide {\r\n        display: none;\r\n        transform: none;\r\n        overflow: hidden;\r\n    }\r\n\r\n    #flyoutMenuBackground {\r\n        width: 100vw;\r\n        height: 100vh;\r\n        position: relative;\r\n    }\r\n\r\n\r\n    #vidtitle {\r\n        font-family: serif;\r\n        font-weight: 500;\r\n        font-size: 72px;\r\n        padding-top: 10%;\r\n        padding-left: 10%;\r\n        padding-right: 10%;\r\n        padding-bottom: 5%;\r\n        letter-spacing: -0.3px;\r\n        text-align: left;\r\n        text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n    }\r\n\r\n    #descriptionheader {\r\n        padding-left: 10%;\r\n        padding-right: 10%;\r\n        font-family: PTMono;\r\n        font-size: 30px;\r\n        font-weight: bold;\r\n        letter-spacing: 4px;\r\n        text-align: left;\r\n        text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n    }\r\n\r\n    #vidsynopsis {\r\n        padding-top: 5%;\r\n        padding-left: 10%;\r\n        padding-right: 10%;\r\n        padding-bottom: 5%;\r\n        font-family: PTMono;\r\n        font-size: 48px;\r\n        line-height: 1.33;\r\n        letter-spacing: -0.4px;\r\n        text-align: left;\r\n        text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n    }\r\n    #vidoriginlink {\r\n        padding-top: 5%;\r\n        padding-left: 10%;\r\n        padding-right: 10%;\r\n        padding-bottom: 5%;\r\n        font-family: PTMono;\r\n        font-size: 36px;\r\n        line-height: 1.33;\r\n        letter-spacing: -0.4px;\r\n        text-align: left;\r\n        text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n\r\n    }\r\n}", ""]);
 
 // exports
 
@@ -29282,7 +29282,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(33)(content, options);
+var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -29302,12 +29302,12 @@ if(false) {
 /* 376 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(32)(undefined);
+exports = module.exports = __webpack_require__(29)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, " #shrednavbutton {   \r\n    padding: 0px 0px;\r\n    display: inline-block;\r\n    cursor: pointer;\r\n    font: inherit;\r\n    color: inherit;\r\n    text-transform: none;\r\n    background-color: transparent;\r\n    border: 0;\r\n    margin: 0;\r\n    overflow: visible; \r\n    position: absolute;\r\n    top: 20px;\r\n    left: 15px;\r\n    z-index: 16;\r\n    transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n }\r\n\r\n#shrednavbutton.dock {\r\n    transform: translate3d(-28px, -28px, 0);\r\n}\r\n\r\n#shrednavbutton.float {\r\n    transform: translate3d(0vw, 0, 0);\r\n}\r\n\r\n.shrednavbutton-box {\r\n    width: 60px;\r\n    height: 60px;\r\n    display: inline-block;\r\n    position: relative; \r\n    background-image: url(\"data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 110 110' style='enable-background:new 0 0 110 110;' xml:space='preserve'%3E%3Cpath fill='white' d='M55,0C24.6,0,0,24.6,0,55s24.6,55,55,55c30.4,0,55-24.6,55-55S85.4,0,55,0z M57.5,28.2c0.8,0.1,1.7,0.2,2.5,0.2 c0.9,0,1.8-0.1,2.8-0.2l0,0h0.1c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c0.2,0,0.5-0.1,0.7-0.1l0.5-0.1l0.2,0.4c0,0,0,0.1,0.1,0.1 c0.1,0.1,0.1,0.3,0.1,0.5c0,1.1,0.2,2.2,0.3,3.3c0.1,0.5,0.1,1.1,0.2,1.6c0.1,0.9,0.1,1.8,0.1,2.7c0,0.7,0,1.3,0,2 c0.1,1.1,0.2,2.2,0.3,3.3c0.1,0.7,0.1,1.5,0.2,2.2c0,0.4,0,0.8,0,1.3c0,0.2,0,0.5,0,0.8v1.5l-1-1.2c-0.1-0.1-0.2-0.2-0.3-0.3 c-0.1-0.2-0.3-0.3-0.4-0.5c-1.8-3.4-3.8-6.6-5.8-9.5c-0.3-0.4-0.6-0.8-0.9-1.2V28.2z M56.3,21.5L56.3,21.5L56.3,21.5L56.3,21.5 l0.1,6.6c0,0,0,0,0,0v5.5c0,0,0,0,0,0v5.5h0V50c-0.6-0.3-1.2-0.5-1.9-0.8c-1.5-0.6-3.1-1.2-4.6-1.8C48.6,47,47.3,46.5,46,46 c-1.9-0.8-3.8-1.5-5.4-2.7v-3.7c0-0.7,0-1.3,0-1.9v-3.5c0-2.1-0.4-4.9-1.1-6.5c0,0,0,0,0,0c-2.1-5.7-6.8-6.3-6.8-6.3H56.3z M32.1,81.7L32.1,81.7c-0.5,0.1-1.1,0.2-1.6,0.2L30.2,82L30,81.7c-0.2-0.4-0.2-0.8-0.2-1c0-0.1,0-0.1,0-0.2c0-2.6,0-5.1,0-7.7l0-4.2 c0-1.8,0-3.7,0-5.5c0-0.4,0-0.7,0-1.1l0-1l1.2-0.1l0.8,1.6c0.4,0.9,0.9,1.8,1.3,2.7c2,4,4,7.2,6.2,9.8c0,0,0,0,0.1,0.1v3.1 c0,0.4,0,1.6-0.3,2.8c0,0,0,0,0,0l0,0l0,0c-0.5-0.1-1-0.2-1.4-0.2c-0.1,0-0.3,0-0.4,0l-0.1,0c0,0-0.1,0-0.1,0c0,0,0,0-0.1,0 c-0.5,0-1.1,0-1.8,0.1C34,81.1,33,81.4,32.1,81.7L32.1,81.7z M34,89.7L34,89.7c3.1-1.6,5.5-4.4,6.3-7.8c0-0.1,0-0.1,0-0.2 c0,0,0,0,0,0c0.2-1.2,0.4-2,0.4-3.3V59.9c1.4,0.5,2.7,1,4.1,1.5l0.4,0.1c1.6,0.5,2.7,1,3.8,1.4c0.6,0.2,1.1,0.5,1.7,0.8 c0.7,0.3,1.4,0.6,2.1,0.9c1.3,0.5,2.5,1.2,3.6,2v5.2c0,1.2,0,2.3,0,3.3v0.7h0c0,3.5,0.5,6.4,1,7.6c0,0,0,0.1,0.1,0.1 c1.2,2.9,3.6,5.2,6.5,6.2H34z M67.7,64.9c-0.1,1.5,0,3-0.3,4.5c-0.5,3.3-1.9,6.2-4.7,8.3c-1.4,1-2.7,1.9-4.3,2.6c0,0-0.1,0-0.1,0.1 c-0.1,0.1-0.2,0.1-0.3,0.2c-0.1-0.6-0.2-1.2-0.3-1.8c1.5-1.4,2.4-3.1,2.7-5.1c0.1-0.4,0.2-0.8,0.2-1.1c0.2-2.1-0.4-3.8-1.9-5.3 c-1.6-1.6-3.5-2.9-5.7-3.8c-1.3-0.5-2.5-1.1-3.8-1.7c-1.3-0.5-2.6-1-3.9-1.4c-2.5-0.8-5-1.7-7.3-2.9c-1.6-0.9-3.1-1.8-4.5-3 c-2.4-2.2-3.6-5-4.1-8.1c-0.5-3.3-0.1-6.4,1.3-9.3c1.3-2.8,3.3-4.9,6-6.4c0.5-0.3,1-0.5,1.5-0.8c0.1-0.1,0.3-0.2,0.4-0.2 c0-0.1,0-0.2,0-0.3c0,0,0-0.1,0-0.1c0-0.1-0.1-0.1-0.1-0.2l0.1-0.1c0.2,0.6,0.4,1.5,0.5,2.5c-0.2,0.2-0.3,0.3-0.5,0.5 c-0.8,0.8-1.4,1.9-1.8,2.9c-0.4,1-0.6,2.1-0.6,3.3c0.1,2.2,0.9,4,2.6,5.4c2,1.7,4.3,2.7,6.6,3.6c2.8,1.1,5.6,2.1,8.4,3.2 c3.2,1.3,6.3,2.8,9,4.9c1.9,1.5,3.2,3.4,4,5.6C67.5,62.1,67.8,63.5,67.7,64.9z M68.6,62.3c-0.1-0.6-0.3-1.2-0.5-1.8 c-0.1-0.4-0.3-0.8-0.5-1.2c5.1-3.9,8.5-10,8.5-17c0-10.4-7.5-19.1-17.4-20.9c0.2,0,0.4,0,0.6,0c17.7,0,29.5,5.9,29.5,20 C88.8,52.1,82.4,59.5,68.6,62.3z'/%3E%3C/svg%3E\");\r\n    background-repeat: no-repeat;\r\n    background-size: 100%;\r\n}\r\n\r\n@media only screen and (max-device-width: 480px) {\r\n    .shrednavbutton-box {\r\n        width: 120px;\r\n        height: 120px;\r\n    }\r\n}", ""]);
+exports.push([module.i, " #shrednavbutton {   \r\n    padding: 0px 0px;\r\n    display: inline-block;\r\n    cursor: pointer;\r\n    font: inherit;\r\n    color: inherit;\r\n    text-transform: none;\r\n    background-color: transparent;\r\n    border: 0;\r\n    margin: 0;\r\n    overflow: visible; \r\n    position: absolute;\r\n    top: 20px;\r\n    left: 15px;\r\n    z-index: 16;\r\n    transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n }\r\n\r\n#shrednavbutton.dock {\r\n    transform: translate3d(-28px, -28px, 0);\r\n}\r\n\r\n#shrednavbutton.float {\r\n    transform: translate3d(0vw, 0, 0);\r\n}\r\n\r\n.shrednavbutton-box {\r\n    width: 60px;\r\n    height: 60px;\r\n    display: inline-block;\r\n    position: relative; \r\n    background-image: url(\"data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 110 110' style='enable-background:new 0 0 110 110;' xml:space='preserve'%3E%3Cpath fill='white' d='M55,0C24.6,0,0,24.6,0,55s24.6,55,55,55c30.4,0,55-24.6,55-55S85.4,0,55,0z M57.5,28.2c0.8,0.1,1.7,0.2,2.5,0.2 c0.9,0,1.8-0.1,2.8-0.2l0,0h0.1c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.2,0c0.2,0,0.5-0.1,0.7-0.1l0.5-0.1l0.2,0.4c0,0,0,0.1,0.1,0.1 c0.1,0.1,0.1,0.3,0.1,0.5c0,1.1,0.2,2.2,0.3,3.3c0.1,0.5,0.1,1.1,0.2,1.6c0.1,0.9,0.1,1.8,0.1,2.7c0,0.7,0,1.3,0,2 c0.1,1.1,0.2,2.2,0.3,3.3c0.1,0.7,0.1,1.5,0.2,2.2c0,0.4,0,0.8,0,1.3c0,0.2,0,0.5,0,0.8v1.5l-1-1.2c-0.1-0.1-0.2-0.2-0.3-0.3 c-0.1-0.2-0.3-0.3-0.4-0.5c-1.8-3.4-3.8-6.6-5.8-9.5c-0.3-0.4-0.6-0.8-0.9-1.2V28.2z M56.3,21.5L56.3,21.5L56.3,21.5L56.3,21.5 l0.1,6.6c0,0,0,0,0,0v5.5c0,0,0,0,0,0v5.5h0V50c-0.6-0.3-1.2-0.5-1.9-0.8c-1.5-0.6-3.1-1.2-4.6-1.8C48.6,47,47.3,46.5,46,46 c-1.9-0.8-3.8-1.5-5.4-2.7v-3.7c0-0.7,0-1.3,0-1.9v-3.5c0-2.1-0.4-4.9-1.1-6.5c0,0,0,0,0,0c-2.1-5.7-6.8-6.3-6.8-6.3H56.3z M32.1,81.7L32.1,81.7c-0.5,0.1-1.1,0.2-1.6,0.2L30.2,82L30,81.7c-0.2-0.4-0.2-0.8-0.2-1c0-0.1,0-0.1,0-0.2c0-2.6,0-5.1,0-7.7l0-4.2 c0-1.8,0-3.7,0-5.5c0-0.4,0-0.7,0-1.1l0-1l1.2-0.1l0.8,1.6c0.4,0.9,0.9,1.8,1.3,2.7c2,4,4,7.2,6.2,9.8c0,0,0,0,0.1,0.1v3.1 c0,0.4,0,1.6-0.3,2.8c0,0,0,0,0,0l0,0l0,0c-0.5-0.1-1-0.2-1.4-0.2c-0.1,0-0.3,0-0.4,0l-0.1,0c0,0-0.1,0-0.1,0c0,0,0,0-0.1,0 c-0.5,0-1.1,0-1.8,0.1C34,81.1,33,81.4,32.1,81.7L32.1,81.7z M34,89.7L34,89.7c3.1-1.6,5.5-4.4,6.3-7.8c0-0.1,0-0.1,0-0.2 c0,0,0,0,0,0c0.2-1.2,0.4-2,0.4-3.3V59.9c1.4,0.5,2.7,1,4.1,1.5l0.4,0.1c1.6,0.5,2.7,1,3.8,1.4c0.6,0.2,1.1,0.5,1.7,0.8 c0.7,0.3,1.4,0.6,2.1,0.9c1.3,0.5,2.5,1.2,3.6,2v5.2c0,1.2,0,2.3,0,3.3v0.7h0c0,3.5,0.5,6.4,1,7.6c0,0,0,0.1,0.1,0.1 c1.2,2.9,3.6,5.2,6.5,6.2H34z M67.7,64.9c-0.1,1.5,0,3-0.3,4.5c-0.5,3.3-1.9,6.2-4.7,8.3c-1.4,1-2.7,1.9-4.3,2.6c0,0-0.1,0-0.1,0.1 c-0.1,0.1-0.2,0.1-0.3,0.2c-0.1-0.6-0.2-1.2-0.3-1.8c1.5-1.4,2.4-3.1,2.7-5.1c0.1-0.4,0.2-0.8,0.2-1.1c0.2-2.1-0.4-3.8-1.9-5.3 c-1.6-1.6-3.5-2.9-5.7-3.8c-1.3-0.5-2.5-1.1-3.8-1.7c-1.3-0.5-2.6-1-3.9-1.4c-2.5-0.8-5-1.7-7.3-2.9c-1.6-0.9-3.1-1.8-4.5-3 c-2.4-2.2-3.6-5-4.1-8.1c-0.5-3.3-0.1-6.4,1.3-9.3c1.3-2.8,3.3-4.9,6-6.4c0.5-0.3,1-0.5,1.5-0.8c0.1-0.1,0.3-0.2,0.4-0.2 c0-0.1,0-0.2,0-0.3c0,0,0-0.1,0-0.1c0-0.1-0.1-0.1-0.1-0.2l0.1-0.1c0.2,0.6,0.4,1.5,0.5,2.5c-0.2,0.2-0.3,0.3-0.5,0.5 c-0.8,0.8-1.4,1.9-1.8,2.9c-0.4,1-0.6,2.1-0.6,3.3c0.1,2.2,0.9,4,2.6,5.4c2,1.7,4.3,2.7,6.6,3.6c2.8,1.1,5.6,2.1,8.4,3.2 c3.2,1.3,6.3,2.8,9,4.9c1.9,1.5,3.2,3.4,4,5.6C67.5,62.1,67.8,63.5,67.7,64.9z M68.6,62.3c-0.1-0.6-0.3-1.2-0.5-1.8 c-0.1-0.4-0.3-0.8-0.5-1.2c5.1-3.9,8.5-10,8.5-17c0-10.4-7.5-19.1-17.4-20.9c0.2,0,0.4,0,0.6,0c17.7,0,29.5,5.9,29.5,20 C88.8,52.1,82.4,59.5,68.6,62.3z'/%3E%3C/svg%3E\");\r\n    background-repeat: no-repeat;\r\n    background-size: 100%;\r\n}\r\n\r\n@media only screen and (max-device-width: 480px) {\r\n    .shrednavbutton-box {\r\n        width: 120px;\r\n        height: 120px;\r\n    }\r\n\r\n    #shrednavbutton.dock {\r\n        transform: translate3d(-36px, -36px, 0);\r\n    }\r\n}", ""]);
 
 // exports
 
@@ -29427,7 +29427,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(33)(content, options);
+var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -29447,7 +29447,7 @@ if(false) {
 /* 379 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(32)(undefined);
+exports = module.exports = __webpack_require__(29)(undefined);
 // imports
 
 
@@ -29483,6 +29483,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 __webpack_require__(381);
+__webpack_require__(383);
 
 var ShredVidList = function (_Component) {
     _inherits(ShredVidList, _Component);
@@ -29510,7 +29511,7 @@ var ShredVidList = function (_Component) {
 
             return _react2.default.createElement(
                 "div",
-                null,
+                { className: "vidlistcontainer" },
                 _react2.default.createElement("div", { id: "shredvidlist-background", className: visibility }),
                 _react2.default.createElement(
                     "div",
@@ -29541,7 +29542,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(33)(content, options);
+var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -29561,7 +29562,7 @@ if(false) {
 /* 382 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(32)(undefined);
+exports = module.exports = __webpack_require__(29)(undefined);
 // imports
 
 
@@ -29575,6 +29576,51 @@ exports.push([module.i, "#shredvidlist {\r\n    width: 100vw;\r\n    height: 100
 /* 383 */
 /***/ (function(module, exports, __webpack_require__) {
 
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(384);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(30)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../../node_modules/css-loader/index.js!./shredvidlist_mobile.css", function() {
+			var newContent = require("!!../../../../node_modules/css-loader/index.js!./shredvidlist_mobile.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 384 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(29)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "@media only screen and (max-device-width: 480px) {\r\n    .vidlistcontainer {\r\n        display: flex;\r\n        flex-direction: column;\r\n        overflow: scroll;\r\n    }\r\n    \r\n    #shredvidlist-background.show {\r\n        transform: none;\r\n        position: relative;\r\n    }\r\n    \r\n    #shredvidlist-background {\r\n        width: 100vw;\r\n        height: 100vh;\r\n        background-color: rgba(16, 16, 16, 0.5);\r\n        position: relative;\r\n        top: 0;\r\n        left: 0;\r\n        transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n        z-index: 14;\r\n    }\r\n    \r\n    #shredvidlist {\r\n        transform: none;\r\n        position: relative;\r\n        display: flex;\r\n        flex-direction: column;\r\n        top: auto;\r\n        height: 100%;\r\n    }\r\n    \r\n    #shredvidlist.show {\r\n        position: absolute;\r\n        transform: none;\r\n    }\r\n    \r\n    .vidPageContainer {\r\n        padding-left: 0;\r\n        padding-right: 0;\r\n    }\r\n}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 385 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -29583,7 +29629,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.layouts = exports.Gamepad = undefined;
 
-var _Gamepad = __webpack_require__(384);
+var _Gamepad = __webpack_require__(386);
 
 var _Gamepad2 = _interopRequireDefault(_Gamepad);
 
@@ -29600,7 +29646,7 @@ exports.layouts = _layouts2.default;
 exports.default = _Gamepad2.default;
 
 /***/ }),
-/* 384 */
+/* 386 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29876,7 +29922,7 @@ Gamepad.defaultProps = {
 exports.default = Gamepad;
 
 /***/ }),
-/* 385 */
+/* 387 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29892,7 +29938,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 386 */
+/* 388 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29908,7 +29954,7 @@ var _reactDom = __webpack_require__(101);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactPlayer = __webpack_require__(387);
+var _reactPlayer = __webpack_require__(389);
 
 var _reactPlayer2 = _interopRequireDefault(_reactPlayer);
 
@@ -29922,8 +29968,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__(402);
 __webpack_require__(404);
+__webpack_require__(406);
 
 var _loaded = false;
 
@@ -30029,7 +30075,7 @@ var Shredplayer = function (_React$Component) {
 _reactDom2.default.render(_react2.default.createElement(Shredplayer, null), document.getElementById('shredplayer'));
 
 /***/ }),
-/* 387 */
+/* 389 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30049,21 +30095,21 @@ var _react2 = _interopRequireDefault(_react);
 
 var _props2 = __webpack_require__(104);
 
-var _utils = __webpack_require__(29);
+var _utils = __webpack_require__(31);
 
-var _YouTube = __webpack_require__(393);
+var _YouTube = __webpack_require__(395);
 
 var _YouTube2 = _interopRequireDefault(_YouTube);
 
-var _SoundCloud = __webpack_require__(394);
+var _SoundCloud = __webpack_require__(396);
 
 var _SoundCloud2 = _interopRequireDefault(_SoundCloud);
 
-var _Vimeo = __webpack_require__(395);
+var _Vimeo = __webpack_require__(397);
 
 var _Vimeo2 = _interopRequireDefault(_Vimeo);
 
-var _Facebook = __webpack_require__(396);
+var _Facebook = __webpack_require__(398);
 
 var _Facebook2 = _interopRequireDefault(_Facebook);
 
@@ -30071,23 +30117,23 @@ var _FilePlayer = __webpack_require__(147);
 
 var _FilePlayer2 = _interopRequireDefault(_FilePlayer);
 
-var _Streamable = __webpack_require__(397);
+var _Streamable = __webpack_require__(399);
 
 var _Streamable2 = _interopRequireDefault(_Streamable);
 
-var _Vidme = __webpack_require__(398);
+var _Vidme = __webpack_require__(400);
 
 var _Vidme2 = _interopRequireDefault(_Vidme);
 
-var _Wistia = __webpack_require__(399);
+var _Wistia = __webpack_require__(401);
 
 var _Wistia2 = _interopRequireDefault(_Wistia);
 
-var _DailyMotion = __webpack_require__(400);
+var _DailyMotion = __webpack_require__(402);
 
 var _DailyMotion2 = _interopRequireDefault(_DailyMotion);
 
-var _Twitch = __webpack_require__(401);
+var _Twitch = __webpack_require__(403);
 
 var _Twitch2 = _interopRequireDefault(_Twitch);
 
@@ -30300,7 +30346,7 @@ ReactPlayer.canPlay = function (url) {
 exports['default'] = ReactPlayer;
 
 /***/ }),
-/* 388 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/**
@@ -30325,17 +30371,17 @@ if (process.env.NODE_ENV !== 'production') {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(389)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(391)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(390)();
+  module.exports = __webpack_require__(392)();
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22)))
 
 /***/ }),
-/* 389 */
+/* 391 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30885,7 +30931,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22)))
 
 /***/ }),
-/* 390 */
+/* 392 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30950,7 +30996,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 391 */
+/* 393 */
 /***/ (function(module, exports) {
 
 
@@ -31021,7 +31067,7 @@ function ieOnEnd (script, cb) {
 
 
 /***/ }),
-/* 392 */
+/* 394 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31118,7 +31164,7 @@ var deepmerge_1 = deepmerge;
 
 
 /***/ }),
-/* 393 */
+/* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31142,7 +31188,7 @@ var _Base2 = __webpack_require__(34);
 
 var _Base3 = _interopRequireDefault(_Base2);
 
-var _utils = __webpack_require__(29);
+var _utils = __webpack_require__(31);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -31339,7 +31385,7 @@ YouTube.displayName = 'YouTube';
 exports['default'] = YouTube;
 
 /***/ }),
-/* 394 */
+/* 396 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31363,7 +31409,7 @@ var _Base2 = __webpack_require__(34);
 
 var _Base3 = _interopRequireDefault(_Base2);
 
-var _utils = __webpack_require__(29);
+var _utils = __webpack_require__(31);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -31525,7 +31571,7 @@ SoundCloud.displayName = 'SoundCloud';
 exports['default'] = SoundCloud;
 
 /***/ }),
-/* 395 */
+/* 397 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31549,7 +31595,7 @@ var _Base2 = __webpack_require__(34);
 
 var _Base3 = _interopRequireDefault(_Base2);
 
-var _utils = __webpack_require__(29);
+var _utils = __webpack_require__(31);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -31715,7 +31761,7 @@ Vimeo.displayName = 'Vimeo';
 exports['default'] = Vimeo;
 
 /***/ }),
-/* 396 */
+/* 398 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31737,7 +31783,7 @@ var _Base2 = __webpack_require__(34);
 
 var _Base3 = _interopRequireDefault(_Base2);
 
-var _utils = __webpack_require__(29);
+var _utils = __webpack_require__(31);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -31884,7 +31930,7 @@ Facebook.displayName = 'Facebook';
 exports['default'] = Facebook;
 
 /***/ }),
-/* 397 */
+/* 399 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31906,7 +31952,7 @@ var _Base2 = __webpack_require__(34);
 
 var _Base3 = _interopRequireDefault(_Base2);
 
-var _utils = __webpack_require__(29);
+var _utils = __webpack_require__(31);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -32045,7 +32091,7 @@ Streamable.displayName = 'Streamable';
 exports['default'] = Streamable;
 
 /***/ }),
-/* 398 */
+/* 400 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32146,7 +32192,7 @@ Vidme.displayName = 'Vidme';
 exports['default'] = Vidme;
 
 /***/ }),
-/* 399 */
+/* 401 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32170,7 +32216,7 @@ var _Base2 = __webpack_require__(34);
 
 var _Base3 = _interopRequireDefault(_Base2);
 
-var _utils = __webpack_require__(29);
+var _utils = __webpack_require__(31);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -32303,7 +32349,7 @@ Wistia.displayName = 'Wistia';
 exports['default'] = Wistia;
 
 /***/ }),
-/* 400 */
+/* 402 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32327,7 +32373,7 @@ var _Base2 = __webpack_require__(34);
 
 var _Base3 = _interopRequireDefault(_Base2);
 
-var _utils = __webpack_require__(29);
+var _utils = __webpack_require__(31);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -32524,7 +32570,7 @@ DailyMotion.displayName = 'DailyMotion';
 exports['default'] = DailyMotion;
 
 /***/ }),
-/* 401 */
+/* 403 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32546,7 +32592,7 @@ var _Base2 = __webpack_require__(34);
 
 var _Base3 = _interopRequireDefault(_Base2);
 
-var _utils = __webpack_require__(29);
+var _utils = __webpack_require__(31);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -32696,13 +32742,13 @@ Twitch.displayName = 'Twitch';
 exports['default'] = Twitch;
 
 /***/ }),
-/* 402 */
+/* 404 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(403);
+var content = __webpack_require__(405);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -32710,7 +32756,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(33)(content, options);
+var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -32727,27 +32773,27 @@ if(false) {
 }
 
 /***/ }),
-/* 403 */
+/* 405 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(32)(undefined);
+exports = module.exports = __webpack_require__(29)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, ".video-background iframe{\r\n    position: absolute;\r\n    top: 0%;\r\n    left: 0%;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: black;\r\n}\r\n\r\n.video-background [id=\"pbcontainer\"] video {\r\n    position: absolute;\r\n    top: 0%;\r\n    left: 0%;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: black;\r\n}\r\n\r\n.video-background [data-vimeo-initialized=\"true\"] iframe {\r\n    position: absolute;\r\n    top: 0%;\r\n    left: 0%;\r\n    width: 100%;\r\n    height: -100%;\r\n    background-color: black;\r\n}\r\n\r\n@media (min-aspect-ratio: 16/9) {\r\n    .video-background iframe{\r\n      height: 300%;\r\n      top: -100%;\r\n    }\r\n    .video-background [data-vimeo-initialized=\"true\"] iframe{\r\n        height: 300%;\r\n        top: -100%;\r\n      }\r\n    }\r\n    .video-background [id=\"pbcontainer\"] video{\r\n        height: 120%;\r\n        top: -10%;\r\n      }\r\n  \r\n@media (max-aspect-ratio: 16/9) {\r\n    .video-background iframe {\r\n      width: 300%;\r\n      left: -100%;\r\n    }\r\n    .video-background [data-vimeo-initialized=\"true\"] iframe {\r\n        width: 300%;\r\n        left: -100%;\r\n      }\r\n    }\r\n    .video-background [id=\"pbcontainer\"] video {\r\n        width: 120%;\r\n        left: -10%;\r\n      }", ""]);
+exports.push([module.i, ".video-background iframe{\r\n    position: absolute;\r\n    top: 0%;\r\n    left: 0%;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: black;\r\n}\r\n\r\n.video-background [id=\"pbcontainer\"] video {\r\n    position: absolute;\r\n    top: 0%;\r\n    left: 0%;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: black;\r\n}\r\n\r\n.video-background [data-vimeo-initialized=\"true\"] iframe {\r\n    position: absolute;\r\n    top: 0%;\r\n    left: 0%;\r\n    width: 100%;\r\n    background-color: black;\r\n}", ""]);
 
 // exports
 
 
 /***/ }),
-/* 404 */
+/* 406 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(405);
+var content = __webpack_require__(407);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -32755,7 +32801,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(33)(content, options);
+var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -32772,15 +32818,15 @@ if(false) {
 }
 
 /***/ }),
-/* 405 */
+/* 407 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(32)(undefined);
+exports = module.exports = __webpack_require__(29)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, "@media only screen and (max-device-width: 480px) {\r\n    .video-background iframe{\r\n        position: absolute;\r\n        top: 0%;\r\n        left: 0%;\r\n        width: 100%;\r\n        height: 34vh;\r\n        background-color: black;\r\n    }\r\n\r\n    .video-background [id=\"pbcontainer\"] video {\r\n        position: absolute;\r\n        top: 0%;\r\n        left: 0%;\r\n        width: 100%;\r\n        height: 34vh;\r\n        background-color: black;\r\n    }\r\n\r\n    .video-background [data-vimeo-initialized=\"true\"] iframe {\r\n        position: absolute;\r\n        top: 0%;\r\n        left: 0%;\r\n        width: 100%;\r\n        height: 34vh;\r\n        background-color: black;\r\n    }\r\n}", ""]);
+exports.push([module.i, "@media only screen and (max-device-width: 480px) {\r\n    .videocontainer {\r\n        position: relative;\r\n        display: flex;\r\n        width: 100%;\r\n        height: 100%;\r\n        padding-bottom: 56.25%;\r\n        overflow: hidden;\r\n    }\r\n    \r\n    .video-background iframe{\r\n        position: absolute;\r\n    }\r\n\r\n    .video-background [id=\"pbcontainer\"] video {\r\n        position: absolute;\r\n    }\r\n\r\n    .video-background [data-vimeo-initialized=\"true\"] iframe {\r\n        position: absolute;\r\n    }\r\n}", ""]);
 
 // exports
 

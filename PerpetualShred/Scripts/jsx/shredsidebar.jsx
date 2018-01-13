@@ -11,7 +11,7 @@ class Shredsidebar extends Component {
             visibility = "show";
         }
 
-        return <div>
+        return <div className="menucontainer">
             <div id="flyoutMenuBackground" className={visibility}/>
             <div id="flyoutMenu" className={visibility}>
                 <div id="vidtitle">

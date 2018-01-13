@@ -49,7 +49,7 @@ class Shredplayer extends React.Component {
             }
             else {
                 return (
-                    <div id="pbcontainer">
+                    <div id="pbcontainer" >
                         <ReactPlayer ref='player'
                             url={
                                 JSON.parse(jsModel.SourceList)[2]
