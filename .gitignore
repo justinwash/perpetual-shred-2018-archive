@@ -98,27 +98,27 @@ $RECYCLE.BIN/
 *.userprefs
 
 # Build results
-/PerpetualShred/Debug/
-/PerpetualShred/DebugPublic/
-/PerpetualShred/Release/
-/PerpetualShred/Releases/
-/PerpetualShred/x64/
-/PerpetualShred/x86/
-/PerpetualShred/bld/
-/PerpetualShred/bin/
-/PerpetualShred/obj/
-/PerpetualShred/log/
-/ShredCrawl/Debug/
-/ShredCrawl/DebugPublic/
-/ShredCrawl/Release/
-/ShredCrawl/Releases/
-/ShredCrawl/x64/
-/ShredCrawl/x86/
-/ShredCrawl/bld/
-/ShredCrawl/bin/
-/ShredCrawl/obj/
-/ShredCrawl/log/
-/ShredCrawlEXE/
+PerpetualShred/Debug/
+PerpetualShred/DebugPublic/
+PerpetualShred/Release/
+PerpetualShred/Releases/
+PerpetualShred/x64/
+PerpetualShred/x86/
+PerpetualShred/bld/
+PerpetualShred/bin/
+PerpetualShred/obj/
+PerpetualShred/log/
+ShredCrawl/Debug/
+ShredCrawl/DebugPublic/
+ShredCrawl/Release/
+ShredCrawl/Releases/
+ShredCrawl/x64/
+ShredCrawl/x86/
+ShredCrawl/bld/
+ShredCrawl/bin/
+ShredCrawl/obj/
+ShredCrawl/log/
+ShredCrawlEXE/
 
 # Visual Studio 2015 cache/options directory
 .vs/
