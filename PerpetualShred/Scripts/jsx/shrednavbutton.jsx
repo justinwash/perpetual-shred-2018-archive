@@ -6,13 +6,13 @@ class ShredNavButton extends Component {
     render() {
         var anim = "dock";
 
-        if (this.props.menuVisibility) {
+        if (this.props.animSwitcher)
             anim = "float";
-        }
+        else anim = "dock";
         
         return (
-            <button id="shrednavbutton" className={anim} type="button" onMouseDown={this.props.handleMouseDown}>
-                <span className="shrednavbutton-box"></span>
+            <button id="shrednavbutton" className={anim} type="button" onMouseDown={this.props.toggleHandler}>
+                <span className="shrednavbutton-box" />
             </button>
         );
     }

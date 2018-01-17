@@ -1,7 +1,9 @@
 ﻿// Import React
 import ReactDOM from 'react-dom';
 import React from 'react';
-// Import UI container
-import ShredUI from './jsx/shredui.jsx'
+// Import UI stuff
+import ShredNavOverlayBox from './jsx/shrednavoverlaybox.jsx';
+import ShredSideBarBox from './jsx/shredsidebarbox.jsx';
+import ShredVidList from './jsx/shredvidlist.jsx';
 // Import video player
-import ShredPlayer from './jsx/shredplayer.jsx'
+import ShredPlayer from './jsx/shredplayer.jsx';

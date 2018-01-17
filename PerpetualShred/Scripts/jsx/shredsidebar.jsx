@@ -2,16 +2,16 @@
 require("!style-loader!css-loader!../css/shredsidebar.css");
 require("!style-loader!css-loader!../css/mobile/shredsidebar_mobile.css");
 
-class Shredsidebar extends Component {
-    
+class ShredSideBar extends Component {
     render() {
-        let visibility = "hide";
+        var visibility = "show";
 
-        if (this.props.menuVisibility) {
+        if (this.props.animSwitcher)
             visibility = "show";
-        }
+        else visibility = "hide";
 
-        return <div className="menucontainer">
+        return (
+        <div className="menucontainer">
             <div id="flyoutMenuBackground" className={visibility}/>
             <div id="flyoutMenu" className={visibility}>
                 <div id="vidtitle">
@@ -27,8 +27,8 @@ class Shredsidebar extends Component {
                     read more at {jsModel.VideoService}.com
                 </div>
             </div>
-        </div>;
+        </div> )
     }
 }
 
-export default Shredsidebar;
+export default ShredSideBar;

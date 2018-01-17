@@ -6,11 +6,11 @@ require("!style-loader!css-loader!../css/mobile/shredplayer_mobile.css");
 
 var loaded = false;
 
-class Shredplayer extends React.Component {
+class ShredPlayer extends React.Component {
 
     constructor(props) {
-        super(props)
-        this.onClickFullscreen = this.onClickFullscreen.bind(this)
+        super(props);
+        this.onClickFullscreen = this.onClickFullscreen.bind(this);
         this.state = {
             playing: true
         }
@@ -20,11 +20,11 @@ class Shredplayer extends React.Component {
     }
 
     loaded() {
-        loaded = true
+        loaded = true;
         console.log('loaded it!')
     }
     reload() {
-        console.log('trying to refresh!')
+        console.log('trying to refresh!');
         if (loaded = true) {
             window.location.reload()
         } 
@@ -87,6 +87,6 @@ class Shredplayer extends React.Component {
 }
 
 ReactDOM.render(
-    <Shredplayer />,
+    <ShredPlayer />,
     document.getElementById('shredplayer')
 );

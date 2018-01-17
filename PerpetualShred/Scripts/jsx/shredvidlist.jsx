@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 require("!style-loader!css-loader!../css/shredvidlist.css");
 require("!style-loader!css-loader!../css/mobile/shredvidlist_mobile.css");
 
@@ -27,4 +28,7 @@ class ShredVidList extends Component {
     }
 }
 
-export default ShredVidList;
+ReactDOM.render(
+    <ShredVidList />,
+    document.getElementById("shredvidlist")
+);
