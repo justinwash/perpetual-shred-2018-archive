@@ -486,7 +486,7 @@ function defaultClearTimeout () {
     } catch (e) {
         cachedClearTimeout = defaultClearTimeout;
     }
-} ());
+} ())
 function runTimeout(fun) {
     if (cachedSetTimeout === setTimeout) {
         //normal enviroments in sane situations
@@ -623,7 +623,7 @@ process.emit = noop;
 process.prependListener = noop;
 process.prependOnceListener = noop;
 
-process.listeners = function (name) { return [] };
+process.listeners = function (name) { return [] }
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
@@ -990,7 +990,7 @@ function listToStyles (list, options) {
 }
 
 function insertStyleElement (options, style) {
-	var target = getElement(options.insertInto);
+	var target = getElement(options.insertInto)
 
 	if (!target) {
 		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
@@ -2631,7 +2631,7 @@ function shouldUseNative() {
 		// Detect buggy property enumeration order in older V8 versions.
 
 		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-		var test1 = String('abc');  // eslint-disable-line no-new-wrappers
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
 		test1[5] = 'de';
 		if (Object.getOwnPropertyNames(test1)[0] === '5') {
 			return false;
@@ -11336,7 +11336,7 @@ function Qa(a,b,c){Ra[a]?E("100",a):void 0;Ra[a]=b;Sa[a]=b.eventTypes[c].depende
 var Va=Object.freeze({plugins:Oa,eventNameDispatchConfigs:Pa,registrationNameModules:Ra,registrationNameDependencies:Sa,possibleRegistrationNames:null,injectEventPluginOrder:Ta,injectEventPluginsByName:Ua}),Wa=null,Xa=null,Ya=null;function Za(a,b,c,d){b=a.type||"unknown-event";a.currentTarget=Ya(d);P.invokeGuardedCallbackAndCatchFirstError(b,c,void 0,a);a.currentTarget=null}
 function $a(a,b){null==b?E("30"):void 0;if(null==a)return b;if(Array.isArray(a)){if(Array.isArray(b))return a.push.apply(a,b),a;a.push(b);return a}return Array.isArray(b)?[a].concat(b):[a,b]}function ab(a,b,c){Array.isArray(a)?a.forEach(b,c):a&&b.call(c,a)}var bb=null;
 function cb(a,b){if(a){var c=a._dispatchListeners,d=a._dispatchInstances;if(Array.isArray(c))for(var e=0;e<c.length&&!a.isPropagationStopped();e++)Za(a,b,c[e],d[e]);else c&&Za(a,b,c,d);a._dispatchListeners=null;a._dispatchInstances=null;a.isPersistent()||a.constructor.release(a)}}function db(a){return cb(a,!0)}function gb(a){return cb(a,!1)}var hb={injectEventPluginOrder:Ta,injectEventPluginsByName:Ua};
-function ib(a,b){var c=a.stateNode;if(!c)return null;var d=Wa(c);if(!d)return null;c=d[b];a:switch(b){case "onClick":case "onClickCapture":case "onDoubleClick":case "onDoubleClickCapture":case "onMouseDown":case "onMouseDownCapture":case "onMouseMove":case "onMouseMoveCapture":case "onMouseUp":case "onMouseUpCapture":(d=!d.disabled)||(a=a.type,d=!("button"===a||"input"===a||"select"===a||"textarea"===a));a=!d;break;default:a=!1}if(a)return null;c&&"function"!==typeof c?E("231",b,typeof c):void 0;
+function ib(a,b){var c=a.stateNode;if(!c)return null;var d=Wa(c);if(!d)return null;c=d[b];a:switch(b){case "onClick":case "onClickCapture":case "onDoubleClick":case "onDoubleClickCapture":case "onMouseDown":case "onMouseDownCapture":case "onMouseMove":case "onMouseMoveCapture":case "onMouseUp":case "onMouseUpCapture":(d=!d.disabled)||(a=a.type,d=!("button"===a||"input"===a||"select"===a||"textarea"===a));a=!d;break a;default:a=!1}if(a)return null;c&&"function"!==typeof c?E("231",b,typeof c):void 0;
 return c}function jb(a,b,c,d){for(var e,f=0;f<Oa.length;f++){var g=Oa[f];g&&(g=g.extractEvents(a,b,c,d))&&(e=$a(e,g))}return e}function kb(a){a&&(bb=$a(bb,a))}function lb(a){var b=bb;bb=null;b&&(a?ab(b,db):ab(b,gb),bb?E("95"):void 0,P.rethrowCaughtError())}var mb=Object.freeze({injection:hb,getListener:ib,extractEvents:jb,enqueueEvents:kb,processEventQueue:lb}),nb=Math.random().toString(36).slice(2),Q="__reactInternalInstance$"+nb,ob="__reactEventHandlers$"+nb;
 function pb(a){if(a[Q])return a[Q];for(var b=[];!a[Q];)if(b.push(a),a.parentNode)a=a.parentNode;else return null;var c=void 0,d=a[Q];if(5===d.tag||6===d.tag)return d;for(;a&&(d=a[Q]);a=b.pop())c=d;return c}function qb(a){if(5===a.tag||6===a.tag)return a.stateNode;E("33")}function rb(a){return a[ob]||null}
 var sb=Object.freeze({precacheFiberNode:function(a,b){b[Q]=a},getClosestInstanceFromNode:pb,getInstanceFromNode:function(a){a=a[Q];return!a||5!==a.tag&&6!==a.tag?null:a},getNodeFromInstance:qb,getFiberCurrentPropsFromNode:rb,updateFiberProps:function(a,b){a[ob]=b}});function tb(a){do a=a["return"];while(a&&5!==a.tag);return a?a:null}function ub(a,b,c){for(var d=[];a;)d.push(a),a=tb(a);for(a=d.length;0<a--;)b(d[a],"captured",c);for(a=0;a<d.length;a++)b(d[a],"bubbled",c)}
@@ -11467,7 +11467,7 @@ e.tag)var f=0;else f=e.updateQueue,f=null===f?0:f.expirationTime;for(var g=e.chi
 if(null!==c)a=c;else{a.stateNode.isReadyForCommit=!0;break}}return null}function d(a){var b=rg(a.alternate,a,H);null===b&&(b=c(a));id.current=null;return b}function e(a){var b=Gg(a.alternate,a,H);null===b&&(b=c(a));id.current=null;return b}function f(a){if(null!==R){if(!(0===H||H>a))if(H<=Uc)for(;null!==F;)F=k(F)?e(F):d(F);else for(;null!==F&&!A();)F=k(F)?e(F):d(F)}else if(!(0===H||H>a))if(H<=Uc)for(;null!==F;)F=d(F);else for(;null!==F&&!A();)F=d(F)}function g(a,b){ja?E("243"):void 0;ja=!0;a.isReadyForCommit=
 !1;if(a!==ra||b!==H||null===F){for(;-1<he;)ge[he]=null,he--;je=D;ie.current=D;X.current=!1;x();ra=a;H=b;F=se(ra.current,null,b)}var c=!1,d=null;try{f(b)}catch(Rc){c=!0,d=Rc}for(;c;){if(eb){ca=d;break}var g=F;if(null===g)eb=!0;else{var k=h(g,d);null===k?E("183"):void 0;if(!eb){try{c=k;d=b;for(k=c;null!==g;){switch(g.tag){case 2:ne(g);break;case 5:qg(g);break;case 3:p(g);break;case 4:p(g)}if(g===k||g.alternate===k)break;g=g["return"]}F=e(c);f(d)}catch(Rc){c=!0;d=Rc;continue}break}}}b=ca;eb=ja=!1;ca=
 null;null!==b&&Ob(b);return a.isReadyForCommit?a.current.alternate:null}function h(a,b){var c=id.current=null,d=!1,e=!1,f=null;if(3===a.tag)c=a,q(a)&&(eb=!0);else for(var g=a["return"];null!==g&&null===c;){2===g.tag?"function"===typeof g.stateNode.componentDidCatch&&(d=!0,f=jd(g),c=g,e=!0):3===g.tag&&(c=g);if(q(g)){if(Sc||null!==ha&&(ha.has(g)||null!==g.alternate&&ha.has(g.alternate)))return null;c=null;e=!1}g=g["return"]}if(null!==c){null===qa&&(qa=new Set);qa.add(c);var h="";g=a;do{a:switch(g.tag){case 0:case 1:case 2:case 5:var k=
-g._debugOwner,Qc=g._debugSource;var m=jd(g);var n=null;k&&(n=jd(k));k=Qc;m="\n    in "+(m||"Unknown")+(k?" (at "+k.fileName.replace(/^.*[\\\/]/,"")+":"+k.lineNumber+")":n?" (created by "+n+")":"");break;default:m=""}h+=m;g=g["return"]}while(g);g=h;a=jd(a);null===R&&(R=new Map);b={componentName:a,componentStack:g,error:b,errorBoundary:d?c.stateNode:null,errorBoundaryFound:d,errorBoundaryName:f,willRetry:e};R.set(c,b);try{var p=b.error;p&&p.suppressReactErrorLogging||console.error(p)}catch(Vc){Vc&&
+g._debugOwner,Qc=g._debugSource;var m=jd(g);var n=null;k&&(n=jd(k));k=Qc;m="\n    in "+(m||"Unknown")+(k?" (at "+k.fileName.replace(/^.*[\\\/]/,"")+":"+k.lineNumber+")":n?" (created by "+n+")":"");break a;default:m=""}h+=m;g=g["return"]}while(g);g=h;a=jd(a);null===R&&(R=new Map);b={componentName:a,componentStack:g,error:b,errorBoundary:d?c.stateNode:null,errorBoundaryFound:d,errorBoundaryName:f,willRetry:e};R.set(c,b);try{var p=b.error;p&&p.suppressReactErrorLogging||console.error(p)}catch(Vc){Vc&&
 Vc.suppressReactErrorLogging||console.error(Vc)}Qb?(null===ha&&(ha=new Set),ha.add(c)):G(c);return c}null===ca&&(ca=b);return null}function k(a){return null!==R&&(R.has(a)||null!==a.alternate&&R.has(a.alternate))}function q(a){return null!==qa&&(qa.has(a)||null!==a.alternate&&qa.has(a.alternate))}function v(){return 20*(((I()+100)/20|0)+1)}function y(a){return 0!==ka?ka:ja?Qb?1:H:!Hg||a.internalContextTag&1?v():1}function u(a,b){return z(a,b,!1)}function z(a,b){for(;null!==a;){if(0===a.expirationTime||
 a.expirationTime>b)a.expirationTime=b;null!==a.alternate&&(0===a.alternate.expirationTime||a.alternate.expirationTime>b)&&(a.alternate.expirationTime=b);if(null===a["return"])if(3===a.tag){var c=a.stateNode;!ja&&c===ra&&b<H&&(F=ra=null,H=0);var d=c,e=b;Rb>Ig&&E("185");if(null===d.nextScheduledRoot)d.remainingExpirationTime=e,null===O?(sa=O=d,d.nextScheduledRoot=d):(O=O.nextScheduledRoot=d,O.nextScheduledRoot=sa);else{var f=d.remainingExpirationTime;if(0===f||e<f)d.remainingExpirationTime=e}Fa||(la?
 Sb&&(ma=d,na=1,m(ma,na)):1===e?w(1,null):L(e));!ja&&c===ra&&b<H&&(F=ra=null,H=0)}else break;a=a["return"]}}function G(a){z(a,1,!0)}function I(){return Uc=((Wc()-Pe)/10|0)+2}function L(a){if(0!==Tb){if(a>Tb)return;Jg(Xc)}var b=Wc()-Pe;Tb=a;Xc=Kg(J,{timeout:10*(a-2)-b})}function N(){var a=0,b=null;if(null!==O)for(var c=O,d=sa;null!==d;){var e=d.remainingExpirationTime;if(0===e){null===c||null===O?E("244"):void 0;if(d===d.nextScheduledRoot){sa=O=d.nextScheduledRoot=null;break}else if(d===sa)sa=e=d.nextScheduledRoot,
@@ -23184,7 +23184,7 @@ var ReactFiberScheduler = function (config) {
       } else if (returnFiber !== null) {
         // If there's no more work in this returnFiber. Complete the returnFiber.
         workInProgress = returnFiber;
-        
+        continue;
       } else {
         // We've reached the root.
         var root = workInProgress.stateNode;
@@ -28683,12 +28683,7 @@ var ShredNavOverlay = function (_Component) {
                         { id: "navlink-list" },
                         _react2.default.createElement(_shreddiscoverbutton2.default, null),
                         _react2.default.createElement(_shredvidlistbutton2.default, null),
-                        _react2.default.createElement(_shredinfobutton2.default, null),
-                        _react2.default.createElement(
-                            "div",
-                            { id: "navlink" },
-                            "> Who We Are"
-                        )
+                        _react2.default.createElement(_shredinfobutton2.default, null)
                     )
                 )
             );
@@ -28913,8 +28908,8 @@ if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
 
-var options = {"hmr":true};
-options.transform = transform;
+var options = {"hmr":true}
+options.transform = transform
 // add the styles to the DOM
 var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
@@ -29109,8 +29104,8 @@ if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
 
-var options = {"hmr":true};
-options.transform = transform;
+var options = {"hmr":true}
+options.transform = transform
 // add the styles to the DOM
 var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
@@ -29308,8 +29303,8 @@ if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
 
-var options = {"hmr":true};
-options.transform = transform;
+var options = {"hmr":true}
+options.transform = transform
 // add the styles to the DOM
 var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
@@ -29353,8 +29348,8 @@ if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
 
-var options = {"hmr":true};
-options.transform = transform;
+var options = {"hmr":true}
+options.transform = transform
 // add the styles to the DOM
 var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
@@ -29462,8 +29457,8 @@ if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
 
-var options = {"hmr":true};
-options.transform = transform;
+var options = {"hmr":true}
+options.transform = transform
 // add the styles to the DOM
 var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
@@ -29507,8 +29502,8 @@ if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
 
-var options = {"hmr":true};
-options.transform = transform;
+var options = {"hmr":true}
+options.transform = transform
 // add the styles to the DOM
 var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
@@ -29622,8 +29617,8 @@ if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
 
-var options = {"hmr":true};
-options.transform = transform;
+var options = {"hmr":true}
+options.transform = transform
 // add the styles to the DOM
 var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
@@ -29650,7 +29645,7 @@ exports = module.exports = __webpack_require__(29)(undefined);
 
 
 // module
-exports.push([module.i, "#shredvidlist {\r\n    width: 100vw;\r\n    height: 100vw;\r\n    background-color: transparent;\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n    z-index: 15;\r\n}\r\n\r\n#shredvidlist.hide {\r\n    transform: translate3d(0, 200vw, 0);\r\n}\r\n\r\n#shredvidlist.show {\r\n    transform: translate3d(0, 0, 0);\r\n    overflow-x: auto;\r\n    overflow-y: auto;\r\n}\r\n\r\n#shredvidlist-background {\r\n    width: 100vw;\r\n    height: 120vw;\r\n    background-color: rgba(16, 16, 16, 0.5);\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n    z-index: 14;\r\n}\r\n\r\n#shredvidlist-background.hide {\r\n    transform: translate3d(0, 200vw, 0);\r\n}\r\n\r\n#shredvidlist-background.show {\r\n    transform: translate3d(0, 0, 0);\r\n    overflow-x: auto;\r\n    overflow-y: auto;\r\n}\r\n\r\n.vidPageContainer {\r\n    padding-left: 30px;\r\n    padding-right: 30px;\r\n    padding-top: 0px;\r\n    padding-bottom: 10px;\r\n    overflow: auto;\r\n    \r\n}\r\n\r\n.vidThumbContainer img {\r\n    width: 200px;\r\n    align-self: center;\r\n    padding-top: 10px;\r\n    padding-left: 10px;\r\n}\r\n\r\n.vidInfoContainer {\r\n    background-color: rgba(105, 33, 33, 0.7);\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n}\r\n\r\n.vidTextContainer {\r\n    padding-left: 10px;\r\n    padding-top: 10px;\r\n    padding-bottom: 10px;\r\n    padding-right: 10px;\r\n}\r\n\r\n.vidTitle {\r\n    font-family: serif;\r\n    font-weight: 500;\r\n    font-size: 32px;\r\n    letter-spacing: -0.3px;\r\n    text-align: left;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n    padding-bottom: 5px;\r\n}\r\n\r\n.vidReleaseDate {\r\n    font-family: PTMono;\r\n    font-size: 12px;\r\n    font-weight: bold;\r\n    letter-spacing: 4px;\r\n    text-align: left;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n}\r\n\r\n.vidSynopsis {\r\n    padding-top: 5px;\r\n    font-family: PTMono;\r\n    line-height: 1.33;\r\n    letter-spacing: -0.4px;\r\n    text-align: left;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n}\r\n\r\n.vidOrigin {\r\n    font-family: serif;\r\n    font-weight: 500;\r\n    letter-spacing: -0.3px;\r\n    text-align: center;\r\n    vertical-align: sub;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n    color: white;\r\n    padding-bottom: 5px;\r\n}\r\n\r\n.vidOrigin:hover {\r\n    transform: translateX(3px);\r\n    transition-duration: 0.3s;\r\n}\r\n\r\n#allvidsheading {\r\n    font-family: serif;\r\n    font-weight: 500;\r\n    font-size: 32px;\r\n    letter-spacing: -0.3px;\r\n    text-align: left;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n    padding-bottom: 5px;\r\n}\r\n\r\na {\r\n    color: white;\r\n    text-decoration: none;\r\n}\r\n", ""]);
+exports.push([module.i, "#shredvidlist {\r\n    width: 100vw;\r\n    height: 100vw;\r\n    background-color: transparent;\r\n    position: fixed;\r\n    top: 100vh;\r\n    left: 0;\r\n    transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n    z-index: 15;\r\n}\r\n\r\n#shredvidlist.hide {\r\n    transform: translate3d(0, 200vw, 0);\r\n}\r\n\r\n#shredvidlist.show {\r\n    transform: translate3d(0, 0, 0);\r\n    overflow-x: auto;\r\n    overflow-y: auto;\r\n}\r\n\r\n#shredvidlist-background {\r\n    width: 100vw;\r\n    height: 120vw;\r\n    background-color: rgba(16, 16, 16, 0.5);\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    transition: transform .3s cubic-bezier(0, .52, 0, 1);\r\n    z-index: 14;\r\n}\r\n\r\n#shredvidlist-background.hide {\r\n    transform: translate3d(0, 200vw, 0);\r\n}\r\n\r\n#shredvidlist-background.show {\r\n    transform: translate3d(0, 0, 0);\r\n    overflow-x: auto;\r\n    overflow-y: auto;\r\n}\r\n\r\n.vidPageContainer {\r\n    padding-left: 30px;\r\n    padding-right: 30px;\r\n    padding-top: 0px;\r\n    padding-bottom: 10px;\r\n    overflow: auto;\r\n    \r\n}\r\n\r\n.vidThumbContainer img {\r\n    width: 200px;\r\n    align-self: center;\r\n    padding-top: 10px;\r\n    padding-left: 10px;\r\n}\r\n\r\n.vidInfoContainer {\r\n    background-color: rgba(105, 33, 33, 0.7);\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n}\r\n\r\n.vidTextContainer {\r\n    padding-left: 10px;\r\n    padding-top: 10px;\r\n    padding-bottom: 10px;\r\n    padding-right: 10px;\r\n}\r\n\r\n.vidTitle {\r\n    font-family: serif;\r\n    font-weight: 500;\r\n    font-size: 32px;\r\n    letter-spacing: -0.3px;\r\n    text-align: left;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n    padding-bottom: 5px;\r\n}\r\n\r\n.vidReleaseDate {\r\n    font-family: PTMono;\r\n    font-size: 12px;\r\n    font-weight: bold;\r\n    letter-spacing: 4px;\r\n    text-align: left;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n}\r\n\r\n.vidSynopsis {\r\n    padding-top: 5px;\r\n    font-family: PTMono;\r\n    line-height: 1.33;\r\n    letter-spacing: -0.4px;\r\n    text-align: left;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n}\r\n\r\n.vidOrigin {\r\n    font-family: serif;\r\n    font-weight: 500;\r\n    letter-spacing: -0.3px;\r\n    text-align: center;\r\n    vertical-align: sub;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n    color: white;\r\n    padding-bottom: 5px;\r\n}\r\n\r\n.vidOrigin:hover {\r\n    transform: translateX(3px);\r\n    transition-duration: 0.3s;\r\n}\r\n\r\n#allvidsheading {\r\n    font-family: serif;\r\n    font-weight: 500;\r\n    font-size: 32px;\r\n    letter-spacing: -0.3px;\r\n    text-align: left;\r\n    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);\r\n    padding-bottom: 5px;\r\n}\r\n\r\na {\r\n    color: white;\r\n    text-decoration: none;\r\n}\r\n", ""]);
 
 // exports
 
@@ -29667,8 +29662,8 @@ if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
 
-var options = {"hmr":true};
-options.transform = transform;
+var options = {"hmr":true}
+options.transform = transform
 // add the styles to the DOM
 var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
@@ -30723,12 +30718,12 @@ module.exports = function() {
       'Use PropTypes.checkPropTypes() to call them. ' +
       'Read more at http://fb.me/use-check-prop-types'
     );
-  }
-    shim.isRequired = shim;
+  };
+  shim.isRequired = shim;
   function getShim() {
     return shim;
-  }
-    // Important!
+  };
+  // Important!
   // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
   var ReactPropTypes = {
     array: shim,
@@ -30764,21 +30759,21 @@ module.exports = function() {
 
 
 module.exports = function load (src, opts, cb) {
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var script = document.createElement('script');
+  var head = document.head || document.getElementsByTagName('head')[0]
+  var script = document.createElement('script')
 
   if (typeof opts === 'function') {
-    cb = opts;
+    cb = opts
     opts = {}
   }
 
-  opts = opts || {};
-  cb = cb || function() {};
+  opts = opts || {}
+  cb = cb || function() {}
 
-  script.type = opts.type || 'text/javascript';
+  script.type = opts.type || 'text/javascript'
   script.charset = opts.charset || 'utf8';
-  script.async = 'async' in opts ? !!opts.async : true;
-  script.src = src;
+  script.async = 'async' in opts ? !!opts.async : true
+  script.src = src
 
   if (opts.attrs) {
     setAttributes(script, opts.attrs)
@@ -30788,8 +30783,8 @@ module.exports = function load (src, opts, cb) {
     script.text = '' + opts.text
   }
 
-  var onend = 'onload' in script ? stdOnEnd : ieOnEnd;
-  onend(script, cb);
+  var onend = 'onload' in script ? stdOnEnd : ieOnEnd
+  onend(script, cb)
 
   // some good legacy browsers (firefox) fail the 'in' detection above
   // so as a fallback we always set onload
@@ -30799,7 +30794,7 @@ module.exports = function load (src, opts, cb) {
   }
 
   head.appendChild(script)
-};
+}
 
 function setAttributes(script, attrs) {
   for (var attr in attrs) {
@@ -30809,21 +30804,21 @@ function setAttributes(script, attrs) {
 
 function stdOnEnd (script, cb) {
   script.onload = function () {
-    this.onerror = this.onload = null;
+    this.onerror = this.onload = null
     cb(null, script)
-  };
+  }
   script.onerror = function () {
     // this.onload = null here is necessary
     // because even IE9 works not like others
-    this.onerror = this.onload = null;
+    this.onerror = this.onload = null
     cb(new Error('Failed to load ' + this.src), script)
   }
 }
 
 function ieOnEnd (script, cb) {
   script.onreadystatechange = function () {
-    if (this.readyState != 'complete' && this.readyState != 'loaded') return;
-    this.onreadystatechange = null;
+    if (this.readyState != 'complete' && this.readyState != 'loaded') return
+    this.onreadystatechange = null
     cb(null, script) // there is no way to catch loading errors in IE8
   }
 }
@@ -32516,8 +32511,8 @@ if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
 
-var options = {"hmr":true};
-options.transform = transform;
+var options = {"hmr":true}
+options.transform = transform
 // add the styles to the DOM
 var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
@@ -32561,8 +32556,8 @@ if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
 
-var options = {"hmr":true};
-options.transform = transform;
+var options = {"hmr":true}
+options.transform = transform
 // add the styles to the DOM
 var update = __webpack_require__(30)(content, options);
 if(content.locals) module.exports = content.locals;
