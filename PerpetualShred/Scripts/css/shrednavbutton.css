@@ -34,7 +34,7 @@
     background-size: 100%;
 }
 
-@media only screen and (max-device-width: 480px) {
+ @media (orientation: portrait) {
     .shrednavbutton-box {
         width: 120px;
         height: 120px;

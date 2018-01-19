@@ -22,7 +22,7 @@
 
 #shrednavoverlay-titlebar {
     width: 100vw;
-    height: 104px;
+    height: 164px;
     background-color: rgba(20, 20, 20, 0.7);
     position: fixed;
     top: 0;
@@ -32,7 +32,7 @@
 }
 
 #shrednavoverlay-background.hide {
-    transform: translate3d(0, -100vh, 0);
+    transform: translate3d(0, -200vh, 0);
 }
 
 #shrednavoverlay-background.show {
@@ -41,7 +41,7 @@
 }
 
 #shrednavoverlay.hide {
-    transform: translate3d(0, -100vh, 0);
+    transform: translate3d(0, -200vh, 0);
 }
 
 #shrednavoverlay.show {
@@ -50,7 +50,7 @@
 }
 
 #shrednavoverlay-titlebar.hide {
-    transform: translate3d(0, -100vh, 0);
+    transform: translate3d(0, -200vh, 0);
 }
 
 #shrednavoverlay-titlebar.show {

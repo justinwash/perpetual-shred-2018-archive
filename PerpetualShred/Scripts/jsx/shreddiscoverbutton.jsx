@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 class ShredDiscoverButton extends Component {
+    
+    discoverRadness(){
+        window.location.replace("http://www.perpetualshred.com/");
+    }
+    
     render() {
-
-        function discoverRadness(){
-            window.location.replace("http://www.perpetualshred.com/");
-        }
-        
-        return (
+    return (
             <div id="navlink">
                 <button id="navlink" type="button" onMouseDown={this.discoverRadness}>
                     <span className="shredvidlistbutton-box">∞ Discover Radness</span>

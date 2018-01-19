@@ -1,4 +1,4 @@
-@media only screen and (max-device-width: 480px) {
+@media (orientation: portrait) {
     .videocontainer {
         position: relative;
         display: flex;

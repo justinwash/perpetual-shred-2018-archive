@@ -22,7 +22,7 @@ class ShredNavOverlay extends Component {
                 <div id="shrednavoverlay" className={visibility}>
                     <div id="navlink-list">
                         <ShredDiscoverButton/>
-                        <ShredVidListButton/>
+                        <ShredVidListButton />
                         <ShredInfoButton/>
                     </div>
                 </div>
