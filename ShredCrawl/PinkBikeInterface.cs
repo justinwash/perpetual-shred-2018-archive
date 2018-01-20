@@ -84,14 +84,25 @@ namespace ShredCrawl
                         pbSourceList.Add(truncatedSourceFirstPass);
                     }
 
-                    pbSourceList[0] = pbSourceList[0].Substring(0, (pbSourceList[0].Length - 6));
-                    pbSourceList[1] = pbSourceList[1].Substring(0, (pbSourceList[1].Length - 6));
-                    pbSourceList[2] = pbSourceList[2].Substring(0, (pbSourceList[2].Length - 6));
-                    if (pbSourceList.Count == 4)
+                    
+                    if (pbSourceList.Count > 0)
                     {
-                        pbSourceList[3] = pbSourceList[3].Substring(1, (pbSourceList[3].Length - 7));
+                        var incr = 0;
+                        while (incr <= pbSourceList.Count - 1)
+                        {
+                            if (incr == 3)
+                                pbSourceList[incr] = pbSourceList[incr].Substring(1, (pbSourceList[incr].Length - 7));
+                            else
+                                pbSourceList[incr] = pbSourceList[incr].Substring(0, (pbSourceList[incr].Length - 6));
+                            incr++;
+                        }
+                    }
+                    else
+                    {
+                        mediaList.Add("NOTPB");
                     }
 
+                    if (pbSourceList.Count < 1) continue;
                     var sourcesJson = JsonConvert.SerializeObject(pbSourceList);
                     Console.WriteLine(@"sourceList= " + JsonConvert.DeserializeObject(sourcesJson));
                     pbVidToAdd.SourceList = sourcesJson;

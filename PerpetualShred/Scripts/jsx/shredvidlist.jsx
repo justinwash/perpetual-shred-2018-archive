@@ -17,11 +17,17 @@ class ShredVidList extends Component {
             return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
         }
         
+        function removeBrTag(text) {
+            text = text.replace(/[<]br[^>]*[>]/gi,"");
+            text = text.replace(/[<]br[^>] *[>]/gi,"");
+            return text;
+        }
+        
         return (
             <div className="vidlistcontainer">
                 <div id="shredvidlist-background" className={visibility} />
                 <div id="shredvidlist" className={visibility}>
-                    <div dangerouslySetInnerHTML={{__html: htmlDecode(jsVidList) }} />
+                    <div dangerouslySetInnerHTML={{__html: removeBrTag(htmlDecode(jsVidList)) }} />
                 </div>
             </div>
         );

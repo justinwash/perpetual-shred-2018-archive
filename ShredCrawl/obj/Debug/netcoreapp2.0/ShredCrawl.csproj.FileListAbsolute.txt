@@ -23,3 +23,16 @@ D:\Projects\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.
 D:\Projects\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.AssemblyInfo.cs
 D:\Projects\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.dll
 D:\Projects\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.pdb
+C:\Projects\GitHub\PerpetualShred\ShredCrawl\bin\Debug\netcoreapp2.0\ShredCrawl.deps.json
+C:\Projects\GitHub\PerpetualShred\ShredCrawl\bin\Debug\netcoreapp2.0\ShredCrawl.runtimeconfig.json
+C:\Projects\GitHub\PerpetualShred\ShredCrawl\bin\Debug\netcoreapp2.0\ShredCrawl.runtimeconfig.dev.json
+C:\Projects\GitHub\PerpetualShred\ShredCrawl\bin\Debug\netcoreapp2.0\ShredCrawl.dll
+C:\Projects\GitHub\PerpetualShred\ShredCrawl\bin\Debug\netcoreapp2.0\ShredCrawl.pdb
+C:\Projects\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.csprojResolveAssemblyReference.cache
+C:\Projects\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.Properties.Resources.resources
+C:\Projects\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.csproj.GenerateResource.Cache
+C:\Projects\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.csproj.CoreCompileInputs.cache
+C:\Projects\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.AssemblyInfoInputs.cache
+C:\Projects\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.AssemblyInfo.cs
+C:\Projects\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.dll
+C:\Projects\GitHub\PerpetualShred\ShredCrawl\obj\Debug\netcoreapp2.0\ShredCrawl.pdb
