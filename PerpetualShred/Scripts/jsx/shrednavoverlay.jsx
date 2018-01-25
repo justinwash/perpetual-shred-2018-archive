@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ShredDiscoverButton from "./shreddiscoverbutton.jsx";
-import ShredVidListButton from "./shredvidlistbutton.jsx";
+import ShredVidListBox from "./shredvidlistbox.jsx";
 import ShredInfoButton from "./shredinfobutton.jsx";
 require("!style-loader!css-loader!../css/shrednavoverlay.css");
 
@@ -22,7 +22,7 @@ class ShredNavOverlay extends Component {
                 <div id="shrednavoverlay" className={visibility}>
                     <div id="navlink-list">
                         <ShredDiscoverButton/>
-                        <ShredVidListButton />
+                        <ShredVidListBox toggleHandler={this.props.toggleHandler}/>
                         <ShredInfoButton/>
                     </div>
                 </div>

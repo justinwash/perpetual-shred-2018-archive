@@ -7,9 +7,9 @@ class ShredVidList extends Component {
     render() {
         var visibility = "hide";
 
-        if (this.props.menuVisibility) {
+        if (this.props.animSwitcher)
             visibility = "show";
-        }
+        else visibility = "hide";
 
         function htmlDecode(input) {
             var e = document.createElement('div');
@@ -34,7 +34,4 @@ class ShredVidList extends Component {
     }
 }
 
-ReactDOM.render(
-    <ShredVidList />,
-    document.getElementById("shredvidlist")
-);
+export default ShredVidList;
