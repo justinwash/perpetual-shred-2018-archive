@@ -3,12 +3,13 @@ import ShredDiscoverButton from "./shreddiscoverbutton.jsx";
 import ShredVidListBox from "./shredvidlistbox.jsx";
 import ShredInfoButton from "./shredinfobutton.jsx";
 require("!style-loader!css-loader!../css/shrednavoverlay.css");
+require("!style-loader!css-loader!../css/mobile/shrednavoverlay_mobile.css");
 
 class ShredNavOverlay extends Component {
     render() {
         var visibility = "hide";
 
-        if (this.props.animSwitcher)
+        if (this.props.navMenuAnimSwitcher)
             visibility = "show";
         else visibility = "hide";
         
@@ -16,13 +17,13 @@ class ShredNavOverlay extends Component {
             <div>
                 <div id="shrednavoverlay-background" className={visibility} />
                 <div id="shrednavoverlay-titlebar"
-                    onMouseDown={this.props.toggleHandler}
                     className={visibility}>
                 </div>
                 <div id="shrednavoverlay" className={visibility}>
                     <div id="navlink-list">
                         <ShredDiscoverButton/>
-                        <ShredVidListBox toggleHandler={this.props.toggleHandler}/>
+                        <ShredVidListBox allVidsHandler={this.props.allVidsHandler} 
+                                         animSwitcher={this.props.vidPageAnimSwitcher} />
                         <ShredInfoButton/>
                     </div>
                 </div>

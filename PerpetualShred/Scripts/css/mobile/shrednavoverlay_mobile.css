@@ -1,0 +1,9 @@
+@media (orientation: portrait) {
+    #navlink {
+        font-size: 64px;
+    }
+    
+    #shrednavoverlay-titlebar {
+        height: 164px
+    }
+}

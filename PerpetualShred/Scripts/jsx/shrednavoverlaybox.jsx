@@ -7,21 +7,36 @@ class ShredNavOverlayBox extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            active: false,
+            navmenuactive: false,
+            allvidspageactive: false
         };
 
         this.toggle = this.toggle.bind(this);
+        this.allVidsPressed = this.allVidsPressed.bind(this);
     }
 
     toggle() {
-        this.setState({ active: !this.state.active});
+        if (this.state.allvidspageactive)
+        {
+            this.setState({ allvidspageactive: false });
+        }
+        this.setState({ navmenuactive: !this.state.navmenuactive});
+    }
+    
+    allVidsPressed() {
+        this.setState({ navmenuactive: false, allvidspageactive: true });
     }
 
     render() {
         return (
             <div>
-                <ShredNavButton toggleHandler={this.toggle} animSwitcher={this.state.active}/>
-                <ShredNavOverlay toggleHandler={this.toggle} animSwitcher={this.state.active}/>
+                <ShredNavButton toggleHandler={this.toggle} 
+                                animSwitcher={this.state.navmenuactive}/>
+                
+                <ShredNavOverlay toggleHandler={this.toggle} 
+                                 allVidsHandler={this.allVidsPressed}
+                                 vidPageAnimSwitcher={this.state.allvidspageactive}
+                                 navMenuAnimSwitcher={this.state.navmenuactive}/>
             </div>
         )
     }

@@ -12,7 +12,7 @@
 #shrednavoverlay-background {
     width: 100vw;
     height: 100vh;
-    background-color: rgba(16, 16, 16, 0.8);
+    background-color: rgba(16, 16, 16, 0.95);
     position: fixed;
     top: 0;
     left: 0;
@@ -22,7 +22,7 @@
 
 #shrednavoverlay-titlebar {
     width: 100vw;
-    height: 164px;
+    height: 102px;
     background-color: rgba(20, 20, 20, 0.7);
     position: fixed;
     top: 0;
@@ -61,7 +61,7 @@
 #navlink {
     font-family: serif;
     font-weight: 500;
-    font-size: 64px;
+    font-size: 48px;
     align-self: center;
     letter-spacing: -0.3px;
     text-align: center;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 require("!style-loader!css-loader!../css/shrednavbutton.css");
+require("!style-loader!css-loader!../css/mobile/shrednavbutton_mobile.css");
 
 
 class ShredNavButton extends Component {

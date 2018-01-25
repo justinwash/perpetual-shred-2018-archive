@@ -10,12 +10,12 @@
 }
 
 #shredvidlist.hide {
-    transform: translate3d(0, -100vh, 0);
+    transform: translate3d(0, 400vh, 0);
     overflow: auto;
 }
 
 #shredvidlist.show {
-    transform: translate3d(0, 0vh, 0);
+    transform: translate3d(0, 200vh, 0);
     overflow-x: auto;
     overflow-y: auto;
 }
@@ -32,12 +32,12 @@
 }
 
 #shredvidlist-background.hide {
-    transform: translate3d(0, -100vh, 0);
+    transform: translate3d(0, 400vh, 0);
     overflow: auto;
 }
 
 #shredvidlist-background.show {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 200vh, 0);
     overflow-x: auto;
     overflow-y: auto;
 }
