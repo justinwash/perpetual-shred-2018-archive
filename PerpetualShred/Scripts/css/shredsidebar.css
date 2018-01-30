@@ -30,7 +30,7 @@
     top: 0;
     left: 0;
     transition: transform .3s cubic-bezier(0, .52, 0, 1);
-    overflow: scroll;
+    overflow: auto;
     z-index: 10;
 }
 

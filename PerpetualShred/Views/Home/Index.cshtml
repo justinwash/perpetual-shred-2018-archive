@@ -4,7 +4,7 @@
 
 @{
     var writer = new StringWriter();
-    Component.InvokeAsync("AllVidList", new { start = 0, count = 1000 }).Result.WriteTo(writer, HtmlEncoder);
+    Component.InvokeAsync($"ShredVidList", new { start = 0, count = 1000 }).Result.WriteTo(writer, HtmlEncoder);
 }
 
 @section Header {

@@ -7,11 +7,11 @@ using PerpetualShred.Models;
 
 namespace PerpetualShred.ViewComponents
 {
-    public class AllVidListViewComponent : ViewComponent
+    public class ShredVidListViewComponent : ViewComponent
     {
         private readonly PerpetualShredContext _db;
 
-        public AllVidListViewComponent(PerpetualShredContext context)
+        public ShredVidListViewComponent(PerpetualShredContext context)
         {
             _db = context;
         }

@@ -27,7 +27,7 @@ class ShredVidList extends Component {
             <div className="vidlistcontainer">
                 <div id="shredvidlist-background" className={visibility} />
                 <div id="shredvidlist" className={visibility}>
-                    <div dangerouslySetInnerHTML={{__html: removeBrTag(htmlDecode(jsVidList)) }} />
+                    $.get
                 </div>
             </div>
         );
