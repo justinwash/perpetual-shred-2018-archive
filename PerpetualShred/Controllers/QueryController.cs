@@ -1,16 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PerpetualShred.Controllers
 {
     public class QueryController : Controller
     {
-        public IActionResult Fetch(string startandcount)
+        public IActionResult Fetch(string subindex)
         {
-            var urlstart = -1;
-            var urlcount = -1;
-
-            if (urlstart == -1)
-                  return ViewComponent("ShredVidList", new {start = 0, count = 10});
+            var urlstart = Convert.ToInt32(subindex.Split("!")[0]);
+            var urlcount = Convert.ToInt32(subindex.Split("!")[1]);
+            
+            if (subindex == "" || subindex == null)
+            {
+                return ViewComponent("ShredVidList", new {start = 0, count = 10});
+            }
             else return ViewComponent("ShredVidList", new {start = urlstart, count = urlcount});
         }
     }

@@ -56,7 +56,7 @@ namespace PerpetualShred
                     template: "{controller=Home}/{action=Index}/{id?}");
                 routes.MapRoute(
                     name: "query",
-                    template: "{controller=Query}/{action=Fetch}/{startandcount?}");
+                    template: "{controller=Query}/{action=Fetch}/{subindex?}");
             });
         }
     }
