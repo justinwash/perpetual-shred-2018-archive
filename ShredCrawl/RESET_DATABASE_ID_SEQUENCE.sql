@@ -1,1 +1,0 @@
-﻿SET @reset = 0; UPDATE WebVid SET id = @reset:= @reset + 1;
