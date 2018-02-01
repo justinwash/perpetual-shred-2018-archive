@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ShredCrawl.Migrations
 {
-    [DbContext(typeof(PerpetualShredContext_0B395B8309F4411697C6Eb6C19F89Ae2Context))]
+    [DbContext(typeof(PerpetualShredContext))]
     [Migration("20171219030633_pbSources")]
     partial class PbSources
     {

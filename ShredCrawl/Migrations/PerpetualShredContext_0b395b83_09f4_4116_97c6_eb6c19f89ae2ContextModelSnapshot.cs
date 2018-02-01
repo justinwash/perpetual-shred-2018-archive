@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ShredCrawl.Migrations
 {
-    [DbContext(typeof(PerpetualShredContext_0B395B8309F4411697C6Eb6C19F89Ae2Context))]
+    [DbContext(typeof(PerpetualShredContext))]
     internal class PerpetualShredContext_0B395B8309F4411697C6Eb6C19F89Ae2ContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

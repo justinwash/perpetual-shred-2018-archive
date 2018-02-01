@@ -8,7 +8,7 @@ namespace ShredCrawl
         
         public static void AddToDb(WebVid webVid)
         {
-            using (var db = new PerpetualShredContext_0B395B8309F4411697C6Eb6C19F89Ae2Context())
+            using (var db = new PerpetualShredContext())
             {
                 if ((webVid.Title == null) || (webVid.Synopsis == null) || (webVid.Title == "") || (webVid.Synopsis == ""))
                 {

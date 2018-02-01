@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ShredCrawl
 {
-    public sealed class PerpetualShredContext_0B395B8309F4411697C6Eb6C19F89Ae2Context : DbContext
+    public sealed class PerpetualShredContext : DbContext
     {
         public DbSet<WebVid> WebVid { get; set; }
 
