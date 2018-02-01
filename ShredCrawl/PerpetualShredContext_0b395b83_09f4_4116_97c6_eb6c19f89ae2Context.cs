@@ -10,9 +10,7 @@ namespace ShredCrawl
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (optionsBuilder.IsConfigured) return;
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;
-				Database=PerpetualShredContext-0b395b83-09f4-4116-97c6-eb6c19f89ae2;
-                Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=mi3-wsq3.a2hosting.com;Initial Catalog=perpetu1_shred;User ID=perpetu1_Trif3ctuh;Password=;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

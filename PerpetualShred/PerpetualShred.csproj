@@ -5,6 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Properties\PublishProfiles\PerpetualShred - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\PerpetualShred20180102115742 - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\main.js" />

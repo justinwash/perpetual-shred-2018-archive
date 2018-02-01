@@ -7,6 +7,7 @@ namespace PerpetualShred.Models
         public PerpetualShredContext (DbContextOptions<PerpetualShredContext> options)
             : base(options)
         {
+            
         }
 
         public DbSet<WebVid> WebVid { get; set; }
