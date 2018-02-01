@@ -10,7 +10,7 @@ namespace ShredCrawl
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (optionsBuilder.IsConfigured) return;
-            optionsBuilder.UseSqlServer(@"Server=mi3-wsq3.a2hosting.com;Initial Catalog=perpetu1_shred;User ID=perpetu1_Trif3ctuh;Password=;");
+            optionsBuilder.UseSqlServer(@"Server=mi3-wsq3.a2hosting.com;Initial Catalog=perpetu1_shred;User ID=perpetu1_Trifectuh;Password=;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
