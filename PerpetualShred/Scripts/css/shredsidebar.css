@@ -3,7 +3,7 @@
 }
     
 #flyoutMenuBackground {
-    width: 40vw;
+    width: 30vw;
     height: 100vh;
     background-color: rgba(105, 33, 33, 0.7);
     position: fixed;
@@ -18,12 +18,12 @@
 }
 
 #flyoutMenuBackground.show {
-    transform: translate3d(60vw, 0, 0);
+    transform: translate3d(70vw, 0, 0);
     overflow: hidden;
 }
 
 #flyoutMenu {
-    width: 40vw;
+    width: 30vw;
     height: 100vh;
     background-color: transparent;
     position: fixed;
@@ -39,7 +39,7 @@
 }
 
 #flyoutMenu.show {
-    transform: translate3d(60vw, 0, 0);
+    transform: translate3d(70vw, 0, 0);
 }
 
 #vidtitle {
