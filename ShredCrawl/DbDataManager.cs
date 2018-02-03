@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace ShredCrawl
 {
-    internal class DbInterface
+    internal class DbDataManager
     {
         
         public static void AddToDb(WebVid webVid)

@@ -19,7 +19,7 @@ namespace ShredCrawl
 
             foreach (var webVid in vidsToAdd)
             {
-                DbInterface.AddToDb(webVid);
+                DbDataManager.AddToDb(webVid);
             }
             Console.ReadLine();
         }
