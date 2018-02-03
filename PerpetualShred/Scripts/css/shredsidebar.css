@@ -23,7 +23,7 @@
 }
 
 #flyoutMenu {
-    width: 30vw;
+    width: calc(30vw + 18px);
     height: 100vh;
     background-color: transparent;
     position: fixed;

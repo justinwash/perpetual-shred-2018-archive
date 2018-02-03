@@ -4,7 +4,7 @@
     }
     #flyoutMenu {
         height: 100vh;
-        width: 100vw;
+        width: calc(100vw + 18px);
         display: flex;
         flex-direction: column;
         top: auto;
