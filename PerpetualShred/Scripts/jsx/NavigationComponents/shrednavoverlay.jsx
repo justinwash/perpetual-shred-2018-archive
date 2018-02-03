@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import ShredDiscoverButton from "./shredoverlaynavbuttons/shreddiscoverbutton.jsx";
-import ShredVidListBox from "./shredvidlist/shredvidlistbox.jsx";
-import ShredInfoButton from "./shredoverlaynavbuttons/shredinfobutton.jsx";
+import ShredDiscoverButton from "./MainMenuButtons/shreddiscoverbutton.jsx";
+import ShredVidListBox from "./AllVideosPage/shredvidlistbox.jsx";
+import ShredInfoButton from "./MainMenuButtons/shredinfobutton.jsx";
 require("!style-loader!css-loader!../../css/shrednavoverlay.css");
 require("!style-loader!css-loader!../../css/mobile/shrednavoverlay_mobile.css");
 

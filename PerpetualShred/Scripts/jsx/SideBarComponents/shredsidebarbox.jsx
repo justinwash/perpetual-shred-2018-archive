@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import ShredSideBar from './shredsidebarcomponents/shredsidebar.jsx';
-import ShredSideBarButton from './shredsidebarcomponents/shredsidebarbutton.jsx';
+import ShredSideBar from '../SideBarComponents/shredsidebar.jsx';
+import ShredSideBarButton from '../SideBarComponents/shredsidebarbutton.jsx';
 
 class ShredSideBarBox extends Component {
     constructor(props, context) {

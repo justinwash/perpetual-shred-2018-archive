@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Microsoft.EntityFrameworkCore;
 
 namespace ShredCrawl
@@ -10,8 +11,9 @@ namespace ShredCrawl
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (optionsBuilder.IsConfigured) return;
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            optionsBuilder.UseSqlServer("Server=mi3-wsq3.a2hosting.com;Initial Catalog=perpetu1_shred;User ID=perpetu1_Trifectuh;Password=Trif3ctuh");
         }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

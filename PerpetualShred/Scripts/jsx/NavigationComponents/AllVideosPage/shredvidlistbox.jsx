@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import ShredVidList from './shredvidlist.jsx';
-import ShredVidListButton from '../shredoverlaynavbuttons/shredvidlistbutton.jsx';
+import ShredVidListButton from '../MainMenuButtons/shredvidlistbutton.jsx';
 
 class ShredVidListBox extends Component {
     render() {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import ShredNavOverlay from './shrednavigationcomponents/shrednavoverlay.jsx';
-import ShredNavUIButton from './shrednavigationcomponents/shrednavuibutton.jsx';
+import ShredNavOverlay from './shrednavoverlay.jsx';
+import ShredNavUIButton from './shrednavuibutton.jsx';
 
 class ShredNavOverlayBox extends Component {
     constructor(props, context) {
