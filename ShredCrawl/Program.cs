@@ -23,16 +23,5 @@ namespace ShredCrawl
             }
             Console.ReadLine();
         }
-
-        public static YouTubeService YoutTubeAuthorize()
-        {
-            var youtubeService = new YouTubeService(new BaseClientService.Initializer
-            {
-                ApiKey = YouTubeSettings.ApiKey,
-                ApplicationName = YouTubeSettings.AppName
-            });
-
-            return youtubeService;
-        }
     }
 }

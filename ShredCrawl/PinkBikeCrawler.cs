@@ -8,7 +8,9 @@ namespace ShredCrawl
     internal class PinkBikeCrawler
     {
         private HtmlDocument _homePage = new HtmlWeb().Load("https://www.pinkbike.com/news/videos/");
-        
+        IVideoCollection _vimcol = new VimeoCollection();
+        IVideoCollection _ytcol = new YouTubeCollection();
+
         public List<WebVid> CrawlPinkBike()
         {
             var pagesToCrawl = GetPostUrls();
@@ -18,9 +20,9 @@ namespace ShredCrawl
 
             foreach (var vidPage in pagesToCrawl)
             {
-                vidList.AddRange(YouTubeInterface.YouTubeCollect(vidPage.Doc));
-                vidList.AddRange(VimeoInterface.VimeoCollect(vidPage.Doc));
-                vidList.AddRange(PinkBikeInterface.PinkBikeCollect(vidPage.Doc, vidPage.Url));
+                vidList.AddRange(_vimcol.Collect(vidPage.Doc));
+                vidList.AddRange(_ytcol.Collect(vidPage.Doc));
+                vidList.AddRange(PinkBikeCollection.Collect(vidPage.Doc, vidPage.Url));
             }
 
             return vidList;
