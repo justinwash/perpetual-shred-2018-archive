@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
-require("!style-loader!css-loader!../css/shredburger.css");
-require("!style-loader!css-loader!../css/mobile/shredburger_mobile.css");
+require("!style-loader!css-loader!../../css/shredburger.css");
+require("!style-loader!css-loader!../../css/mobile/shredburger_mobile.css");
 
 class ShredSideBarButton extends Component {
     render() {

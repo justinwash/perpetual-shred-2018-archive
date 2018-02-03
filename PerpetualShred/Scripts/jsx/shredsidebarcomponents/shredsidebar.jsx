@@ -1,6 +1,6 @@
 ﻿import React, { Component } from "react";
-require("!style-loader!css-loader!../css/shredsidebar.css");
-require("!style-loader!css-loader!../css/mobile/shredsidebar_mobile.css");
+require("!style-loader!css-loader!../../css/shredsidebar.css");
+require("!style-loader!css-loader!../../css/mobile/shredsidebar_mobile.css");
 
 class ShredSideBar extends Component {
     render() {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-require("!style-loader!css-loader!../css/shredvidlist.css");
-require("!style-loader!css-loader!../css/mobile/shredvidlist_mobile.css");
+require("!style-loader!css-loader!../../../css/shredvidlist.css");
+require("!style-loader!css-loader!../../../css/mobile/shredvidlist_mobile.css");
 import axios from 'axios';
 import ShredNextButton from './shrednextbutton.jsx';
 

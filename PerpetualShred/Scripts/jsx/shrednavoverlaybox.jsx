@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import ShredNavOverlay from './shrednavoverlay.jsx';
-import ShredNavButton from './shrednavbutton.jsx';
+import ShredNavOverlay from './shrednavigationcomponents/shrednavoverlay.jsx';
+import ShredNavUIButton from './shrednavigationcomponents/shrednavuibutton.jsx';
 
 class ShredNavOverlayBox extends Component {
     constructor(props, context) {
@@ -30,7 +30,7 @@ class ShredNavOverlayBox extends Component {
     render() {
         return (
             <div>
-                <ShredNavButton toggleHandler={this.toggle} 
+                <ShredNavUIButton toggleHandler={this.toggle} 
                                 animSwitcher={this.state.navmenuactive}/>
                 
                 <ShredNavOverlay toggleHandler={this.toggle} 

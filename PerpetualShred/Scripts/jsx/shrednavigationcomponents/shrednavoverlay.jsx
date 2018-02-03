@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import ShredDiscoverButton from "./shreddiscoverbutton.jsx";
-import ShredVidListBox from "./shredvidlistbox.jsx";
-import ShredInfoButton from "./shredinfobutton.jsx";
-require("!style-loader!css-loader!../css/shrednavoverlay.css");
-require("!style-loader!css-loader!../css/mobile/shrednavoverlay_mobile.css");
+import ShredDiscoverButton from "./shredoverlaynavbuttons/shreddiscoverbutton.jsx";
+import ShredVidListBox from "./shredvidlist/shredvidlistbox.jsx";
+import ShredInfoButton from "./shredoverlaynavbuttons/shredinfobutton.jsx";
+require("!style-loader!css-loader!../../css/shrednavoverlay.css");
+require("!style-loader!css-loader!../../css/mobile/shrednavoverlay_mobile.css");
 
 class ShredNavOverlay extends Component {
     render() {
