@@ -7,9 +7,9 @@ using Newtonsoft.Json;
 
 namespace ShredCrawl
 {
-    internal class PinkBikeInterface
+    internal class PinkBikeCollection
     {
-        public static List<WebVid> PinkBikeCollect(HtmlDocument htmlDoc, string originUrl)
+        public static IEnumerable<WebVid> Collect(HtmlDocument htmlDoc, string originUrl)
         {
             var pinkbikeMatch = new Regex("(data-videoid=\")([0-9]+)\"");
             var pbVidList = new List<WebVid>();

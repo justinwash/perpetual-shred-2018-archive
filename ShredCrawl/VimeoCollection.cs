@@ -8,35 +8,9 @@ using Newtonsoft.Json;
 
 namespace ShredCrawl
 {
-    internal static class VimeoInterface
+    public class VimeoCollection : IVideoCollection
     {
-        private static VimeoVid RetrieveData(string vidUrl)
-        {
-            var vidId = int.Parse(vidUrl);
-            var vmVid = new VimeoVid();
-
-            var myDownloader = new WebClient {Encoding = Encoding.UTF8};
-
-
-            var jsonResponse = myDownloader.DownloadString("http://vimeo.com/api/v2/video/" + vidId + ".json");
-            var tempVidList = JsonConvert.DeserializeObject<List<VimeoVid>>(jsonResponse);
-            var tempVid = tempVidList[0];
-
-            vmVid.Title = tempVid.Title;
-            vmVid.UserId = tempVid.UserId;
-            vmVid.UserName = tempVid.UserName;
-            vmVid.UploadDate = tempVid.UploadDate;
-            vmVid.Description = VmTruncate(tempVid.Description, 200);
-            vmVid.ThumbnailLarge = tempVid.ThumbnailLarge;
-            return vmVid;
-        }
-
-        private static string VmTruncate(this string value, int maxChars)
-        {
-            return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
-        }
-
-        public static IEnumerable<WebVid> VimeoCollect(HtmlDocument htmlDoc)
+        public IEnumerable<WebVid> Collect(HtmlDocument htmlDoc)
         {
             var vimeoMatch = new Regex("(player.)?(vimeo.com)/(video/)?([0-9]+)");
 
@@ -75,6 +49,32 @@ namespace ShredCrawl
             }
 
             return vmVidList;
+        }
+        
+        private VimeoVid RetrieveData(string vidUrl)
+        {
+            var vidId = int.Parse(vidUrl);
+            var vmVid = new VimeoVid();
+
+            var myDownloader = new WebClient { Encoding = Encoding.UTF8 };
+
+
+            var jsonResponse = myDownloader.DownloadString("http://vimeo.com/api/v2/video/" + vidId + ".json");
+            var tempVidList = JsonConvert.DeserializeObject<List<VimeoVid>>(jsonResponse);
+            var tempVid = tempVidList[0];
+
+            vmVid.Title = tempVid.Title;
+            vmVid.UserId = tempVid.UserId;
+            vmVid.UserName = tempVid.UserName;
+            vmVid.UploadDate = tempVid.UploadDate;
+            vmVid.Description = VmTruncate(tempVid.Description, 200);
+            vmVid.ThumbnailLarge = tempVid.ThumbnailLarge;
+            return vmVid;
+        }
+
+        private string VmTruncate(string value, int maxChars)
+        {
+            return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
         }
 
     }
