@@ -7,8 +7,8 @@ class ShredNextButton extends Component {
     render() {
         
         return (
-            <button className="vidOrigin" type="button" onMouseDown={this.props.nextHandler}>
-                NEXT 10 SHREDITS
+            <button className={this.props.buttonType} type="button" onMouseDown={this.props.nextHandler}>
+                {this.props.displayName}
             </button>
         );
     }

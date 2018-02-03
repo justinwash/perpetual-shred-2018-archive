@@ -9,20 +9,31 @@ class ShredVidList extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            vidlist: {__html: "There doesn't appear to be anything here."}
+            vidlist: {__html: "There doesn't appear to be anything here."},
+            vidSetStart: 0,
+            vidSetLength: 5,
+            pageNumber: 1
         };
 
         this.getVidSubset = this.getVidSubset.bind(this);
-        this.getNextTen = this.getNextTen.bind(this);
+        this.getNextSet = this.getNextSet.bind(this);
+        this.getPrevSet = this.getPrevSet.bind(this);
     }
-    
     
     componentDidMount() {
-        this.getVidSubset(0, 10);
+        this.getVidSubset(this.state.vidSetStart, this.state.vidSetLength);
     }
     
-    getNextTen() {
-        this.getVidSubset(10, 20);
+    getNextSet() {
+        this.getVidSubset((this.state.vidSetStart + this.state.vidSetLength), this.state.vidSetLength);
+        this.setState({vidSetStart: (this.state.vidSetStart + this.state.vidSetLength)});
+        this.setState({pageNumber: (this.state.pageNumber + 1)});
+    }
+    
+    getPrevSet() {
+        this.getVidSubset((this.state.vidSetStart - this.state.vidSetLength), this.state.vidSetLength);
+        this.setState({vidSetStart: (this.state.vidSetStart - this.state.vidSetLength)});
+        this.setState({pageNumber: (this.state.pageNumber - 1)});
     }
 
     getVidSubset(start, count) {
@@ -45,7 +56,15 @@ class ShredVidList extends Component {
                 <div id="shredvidlist-background" className={visibility} />
                 <div id="shredvidlist" className={visibility}>
                     <div dangerouslySetInnerHTML={ this.state.vidlist } />
-                    <ShredNextButton nextHandler={this.getNextTen} />
+                    <div className={"nextbuttonbox"}>
+                        <ShredNextButton nextHandler={this.getNextSet}
+                                         buttonType={"shrednextbutton"}
+                                         displayName={"NEXT"} />
+                        <div className="pagecounter">{this.state.pageNumber}</div>
+                        <ShredNextButton nextHandler={this.getPrevSet}
+                                         buttonType={"shredprevbutton"}
+                                         displayName={"PREV"} />
+                    </div>
                 </div>
             </div>
         );

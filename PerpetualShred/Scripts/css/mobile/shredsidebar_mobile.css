@@ -8,17 +8,16 @@
         display: flex;
         flex-direction: column;
         top: auto;
+        overflow: auto;
     }
     
     #flyoutMenu.show { 
         transform: none;
-        overflow: hidden;
     }
 
     #flyoutMenu.hide {
         display: none;
         transform: none;
-        overflow: hidden;
     }
 
     #flyoutMenuBackground.show {
@@ -79,7 +78,7 @@
         padding-top: 5%;
         padding-left: 10%;
         padding-right: 10%;
-        padding-bottom: 5%;
+        padding-bottom: 100%;
         font-family: PTMono;
         font-size: 36px;
         line-height: 1.33;

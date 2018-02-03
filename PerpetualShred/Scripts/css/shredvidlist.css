@@ -129,3 +129,49 @@ a {
     color: white;
     text-decoration: none;
 }
+
+.shrednextbutton {
+    position: absolute;
+    font-family: serif;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.3px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    padding: 10px;
+    left: 80%;
+    color: white;
+    background-color: rgba(105, 33, 33, 0.7);
+}
+
+.nextbuttonbox {
+    padding-bottom: 54px;
+}
+
+.shredprevbutton {
+    position: absolute;
+    font-family: serif;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.3px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    padding: 10px;
+    left: 8%;
+    color: white;
+    background-color: rgba(105, 33, 33, 0.7);
+}
+
+.pagecounter {
+    position: absolute;
+    font-family: serif;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.3px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    padding: 10px;
+    left: 48%;
+    color: white;
+    background-color: rgba(105, 33, 33, 0.7);
+}

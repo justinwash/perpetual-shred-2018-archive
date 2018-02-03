@@ -24,7 +24,15 @@ namespace PerpetualShred.ViewComponents
 
         private Task<List<WebVid>> GetVidsAsync(int start, int count)
         {
+            
+            if (_db.WebVid.Skip(start).Take(count).ToList().Count < 1)
+            {
+                start = 0;
+                count = 5;
+            }
+            
             return _db.WebVid.Skip(start).Take(count).ToListAsync();
+            
         }
     }
 }
