@@ -3,7 +3,7 @@
 }
     
 #flyoutMenuBackground {
-    width: 30vw;
+    width: calc(30vw + 18px);
     height: 100vh;
     background-color: rgba(105, 33, 33, 0.7);
     position: fixed;
@@ -82,4 +82,40 @@
     padding-left: 10%;
     padding-right: 10%;
     padding-bottom: 50%;
+}
+
+@media (max-width: 1280px) {
+    #flyoutMenu {
+        width: calc(40vw + 18px);
+    }
+
+    #flyoutMenu.show {
+        transform: translate3d(60vw, 0, 0);
+    }
+
+    #flyoutMenuBackground {
+        width: 40vw;
+    }
+
+    #flyoutMenuBackground.show {
+        transform: translate3d(60vw, 0, 0);
+    }
+}
+
+@media (max-width: 800px) {
+    #flyoutMenu {
+        width: calc(50vw + 18px);
+    }
+
+    #flyoutMenu.show {
+        transform: translate3d(50vw, 0, 0);
+    }
+
+    #flyoutMenuBackground {
+        width: 50vw;
+    }
+
+    #flyoutMenuBackground.show {
+        transform: translate3d(50vw, 0, 0);
+    }
 }

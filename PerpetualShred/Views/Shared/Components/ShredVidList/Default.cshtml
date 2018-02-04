@@ -7,15 +7,16 @@
 @foreach (var shredVid in Model) {
 <div class="vidPageContainer">
     <div class="vidInfoContainer">
-        <div class="vidThumbContainer"><img src="@shredVid.Thumbnail" />
-            <div class="vidOrigin"><a href="@shredVid.OriginUrl">> @shredVid.VideoService</a></div>
+        <div class="vidThumbContainer">
+            <a href="@shredVid.OriginUrl">
+                <img src="@shredVid.Thumbnail"/>
+            </a>
         </div>
         <div class="vidTextContainer">
             <div class="vidTitle"><a asp-action="Index" 
                                      asp-controller="Home"
                                      asp-route-id="@shredVid.Id"> @shredVid.Title </a></div>
             <div class="vidReleaseDate">@shredVid.ReleaseDate</div>
-            <div class="vidSynopsis">@shredVid.Synopsis</div>
         </div>
     </div>
 </div> }
