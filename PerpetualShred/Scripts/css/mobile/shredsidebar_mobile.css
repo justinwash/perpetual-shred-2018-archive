@@ -1,32 +1,47 @@
 @media (orientation: portrait){
     .menucontainer {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
     }
     #flyoutMenu {
         height: 100vh;
         width: calc(100vw + 18px);
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
         flex-direction: column;
         top: auto;
         overflow: auto;
     }
-    
-    #flyoutMenu.show { 
+
+    #flyoutMenu.show {
+        -webkit-transform: none;
+        -ms-transform: none;
         transform: none;
     }
 
     #flyoutMenu.hide {
         display: none;
+        -webkit-transform: none;
+        -ms-transform: none;
         transform: none;
     }
 
     #flyoutMenuBackground.show {
+        -webkit-transform: none;
+        -ms-transform: none;
         transform: none;
         overflow: hidden;
     }
 
     #flyoutMenuBackground.hide {
         display: none;
+        -webkit-transform: none;
+        -ms-transform: none;
         transform: none;
         overflow: hidden;
     }

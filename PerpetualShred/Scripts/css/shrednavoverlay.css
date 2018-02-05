@@ -5,7 +5,11 @@
     position: fixed;
     top: 0;
     left: 0;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+    transition: -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+    -o-transition: transform .3s cubic-bezier(0, .52, 0, 1);
     transition: transform .3s cubic-bezier(0, .52, 0, 1);
+    transition: transform .3s cubic-bezier(0, .52, 0, 1), -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
     z-index: 15;
 }
 
@@ -16,7 +20,11 @@
     position: fixed;
     top: 0;
     left: 0;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+    transition: -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+    -o-transition: transform .3s cubic-bezier(0, .52, 0, 1);
     transition: transform .3s cubic-bezier(0, .52, 0, 1);
+    transition: transform .3s cubic-bezier(0, .52, 0, 1), -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
     z-index: 14;
 }
 
@@ -27,33 +35,43 @@
     position: fixed;
     top: 0;
     left: 0;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+    transition: -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+    -o-transition: transform .3s cubic-bezier(0, .52, 0, 1);
     transition: transform .3s cubic-bezier(0, .52, 0, 1);
+    transition: transform .3s cubic-bezier(0, .52, 0, 1), -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
     z-index: 13;
 }
 
 #shrednavoverlay-background.hide {
+    -webkit-transform: translate3d(0, -200vh, 0);
     transform: translate3d(0, -200vh, 0);
 }
 
 #shrednavoverlay-background.show {
+    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     overflow: hidden;
 }
 
 #shrednavoverlay.hide {
+    -webkit-transform: translate3d(0, -200vh, 0);
     transform: translate3d(0, -200vh, 0);
 }
 
 #shrednavoverlay.show {
+    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     overflow: hidden;
 }
 
 #shrednavoverlay-titlebar.hide {
+    -webkit-transform: translate3d(0, -200vh, 0);
     transform: translate3d(0, -200vh, 0);
 }
 
 #shrednavoverlay-titlebar.show {
+    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     overflow: hidden;
 }
@@ -62,6 +80,8 @@
     font-family: serif;
     font-weight: 500;
     font-size: 48px;
+    -ms-flex-item-align: center;
+    -ms-grid-row-align: center;
     align-self: center;
     letter-spacing: -0.3px;
     text-align: center;
@@ -70,11 +90,17 @@
 }
 
 #navlink:hover {
-        transform: translateX(5px);
-        transition-duration: 0.3s;
-    }
+    -webkit-transform: translateX(5px);
+    -ms-transform: translateX(5px);
+    transform: translateX(5px);
+    -webkit-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
 
 #navlink-list {
+    -ms-flex-item-align: center;
+    -ms-grid-row-align: center;
     align-self: center;
     top: 50%;
     padding-top: 40vh;

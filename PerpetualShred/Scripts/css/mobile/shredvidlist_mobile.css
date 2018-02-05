@@ -1,16 +1,18 @@
 @media (orientation: portrait) {
     .vidlistcontainer {
         height: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
     }
-    
+
     #shredvidlist-background.show {
         position: absolute;
         height: 100vh;
         top: 0;
         left: 0;
     }
-    
+
     #shredvidlist-background {
         width: 100vw;
         height: 100vh;
@@ -18,26 +20,37 @@
         position: relative;
         top: 0;
         left: 0;
+        -webkit-transition: -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+        transition: -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+        -o-transition: transform .3s cubic-bezier(0, .52, 0, 1);
         transition: transform .3s cubic-bezier(0, .52, 0, 1);
+        transition: transform .3s cubic-bezier(0, .52, 0, 1), -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
         z-index: 14;
     }
-    
+
     #shredvidlist {
+        -webkit-transform: none;
+        -ms-transform: none;
         transform: none;
         position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
         flex-direction: column;
         top: auto;
         height: 100%;
     }
-    
+
     #shredvidlist.show {
         position: absolute;
         height: 100vh;
         top: 0;
         left: 0;
     }
-    
+
     .vidPageContainer {
         padding-left: 0;
         padding-right: 0;

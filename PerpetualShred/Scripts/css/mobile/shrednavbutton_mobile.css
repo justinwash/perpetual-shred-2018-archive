@@ -5,6 +5,7 @@
     }
 
     #shrednavbutton.dock {
+        -webkit-transform: translate3d(-36px, -36px, 0);
         transform: translate3d(-36px, -36px, 0);
     }
 }

@@ -1,7 +1,7 @@
 #container li {
     margin-bottom: 10px;
 }
-    
+
 #flyoutMenuBackground {
     width: calc(30vw + 18px);
     height: 100vh;
@@ -9,15 +9,21 @@
     position: fixed;
     top: 0;
     left: 0;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+    transition: -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+    -o-transition: transform .3s cubic-bezier(0, .52, 0, 1);
     transition: transform .3s cubic-bezier(0, .52, 0, 1);
+    transition: transform .3s cubic-bezier(0, .52, 0, 1), -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
     z-index: 9;
 }
 
 #flyoutMenuBackground.hide {
+    -webkit-transform: translate3d(200vw, 0, 0);
     transform: translate3d(200vw, 0, 0);
 }
 
 #flyoutMenuBackground.show {
+    -webkit-transform: translate3d(70vw, 0, 0);
     transform: translate3d(70vw, 0, 0);
     overflow: hidden;
 }
@@ -29,16 +35,23 @@
     position: fixed;
     top: 0;
     left: 0;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+    transition: -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+    -o-transition: transform .3s cubic-bezier(0, .52, 0, 1);
     transition: transform .3s cubic-bezier(0, .52, 0, 1);
+    transition: transform .3s cubic-bezier(0, .52, 0, 1), -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
     overflow: auto;
     z-index: 10;
+    overflow-x: hidden;
 }
 
 #flyoutMenu.hide {
+    -webkit-transform: translate3d(200vw, 0, 0);
     transform: translate3d(200vw, 0, 0);
 }
 
 #flyoutMenu.show {
+    -webkit-transform: translate3d(70vw, 0, 0);
     transform: translate3d(70vw, 0, 0);
 }
 
@@ -90,6 +103,7 @@
     }
 
     #flyoutMenu.show {
+        -webkit-transform: translate3d(60vw, 0, 0);
         transform: translate3d(60vw, 0, 0);
     }
 
@@ -98,6 +112,7 @@
     }
 
     #flyoutMenuBackground.show {
+        -webkit-transform: translate3d(60vw, 0, 0);
         transform: translate3d(60vw, 0, 0);
     }
 }
@@ -108,6 +123,7 @@
     }
 
     #flyoutMenu.show {
+        -webkit-transform: translate3d(50vw, 0, 0);
         transform: translate3d(50vw, 0, 0);
     }
 
@@ -116,6 +132,7 @@
     }
 
     #flyoutMenuBackground.show {
+        -webkit-transform: translate3d(50vw, 0, 0);
         transform: translate3d(50vw, 0, 0);
     }
 }
