@@ -56,7 +56,7 @@
     #vidtitle {
         font-family: serif;
         font-weight: 500;
-        font-size: 72px;
+        font-size: 10vw;
         padding-top: 10%;
         padding-left: 10%;
         padding-right: 10%;
@@ -70,7 +70,7 @@
         padding-left: 10%;
         padding-right: 10%;
         font-family: PTMono;
-        font-size: 30px;
+        font-size: 3vw;
         font-weight: bold;
         letter-spacing: 4px;
         text-align: left;
@@ -83,7 +83,7 @@
         padding-right: 10%;
         padding-bottom: 5%;
         font-family: PTMono;
-        font-size: 48px;
+        font-size: 5vw;
         line-height: 1.33;
         letter-spacing: -0.4px;
         text-align: left;
@@ -95,7 +95,7 @@
         padding-right: 10%;
         padding-bottom: 100%;
         font-family: PTMono;
-        font-size: 36px;
+        font-size: 5vw;
         line-height: 1.33;
         letter-spacing: -0.4px;
         text-align: left;

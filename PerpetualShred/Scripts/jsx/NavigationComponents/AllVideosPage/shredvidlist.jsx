@@ -21,7 +21,18 @@ class ShredVidList extends Component {
     }
     
     componentDidMount() {
-        this.getVidSubset(this.state.vidSetStart, this.state.vidSetLength);
+        var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        var vidFit;
+        if (windowHeight < 1200) {
+            vidFit = Math.floor(windowHeight / 100 );
+            this.setState({ vidSetLength: vidFit });
+        }
+        else {
+            vidFit = Math.floor(windowHeight / 150 );
+            this.setState({ vidSetLength: vidFit });
+        }
+        
+        this.getVidSubset(this.state.vidSetStart, vidFit);
     }
     
     getNextSet() {

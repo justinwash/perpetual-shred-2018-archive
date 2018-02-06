@@ -52,7 +52,23 @@
     }
 
     .vidPageContainer {
+        height: 88px;
+        overflow: hidden;
         padding-left: 0;
         padding-right: 0;
+    }
+    
+    #allvidsheading {
+        font-size: 3.5vw;
+    }
+    
+    .vidTitle {
+        font-size: 5vw;
+    }
+}
+
+@media (min-resolution: 100dpi) {
+    .vidPageContainer {
+        height: 172px;
     }
 }
