@@ -23,12 +23,12 @@ class ShredVidList extends Component {
     componentDidMount() {
         var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
         var vidFit;
-        if (windowHeight < 1200) {
+        if (windowHeight < 1000) {
             vidFit = Math.floor(windowHeight / 100 );
             this.setState({ vidSetLength: vidFit });
         }
         else {
-            vidFit = Math.floor(windowHeight / 150 );
+            vidFit = Math.floor(windowHeight / 180 );
             this.setState({ vidSetLength: vidFit });
         }
         

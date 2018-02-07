@@ -53,7 +53,7 @@
 }
 
 .vidThumbContainer img {
-    height: 88px;
+    height: 116px;
     align-self: center;
     padding-top: 5px;
     padding-left: 5px;
@@ -75,11 +75,10 @@
     font-family: serif;
     font-weight: 500;
     font-size: 5vh;
-    height: 8vh;
     letter-spacing: -0.3px;
     text-align: left;
     text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
-    padding-bottom: 5px;
+    padding-bottom: 10px;
 }
 
 .vidReleaseDate {
