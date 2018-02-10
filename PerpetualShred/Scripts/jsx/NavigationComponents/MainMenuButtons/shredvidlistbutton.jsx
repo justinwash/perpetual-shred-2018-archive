@@ -5,8 +5,7 @@ class ShredVidListButton extends Component {
         return (
             <div id="navlink">
                 <button id="navlink" type="button" onMouseDown={this.props.allVidsHandler}>
-                    <span className="shredvidlistbutton-box" 
-                          onMouseDown={this.props.animSwitcher}>> All Videos</span>
+                    <span className="shredvidlistbutton-box">> All Videos</span>
                 </button>
             </div>
         );

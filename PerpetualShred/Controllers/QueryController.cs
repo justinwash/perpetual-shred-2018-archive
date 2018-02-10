@@ -16,5 +16,10 @@ namespace PerpetualShred.Controllers
             }
             else return ViewComponent("ShredVidList", new {start = urlstart, count = urlcount});
         }
+
+        public IActionResult ComingUp()
+        {
+            return ViewComponent("ComingUp");
+        }
     }
 }

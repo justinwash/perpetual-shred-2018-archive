@@ -1,0 +1,24 @@
+﻿@model IEnumerable<WebVid>
+
+<div id="comingupheading">
+    <h4 align="center">Coming Up:</h4>
+</div>
+
+@foreach (var shredVid in Model)
+{
+    <div class="CUvidPageContainer">
+        <div class="CUvidInfoContainer">
+            <div class="CUvidThumbContainer">
+                <a href="@shredVid.OriginUrl">
+                    <img src="@shredVid.Thumbnail" />
+                </a>
+            </div>
+            <div class="CUvidTextContainer">
+                <div class="CUvidTitle">
+                    <a asp-action="Index"
+                       asp-controller="Home"
+                       asp-route-id="@shredVid.Id">@shredVid.Title</a>
+                </div>
+            </div>
+        </div>
+    </div>      }
