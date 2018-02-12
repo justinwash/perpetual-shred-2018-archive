@@ -14,6 +14,7 @@ namespace ShredCrawl
             var pinkbikeMatch = new Regex("(data-videoid=\")([0-9]+)\"");
             var pbVidList = new List<WebVid>();
             var titleList = new ArrayList();
+            var thumbList = new ArrayList();
             var synList = new ArrayList();
             var mediaList = new ArrayList();
             var infoNodes = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class, 'blog-text-container')]");
@@ -23,6 +24,7 @@ namespace ShredCrawl
             var pinkbikeTitle = new Regex("<span(.*?)<");
             var pinkbikeSynopsis = new Regex("</span(.*?)<");
             var videoSource = new Regex("<source(.*?)type");
+            var pinkbikeThumb = new Regex("poster(.*?).jpg");
             int vidNumber;
 
             var pbPreceder = "www.pinkbike.com/v/embed/";
@@ -66,6 +68,9 @@ namespace ShredCrawl
                     pbVidToAdd.PlayerUrl = "https://" + pbLink + "?colors=c80000&a=1&showheadshot=0&showtitle=0&showbyline=0";
                     pbVidToAdd.VideoService = "PinkBike";
 
+                    var pbThumb = pinkbikeThumb.Match(mediaNode.InnerHtml).Value;
+                    pbVidToAdd.Thumbnail = pbThumb.Substring(8, (pbThumb.Length - 8));
+
                     if ((titleList[vidNumber].ToString() != null) && (titleList[vidNumber].ToString() != ""))
                     {
                         pbVidToAdd.Title = titleList[vidNumber].ToString().Substring(19, titleLength);
@@ -101,6 +106,8 @@ namespace ShredCrawl
                     {
                         mediaList.Add("NOTPB");
                     }
+                    
+                    
 
                     if (pbSourceList.Count < 1) continue;
                     var sourcesJson = JsonConvert.SerializeObject(pbSourceList);

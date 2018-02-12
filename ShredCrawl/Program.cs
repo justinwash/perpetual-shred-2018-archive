@@ -10,7 +10,7 @@ namespace ShredCrawl
         private static void Main()
         {
             var vidsToAdd = new List<WebVid>();
-            var pbCrawler = new PinkBikeCrawler();
+            var pbCrawler = new Crawlers.PinkBikeCrawler();
 
             vidsToAdd.AddRange(pbCrawler.CrawlPinkBike());
 

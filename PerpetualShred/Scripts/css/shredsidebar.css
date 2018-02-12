@@ -43,6 +43,8 @@
     overflow: auto;
     z-index: 10;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 #flyoutMenu.hide {
@@ -59,18 +61,20 @@
     font-family: serif;
     font-weight: 500;
     font-size: 48px;
-    padding-top: 20%;
+    padding-top: 10%;
     padding-left: 10%;
     padding-right: 10%;
-    padding-bottom: 5%;
+    padding-bottom: 3%;
     letter-spacing: -0.3px;
     text-align: left;
     text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    line-height: 40px
 }
 
 #descriptionheader {
     padding-left: 10%;
     padding-right: 10%;
+    padding-bottom: 2%;
     font-family: PTMono;
     font-size: 12px;
     font-weight: bold;
@@ -80,10 +84,10 @@
 }
 
 #vidsynopsis {
-    padding-top: 5%;
+    padding-top: 0%;
     padding-left: 10%;
     padding-right: 10%;
-    padding-bottom: 5%;
+    padding-bottom: 3%;
     font-family: PTMono;
     line-height: 1.33;
     letter-spacing: -0.4px;
@@ -94,7 +98,7 @@
 #vidoriginlink {
     padding-left: 10%;
     padding-right: 10%;
-    padding-bottom: 50%;
+    padding-bottom: 5%;
 }
 
 @media (max-width: 1280px) {
@@ -135,4 +139,35 @@
         -webkit-transform: translate3d(50vw, 0, 0);
         transform: translate3d(50vw, 0, 0);
     }
+}
+
+.CUvidThumbContainer img {
+    height: 64px;
+    align-self: center;
+    padding-top: 15px;
+}
+
+.CUvidInfoContainer {
+    display: flex;
+    flex-direction: row;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.CUvidTextContainer {
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    font-size: 14px;
+}
+
+.CUvidTitle {
+    font-family: serif;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.3px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    padding-bottom: 10px;
 }

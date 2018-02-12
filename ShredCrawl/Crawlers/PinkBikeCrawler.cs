@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 
-namespace ShredCrawl
+namespace ShredCrawl.Crawlers
 {
     internal class PinkBikeCrawler
     {

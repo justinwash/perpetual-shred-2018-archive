@@ -18,7 +18,7 @@ namespace ShredCrawl
                 if (db.WebVid.Any(o => o.PlayerUrl == webVid.PlayerUrl))
                 {
                     Console.WriteLine("Duplicate found : " + webVid.Title);
-                }
+                } 
 
                 else
                 {
