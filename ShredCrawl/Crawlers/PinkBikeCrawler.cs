@@ -7,7 +7,8 @@ namespace ShredCrawl.Crawlers
 {
     internal class PinkBikeCrawler
     {
-        private HtmlDocument _homePage = new HtmlWeb().Load("https://www.pinkbike.com/news/videos/");
+        // private HtmlDocument _homePage = new HtmlWeb().Load("https://www.pinkbike.com/news/videos");
+        private HtmlDocument _homePage = new HtmlWeb().Load("https://www.pinkbike.com/news/archive/?catid=0&year=2017&month=3");
         IVideoCollection _vimcol = new VimeoCollection();
         IVideoCollection _ytcol = new YouTubeCollection();
 
@@ -22,7 +23,7 @@ namespace ShredCrawl.Crawlers
             {
                 vidList.AddRange(_vimcol.Collect(vidPage.Doc));
                 vidList.AddRange(_ytcol.Collect(vidPage.Doc));
-                vidList.AddRange(PinkBikeCollection.Collect(vidPage.Doc, vidPage.Url));
+                vidList.AddRange(Collections.PinkBikeCollection.Collect(vidPage.Doc, vidPage.Url));
             }
 
             return vidList;
@@ -30,7 +31,11 @@ namespace ShredCrawl.Crawlers
 
         public List<PinkBikePage> GetPostUrls()
         {
-            var posts = _homePage.DocumentNode.SelectNodes("/html/body/div[4]/div/div[1]/div/div/div[1]/div[2]/div[2]/div");
+            // For homepage
+            // var posts = _homePage.DocumentNode.SelectNodes("/html/body/div[4]/div/div[1]/div/div/div[1]/div[2]/div[2]/div");
+            
+            // For archive
+            var posts = _homePage.DocumentNode.SelectNodes("/html/body/div[4]/div/div[1]/div/div/div/div[2]/div[3]/div");
             var vidPageLink = new Regex("<a class=\"f22 fgrey4 bold\" href=\"(.*?)>");
 
             var postList = new List<PinkBikePage>();

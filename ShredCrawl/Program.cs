@@ -21,6 +21,7 @@ namespace ShredCrawl
             {
                 DbDataManager.AddToDb(webVid);
             }
+            Console.WriteLine("DONE!");
             Console.ReadLine();
         }
     }

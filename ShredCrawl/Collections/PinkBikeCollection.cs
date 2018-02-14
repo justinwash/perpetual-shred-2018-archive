@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 
-namespace ShredCrawl
+namespace ShredCrawl.Collections
 {
     internal class PinkBikeCollection
     {
@@ -44,6 +44,7 @@ namespace ShredCrawl
 
             }
 
+            if (mediaNodes == null) return pbVidList;
             foreach (var mediaNode in mediaNodes)
             {
                 var pbMatches = pinkbikeMatch.Match(mediaNode.OuterHtml);
@@ -65,20 +66,23 @@ namespace ShredCrawl
                     var titleLength = titleList[vidNumber].ToString().Length - 21;
                     var synopsisLength = synList[vidNumber].ToString().Length - 8;
 
-                    pbVidToAdd.PlayerUrl = "https://" + pbLink + "?colors=c80000&a=1&showheadshot=0&showtitle=0&showbyline=0";
+                    pbVidToAdd.PlayerUrl = "https://" + pbLink +
+                                           "?colors=c80000&a=1&showheadshot=0&showtitle=0&showbyline=0";
                     pbVidToAdd.VideoService = "PinkBike";
 
                     var pbThumb = pinkbikeThumb.Match(mediaNode.InnerHtml).Value;
                     pbVidToAdd.Thumbnail = pbThumb.Substring(8, (pbThumb.Length - 8));
 
-                    if ((titleList[vidNumber].ToString() != null) && (titleList[vidNumber].ToString() != ""))
+                    if ((titleList[vidNumber].ToString() != null) && (titleLength >= 19) && (titleList[vidNumber].ToString() != ""))
                     {
                         pbVidToAdd.Title = titleList[vidNumber].ToString().Substring(19, titleLength);
                     }
+
                     if ((synList[vidNumber].ToString() != null) && (synList[vidNumber].ToString() != ""))
                     {
                         pbVidToAdd.Synopsis = synList[vidNumber].ToString().Substring(7, synopsisLength);
                     }
+
                     pbVidToAdd.OriginUrl = originUrl;
                     pbVidToAdd.OriginTitle = pageTitle.InnerText;
                     pbVidToAdd.ReleaseDate = DateTime.Today;
@@ -89,16 +93,18 @@ namespace ShredCrawl
                         pbSourceList.Add(truncatedSourceFirstPass);
                     }
 
-                    
+
                     if (pbSourceList.Count > 0)
                     {
                         var incr = 0;
                         while (incr <= pbSourceList.Count - 1)
                         {
                             if (incr == 3)
-                                pbSourceList[incr] = pbSourceList[incr].Substring(1, (pbSourceList[incr].Length - 7));
+                                pbSourceList[incr] =
+                                    pbSourceList[incr].Substring(1, (pbSourceList[incr].Length - 7));
                             else
-                                pbSourceList[incr] = pbSourceList[incr].Substring(0, (pbSourceList[incr].Length - 6));
+                                pbSourceList[incr] =
+                                    pbSourceList[incr].Substring(0, (pbSourceList[incr].Length - 6));
                             incr++;
                         }
                     }
@@ -106,8 +112,8 @@ namespace ShredCrawl
                     {
                         mediaList.Add("NOTPB");
                     }
-                    
-                    
+
+
 
                     if (pbSourceList.Count < 1) continue;
                     var sourcesJson = JsonConvert.SerializeObject(pbSourceList);
