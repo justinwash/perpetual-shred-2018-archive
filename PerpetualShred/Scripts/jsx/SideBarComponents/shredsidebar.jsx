@@ -24,10 +24,12 @@ class ShredSideBar extends Component {
                 <div id="vidsynopsis">
                     {jsModel.Synopsis}
                 </div>
-                <div id="vidoriginlink">
-                    read more at {jsModel.VideoService}.com
-                </div>
-                    <ShredComingUp />
+              
+                    <div id="vidoriginlink">
+                        read more at <a href={jsModel.OriginUrl}>{jsModel.VideoService}.com</a>
+                    </div>
+                
+                <ShredComingUp />
             </div>
         </div> )
     }
