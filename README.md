@@ -13,9 +13,9 @@ Getting set up:
 1. Install Node.js
 2. Install dependencies (React, React-Video, Webpack, Babel):
  
-  npm install --save react react-dom react-video axios
+  npm install --save react react-dom react-player axios
   
-  npm install --save-dev webpack babel-loader babel-core babel-preset-es2015 babel-preset-react
+  npm install --save-dev webpack babel-loader babel-core babel-preset-es2015 babel-preset-react babel-polyfill-stage-1 style-loader css-loader
   
   npm install  –g webpack webpack-dev-server
 
