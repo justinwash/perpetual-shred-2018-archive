@@ -33,7 +33,13 @@ class ShredComingUp extends Component {
         )}
         else
             return (
-                <div dangerouslySetInnerHTML={this.state.comingUp} />)
+                <div id="CUBox">
+                    <div id="comingupheading">
+                        COMING UP:
+                    </div>
+                    <div dangerouslySetInnerHTML={this.state.comingUp} />
+                </div>
+            )
     }
 }
 

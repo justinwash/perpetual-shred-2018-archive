@@ -60,21 +60,21 @@
 #vidtitle {
     font-family: serif;
     font-weight: 500;
-    font-size: 48px;
+    font-size: 36px;
     padding-top: 10%;
     padding-left: 10%;
     padding-right: 10%;
-    padding-bottom: 3%;
+    padding-bottom: 6%;
     letter-spacing: -0.3px;
     text-align: left;
     text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
-    line-height: 40px
+    line-height: 0.9;
 }
 
 #descriptionheader {
     padding-left: 10%;
     padding-right: 10%;
-    padding-bottom: 2%;
+    padding-bottom: 1%;
     font-family: PTMono;
     font-size: 12px;
     font-weight: bold;
@@ -87,18 +87,26 @@
     padding-top: 0%;
     padding-left: 10%;
     padding-right: 10%;
-    padding-bottom: 3%;
+    padding-bottom: 5%;
     font-family: PTMono;
-    line-height: 1.33;
+    line-height: 1.1;
     letter-spacing: -0.4px;
     text-align: left;
     text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    font-size: large;
 }
 
-#vidoriginlink {
+#vidsourcelink {
+    padding-top: 0%;
     padding-left: 10%;
     padding-right: 10%;
-    padding-bottom: 5%;
+    padding-bottom: 3%;
+    font-family: PTMono;
+    line-height: 1;
+    letter-spacing: -0.4px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    font-size: medium;
 }
 
 @media (max-width: 1280px) {
@@ -143,8 +151,9 @@
 
 .CUvidThumbContainer img {
     height: 64px;
+    width: 112px;
     align-self: center;
-    padding-top: 15px;
+    padding-top: 10px;
 }
 
 .CUvidInfoContainer {
@@ -165,7 +174,7 @@
 .CUvidTitle {
     font-family: serif;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 14px;
     letter-spacing: -0.3px;
     text-align: left;
     text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
@@ -173,8 +182,17 @@
 }
 
 #comingupheading {
-    margin: 0;
-    padding: 0;
     padding-left: 10%;
-    display: inline-block;
+    padding-right: 10%;
+    padding-top: 4%;
+    font-family: PTMono;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+}
+
+#CUBox {
+    padding-bottom: 60vh;
 }
