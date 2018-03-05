@@ -1,12 +1,7 @@
 ﻿import React, { Component } from 'react';
 import ShredComingUp from './shredcomingup.jsx';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import fontawesome from '@fortawesome/fontawesome';
-import brands from '@fortawesome/fontawesome-free-brands';
 require('!style-loader!css-loader!../../css/shredsidebar.css');
 require('!style-loader!css-loader!../../css/mobile/shredsidebar_mobile.css');
-
-fontawesome.library.add(brands);
 
 class ShredSideBar extends Component {
     render() {
@@ -33,8 +28,7 @@ class ShredSideBar extends Component {
                     <div id="descriptionheader">
                         SOURCE:
                     </div>
-                    <div id="vidsourcelink">
-                        <FontAwesomeIcon icon={["fab", "youtube"]} /> &nbsp; <a href={jsModel.OriginUrl}>{jsModel.VideoService}</a>
+                    <div id="vidsourcelink"><a href={jsModel.OriginUrl}>{jsModel.VideoService}</a>
                     </div>
                 </div>
                 
