@@ -12,12 +12,11 @@ module.exports = {
     },
     module: {
         
-        loaders: [{
+        rules: [{
             exclude: /node_modules/,
             loader: "babel-loader",
             query: {
-                presets: ["es2015", "stage-1", "react"],
-                plugins: ["add-module-exports"]
+                presets: ["es2015", "stage-1", "react"]
             }
         }]
     }
