@@ -102,4 +102,11 @@
         text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
 
     }
+
+    #CUvidThumbContainer img {
+        height: 14vw;
+        width: 24vw;
+        align-self: center;
+        padding-top: 10px;
+    }
 }

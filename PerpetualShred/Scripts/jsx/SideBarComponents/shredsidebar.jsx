@@ -28,7 +28,8 @@ class ShredSideBar extends Component {
                     <div id="descriptionheader">
                         SOURCE:
                     </div>
-                    <div id="vidsourcelink"><a href={jsModel.OriginUrl}>{jsModel.VideoService}</a>
+                    <div id="vidsourcelink"><a href={jsModel.OriginUrl}>
+                        <img className="ytLogo" src={'/images/yt_icon_mono_dark.png'} />  {jsModel.VideoService}</a>
                     </div>
                 </div>
                 
