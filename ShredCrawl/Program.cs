@@ -14,8 +14,7 @@ namespace ShredCrawl
 
             vidsToAdd.AddRange(pbCrawler.CrawlPinkBike());
 
-            Console.WriteLine(@"Crawled PinkBike dude! Found " + vidsToAdd.Count + @" videos. Press anything to add the new ones to the Db.");
-            Console.ReadLine();
+            Console.WriteLine(@"Crawled PinkBike dude! Found " + vidsToAdd.Count + @" videos. Adding new ones to the database.");
 
             foreach (var webVid in vidsToAdd)
             {
