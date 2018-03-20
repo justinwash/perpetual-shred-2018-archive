@@ -10,19 +10,17 @@ namespace PerpetualShred.Controllers
     public class HomeController : Controller
     {
         private readonly PerpetualShredContext _context;
-        private readonly ICookieService _cookieService;
 
-        public HomeController(PerpetualShredContext context, ICookieService cookieService)
+        public HomeController(PerpetualShredContext context)
         {
             _context = context;
-            _cookieService = cookieService;
         }
         public async Task<IActionResult> Index(int? id)
         {
             
             if (id == null)
             {
-                var randomizer = new Randomizer(_cookieService);
+                var randomizer = new Randomizer();
 
                 var vidList = new List<WebVid>();
                 vidList.AddRange(_context.WebVid);

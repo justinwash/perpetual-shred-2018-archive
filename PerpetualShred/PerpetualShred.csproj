@@ -21,9 +21,7 @@
     <PackageReference Include="WindowsAzure.Storage" Version="8.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <DotNetCliToolReference
-
-            Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Connected Services\" />
@@ -32,6 +30,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Account\Login.cshtml" />
   </ItemGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="webpack" />

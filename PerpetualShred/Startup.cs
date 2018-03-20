@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PerpetualShred.Data.Identity;
 using PerpetualShred.Models;
-//using React.AspNet;
+using PerpetualShred.Data;
+using PerpetualShred.Services;
 
 namespace PerpetualShred
 {
@@ -22,38 +22,22 @@ namespace PerpetualShred
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ICookieService, CookieService>();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddMvc();
-            
-            // Add PerpetualShred DB Context
             services.AddDbContext<PerpetualShredContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("PerpetualShredContext")));
             
-            //Add Identity Services
-            services.AddIdentity<ShredIdentityUser, ShredIdentityRole>()
-                .AddEntityFrameworkStores<PerpetualShredContext>()
+            services.AddDbContext<ShredUsersContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("ShredUsersContext")));
+
+            services.AddIdentity<ShredUser, IdentityRole>()
+                .AddEntityFrameworkStores<ShredUsersContext>()
                 .AddDefaultTokenProviders();
 
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.LoginPath = "/Security/Login";
-                options.LogoutPath = "/Security/Logout";
-                options.AccessDeniedPath = "/Security/AccessDenied";
-                options.SlidingExpiration = true;
-                options.Cookie = new CookieBuilder
-                {
-                    HttpOnly = true,
-                    Name = ".PerpetualShred.Security.Cookie",
-                    Path = "/",
-                    SameSite = SameSiteMode.Lax,
-                    SecurePolicy = CookieSecurePolicy.SameAsRequest
-                };
-            });
-            
-            return services.BuildServiceProvider();
+            // Add application services.
+            services.AddTransient<IEmailSender, EmailSender>();
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
