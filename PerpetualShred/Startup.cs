@@ -46,7 +46,7 @@ namespace PerpetualShred
                 options.Cookie = new CookieBuilder
                 {
                     HttpOnly = true,
-                    Name = ".Fiver.Security.Cookie",
+                    Name = ".PerpetualShred.Security.Cookie",
                     Path = "/",
                     SameSite = SameSiteMode.Lax,
                     SecurePolicy = CookieSecurePolicy.SameAsRequest
@@ -70,6 +70,7 @@ namespace PerpetualShred
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
