@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PerpetualShred.Data.Identity;
 using PerpetualShred.Models;
 //using React.AspNet;
 
@@ -24,13 +26,33 @@ namespace PerpetualShred
         {
             services.AddTransient<ICookieService, CookieService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            //services.AddReact();
             services.AddMvc();
-
+            
+            // Add PerpetualShred DB Context
             services.AddDbContext<PerpetualShredContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("PerpetualShredContext")));
+            
+            //Add Identity Services
+            services.AddIdentity<ShredIdentityUser, ShredIdentityRole>()
+                .AddEntityFrameworkStores<PerpetualShredContext>()
+                .AddDefaultTokenProviders();
 
-                    options.UseSqlServer(Configuration.GetConnectionString("PerpetualShredContext")));
-
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Security/Login";
+                options.LogoutPath = "/Security/Logout";
+                options.AccessDeniedPath = "/Security/AccessDenied";
+                options.SlidingExpiration = true;
+                options.Cookie = new CookieBuilder
+                {
+                    HttpOnly = true,
+                    Name = ".Fiver.Security.Cookie",
+                    Path = "/",
+                    SameSite = SameSiteMode.Lax,
+                    SecurePolicy = CookieSecurePolicy.SameAsRequest
+                };
+            });
+            
             return services.BuildServiceProvider();
         }
 
