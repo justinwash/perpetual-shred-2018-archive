@@ -7,3 +7,4 @@ import ShredSideBarBox from './jsx/SideBarComponents/shredsidebarbox.jsx';
 import ShredVidList from './jsx/NavigationComponents/AllVideosPage/shredvidlist.jsx';
 // Import video player
 import ShredPlayer from './jsx/shredplayer.jsx';
+import ShredLoginPage from './jsx/NavigationComponents/LoginPage/shredloginpage.jsx'

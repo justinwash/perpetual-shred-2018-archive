@@ -1,0 +1,46 @@
+@media (orientation: portrait) {
+    #shredloginpage-background.show {
+        position: absolute;
+        height: 100vh;
+        top: 0;
+        left: 0;
+    }
+
+    #shredloginpage-background {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(16, 16, 16, 0.95);
+        position: relative;
+        top: 0;
+        left: 0;
+        -webkit-transition: -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+        transition: -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+        -o-transition: transform .3s cubic-bezier(0, .52, 0, 1);
+        transition: transform .3s cubic-bezier(0, .52, 0, 1);
+        transition: transform .3s cubic-bezier(0, .52, 0, 1), -webkit-transform .3s cubic-bezier(0, .52, 0, 1);
+        z-index: 14;
+    }
+
+    #shredloginpage {
+        -webkit-transform: none;
+        -ms-transform: none;
+        transform: none;
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        top: auto;
+        height: 100%;
+    }
+
+    #shredloginpage.show {
+        position: absolute;
+        height: 100vh;
+        top: 0;
+        left: 0;
+    }
+}

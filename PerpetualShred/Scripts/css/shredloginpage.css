@@ -1,0 +1,50 @@
+#shredloginpage {
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: transform .3s cubic-bezier(0, .52, 0, 1);
+    z-index: 15;
+}
+
+#shredloginpage.hide {
+    transform: translate3d(0, 400vh, 0);
+    overflow: auto;
+}
+
+#shredloginpage.show {
+    transform: translate3d(0, 200vh, 0);
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+#shredloginpage-background {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(16, 16, 16, 0.85);
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: transform .3s cubic-bezier(0, .52, 0, 1);
+    z-index: 14;
+}
+
+#shredloginpage-background.hide {
+    transform: translate3d(0, 400vh, 0);
+    overflow: auto;
+}
+
+#shredloginpage-background.show {
+    transform: translate3d(0, 200vh, 0);
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+
