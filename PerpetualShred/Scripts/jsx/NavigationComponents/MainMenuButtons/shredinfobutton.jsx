@@ -15,9 +15,10 @@ class ShredInfoButton extends Component {
 
         return (
             <div id="navlink">
+                <a href="/Account/Logout">
                 <button id="navlink" type="button" onMouseDown={this.infoVisibility}>
                     <span className="shredvidlistbutton-box">> Who We Are</span>
-                </button>
+                </button></a>
             </div>
         );
     }

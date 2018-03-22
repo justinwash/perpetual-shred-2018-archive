@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class ShredDiscoverButton extends Component {
 
     discoverRadness(){
-        window.location.replace("http://www.perpetualshred.com/");
+        window.location.replace("/");
     }
 
     render() {
