@@ -470,4 +470,4 @@ ShredCrawl/obj/project.assets.json
 ShredCrawl/obj/ShredCrawl.csproj.nuget.cache
 ShredCrawl/obj/ShredCrawl.csproj.nuget.g.props
 ShredCrawl/obj/ShredCrawl.csproj.nuget.g.targets
-PerpetualShred/appsettings.json
+appsettings.json

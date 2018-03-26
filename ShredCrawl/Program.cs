@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
+using Microsoft.Extensions.Configuration;
 
 namespace ShredCrawl
 {
@@ -9,6 +10,7 @@ namespace ShredCrawl
     {
         private static void Main()
         {
+            
             var vidsToAdd = new List<WebVid>();
             var pbCrawler = new Crawlers.PinkBikeCrawler();
 

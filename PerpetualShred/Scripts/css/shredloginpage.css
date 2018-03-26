@@ -47,4 +47,15 @@ a {
     text-decoration: none;
 }
 
+#formcontainer {
+    position: relative;
+    text-align: center;
+    top: 28vh;
+}
+
+#formcontainer button {
+    background-color: white;
+    color: black;
+    
+}
 
