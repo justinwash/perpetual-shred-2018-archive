@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import ShredComingUp from './shredcomingup.jsx';
+import FavButton from'./favbutton.jsx';
 require('!style-loader!css-loader!../../css/shredsidebar.css');
 require('!style-loader!css-loader!../../css/mobile/shredsidebar_mobile.css');
 
@@ -32,7 +33,7 @@ class ShredSideBar extends Component {
                         <img className="ytLogo" src={'/images/yt_icon_mono_dark.png'} />  {jsModel.VideoService}</a>
                     </div>
                 </div>
-                
+                <FavButton />
                 <ShredComingUp />
             </div>
         </div> )

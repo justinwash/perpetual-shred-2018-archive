@@ -200,3 +200,20 @@
 .ytLogo {
     height: 12px;
 }
+
+.hornicon {
+    height: 18px;
+}
+
+#favbuttonbox {
+    padding-top: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 3%;
+    font-family: PTMono;
+    line-height: 1;
+    letter-spacing: -0.4px;
+    text-align: left;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    font-size: medium;
+}
