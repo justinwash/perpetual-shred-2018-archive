@@ -45,7 +45,7 @@ constructor(props){
     }
 
     getAccountView() {
-        axios.get("/Manage/Index")
+        axios.get("/Account/UserFavs")
             .then(res => {
                 const accountHtml = res.data.toString();
                 this.setState({ viewHtml: {__html: accountHtml} });

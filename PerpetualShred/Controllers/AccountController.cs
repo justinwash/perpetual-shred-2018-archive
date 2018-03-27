@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,20 +17,20 @@ using PerpetualShred.Models;
 using PerpetualShred.Models.AccountViewModels;
 using PerpetualShred.Services;
 using PerpetualShred.Data;
+using IdentityResult = Microsoft.AspNetCore.Identity.IdentityResult;
 
 namespace PerpetualShred.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly UserManager<ShredUser> _userManager;
+        private readonly Microsoft.AspNetCore.Identity.UserManager<ShredUser> _userManager;
         private readonly SignInManager<ShredUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly ShredUsersContext _context;
 
-        public AccountController(
-            UserManager<ShredUser> userManager,
+        public AccountController(Microsoft.AspNetCore.Identity.UserManager<ShredUser> userManager,
             SignInManager<ShredUser> signInManager,
             IEmailSender emailSender,
             ILogger<AccountController> logger,
@@ -63,41 +64,58 @@ namespace PerpetualShred.Controllers
         [AllowAnonymous]
         public bool AddFav(string vidUrl)
         {
-            using (var db = _context)
+            if (User != null && User.Identity.IsAuthenticated)
             {
-                if (db.ShredUser.Find(User.Identity.Name).Favorites != null)
+                using (var db = _context)
                 {
-                    string currentFavs = db.ShredUser.Find(User.Identity.Name).Favorites;
+                    var tempUser = db.ShredUser.Find(User.Identity.GetUserId());
 
-
-                    if (currentFavs == null && vidUrl != null)
+                    if (tempUser.Favorites == null && vidUrl != null)
                     {
-                        var newFavs = new ArrayList<string>();
-                        newFavs.Add(vidUrl);
+                        var newFavs = new List<string> {vidUrl};
                         var favJson = JsonConvert.SerializeObject(newFavs);
-                        db.ShredUser.Find(User.Identity.Name).Favorites = favJson;
+                        tempUser.Favorites = favJson;
+                        db.ShredUser.Find(User.Identity.GetUserId()).Favorites = tempUser.Favorites;
+                        db.SaveChanges();
                         return true;
                     }
-                    else if (currentFavs != null && vidUrl != null)
+                    else if (tempUser.Favorites != null && vidUrl != null)
                     {
-                        if (currentFavs.Contains(vidUrl))
+                        if (tempUser.Favorites.Contains(vidUrl))
                         {
                             return false;
                         }
                         else
                         {
-                            var favArray = JsonConvert.DeserializeObject<ArrayList<string>>(currentFavs);
-                            favArray.Add(vidUrl);
-                            var favJson = JsonConvert.SerializeObject(favArray);
-                            db.ShredUser.Find(User.Identity.Name).Favorites = favJson;
+                            var favList = JsonConvert.DeserializeObject<List<string>>(tempUser.Favorites);
+                            favList.Add(vidUrl);
+                            var favJson = JsonConvert.SerializeObject(favList);
+                            tempUser.Favorites = favJson;
+                            db.ShredUser.Find(User.Identity.GetUserId()).Favorites = tempUser.Favorites;
+                            db.SaveChanges();
                             return true;
                         }
                     }
+                    else return false;
                 }
-                else
+            }
+            else return false;
+        }
+        
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult UserFavs()
+        {
+            using (var db = _context)
+            {
+                var userFavs = db.ShredUser.Find(User.Identity.GetUserId()).Favorites;
+
+                if (User.Identity.IsAuthenticated && userFavs != null)
                 {
-                    return false;
+                    return ViewComponent("Favs", new {favString = userFavs});
                 }
+
+                else return View("Login");
             }
         }
        
