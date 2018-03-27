@@ -33,7 +33,12 @@ class ShredSideBar extends Component {
                         <img className="ytLogo" src={'/images/yt_icon_mono_dark.png'} />  {jsModel.VideoService}</a>
                     </div>
                 </div>
-                <FavButton />
+                <div id="favbuttonbox">
+                    <div id="descriptionheader">
+                    MY SHREDNESS:
+                    </div>
+                    <FavButton />
+                </div>
                 <ShredComingUp />
             </div>
         </div> )

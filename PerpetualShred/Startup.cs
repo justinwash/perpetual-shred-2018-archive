@@ -64,6 +64,9 @@ namespace PerpetualShred
                 routes.MapRoute(
                     name: "query",
                     template: "{controller=Query}/{action=Fetch}/{subindex?}");
+                routes.MapRoute(
+                    name: "account",
+                    template: "{controller=Account}/{action=AddFav}/{vidId?}");
             });
         }
     }

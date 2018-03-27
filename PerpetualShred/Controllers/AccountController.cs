@@ -17,7 +17,6 @@ using PerpetualShred.Services;
 namespace PerpetualShred.Controllers
 {
     [Authorize]
-    [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
         private readonly UserManager<ShredUser> _userManager;
@@ -53,6 +52,19 @@ namespace PerpetualShred.Controllers
                 return false;
             }
         }
+        
+        [HttpGet]
+        [AllowAnonymous]
+        public bool AddFav(string vidUrl)
+        {
+            if (vidUrl != null)
+                return true;
+            else
+            {
+                return false;
+            }
+        }
+       
         
         [HttpGet]
         [AllowAnonymous]
