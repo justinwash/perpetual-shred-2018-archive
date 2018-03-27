@@ -12,5 +12,8 @@ namespace PerpetualShred.Data
         {
             
         }
+        
+        public DbSet<ShredUser> ShredUser { get; set; }
     }
+    
 }
