@@ -26,7 +26,7 @@ class ShredPlayer extends React.Component {
     reload() {
         console.log('trying to refresh!');
         if (loaded = true) {
-            window.location.reload()
+            window.location.replace("/")
         } 
     }
     render() {
