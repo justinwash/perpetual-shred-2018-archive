@@ -20,14 +20,14 @@ namespace PerpetualShred.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(string favString)
         {
-            var items = GetVidsAsync(favString);
+            var items =  GetVidsAsync(favString);
             return View(items);
         }
 
         private List<WebVid> GetVidsAsync(string favString)
         {
             var favList = JsonConvert.DeserializeObject<List<string>>(favString);
-            List<WebVid> webVidList = null;
+            var webVidList = new List<WebVid>();
             foreach (var vidUrl in favList)
             {
                 var tempVid = _vidDb.WebVid.First(r => r.PlayerUrl.Contains(vidUrl));
