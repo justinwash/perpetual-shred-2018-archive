@@ -67,6 +67,7 @@ namespace PerpetualShred.Controllers
             if (User != null && User.Identity.IsAuthenticated)
             {
                 using (var db = _context)
+                
                 {
                     var tempUser = db.ShredUser.Find(User.Identity.GetUserId());
 

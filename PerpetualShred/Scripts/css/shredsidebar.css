@@ -227,3 +227,17 @@
     text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
     font-size: medium;
 }
+
+#favbuttonbox #formcontainer {
+    position: relative;
+    text-align: left;
+    top: 0px;
+    padding-left: 10%;
+    font-size: medium;
+}
+
+#favbuttonbox .btn-default {
+    padding-top: 12px;
+    padding-left: 0px;
+    font-weight: bolder;
+}
