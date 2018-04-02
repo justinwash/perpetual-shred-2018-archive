@@ -42,10 +42,11 @@ class FavButton extends Component {
     }
 
     getLoginView() {
+        this.setState({ loading: true });
         axios.get("/Account/Login")
             .then(res => {
                 const loginHtml = res.data.toString();
-                this.setState({ viewHtml: {__html: loginHtml} });
+                this.setState({ viewHtml: {__html: loginHtml, loading: false} });
             })
     }
     
