@@ -15,9 +15,9 @@ class ShredLoginButton extends Component {
         var displayText = "";
         if (this.props.isLoggedIn)
         {
-            displayText = "> My Shredness";
+            displayText = "My Shredness";
         }
-        else displayText = "> Log In";
+        else displayText = "Log In";
         
         return (
             <div id="navlink">

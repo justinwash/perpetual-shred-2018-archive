@@ -9,11 +9,13 @@ class FavButton extends Component {
             error: null,
             isLoggedIn: null,
             loading: null,
-            viewHtml: null
+            logViewHtml: null,
+            regViewHtml: null
         };
         this.addFav = this.addFav.bind(this);
         this.getLoginStatus = this.getLoginStatus.bind(this);
         this.getLoginView = this.getLoginView.bind(this);
+        this.getRegisterView = this.getRegisterView.bind(this);
     }
     
     componentDidMount() {
@@ -46,7 +48,21 @@ class FavButton extends Component {
         axios.get("/Account/Login")
             .then(res => {
                 const loginHtml = res.data.toString();
-                this.setState({ viewHtml: {__html: loginHtml, loading: false} });
+                this.setState({ logViewHtml: {__html: loginHtml },
+                                regViewHtml: {__html: null },
+                                loading: false,
+                                });
+            })
+    }
+
+    getRegisterView() {
+        this.setState({ loading: true });
+        axios.get("/Account/Register")
+            .then(res => {
+                const regHtml = res.data.toString();
+                this.setState({ regViewHtml: {__html: regHtml }, 
+                                logViewHtml: {__html: null},
+                                loading: false });
             })
     }
     
@@ -55,7 +71,7 @@ class FavButton extends Component {
             return (
                 <div>
                     <button id="favbutton" type="button">
-                        <span className="shredvidlistbutton-box"><img className="hornicon" src={'/images/horns.png'} /> Error :(</span>
+                        <span className="favbutton-box"><img className="hornicon" src={'/images/horns.png'} /> Error :(</span>
                     </button>
                 </div>
             )
@@ -64,7 +80,7 @@ class FavButton extends Component {
             return (
                 <div>
                     <button id="favbutton" type="button">
-                        <span className="shredvidlistbutton-box"><img className="hornicon" src={'/images/horns.png'} />  Please wait...</span>
+                        <span className="favbutton-box"><img className="hornicon" src={'/images/horns.png'} />  Please wait...</span>
                     </button>
                 </div>
             )
@@ -73,9 +89,14 @@ class FavButton extends Component {
             return (
                 <div>
                     <button id="favbutton" type="button" onMouseDown={this.getLoginView}>
-                        <span className="shredvidlistbutton-box"><img className="hornicon" src={'/images/horns.png'} />  Log in to save videos</span>
+                        <span className="loginbutton"><img className="hornicon" src={'/images/horns.png'} /> Login</span>
                     </button>
-                    <div dangerouslySetInnerHTML={this.state.viewHtml} />
+                    <br/>
+                    <button id="favbutton" type="button" onMouseDown={this.getRegisterView}>
+                        <span className="registerbutton"><img className="hornicon" src={'/images/horns.png'} />  Register</span>
+                    </button>
+                    <div dangerouslySetInnerHTML={this.state.logViewHtml} />
+                    <div dangerouslySetInnerHTML={this.state.regViewHtml} /> 
                 </div>
             )
         }
@@ -83,7 +104,7 @@ class FavButton extends Component {
             return (
                 <div>
                     <button id="favbutton" type="button">
-                        <span className="shredvidlistbutton-box"><img className="hornicon" src={'/images/horns.png'} />  Saved!</span>
+                        <span className="favbutton-box"><img className="hornicon" src={'/images/horns.png'} />  Saved!</span>
                     </button>
                 </div>
             )
@@ -91,7 +112,7 @@ class FavButton extends Component {
         else return (
             <div>
                 <button id="favbutton" type="button" onMouseDown={this.addFav}>
-                    <span className="shredvidlistbutton-box"><img className="hornicon" src={'/images/horns.png'} />  Add To Favorites</span>
+                    <span className="favbutton-box"><img className="hornicon" src={'/images/horns.png'} />  Add To Favorites</span>
                 </button>
             </div>
         )

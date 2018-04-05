@@ -6,7 +6,7 @@ class ShredLogoutButton extends Component {
         return (
             <div id="navlink">
                 <button id="navlink" type="button" onMouseDown={this.props.logoutHandler}>
-                    <span className="shredvidlistbutton-box">> Log Out</span>
+                    <span className="shredvidlistbutton-box">Log Out</span>
                 </button>
             </div>
         );

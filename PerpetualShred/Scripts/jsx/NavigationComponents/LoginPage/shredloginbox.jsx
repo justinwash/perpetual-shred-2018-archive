@@ -9,13 +9,15 @@ constructor(props){
     super(props);
     this.state = {
         isLoggedIn: null,
-        viewHtml: null
+        viewHtml: null,
+        regToggle: true
     };
     this.getLoginStatus = this.getLoginStatus.bind(this);
     this.getLoginView = this.getLoginView.bind(this);
     this.getAccountView = this.getAccountView.bind(this);
     this.getViewHtml = this.getViewHtml.bind(this);
     this.logout = this.logout.bind(this);
+    this.getRegView = this.getRegView.bind(this);
 }
 
     componentDidMount() {
@@ -33,9 +35,12 @@ constructor(props){
     getViewHtml() {
         if (this.state.isLoggedIn){
             this.getAccountView();
+            this.setState({ regToggle: false })
         } 
-        else
+        else {
             this.getLoginView();
+            this.setState({ regToggle: true })
+        }
     }
 
     getLoginView() {
@@ -43,6 +48,14 @@ constructor(props){
             .then(res => {
                 const loginHtml = res.data.toString();
                 this.setState({ viewHtml: {__html: loginHtml} });
+            })
+    }
+
+    getRegView() {
+        axios.get("/Account/Register")
+            .then(res => {
+                const regHtml = res.data.toString();
+                this.setState({ viewHtml: {__html: regHtml} });
             })
     }
 
@@ -87,7 +100,10 @@ constructor(props){
                                   getViewHtml={this.getViewHtml}/>
                 <ShredLoginPage animSwitcher={this.props.animSwitcher}
                                 isLoggedIn={this.state.isLoggedIn}
-                                viewHtml={this.state.viewHtml}/>
+                                viewHtml={this.state.viewHtml}
+                                getRegView={this.getRegView}
+                                getLoginView={this.getLoginView}
+                                regToggle={this.state.regToggle}/>
             </div>
         )
     }

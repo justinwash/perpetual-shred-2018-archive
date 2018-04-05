@@ -17,7 +17,7 @@ class ShredInfoButton extends Component {
             <div id="navlink">
                 
                 <button id="navlink" type="button" onMouseDown={this.infoVisibility}>
-                    <span className="shredvidlistbutton-box">> Who We Are</span>
+                    <span className="shredvidlistbutton-box">Who We Are</span>
                 </button>
             </div>
         );

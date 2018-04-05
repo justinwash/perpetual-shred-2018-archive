@@ -59,3 +59,17 @@ a {
     
 }
 
+.regbuttonbox {
+    position: absolute;
+    bottom: 5vh;
+    width: 100vw;
+    text-align: center;
+}
+
+.regbuttonbox-hide {
+    display: none;
+}
+.registerbutton {
+    color: white;
+}
+
