@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebVid>
+﻿@using Newtonsoft.Json
+@model IEnumerable<WebVid>
 
 <div id="allvidsheading">
     <h3 align="center">My Shredness</h3>
@@ -16,7 +17,11 @@
             <div class="vidTitle"><a asp-action="Index" 
                                      asp-controller="Home"
                                      asp-route-id="@shredVid.Id"> @shredVid.Title </a></div>
-            <div class="vidReleaseDate">@shredVid.ReleaseDate</div>
+            <div id="date-and-control">
+                <div class="vidReleaseDate">@shredVid.ReleaseDate</div>
+                <div id="remove-fav"><a href="/Account/RemoveFav?vidUrl=@shredVid.PlayerUrl">REMOVE</a></div>
+            </div> 
         </div>
     </div>
-</div> }
+</div> 
+}
