@@ -43,23 +43,15 @@ namespace PerpetualShred.Controllers
             _context = context;
         }
 
-        [TempData]
-        public string ErrorMessage { get; set; }
+        [TempData] public string ErrorMessage { get; set; }
 
         [HttpGet]
         [AllowAnonymous]
         public bool IsLoggedIn()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return User.Identity.IsAuthenticated;
         }
-        
+
         [HttpGet]
         [AllowAnonymous]
         public bool AddFav(string vidUrl)
@@ -67,7 +59,6 @@ namespace PerpetualShred.Controllers
             if (User != null && User.Identity.IsAuthenticated)
             {
                 using (var db = _context)
-                
                 {
                     var tempUser = db.ShredUser.Find(User.Identity.GetUserId());
 
@@ -102,7 +93,33 @@ namespace PerpetualShred.Controllers
             }
             else return false;
         }
-        
+
+        [HttpGet]
+        [AllowAnonymous]
+        public bool RemoveFav(string vidUrl)
+        {
+            if (User != null && User.Identity.IsAuthenticated)
+            {
+                using (var db = _context)
+                {
+                    var tempUser = db.ShredUser.Find(User.Identity.GetUserId());
+
+                    if (tempUser.Favorites.Contains(vidUrl))
+                    {
+                        var favList = JsonConvert.DeserializeObject<List<string>>(tempUser.Favorites);
+                        favList.RemoveAt(favList.FindIndex(x => x.Contains(vidUrl)));
+                        var favJson = JsonConvert.SerializeObject(favList);
+                        tempUser.Favorites = favJson;
+                        db.ShredUser.Find(User.Identity.GetUserId()).Favorites = tempUser.Favorites;
+                        db.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult UserFavs()
@@ -110,24 +127,20 @@ namespace PerpetualShred.Controllers
             using (var db = _context)
             {
                 var userFavs = db.ShredUser.Find(User.Identity.GetUserId()).Favorites;
-
                 if (User.Identity.IsAuthenticated && userFavs != null)
                 {
                     return ViewComponent("Favs", new {favString = userFavs});
                 }
-
                 else return View("Login");
             }
         }
-       
-        
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
-            // Clear the existing external cookie to ensure a clean login process
+// Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
@@ -142,9 +155,11 @@ namespace PerpetualShred.Controllers
             {
                 if (!User.Identity.IsAuthenticated)
                 {
-                    // This doesn't count login failures towards account lockout
-                    // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                    var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+// This doesn't count login failures towards account lockout
+// To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                    var result =
+                        await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,
+                            lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User logged in.");
@@ -168,7 +183,7 @@ namespace PerpetualShred.Controllers
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+// If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -195,24 +210,23 @@ namespace PerpetualShred.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ShredUser { UserName = model.Email, Email = model.Email };
+                var user = new ShredUser {UserName = model.Email, Email = model.Email};
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
                     return RedirectToLocal(returnUrl);
                 }
+
                 AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form
+// If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -224,7 +238,7 @@ namespace PerpetualShred.Controllers
             _logger.LogInformation("User logged out.");
             return Redirect("/");
         }
-        
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
@@ -233,11 +247,13 @@ namespace PerpetualShred.Controllers
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
+
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
                 throw new ApplicationException($"Unable to load user with ID '{userId}'.");
             }
+
             var result = await _userManager.ConfirmEmailAsync(user, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
@@ -259,20 +275,20 @@ namespace PerpetualShred.Controllers
                 var user = await _userManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
+// Don't reveal that the user does not exist or is not confirmed
                     return RedirectToAction(nameof(ForgotPasswordConfirmation));
                 }
 
-                // For more information on how to enable account confirmation and password reset please
-                // visit https://go.microsoft.com/fwlink/?LinkID=532713
+// For more information on how to enable account confirmation and password reset please
+// visit https://go.microsoft.com/fwlink/?LinkID=532713
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
                 await _emailSender.SendEmailAsync(model.Email, "Reset Password",
-                   $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+                    $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
                 return RedirectToAction(nameof(ForgotPasswordConfirmation));
             }
 
-            // If we got this far, something failed, redisplay form
+// If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -291,7 +307,8 @@ namespace PerpetualShred.Controllers
             {
                 throw new ApplicationException("A code must be supplied for password reset.");
             }
-            var model = new ResetPasswordViewModel { Code = code };
+
+            var model = new ResetPasswordViewModel {Code = code};
             return View(model);
         }
 
@@ -304,17 +321,20 @@ namespace PerpetualShred.Controllers
             {
                 return View(model);
             }
+
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
-                // Don't reveal that the user does not exist
+// Don't reveal that the user does not exist
                 return RedirectToAction(nameof(ResetPasswordConfirmation));
             }
+
             var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
             if (result.Succeeded)
             {
                 return RedirectToAction(nameof(ResetPasswordConfirmation));
             }
+
             AddErrors(result);
             return View();
         }
