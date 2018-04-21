@@ -5,23 +5,30 @@
     <h3 align="center">My Shredness</h3>
 </div>
 
-@foreach (var shredVid in Model) {
-<div class="vidPageContainer">
-    <div class="vidInfoContainer">
-        <div class="vidThumbContainer">
-            <a href="@shredVid.OriginUrl">
-                <img src="@shredVid.Thumbnail"/>
-            </a>
-        </div>
-        <div class="vidTextContainer">
-            <div class="vidTitle"><a asp-action="Index" 
-                                     asp-controller="Home"
-                                     asp-route-id="@shredVid.Id"> @shredVid.Title </a></div>
-            <div id="date-and-control">
-                <div class="vidReleaseDate">@shredVid.ReleaseDate</div>
-                <div id="remove-fav"><a href="/Account/RemoveFav?vidUrl=@shredVid.PlayerUrl">REMOVE</a></div>
-            </div> 
+@foreach (var shredVid in Model)
+{
+    var jsVid = @Html.Raw(JsonConvert.SerializeObject(shredVid));
+    <div class="vidPageContainer">
+        <div class="vidInfoContainer">
+            <div class="vidThumbContainer">
+                <a href="@shredVid.OriginUrl">
+                    <img src="@shredVid.Thumbnail"/>
+                </a>
+            </div>
+            <div class="vidTextContainer">
+                <div class="vidTitle">
+                    <a asp-action="Index"
+                       asp-controller="Home"
+                       asp-route-id="@shredVid.Id">
+                        @shredVid.Title
+                    </a>
+                </div>
+                <div id="date-and-control">
+                    <div class="vidReleaseDate">@shredVid.ReleaseDate</div>
+                    <div id="fav-remover">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div> 
 }

@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import ShredLoginPage from './shredloginpage.jsx';
 import ShredLoginButton from '../MainMenuButtons/shredloginbutton.jsx';
 import ShredLogoutButton from '../MainMenuButtons/shredlogoutbutton.jsx';
+import FavRemover from '../../AccountComponents/FavRemover.jsx';
 import axios from "axios";
+import ReactDOM from "react-dom";
 
 class ShredLoginBox extends Component {
 constructor(props){
@@ -64,7 +66,7 @@ constructor(props){
             .then(res => {
                 const accountHtml = res.data.toString();
                 this.setState({ viewHtml: {__html: accountHtml} });
-            })
+            });
     }
     
     logout() {
