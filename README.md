@@ -10,5 +10,7 @@ Perpetual Shred is a combination of two projects:
 Getting set up:
 
 npm install  -g webpack webpack-dev-server
+
 cd to /PerpetualShred
+
 npm i -f
