@@ -448,7 +448,6 @@ ShredCrawl/obj/ShredCrawl.csproj.nuget.cache
 ShredCrawl/obj/ShredCrawl.csproj.nuget.g.props
 ShredCrawl/obj/ShredCrawl.csproj.nuget.g.targets
 package-lock.json
-package.json
 PerpetualShred/bin/Debug/netcoreapp2.0/PerpetualShred.deps.json
 PerpetualShred/bin/Debug/netcoreapp2.0/PerpetualShred.dll
 PerpetualShred/bin/Debug/netcoreapp2.0/PerpetualShred.pdb

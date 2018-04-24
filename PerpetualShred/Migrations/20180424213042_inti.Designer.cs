@@ -11,9 +11,10 @@ using System;
 namespace PerpetualShred.Migrations
 {
     [DbContext(typeof(ShredUsersContext))]
-    partial class ShredUsersContextModelSnapshot : ModelSnapshot
+    [Migration("20180424213042_inti")]
+    partial class inti
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
