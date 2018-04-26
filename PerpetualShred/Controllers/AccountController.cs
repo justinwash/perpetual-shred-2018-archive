@@ -17,6 +17,7 @@ using PerpetualShred.Models;
 using PerpetualShred.Models.AccountViewModels;
 using PerpetualShred.Services;
 using PerpetualShred.Data;
+using PerpetualShred.ViewComponents;
 using IdentityResult = Microsoft.AspNetCore.Identity.IdentityResult;
 
 namespace PerpetualShred.Controllers
@@ -29,18 +30,21 @@ namespace PerpetualShred.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly ShredUsersContext _context;
+        private readonly PerpetualShredContext _vcontext;
 
         public AccountController(Microsoft.AspNetCore.Identity.UserManager<ShredUser> userManager,
             SignInManager<ShredUser> signInManager,
             IEmailSender emailSender,
             ILogger<AccountController> logger,
-            ShredUsersContext context)
+            ShredUsersContext context,
+            PerpetualShredContext vcontext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
             _context = context;
+            _vcontext = vcontext;
         }
 
         [TempData] public string ErrorMessage { get; set; }
@@ -65,7 +69,7 @@ namespace PerpetualShred.Controllers
                     if (tempUser.Favorites == null && vidUrl != null)
                     {
                         var newFavs = new List<string> {vidUrl};
-                        var favJson = JsonConvert.SerializeObject(newFavs);
+                        string favJson = JsonConvert.SerializeObject(newFavs);
                         tempUser.Favorites = favJson;
                         db.ShredUser.Find(User.Identity.GetUserId()).Favorites = tempUser.Favorites;
                         db.SaveChanges();
@@ -81,7 +85,7 @@ namespace PerpetualShred.Controllers
                         {
                             var favList = JsonConvert.DeserializeObject<List<string>>(tempUser.Favorites);
                             favList.Add(vidUrl);
-                            var favJson = JsonConvert.SerializeObject(favList);
+                            string favJson = JsonConvert.SerializeObject(favList);
                             tempUser.Favorites = favJson;
                             db.ShredUser.Find(User.Identity.GetUserId()).Favorites = tempUser.Favorites;
                             db.SaveChanges();
@@ -108,7 +112,7 @@ namespace PerpetualShred.Controllers
                     {
                         var favList = JsonConvert.DeserializeObject<List<string>>(tempUser.Favorites);
                         favList.RemoveAt(favList.FindIndex(x => x.Contains(vidUrl)));
-                        var favJson = JsonConvert.SerializeObject(favList);
+                        string favJson = JsonConvert.SerializeObject(favList);
                         tempUser.Favorites = favJson;
                         db.ShredUser.Find(User.Identity.GetUserId()).Favorites = tempUser.Favorites;
                         db.SaveChanges();
@@ -126,12 +130,35 @@ namespace PerpetualShred.Controllers
         {
             using (var db = _context)
             {
-                var userFavs = db.ShredUser.Find(User.Identity.GetUserId()).Favorites;
+                string userFavs = db.ShredUser.Find(User.Identity.GetUserId()).Favorites;
                 if (User.Identity.IsAuthenticated && userFavs != null)
                 {
                     return ViewComponent("Favs", new {favString = userFavs});
                 }
                 else return View("Login");
+            }
+        }
+        
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult GetFavObjects()
+        {
+            using (var db = _context)
+            {
+                string favString = db.ShredUser.Find(User.Identity.GetUserId()).Favorites;
+                if (!User.Identity.IsAuthenticated || favString == null) return Json("shits broke");
+                
+                using (var vdb = _vcontext)
+                {
+                    var favList = JsonConvert.DeserializeObject<List<string>>(favString);
+                    var webVidList = new List<WebVid>();
+                    foreach (string vidUrl in favList)
+                    {
+                        var tempVid = vdb.WebVid.First(r => r.PlayerUrl.Contains(vidUrl));
+                        webVidList.Add(tempVid);
+                    }
+                    return Json(webVidList);
+                }
             }
         }
 
@@ -215,8 +242,8 @@ namespace PerpetualShred.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                    string code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    string callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
@@ -281,8 +308,8 @@ namespace PerpetualShred.Controllers
 
 // For more information on how to enable account confirmation and password reset please
 // visit https://go.microsoft.com/fwlink/?LinkID=532713
-                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
+                string code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                string callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
                 await _emailSender.SendEmailAsync(model.Email, "Reset Password",
                     $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
                 return RedirectToAction(nameof(ForgotPasswordConfirmation));
