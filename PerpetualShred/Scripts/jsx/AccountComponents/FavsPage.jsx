@@ -12,14 +12,16 @@ class FavsPage extends Component {
             favorites: null
         };
         this.CreateFavsList = this.CreateFavsList.bind(this);
+        this.getUserFavs = this.getUserFavs.bind(this);
     }
-
+    
     componentDidMount(){
         this.getUserFavs();
     }
     
     CreateFavsList() {
         var favs = this.state.favorites;
+        if (favs == null) return (<div>something went wrong</div>);
         
         var displayFavs = favs.map((fav) =>
             <FavContainer shredVid={fav} />

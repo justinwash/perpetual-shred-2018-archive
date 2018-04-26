@@ -25,7 +25,7 @@ class ShredLoginPage extends Component {
                 <div className="vidlistcontainer">
                     <div id="shredvidlist-background" className={visibility}/>
                     <div id="shredvidlist" className={visibility}>
-                        <FavsPage />
+                        <div dangerouslySetInnerHTML={this.props.viewHtml}/>
                         <div className={regVisibility}>
                             <button type="button" onMouseDown={this.props.getLoginView}>
                                 <span className="registerbutton">Log In</span>

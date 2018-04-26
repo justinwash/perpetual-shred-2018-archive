@@ -15,18 +15,18 @@ class FavContainer extends Component {
             <div className="vidPageContainer">
                 <div className="vidInfoContainer">
                     <div className="vidThumbContainer">
-                        <a href={this.props.shredVid.OriginUrl}>
-                            <img src={this.props.shredVid.Thumbnail} />
+                        <a href={this.props.shredVid.originUrl}>
+                            <img src={this.props.shredVid.thumbnail} />
                         </a>
                     </div>
                     <div className="vidTextContainer">
                         <div className="vidTitle">
-                            <a href={"/Index/Home/" + this.props.shredVid.Id}>
-                                {this.props.shredVid.Title}
+                            <a href={"/Home/Index/" + this.props.shredVid.id}>
+                                {this.props.shredVid.title}
                             </a>
                         </div>
                         <div id="date-and-control">
-                            <div className="vidReleaseDate">{this.props.shredVid.ReleaseDate}</div>
+                            <div className="vidReleaseDate">{this.props.shredVid.releaseDate}</div>
                             <FavRemover shredVid={this.props.shredVid} />
                         </div>
                     </div>

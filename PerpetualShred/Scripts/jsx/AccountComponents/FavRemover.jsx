@@ -22,14 +22,14 @@ class FavRemover extends Component {
     render() {
         if (this.state.favRemoved) {
             return (
-                <div id="fav-remover">
+                <div id="remove-fav">
                     REMOVED FROM FAVORITES
                 </div>
             )
         }
         else {
             return (
-                <div id="fav-remover">
+                <div id="remove-fav">
                     <a onClick={this.removeFav}>REMOVE</a>
                 </div>
             )

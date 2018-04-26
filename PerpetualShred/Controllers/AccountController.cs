@@ -141,12 +141,12 @@ namespace PerpetualShred.Controllers
         
         [HttpGet]
         [AllowAnonymous]
-        public JsonResult GetFavObjects()
+        public List<WebVid> GetFavObjects()
         {
             using (var db = _context)
             {
                 string favString = db.ShredUser.Find(User.Identity.GetUserId()).Favorites;
-                if (!User.Identity.IsAuthenticated || favString == null) return Json("shits broke");
+                if (!User.Identity.IsAuthenticated || favString == null) return null;
                 
                 using (var vdb = _vcontext)
                 {
@@ -157,7 +157,7 @@ namespace PerpetualShred.Controllers
                         var tempVid = vdb.WebVid.First(r => r.PlayerUrl.Contains(vidUrl));
                         webVidList.Add(tempVid);
                     }
-                    return Json(webVidList);
+                    return webVidList;
                 }
             }
         }
