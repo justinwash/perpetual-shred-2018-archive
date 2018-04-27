@@ -21,6 +21,7 @@ class ShredLoginPage extends Component {
             regVisibility = "regbuttonbox";
         else regVisibility = "regbuttonbox-hide";
         
+        if (this.props.isLoggedIn){
             return (
                 <div className="vidlistcontainer">
                     <div id="shredvidlist-background" className={visibility}/>
@@ -37,7 +38,26 @@ class ShredLoginPage extends Component {
                     </div>
                 </div>
             );
+        } 
+        else {
+            return (
+                <div className="vidlistcontainer">
+                    <div id="shredvidlist-background" className={visibility}/>
+                    <div id="shredvidlist" className={visibility}>
+                        <div dangerouslySetInnerHTML={this.props.viewHtml}/>
+                        <div className={regVisibility}>
+                            <button type="button" onMouseDown={this.props.getLoginView}>
+                                <span className="registerbutton">Log In</span>
+                            </button>
+                            <button type="button" onMouseDown={this.props.getRegView}>
+                                <span className="registerbutton">Register</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
         }
+    }
     
 }
 

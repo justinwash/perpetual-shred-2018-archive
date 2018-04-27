@@ -46,12 +46,20 @@ class FavsPage extends Component {
     }
     
     render() {
-        return (
-            <div>
-                <FavPageTitle title="My Shredness" />
-                <this.CreateFavsList />
-            </div>
-        )
+        if (this.state.loading)
+        {
+            return (
+                <div id="loadingspinner" className={visibility} />
+            )
+        }
+        else {
+            return (
+                <div>
+                    <FavPageTitle title="My Shredness"/>
+                    <this.CreateFavsList/>
+                </div>
+            )
+        }
     }
     
 }
