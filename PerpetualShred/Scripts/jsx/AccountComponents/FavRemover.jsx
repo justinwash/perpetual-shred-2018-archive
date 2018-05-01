@@ -12,7 +12,8 @@ class FavRemover extends Component {
     }
 
     removeFav() {
-        axios.get("/Account/RemoveFav?vidUrl=" + this.props.shredVid.PlayerUrl)
+        var vidUrl = this.props.shredVid.playerUrl;
+        axios.get("/Account/RemoveFav?vidUrl=" + vidurl)
             .then(res => {
                 const removalStatus = res.data;
                 this.setState({favRemoved: removalStatus});

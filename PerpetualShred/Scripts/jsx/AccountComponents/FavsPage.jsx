@@ -46,13 +46,6 @@ class FavsPage extends Component {
     }
     
     render() {
-        if (this.state.loading)
-        {
-            return (
-                <div id="loadingspinner" className={visibility} />
-            )
-        }
-        else {
             return (
                 <div>
                     <FavPageTitle title="My Shredness"/>
@@ -60,7 +53,6 @@ class FavsPage extends Component {
                 </div>
             )
         }
-    }
     
 }
 
