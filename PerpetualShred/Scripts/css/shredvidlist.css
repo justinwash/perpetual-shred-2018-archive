@@ -204,8 +204,14 @@ a {
     text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
     position: absolute;
     right: 10px;
+    color: white;
 }
 
 #date-and-control {
     display: flex;
+}
+
+button {
+    font-family: serif;
+    font-size: xx-small;
 }
