@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 require("!style-loader!css-loader!../../../css/shredloginpage.css");
 require("!style-loader!css-loader!../../../css/mobile/shredloginpage_mobile.css");
-import FavsPage from '../../AccountComponents/FavsPage.jsx';
+import FavsPage from '../../AccountComponents/Favorites/FavsPage.jsx';
 
 class ShredLoginPage extends Component {
     constructor(props, context) {

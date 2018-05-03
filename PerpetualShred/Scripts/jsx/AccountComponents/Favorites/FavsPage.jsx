@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FavPageTitle from './FavPageTitle.jsx';
 import FavContainer from './FavContainer.jsx';
 import axios from 'axios';
+import AccountHelper from "../../../accounthelper";
 
 class FavsPage extends Component {
     constructor(props){
@@ -12,11 +13,11 @@ class FavsPage extends Component {
             favorites: null
         };
         this.CreateFavsList = this.CreateFavsList.bind(this);
-        this.getUserFavs = this.getUserFavs.bind(this);
     }
     
-    componentDidMount(){
-        this.getUserFavs();
+    async componentDidMount(){
+        var favs = await AccountHelper.getFavObjects();
+        this.setState({ favorites: favs });
     }
     
     CreateFavsList() {
@@ -32,17 +33,6 @@ class FavsPage extends Component {
                 {displayFavs}
             </div>
         );
-    }
-
-    getUserFavs() {
-        this.setState({loading: true});
-        var favObjectList = null;
-        axios.get("/Account/GetFavObjects")
-            .then(res => {
-                favObjectList = res.data;
-                this.setState({ favorites: favObjectList});
-                this.setState({loading: false});
-            })
     }
     
     render() {

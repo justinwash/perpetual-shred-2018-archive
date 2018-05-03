@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import ShredLoginPage from './shredloginpage.jsx';
 import ShredLoginButton from '../MainMenuButtons/shredloginbutton.jsx';
 import ShredLogoutButton from '../MainMenuButtons/shredlogoutbutton.jsx';
-import FavRemover from '../../AccountComponents/FavRemover.jsx';
 import axios from "axios";
-import ReactDOM from "react-dom";
+import AccountHelper from "../../../accounthelper";
 
 class ShredLoginBox extends Component {
 constructor(props){
@@ -14,7 +13,7 @@ constructor(props){
         viewHtml: null,
         regToggle: true
     };
-    this.getLoginStatus = this.getLoginStatus.bind(this);
+    
     this.getLoginView = this.getLoginView.bind(this);
     this.getAccountView = this.getAccountView.bind(this);
     this.getViewHtml = this.getViewHtml.bind(this);
@@ -22,16 +21,9 @@ constructor(props){
     this.getRegView = this.getRegView.bind(this);
 }
 
-    componentDidMount() {
-        this.getLoginStatus();
-    }
-    
-    getLoginStatus() {
-        axios.get("/Account/IsLoggedIn")
-            .then(res => {
-                const loginStatus = res.data;
-                this.setState({isLoggedIn: loginStatus});
-            })
+    async componentDidMount() {
+        var status = AccountHelper.getLoginStatus();
+        this.setState({isLoggedIn: status});
     }
     
     getViewHtml() {
