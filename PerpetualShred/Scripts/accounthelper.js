@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class AccountHelper {
-    
+
     static async getLoginStatus() {
         var status = null;
         await axios.get("/Account/IsLoggedIn")
@@ -10,7 +10,7 @@ class AccountHelper {
             });
         return status;
     }
-    
+
     static async getFavObjects() {
         var data = null;
         await axios.get("/Account/GetFavObjects")
@@ -29,7 +29,7 @@ class AccountHelper {
         return data;
     }
 
-    static async addFav(vidUrl){
+    static async addFav(vidUrl) {
         var data = null;
         await axios.get("/Account/AddFav?vidUrl=" + vidUrl)
             .then(res => {
@@ -51,18 +51,18 @@ class AccountHelper {
         var regPage = null;
         await axios.get("/Account/Register")
             .then(res => {
-                return res.data.toString();
+                regPage = res.data.toString();
             });
         return regPage;
     }
 
-    static async getAccountView() {
-        var favsPage = null;
-        axios.get("/Account/UserFavs")
+    static async logout() {
+        var result = null;
+        await axios.get("/Account/Logout")
             .then(res => {
-                favsPage = res.data.toString();
+                result = res.data;
             });
-        return favsPage;
+        return false;
     }
 }
 

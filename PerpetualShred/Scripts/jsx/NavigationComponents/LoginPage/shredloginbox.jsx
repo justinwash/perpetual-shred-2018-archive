@@ -14,62 +14,42 @@ constructor(props){
         regToggle: true
     };
     
-    this.getLoginView = this.getLoginView.bind(this);
-    this.getAccountView = this.getAccountView.bind(this);
+    this.showLoginForm = this.showLoginForm.bind(this);
     this.getViewHtml = this.getViewHtml.bind(this);
     this.logout = this.logout.bind(this);
-    this.getRegView = this.getRegView.bind(this);
+    this.showRegisterForm = this.showRegisterForm.bind(this);
 }
 
     async componentDidMount() {
-        var status = AccountHelper.getLoginStatus();
+        var status = await AccountHelper.getLoginStatus();
         this.setState({isLoggedIn: status});
     }
     
-    getViewHtml() {
+    async getViewHtml() {
         if (this.state.isLoggedIn){
-            this.getAccountView();
             this.setState({ regToggle: false })
         } 
         else {
-            this.getLoginView();
+            await this.showLoginForm();
             this.setState({ regToggle: true })
         }
     }
 
-    getLoginView() {
-        axios.get("/Account/Login")
-            .then(res => {
-                const loginHtml = res.data.toString();
-                this.setState({ viewHtml: {__html: loginHtml} });
-            })
+    async showLoginForm() {
+        var view = await AccountHelper.getLoginView();
+        this.setState({ viewHtml: {__html: view} });
+            
     }
 
-    getRegView() {
-        axios.get("/Account/Register")
-            .then(res => {
-                const regHtml = res.data.toString();
-                this.setState({ viewHtml: {__html: regHtml} });
-            })
-    }
-
-    getAccountView() {
-        axios.get("/Account/UserFavs")
-            .then(res => {
-                const accountHtml = res.data.toString();
-                this.setState({ viewHtml: {__html: accountHtml} });
-            });
+    async showRegisterForm() {
+        var view = await AccountHelper.getRegView();
+        this.setState({ viewHtml: {__html: view} });
+            
     }
     
-    logout() {
-        axios.get("/Account/Logout")
-            .then(res => {
-                axios.get("/Account/IsLoggedIn")
-                    .then(res => {
-                        const loginStatus = res.data;
-                        this.setState({isLoggedIn: loginStatus});
-                    })
-            })
+    async logout() {
+        var loginStatus = await AccountHelper.logout();
+        this.setState({ isLoggedIn: loginStatus });
     }
     
     render() {
@@ -95,8 +75,8 @@ constructor(props){
                 <ShredLoginPage animSwitcher={this.props.animSwitcher}
                                 isLoggedIn={this.state.isLoggedIn}
                                 viewHtml={this.state.viewHtml}
-                                getRegView={this.getRegView}
-                                getLoginView={this.getLoginView}
+                                showRegisterForm={this.showRegisterForm}
+                                showLoginForm={this.showLoginForm}
                                 regToggle={this.state.regToggle}/>
             </div>
         )
