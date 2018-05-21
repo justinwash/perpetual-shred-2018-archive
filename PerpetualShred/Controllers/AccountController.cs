@@ -175,43 +175,33 @@ namespace PerpetualShred.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login(ShredDto model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return Redirect("/");
+            if (!User.Identity.IsAuthenticated)
             {
-                if (!User.Identity.IsAuthenticated)
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                var result =
+                    await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,
+                        lockoutOnFailure: false);
+                if (result.Succeeded)
                 {
-// This doesn't count login failures towards account lockout
-// To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                    var result =
-                        await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,
-                            lockoutOnFailure: false);
-                    if (result.Succeeded)
-                    {
-                        _logger.LogInformation("User logged in.");
-                        return RedirectToLocal(returnUrl);
-                    }
-
-                    if (result.IsLockedOut)
-                    {
-                        _logger.LogWarning("User account locked out.");
-                        return RedirectToAction(nameof(Lockout));
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                        return View(model);
-                    }
+                    _logger.LogInformation("User logged in.");
+                    return Redirect("/");
                 }
+                    
                 else
                 {
-                    return View(model);
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return Redirect("/");
                 }
             }
-
-// If we got this far, something failed, redisplay form
-            return View(model);
+            else
+            {
+                return Redirect("/");
+            }
         }
 
         [HttpGet]

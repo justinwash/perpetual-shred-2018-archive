@@ -23,7 +23,6 @@
     "extend-shallow": "^3.0.2",
     "f": "^1.4.0",
     "fragment-cache": "^0.2.1",
-    "fsevents": "^1.2.2",
     "get-value": "^2.0.6",
     "has-value": "^1.0.0",
     "has-values": "^1.0.0",
@@ -65,7 +64,8 @@
     "ssri": "^5.3.0",
     "static-extend": "^0.1.2",
     "stream-shift": "^1.0.0",
-    "style-loader": "^0.19.1"
+    "style-loader": "^0.19.1",
+    "react-form-login": "^1.1.0"
   },
   "devDependencies": {},
   "scripts": {

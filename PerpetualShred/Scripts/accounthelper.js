@@ -64,6 +64,7 @@ class AccountHelper {
             });
         return false;
     }
+    
 }
 
 export default AccountHelper;
