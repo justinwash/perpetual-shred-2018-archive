@@ -47,6 +47,7 @@
     "path-dirname": "^1.0.2",
     "posix-character-classes": "^0.1.1",
     "promise-inflight": "^1.0.1",
+    "qs": "^6.5.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-player": "^0.25.3",

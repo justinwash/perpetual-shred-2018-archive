@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoginForm from '../Utilities/LoginForm.jsx';
 import axios from 'axios';
+import qs from 'qs';
 
 class ShredLoginForm extends Component {
     constructor(props){
@@ -12,11 +13,10 @@ class ShredLoginForm extends Component {
         return (
             <LoginForm
                 onSubmit={(username, password, isRemember) => {
-                    axios.post("/Account/Login", {
-                        Email: 'justin.wash@pm.me',
-                        Password: password, 
-                        RememberMe: isRemember
-                    })
+                    const data = qs.stringify({ Email: username, 
+                                                Password: password, 
+                                                RememberMe: isRemember});
+                    axios.post("/Account/Login", data);
                 }} />
         );
     }
