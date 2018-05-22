@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LoginForm } from 'react-form-login';
+import LoginForm from '../Utilities/LoginForm.jsx';
 import axios from 'axios';
 
 class ShredLoginForm extends Component {
@@ -13,7 +13,7 @@ class ShredLoginForm extends Component {
             <LoginForm
                 onSubmit={(username, password, isRemember) => {
                     axios.post("/Account/Login", {
-                        Email: username,
+                        Email: 'justin.wash@pm.me',
                         Password: password, 
                         RememberMe: isRemember
                     })

@@ -174,9 +174,9 @@ namespace PerpetualShred.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(ShredDto model, string returnUrl = null)
         {
+            Console.WriteLine(model.Email + model.RememberMe);
             ViewData["ReturnUrl"] = returnUrl;
             if (!ModelState.IsValid) return Redirect("/");
             if (!User.Identity.IsAuthenticated)

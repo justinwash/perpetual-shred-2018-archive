@@ -2,6 +2,7 @@ import React, { Component } from "react";
 require("!style-loader!css-loader!../../../css/shredloginpage.css");
 require("!style-loader!css-loader!../../../css/mobile/shredloginpage_mobile.css");
 import FavsPage from '../../AccountComponents/Favorites/FavsPage.jsx';
+import ShredLoginForm from "../../AccountComponents/ShredLoginForm.jsx";
 
 class ShredLoginPage extends Component {
     constructor(props, context) {
@@ -46,6 +47,7 @@ class ShredLoginPage extends Component {
                     <div id="shredvidlist" className={visibility}>
                         <div dangerouslySetInnerHTML={this.props.viewHtml}/>
                         <div className={regVisibility}>
+                            <ShredLoginForm/>
                             <button type="button" onMouseDown={this.props.showLoginForm}>
                                 <span className="registerbutton">Log In</span>
                             </button>
