@@ -6,6 +6,7 @@
    "configurations": [
    {
        "name": "ShredCrawl (console)",
+       "requireExactSource": false,
        "type": "coreclr",
        "request": "launch",
        "preLaunchTask": "build",

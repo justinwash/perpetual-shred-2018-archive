@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using System.Linq;
 
 namespace ShredCrawl.Crawlers
 {
@@ -34,18 +35,18 @@ namespace ShredCrawl.Crawlers
         public List<PinkBikePage> GetPostUrls()
         {
             // For current
-             var posts = _homePage.DocumentNode.SelectNodes("/html/body/div[4]/div/div[1]/div/div/div[1]/div[2]/div[2]/div");
+            var links = _homePage.DocumentNode.SelectNodes("//a").ToArray();
             
             //for archive. spin this out into it's own thing!
-            // var posts = _homePage.DocumentNode.SelectNodes("/html/body/div[4]/div/div[1]/div/div/div/div[2]/div[3]/div");
+            //var posts = _homePage.DocumentNode.SelectNodes("/html/body/div[4]/div/div[1]/div/div/div/div[2]/div[3]/div");
             var vidPageLink = new Regex("<a class=\"f22 fgrey4 bold\" href=\"(.*?)>");
 
             var postList = new List<PinkBikePage>();
 
-            foreach (var postNode in posts)
+            foreach (var linkNode in links)
             {
                 //Console.WriteLine(postNode.OuterHtml);
-                var vidPageMatches = vidPageLink.Match(postNode.OuterHtml);
+                var vidPageMatches = vidPageLink.Match(linkNode.OuterHtml);
 
                 if (vidPageMatches.Success)
                 {
