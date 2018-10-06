@@ -35,7 +35,4 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Account\Login.cshtml" />
   </ItemGroup>
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="webpack" />
-  </Target>
 </Project>
