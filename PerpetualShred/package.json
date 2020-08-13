@@ -56,7 +56,7 @@
     "ret": "^0.1.15",
     "run-queue": "^1.0.3",
     "safe-regex": "^1.1.0",
-    "serialize-javascript": "^1.5.0",
+    "serialize-javascript": "^4.0.0",
     "set-value": "^2.0.0",
     "snapdragon-node": "^2.1.1",
     "snapdragon-util": "^3.0.1",
